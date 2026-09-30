@@ -59,23 +59,18 @@ jobs:
           cp .auto-output/paper-trades.json /tmp/autonomous-memory/paper-trades.json
 
           cat > /tmp/autonomous-memory/README.md <<'EOF'
-          # Autonomous Investor — public research and simulated paper memory
+          # Autonomous Investor — research & paper memory
 
           This branch is generated automatically.
 
-          It stores only:
-          - public market research results,
-          - simulated paper positions,
-          - simulated paper trade history.
+          It stores public market research and simulated paper-trading state only:
+          - latest.json
+          - history.json
+          - paper.json
+          - paper-trades.json
 
-          It must never contain:
-          - broker credentials,
-          - API secrets,
-          - account identifiers,
-          - real-money positions,
-          - private user data.
-
-          Live trading is disabled.
+          It must never contain broker credentials, API secrets, account identifiers,
+          real-money positions, or private user data.
           EOF
 
       - name: Publish research-data branch
