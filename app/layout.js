@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Autonomiczny Inwestor v0.3",
-  description: "Multi-strategy research lab, out-of-sample tests, walk-forward and paper trading.",
+  title: "Autonomiczny Inwestor v0.4",
+  description: "Multi-market research, strict validation, benchmark comparison and paper candidates.",
 };
 
 export default function RootLayout({ children }) {

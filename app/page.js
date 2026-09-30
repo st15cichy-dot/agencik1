@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const STARTING_CAPITAL = 200;
 const RISK_PER_TRADE = 0.005;
+const AUTO_RESEARCH_AFTER_MS = 6 * 60 * 60 * 1000;
 
 function money(x) {
   return new Intl.NumberFormat("pl-PL", { style: "currency", currency: "PLN" }).format(x);
@@ -15,7 +16,7 @@ function pct(x) {
   return Number.isFinite(x) ? `${x >= 0 ? "+" : ""}${x.toFixed(2)}%` : "—";
 }
 function cfg(x) {
-  return x ? Object.entries(x).map(([k,v]) => `${k}:${v}`).join(" · ") : "—";
+  return x ? Object.entries(x).map(([k, v]) => `${k}:${v}`).join(" · ") : "—";
 }
 
 export default function Home() {
@@ -27,25 +28,34 @@ export default function Home() {
   const [lab, setLab] = useState(null);
   const [labLoading, setLabLoading] = useState(false);
 
+  const [allLab, setAllLab] = useState(null);
+  const [allLabLoading, setAllLabLoading] = useState(false);
+
   const [paper, setPaper] = useState([]);
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
     try {
-      const p = JSON.parse(localStorage.getItem("ai-paper-v03") || "[]");
-      const h = JSON.parse(localStorage.getItem("ai-lab-history-v03") || "[]");
+      const p = JSON.parse(localStorage.getItem("ai-paper-v04") || "[]");
+      const h = JSON.parse(localStorage.getItem("ai-lab-history-v04") || "[]");
+      const a = JSON.parse(localStorage.getItem("ai-all-lab-v04") || "null");
       if (Array.isArray(p)) setPaper(p);
       if (Array.isArray(h)) setHistory(h);
+      if (a && typeof a === "object") setAllLab(a);
     } catch {}
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("ai-paper-v03", JSON.stringify(paper));
+    localStorage.setItem("ai-paper-v04", JSON.stringify(paper));
   }, [paper]);
 
   useEffect(() => {
-    localStorage.setItem("ai-lab-history-v03", JSON.stringify(history));
+    localStorage.setItem("ai-lab-history-v04", JSON.stringify(history));
   }, [history]);
+
+  useEffect(() => {
+    if (allLab) localStorage.setItem("ai-all-lab-v04", JSON.stringify(allLab));
+  }, [allLab]);
 
   async function refreshMarket() {
     setMarketLoading(true);
@@ -55,9 +65,6 @@ export default function Home() {
       const data = await r.json();
       if (!r.ok) throw new Error(data.detail || "Błąd danych");
       setMarket(data);
-      if (data.instruments?.length && !data.instruments.some((x) => x.symbol === selected)) {
-        setSelected(data.instruments[0].symbol);
-      }
     } catch (e) {
       setMarketError(e.message);
     } finally {
@@ -80,17 +87,19 @@ export default function Home() {
       setLab(data);
 
       const top = data.ranking?.[0];
-      const record = {
+      setHistory((h) => [{
         id: `${symbol}-${Date.now()}`,
         symbol,
         generatedAt: data.generatedAt,
         strategy: top?.name,
         testReturnPct: top?.test?.totalReturnPct,
+        benchmarkPct: top?.test?.benchmarkPct,
+        excessReturnPct: top?.test?.excessReturnPct,
         drawdownPct: top?.test?.maxDrawdownPct,
+        trades: top?.test?.trades,
         stabilityPct: top?.walkForward?.stabilityPct,
         eligible: data.candidate?.eligible,
-      };
-      setHistory((h) => [record, ...h].slice(0, 40));
+      }, ...h].slice(0, 100));
     } catch (e) {
       setLab({ error: e.message });
     } finally {
@@ -98,62 +107,85 @@ export default function Home() {
     }
   }
 
+  async function runAllLabs() {
+    setAllLabLoading(true);
+    try {
+      const r = await fetch("/api/lab-all", { cache: "no-store" });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.detail || "Analiza całego rynku niedostępna");
+      setAllLab(data);
+      localStorage.setItem("ai-all-lab-last-run", String(Date.now()));
+    } catch (e) {
+      setAllLab({ error: e.message });
+    } finally {
+      setAllLabLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    const last = Number(localStorage.getItem("ai-all-lab-last-run") || 0);
+    if (!last || Date.now() - last >= AUTO_RESEARCH_AFTER_MS) {
+      runAllLabs();
+    }
+  }, []);
+
   const selectedRow = useMemo(
     () => market?.instruments?.find((x) => x.symbol === selected),
     [market, selected]
   );
 
-  function addPaperCandidate() {
-    if (!selectedRow || !lab?.candidate) return;
+  function addPaperCandidateFrom(symbol, strategy, config) {
+    const row = market?.instruments?.find((x) => x.symbol === symbol);
+    if (!row) return;
 
-    const atrStopPct = Math.max(1, Math.min(5, (selectedRow.atrPct || 1) * 2));
+    const atrStopPct = Math.max(1, Math.min(5, (row.atrPct || 1) * 2));
     const riskPln = STARTING_CAPITAL * RISK_PER_TRADE;
     const positionPln = Math.min(STARTING_CAPITAL, riskPln / (atrStopPct / 100));
-    const stop = selectedRow.price * (1 - atrStopPct / 100);
 
-    const row = {
-      id: `${selectedRow.symbol}-${Date.now()}`,
-      symbol: selectedRow.symbol,
-      strategy: lab.candidate.strategyName,
-      config: lab.candidate.config,
-      entry: selectedRow.price,
-      stop,
+    setPaper((p) => [{
+      id: `${symbol}-${Date.now()}`,
+      symbol,
+      strategy,
+      config,
+      entry: row.price,
+      stop: row.price * (1 - atrStopPct / 100),
       stopPct: atrStopPct,
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "v0.3 paper candidate",
-    };
-
-    setPaper((p) => [row, ...p].slice(0, 50));
+      source: "v0.4 validated paper candidate",
+    }, ...p].slice(0, 100));
   }
 
   function exportJournal() {
     const blob = new Blob(
-      [JSON.stringify({ exportedAt: new Date().toISOString(), paper, history }, null, 2)],
+      [JSON.stringify({
+        version: "0.4.0",
+        exportedAt: new Date().toISOString(),
+        paper,
+        history,
+        allMarketResearch: allLab,
+      }, null, 2)],
       { type: "application/json" }
     );
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v03-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v04-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
 
   const top = lab?.ranking?.[0];
-  const candidateReady =
-    lab?.candidate?.eligible &&
-    lab?.candidate?.signalNow === "LONG" &&
-    selectedRow;
+  const chosen = lab?.ranking?.find((r) => r.id === lab?.candidate?.strategyId) || top;
 
   return (
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.3</p>
-          <h1>Research Lab</h1>
-          <p className="muted">Skaner + 4 rodziny strategii + OOS + walk-forward + paper gating</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.4</p>
+          <h1>Validation Engine</h1>
+          <p className="muted">Multi-market research + benchmark + ostrzejszy paper gate</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -163,24 +195,24 @@ export default function Home() {
       </header>
 
       <section className="warning">
-        <strong>Realne zlecenia są wyłączone.</strong>
-        <span> Ranking i bramki jakości służą wyłącznie do badań i paper tradingu.</span>
+        <strong>Realne zlecenia pozostają wyłączone.</strong>
+        <span> PASS oznacza tylko zgodę na dalszy paper test — nie rekomendację inwestycyjną.</span>
       </section>
 
       <section className="metrics">
         <Metric label="Kapitał paper" value={money(STARTING_CAPITAL)} sub="bazowy" />
         <Metric label="Ryzyko / trade" value={money(STARTING_CAPITAL * RISK_PER_TRADE)} sub="0,50%" />
-        <Metric label="Instrumenty" value="8" sub="skaner 1h" />
-        <Metric label="Strategie" value="4" sub="rodziny" />
-        <Metric label="Walidacja" value="70/30" sub="train / test" />
-        <Metric label="Walk-forward" value="3" sub="foldy OOS" />
+        <Metric label="Min. OOS trades" value="8" sub="bramka jakości" />
+        <Metric label="WF dodatnie" value="≥ 2/3" sub="bramka jakości" />
+        <Metric label="Min. PF" value="1,15" sub="bramka jakości" />
+        <Metric label="Max OOS DD" value="-12%" sub="bramka jakości" />
       </section>
 
       <section className="card">
         <div className="cardTitle">
           <div>
             <h2>Skaner rynku</h2>
-            <p className="muted">8 płynnych par · score techniczny · ATR do sizingu paper</p>
+            <p className="muted">8 par · cena, score, RSI, momentum i ATR</p>
           </div>
           <button onClick={refreshMarket} disabled={marketLoading}>
             {marketLoading ? "Pobieranie…" : "Odśwież"}
@@ -219,51 +251,100 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        <p className="tiny">Ostatnia aktualizacja: {market?.asOf ? new Date(market.asOf).toLocaleString("pl-PL") : "—"}</p>
       </section>
 
       <section className="card">
         <div className="cardTitle">
           <div>
-            <h2>Laboratorium strategii · {selected}</h2>
-            <p className="muted">1500 świec 1h · optymalizacja konfiguracji na train · ocena na test + walk-forward</p>
+            <h2>Analiza całego rynku</h2>
+            <p className="muted">Automatyczny research 8 instrumentów; odświeża się po otwarciu, jeśli ostatni run był ≥ 6 h temu.</p>
+          </div>
+          <button onClick={runAllLabs} disabled={allLabLoading}>
+            {allLabLoading ? "Analizuję 8 rynków…" : "Analizuj wszystkie 8"}
+          </button>
+        </div>
+
+        {allLab?.error && <div className="errorBox">{allLab.error}</div>}
+        {!allLab && <div className="placeholder">Oczekiwanie na pierwszy research.</div>}
+
+        {allLab && !allLab.error && (
+          <>
+            <div className="allSummary">
+              <Metric label="Przeanalizowano" value={String(allLab.successful)} sub={`z ${allLab.analyzed}`} />
+              <Metric label="Paper-ready" value={String(allLab.candidates?.length || 0)} sub="PASS + aktywny LONG" />
+              <Metric label="Ostatni run" value={new Date(allLab.generatedAt).toLocaleTimeString("pl-PL")} sub={new Date(allLab.generatedAt).toLocaleDateString("pl-PL")} />
+            </div>
+
+            <div className="tableWrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Instrument</th><th>Strategia</th><th>OOS</th><th>Benchmark</th>
+                    <th>Excess</th><th>DD</th><th>PF</th><th>Trades</th><th>WF</th><th>Gate</th><th>Sygnał</th><th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(allLab.ranking || []).map((r) => (
+                    <tr key={r.symbol}>
+                      <td><b>{r.symbol}</b></td>
+                      <td>{r.strategy}</td>
+                      <td className={r.oosReturnPct >= 0 ? "positive" : "negative"}>{pct(r.oosReturnPct)}</td>
+                      <td>{pct(r.benchmarkPct)}</td>
+                      <td className={r.excessReturnPct >= 0 ? "positive" : "negative"}>{pct(r.excessReturnPct)}</td>
+                      <td>{pct(r.drawdownPct)}</td>
+                      <td>{num(r.profitFactor, 2)}</td>
+                      <td>{r.trades}</td>
+                      <td>{r.wfPositive}/{r.wfTotal}</td>
+                      <td><span className={`signal ${r.eligible ? "good" : "bad"}`}>{r.eligible ? "PASS" : "FAIL"}</span></td>
+                      <td>{r.signalNow}</td>
+                      <td>
+                        {r.paperReady && (
+                          <button className="smallBtn" onClick={() => addPaperCandidateFrom(r.symbol, r.strategy, r.config)}>
+                            Paper +
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </section>
+
+      <section className="card">
+        <div className="cardTitle">
+          <div>
+            <h2>Laboratorium pojedynczego instrumentu · {selected}</h2>
+            <p className="muted">1500 świec 1h · train/test 70/30 · benchmark · 3-fold walk-forward</p>
           </div>
           <button onClick={() => runLab(selected)} disabled={labLoading || !selectedRow}>
             {labLoading ? "Liczenie…" : `Uruchom lab ${selected}`}
           </button>
         </div>
 
-        {!lab && <div className="placeholder">Uruchom lab dla wybranego instrumentu.</div>}
+        {!lab && <div className="placeholder">Wybierz instrument i uruchom dokładny lab.</div>}
         {lab?.error && <div className="errorBox">{lab.error}</div>}
 
         {lab && !lab.error && (
           <>
             <div className="labSummary">
-              <div>
-                <span>Top strategia</span>
-                <b>{top?.name || "—"}</b>
-                <small>{cfg(top?.bestConfig)}</small>
-              </div>
-              <div>
-                <span>OOS zwrot</span>
-                <b className={top?.test?.totalReturnPct >= 0 ? "positive" : "negative"}>{pct(top?.test?.totalReturnPct)}</b>
-                <small>{top?.test?.trades || 0} transakcji</small>
-              </div>
-              <div>
-                <span>OOS drawdown</span>
-                <b>{pct(top?.test?.maxDrawdownPct)}</b>
-                <small>test 30%</small>
-              </div>
-              <div>
-                <span>WF stabilność</span>
-                <b>{pct(top?.walkForward?.stabilityPct)}</b>
-                <small>{top?.walkForward?.positiveFolds}/{top?.walkForward?.totalFolds} dodatnich foldów</small>
-              </div>
-              <div>
-                <span>Sygnał teraz</span>
-                <b>{lab.candidate?.signalNow || "—"}</b>
-                <small>{lab.candidate?.eligible ? "bramki jakości: PASS" : "bramki jakości: FAIL"}</small>
-              </div>
+              <div><span>{lab.candidate?.eligible ? "Wybrana strategia" : "Top score (fallback)"}</span><b>{chosen?.name || "—"}</b><small>{cfg(chosen?.bestConfig)}</small></div>
+              <div><span>OOS</span><b className={chosen?.test?.totalReturnPct >= 0 ? "positive" : "negative"}>{pct(chosen?.test?.totalReturnPct)}</b><small>{chosen?.test?.trades || 0} transakcji</small></div>
+              <div><span>Buy & hold</span><b>{pct(chosen?.test?.benchmarkPct)}</b><small>ta sama próbka</small></div>
+              <div><span>Excess vs B&H</span><b className={chosen?.test?.excessReturnPct >= 0 ? "positive" : "negative"}>{pct(chosen?.test?.excessReturnPct)}</b><small>po kosztach modelowych</small></div>
+              <div><span>WF</span><b>{chosen?.walkForward?.positiveFolds}/{chosen?.walkForward?.totalFolds}</b><small>{pct(chosen?.walkForward?.stabilityPct)} dodatnich</small></div>
+              <div><span>Gate</span><b>{lab.candidate?.eligible ? "PASS" : "FAIL"}</b><small>{lab.candidate?.gate?.passedCount}/{lab.candidate?.gate?.totalChecks} kryteriów</small></div>
+            </div>
+
+            <div className="gateGrid">
+              {Object.entries(lab.candidate?.gate?.checks || {}).map(([key, value]) => (
+                <div key={key} className={value ? "gatePass" : "gateFail"}>
+                  <span>{value ? "✓" : "×"}</span>
+                  <b>{key}</b>
+                </div>
+              ))}
             </div>
 
             <div className="tableWrap">
@@ -271,7 +352,7 @@ export default function Home() {
                 <thead>
                   <tr>
                     <th>#</th><th>Strategia</th><th>Parametry</th><th>Train</th>
-                    <th>Test</th><th>DD test</th><th>PF</th><th>Trades</th><th>WF</th><th>Sygnał</th>
+                    <th>OOS</th><th>B&H</th><th>Excess</th><th>DD</th><th>PF</th><th>Trades</th><th>WF</th><th>Gate</th><th>Sygnał</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -282,25 +363,18 @@ export default function Home() {
                       <td>{cfg(r.bestConfig)}</td>
                       <td>{pct(r.train.totalReturnPct)}</td>
                       <td className={r.test.totalReturnPct >= 0 ? "positive" : "negative"}>{pct(r.test.totalReturnPct)}</td>
+                      <td>{pct(r.test.benchmarkPct)}</td>
+                      <td className={r.test.excessReturnPct >= 0 ? "positive" : "negative"}>{pct(r.test.excessReturnPct)}</td>
                       <td>{pct(r.test.maxDrawdownPct)}</td>
                       <td>{num(r.test.profitFactor, 2)}</td>
                       <td>{r.test.trades}</td>
-                      <td>{pct(r.walkForward.stabilityPct)}</td>
+                      <td>{r.walkForward.positiveFolds}/{r.walkForward.totalFolds}</td>
+                      <td><span className={`signal ${r.eligible ? "good" : "bad"}`}>{r.eligible ? "PASS" : "FAIL"}</span></td>
                       <td>{r.signalNow}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-
-            <div className={`candidateBox ${lab.candidate?.eligible ? "pass" : "fail"}`}>
-              <div>
-                <b>Paper gate: {lab.candidate?.eligible ? "PASS" : "FAIL"}</b>
-                <p>{lab.candidate?.reason}</p>
-              </div>
-              <button onClick={addPaperCandidate} disabled={!candidateReady}>
-                {candidateReady ? "Dodaj kandydata paper" : "Brak aktywnego LONG"}
-              </button>
             </div>
           </>
         )}
@@ -310,14 +384,14 @@ export default function Home() {
         <article className="card">
           <div className="cardTitle">
             <div>
-              <h2>Paper journal</h2>
-              <p className="muted">Sizing na podstawie 0,50% ryzyka i 2×ATR.</p>
+              <h2>Paper candidates</h2>
+              <p className="muted">Tylko ręcznie dodane po PASS + aktywnym LONG.</p>
             </div>
-            <button onClick={exportJournal} disabled={!paper.length && !history.length}>Eksport JSON</button>
+            <button onClick={exportJournal} disabled={!paper.length && !history.length && !allLab}>Eksport JSON</button>
           </div>
 
           {paper.length === 0 ? (
-            <div className="placeholder">Brak kandydatów paper.</div>
+            <div className="placeholder">Brak kandydatów paper-ready.</div>
           ) : (
             <div className="tableWrap">
               <table>
@@ -343,17 +417,17 @@ export default function Home() {
         </article>
 
         <article className="card">
-          <h2>Historia labów</h2>
-          <p className="muted">Ostatnie 40 uruchomień; można je eksportować do JSON.</p>
+          <h2>Historia researchu</h2>
+          <p className="muted">Do 100 ostatnich pojedynczych labów w tej przeglądarce.</p>
           {history.length === 0 ? (
             <div className="placeholder">Brak historii.</div>
           ) : (
             <div className="historyList">
-              {history.slice(0, 8).map((h) => (
+              {history.slice(0, 10).map((h) => (
                 <div key={h.id}>
                   <span><b>{h.symbol}</b> · {h.strategy}</span>
                   <span className={h.testReturnPct >= 0 ? "positive" : "negative"}>{pct(h.testReturnPct)}</span>
-                  <small>WF {pct(h.stabilityPct)} · {h.eligible ? "PASS" : "FAIL"}</small>
+                  <small>Excess {pct(h.excessReturnPct)} · {h.trades} trades · WF {pct(h.stabilityPct)} · {h.eligible ? "PASS" : "FAIL"}</small>
                 </div>
               ))}
             </div>
@@ -362,21 +436,25 @@ export default function Home() {
       </section>
 
       <section className="card riskCard">
-        <h2>Hard risk policy</h2>
+        <h2>Walidacja v0.4</h2>
         <div className="riskGrid">
+          <div><span>OOS trades</span><b>≥ 8</b></div>
+          <div><span>Walk-forward</span><b>≥ 2/3 dodatnie</b></div>
+          <div><span>Profit factor</span><b>≥ 1,15</b></div>
+          <div><span>OOS drawdown</span><b>≥ -12%</b></div>
+          <div><span>OOS return</span><b>&gt; 0%</b></div>
+          <div><span>Excess vs B&H</span><b>≥ 0%</b></div>
           <div><span>Ryzyko / pozycję</span><b>0,50%</b></div>
-          <div><span>Stop</span><b>2×ATR, min 1%, max 5%</b></div>
-          <div><span>Maks. sizing</span><b>100% paper capital</b></div>
           <div><span>Live trading</span><b className="off">WYŁĄCZONY</b></div>
         </div>
         <p className="note">
-          Ranking strategii nie jest rekomendacją inwestycyjną. Bramka PASS oznacza wyłącznie,
-          że strategia spełniła techniczne kryteria do dalszego paper testu w tej próbce.
+          v0.4 celowo preferuje brak transakcji nad dopuszczenie słabo zweryfikowanej strategii.
+          Wyniki historyczne nie gwarantują przyszłych rezultatów.
         </p>
       </section>
 
       <footer>
-        v0.3 · dane rzeczywiste · badania historyczne · paper only · XTB niepołączony
+        v0.4 · multi-market validation · benchmark · strict paper gate · XTB niepołączony
       </footer>
     </main>
   );

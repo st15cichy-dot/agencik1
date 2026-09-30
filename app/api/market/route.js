@@ -1,12 +1,7 @@
 import { scannerScore } from "../../../lib/indicators";
+import { BASE, SYMBOLS } from "../../../lib/research";
 
 export const revalidate = 60;
-
-const BASE = "https://data-api.binance.vision";
-const SYMBOLS = [
-  "BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT",
-  "XRPUSDT", "ADAUSDT", "DOGEUSDT", "LINKUSDT",
-];
 
 async function fetchJson(path) {
   const res = await fetch(`${BASE}${path}`, { next: { revalidate: 60 } });
@@ -28,13 +23,12 @@ async function instrument(symbol) {
     low: Number(r[3]), close: Number(r[4]), volume: Number(r[5]),
   }));
 
-  const scan = scannerScore(candles);
   return {
     symbol,
     price: Number(ticker.lastPrice),
     change24h: Number(ticker.priceChangePercent),
     quoteVolume24h: Number(ticker.quoteVolume),
-    ...scan,
+    ...scannerScore(candles),
   };
 }
 
@@ -42,6 +36,7 @@ export async function GET() {
   try {
     const instruments = await Promise.all(SYMBOLS.map(instrument));
     instruments.sort((a, b) => b.score - a.score);
+
     return Response.json({
       source: "Binance public market-data-only endpoint",
       asOf: new Date().toISOString(),

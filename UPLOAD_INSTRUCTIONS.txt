@@ -1,0 +1,14 @@
+AUTONOMICZNY INWESTOR v0.4 — UPLOAD
+
+Wgraj do katalogu głównego repozytorium agencik1:
+- package.json
+- next.config.mjs
+- cały folder app
+- cały folder lib
+- opcjonalnie README_V04.md
+
+Nie wgrywaj folderu nadrzędnego autonomiczny_inwestor_v04.
+Commituj do main.
+
+Nie dodawaj żadnych kluczy API.
+Live trading pozostaje wyłączony.
