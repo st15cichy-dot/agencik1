@@ -1,10 +1,32 @@
 import fs from "node:fs";
 import path from "node:path";
-import { analyzeSymbol, SYMBOLS } from "../lib/research.js";
+import {
+  analyzeSymbol,
+  fetchBars,
+  SYMBOLS,
+} from "../lib/research.js";
+import { atrSeries } from "../lib/indicators.js";
+import { prepareStrategy } from "../lib/strategies.js";
+import {
+  PAPER_POLICY,
+  normalizePaperState,
+  paperSnapshot,
+  refreshDayState,
+  updateRiskFlags,
+  openPaperPosition,
+  closePaperPosition,
+  publicPaperSummary,
+} from "../lib/paper-portfolio.js";
 
 const OUT_DIR = path.resolve(".auto-output");
-const previousLatestPath = process.env.PREVIOUS_LATEST_PATH || "";
-const previousHistoryPath = process.env.PREVIOUS_HISTORY_PATH || "";
+const previousLatestPath =
+  process.env.PREVIOUS_LATEST_PATH || "";
+const previousHistoryPath =
+  process.env.PREVIOUS_HISTORY_PATH || "";
+const previousPaperPath =
+  process.env.PREVIOUS_PAPER_PATH || "";
+const previousTradesPath =
+  process.env.PREVIOUS_TRADES_PATH || "";
 
 function readJson(file, fallback) {
   try {
@@ -16,12 +38,18 @@ function readJson(file, fallback) {
 }
 
 function round(value, digits = 4) {
-  return Number.isFinite(value) ? Number(value.toFixed(digits)) : null;
+  return Number.isFinite(value)
+    ? Number(value.toFixed(digits))
+    : null;
 }
 
 function chosenFrom(result) {
   if (!result?.ranking?.length) return null;
-  return result.ranking.find((x) => x.id === result.candidate?.strategyId) || result.ranking[0];
+  return (
+    result.ranking.find(
+      (x) => x.id === result.candidate?.strategyId
+    ) || result.ranking[0]
+  );
 }
 
 function summarize(result, stage) {
@@ -37,32 +65,109 @@ function summarize(result, stage) {
   return {
     symbol: result.symbol,
     stage,
+    strategyId: chosen.id,
     strategy: chosen.name,
     config: chosen.config,
+    robustScore: round(chosen.robustScore),
     returnPct: round(chosen.final?.totalReturnPct),
-    exposureBenchmarkPct: round(chosen.final?.exposureBenchmarkPct),
-    excessPct: round(chosen.final?.excessVsExposureBenchmarkPct),
+    exposureBenchmarkPct: round(
+      chosen.final?.exposureBenchmarkPct
+    ),
+    excessPct: round(
+      chosen.final?.excessVsExposureBenchmarkPct
+    ),
     drawdownPct: round(chosen.final?.maxDrawdownPct),
     profitFactor: round(chosen.final?.profitFactor),
     sharpe: round(chosen.final?.sharpe),
-    returnToDrawdown: round(chosen.final?.returnToDrawdown),
+    returnToDrawdown: round(
+      chosen.final?.returnToDrawdown
+    ),
     exposurePct: round(chosen.final?.exposurePct),
     trades: chosen.final?.trades ?? 0,
-    wfPositive: chosen.walkForward?.positiveFolds ?? 0,
+    wfPositive:
+      chosen.walkForward?.positiveFolds ?? 0,
     wfTotal: chosen.walkForward?.totalFolds ?? 0,
-    parameterStabilityPct: round(chosen.walkForward?.parameterStabilityPct),
+    parameterStabilityPct: round(
+      chosen.walkForward?.parameterStabilityPct
+    ),
     eligible: Boolean(result.candidate?.eligible),
-    paperReady: Boolean(result.candidate?.paperReady),
-    signalNow: result.candidate?.signalNow || chosen.signalNow || "FLAT",
-    gate: chosen.gate || result.candidate?.gate || null,
+    paperReady: false,
+    signalNow:
+      result.candidate?.signalNow ||
+      chosen.signalNow ||
+      "FLAT",
+    entryWindowLong: false,
+    entrySignalAt: null,
+    gate:
+      chosen.gate ||
+      result.candidate?.gate ||
+      null,
     generatedAt: result.generatedAt,
   };
 }
 
-function detectEvents(previous, current) {
+function sameConfig(a, b) {
+  return JSON.stringify(a || {}) === JSON.stringify(b || {});
+}
+
+function recentEntryState(
+  candles,
+  strategyId,
+  config,
+  sinceMs
+) {
+  const strategy = prepareStrategy(
+    candles,
+    strategyId,
+    config
+  );
+
+  let start = candles.findIndex(
+    (c) => c.time > sinceMs
+  );
+  if (start < 0) start = candles.length;
+  start = Math.max(1, start);
+
+  let inPosition = false;
+  let entrySignalAt = null;
+
+  for (let i = start; i < candles.length; i += 1) {
+    const signal = strategy.signal(i, inPosition);
+
+    if (!inPosition && signal === "ENTER") {
+      inPosition = true;
+      entrySignalAt = new Date(
+        candles[i].time
+      ).toISOString();
+    } else if (
+      inPosition &&
+      signal === "EXIT"
+    ) {
+      inPosition = false;
+      entrySignalAt = null;
+    }
+  }
+
+  return {
+    active: inPosition,
+    entrySignalAt,
+  };
+}
+
+function detectResearchEvents(previous, current) {
   const events = [];
-  const prevDeep = new Map((previous?.deep || []).map((x) => [x.symbol, x]));
-  const currDeep = new Map((current?.deep || []).map((x) => [x.symbol, x]));
+  const prevDeep = new Map(
+    (previous?.deep || []).map((x) => [
+      x.symbol,
+      x,
+    ])
+  );
+  const currDeep = new Map(
+    (current?.deep || []).map((x) => [
+      x.symbol,
+      x,
+    ])
+  );
 
   for (const [symbol, now] of currDeep) {
     const before = prevDeep.get(symbol);
@@ -75,15 +180,25 @@ function detectEvents(previous, current) {
       });
     }
 
-    if (before && before.eligible !== now.eligible) {
+    if (
+      before &&
+      before.eligible !== now.eligible
+    ) {
       events.push({
-        type: now.eligible ? "DEEP_PASS_GAINED" : "DEEP_PASS_LOST",
+        type: now.eligible
+          ? "DEEP_PASS_GAINED"
+          : "DEEP_PASS_LOST",
         symbol,
-        message: `${symbol}: Deep gate ${before.eligible ? "PASS" : "FAIL"} → ${now.eligible ? "PASS" : "FAIL"}`,
+        message: `${symbol}: Deep gate ${
+          before.eligible ? "PASS" : "FAIL"
+        } → ${now.eligible ? "PASS" : "FAIL"}`,
       });
     }
 
-    if (before && before.signalNow !== now.signalNow) {
+    if (
+      before &&
+      before.signalNow !== now.signalNow
+    ) {
       events.push({
         type: "SIGNAL_CHANGED",
         symbol,
@@ -91,106 +206,699 @@ function detectEvents(previous, current) {
       });
     }
 
-    if ((!before?.paperReady) && now.paperReady) {
+    if (
+      !before?.paperReady &&
+      now.paperReady
+    ) {
       events.push({
         type: "PAPER_READY_NEW",
         symbol,
-        message: `${symbol}: Deep PASS + aktywny LONG`,
+        message: `${symbol}: Deep PASS + aktywne wejście LONG w oknie heartbeat`,
       });
     }
   }
 
-  for (const [symbol, before] of prevDeep) {
-    if (!currDeep.has(symbol) && before?.eligible) {
-      events.push({
-        type: "CANDIDATE_NOT_RETESTED",
-        symbol,
-        message: `${symbol}: poprzedni Deep PASS nie był kandydatem screeningu w tym runie`,
-      });
-    }
+  return events;
+}
+
+async function getMarketContext(
+  symbol,
+  cache
+) {
+  if (cache.has(symbol)) {
+    return cache.get(symbol);
   }
 
-  return events.map((x) => ({
-    ...x,
-    at: new Date().toISOString(),
-  }));
+  const candles = await fetchBars(symbol, 240);
+  const last = candles.at(-1);
+  const atr = atrSeries(candles, 14).at(-1);
+  const atrPct =
+    atr && last?.close
+      ? (atr / last.close) * 100
+      : null;
+
+  const context = {
+    candles,
+    price: last?.close,
+    atrPct,
+    asOf: last?.time
+      ? new Date(last.time).toISOString()
+      : new Date().toISOString(),
+  };
+
+  cache.set(symbol, context);
+  return context;
 }
 
 async function main() {
-  fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.mkdirSync(OUT_DIR, {
+    recursive: true,
+  });
 
-  const previousLatest = readJson(previousLatestPath, null);
-  const previousHistory = readJson(previousHistoryPath, []);
+  const previousLatest = readJson(
+    previousLatestPath,
+    null
+  );
+  const previousHistory = readJson(
+    previousHistoryPath,
+    []
+  );
+  const previousPaper = readJson(
+    previousPaperPath,
+    null
+  );
+  const previousTrades = readJson(
+    previousTradesPath,
+    []
+  );
 
-  const startedAt = new Date().toISOString();
+  const nowIso = new Date().toISOString();
+  const startedAt = nowIso;
   const screen = [];
   const deep = [];
   const failures = [];
+  const paperEvents = [];
+  const marketCache = new Map();
 
-  // Stage 1: cheaper screening for all instruments.
+  let paperState = normalizePaperState(
+    previousPaper,
+    nowIso
+  );
+  let paperTrades = Array.isArray(
+    previousTrades
+  )
+    ? previousTrades
+    : [];
+
   for (const symbol of SYMBOLS) {
     try {
-      const result = await analyzeSymbol(symbol, "screen");
-      screen.push(summarize(result, "screen"));
+      const result = await analyzeSymbol(
+        symbol,
+        "screen"
+      );
+      screen.push(
+        summarize(result, "screen")
+      );
     } catch (error) {
       failures.push({
         stage: "screen",
         symbol,
-        error: error?.message || String(error),
+        error:
+          error?.message ||
+          String(error),
       });
     }
   }
 
-  const deepSymbols = screen
-    .filter((x) => x.eligible)
-    .map((x) => x.symbol);
+  const deepSymbols = [
+    ...new Set([
+      ...screen
+        .filter((x) => x.eligible)
+        .map((x) => x.symbol),
+      ...(paperState.openPositions || []).map(
+        (x) => x.symbol
+      ),
+    ]),
+  ];
 
-  // Stage 2: expensive deep validation only for screening candidates.
   for (const symbol of deepSymbols) {
     try {
-      const result = await analyzeSymbol(symbol, "deep");
-      deep.push(summarize(result, "deep"));
+      const result = await analyzeSymbol(
+        symbol,
+        "deep"
+      );
+      deep.push(
+        summarize(result, "deep")
+      );
     } catch (error) {
       failures.push({
         stage: "deep",
         symbol,
-        error: error?.message || String(error),
+        error:
+          error?.message ||
+          String(error),
       });
     }
   }
 
+  const previousHeartbeatMs =
+    previousLatest?.completedAt
+      ? Date.parse(
+          previousLatest.completedAt
+        )
+      : Date.now() - 3 * 3600_000;
+
+  for (const item of deep) {
+    if (!item.eligible) continue;
+
+    try {
+      const market = await getMarketContext(
+        item.symbol,
+        marketCache
+      );
+
+      const entry = recentEntryState(
+        market.candles,
+        item.strategyId,
+        item.config,
+        previousHeartbeatMs
+      );
+
+      item.entryWindowLong = entry.active;
+      item.entrySignalAt =
+        entry.entrySignalAt;
+      item.paperReady =
+        item.eligible &&
+        entry.active;
+    } catch (error) {
+      failures.push({
+        stage: "entry-window",
+        symbol: item.symbol,
+        error:
+          error?.message ||
+          String(error),
+      });
+    }
+  }
+
+  const deepBySymbol = new Map(
+    deep.map((x) => [x.symbol, x])
+  );
+
+  for (const position of
+    paperState.openPositions || []) {
+    try {
+      await getMarketContext(
+        position.symbol,
+        marketCache
+      );
+    } catch (error) {
+      failures.push({
+        stage: "paper-market",
+        symbol: position.symbol,
+        error:
+          error?.message ||
+          String(error),
+      });
+    }
+  }
+
+  const priceMap = {};
+  for (const [symbol, ctx] of
+    marketCache.entries()) {
+    if (Number.isFinite(ctx.price)) {
+      priceMap[symbol] = ctx.price;
+    }
+  }
+
+  let snapshot = paperSnapshot(
+    paperState,
+    priceMap
+  );
+
+  refreshDayState(
+    paperState,
+    snapshot,
+    nowIso
+  );
+
+  snapshot = paperSnapshot(
+    paperState,
+    priceMap
+  );
+
+  for (const position of [
+    ...paperState.openPositions,
+  ]) {
+    const market = marketCache.get(
+      position.symbol
+    );
+
+    if (
+      !market?.candles?.length ||
+      !Number.isFinite(market.price)
+    ) {
+      continue;
+    }
+
+    const lastCheckedMs = Date.parse(
+      position.lastCheckedAt ||
+        position.openedAt
+    );
+
+    const freshBars =
+      market.candles.filter(
+        (c) => c.time > lastCheckedMs
+      );
+
+    const stopHit = freshBars.find(
+      (c) => c.low <= position.stopPrice
+    );
+
+    if (stopHit) {
+      const result =
+        closePaperPosition(
+          paperState,
+          position.id,
+          {
+            rawExitPrice:
+              position.stopPrice,
+            nowIso,
+            reason: "STOP_LOSS",
+          }
+        );
+
+      if (result.closed) {
+        paperTrades.unshift(
+          result.trade
+        );
+        paperEvents.push({
+          type: "PAPER_STOP",
+          symbol: position.symbol,
+          message: `${position.symbol}: paper stop-loss, P/L ${round(result.trade.pnlPln, 2)} PLN`,
+        });
+      }
+      continue;
+    }
+
+    const deepNow = deepBySymbol.get(
+      position.symbol
+    );
+
+    if (
+      deepNow &&
+      !deepNow.eligible
+    ) {
+      const result =
+        closePaperPosition(
+          paperState,
+          position.id,
+          {
+            rawExitPrice: market.price,
+            nowIso,
+            reason: "DEEP_GATE_LOST",
+          }
+        );
+
+      if (result.closed) {
+        paperTrades.unshift(
+          result.trade
+        );
+        paperEvents.push({
+          type: "PAPER_GATE_EXIT",
+          symbol: position.symbol,
+          message: `${position.symbol}: zamknięcie paper — Deep PASS utracony`,
+        });
+      }
+      continue;
+    }
+
+    if (
+      deepNow &&
+      (
+        deepNow.strategyId !==
+          position.strategyId ||
+        !sameConfig(
+          deepNow.config,
+          position.config
+        )
+      )
+    ) {
+      const result =
+        closePaperPosition(
+          paperState,
+          position.id,
+          {
+            rawExitPrice: market.price,
+            nowIso,
+            reason:
+              "VALIDATED_STRATEGY_CHANGED",
+          }
+        );
+
+      if (result.closed) {
+        paperTrades.unshift(
+          result.trade
+        );
+        paperEvents.push({
+          type: "PAPER_STRATEGY_EXIT",
+          symbol: position.symbol,
+          message: `${position.symbol}: zamknięcie paper — zmieniła się walidowana strategia`,
+        });
+      }
+      continue;
+    }
+
+    const strategy = prepareStrategy(
+      market.candles,
+      position.strategyId,
+      position.config
+    );
+
+    const exitSignal = strategy.signal(
+      market.candles.length - 1,
+      true
+    );
+
+    if (exitSignal === "EXIT") {
+      const result =
+        closePaperPosition(
+          paperState,
+          position.id,
+          {
+            rawExitPrice: market.price,
+            nowIso,
+            reason: "STRATEGY_EXIT",
+          }
+        );
+
+      if (result.closed) {
+        paperTrades.unshift(
+          result.trade
+        );
+        paperEvents.push({
+          type: "PAPER_SIGNAL_EXIT",
+          symbol: position.symbol,
+          message: `${position.symbol}: zamknięcie paper — sygnał EXIT`,
+        });
+      }
+      continue;
+    }
+
+    if (
+      Date.parse(nowIso) >=
+      Date.parse(
+        position.maxHoldUntil
+      )
+    ) {
+      const result =
+        closePaperPosition(
+          paperState,
+          position.id,
+          {
+            rawExitPrice: market.price,
+            nowIso,
+            reason: "MAX_HOLD_7D",
+          }
+        );
+
+      if (result.closed) {
+        paperTrades.unshift(
+          result.trade
+        );
+        paperEvents.push({
+          type: "PAPER_TIME_EXIT",
+          symbol: position.symbol,
+          message: `${position.symbol}: zamknięcie paper po maks. 7 dniach`,
+        });
+      }
+      continue;
+    }
+
+    const livePosition =
+      paperState.openPositions.find(
+        (p) => p.id === position.id
+      );
+
+    if (livePosition) {
+      livePosition.lastCheckedAt =
+        nowIso;
+      livePosition.lastMarketPrice =
+        market.price;
+    }
+  }
+
+  snapshot = paperSnapshot(
+    paperState,
+    priceMap
+  );
+
+  updateRiskFlags(
+    paperState,
+    snapshot
+  );
+
+  if (
+    paperState.halted &&
+    paperState.openPositions.length
+  ) {
+    for (const position of [
+      ...paperState.openPositions,
+    ]) {
+      const market = marketCache.get(
+        position.symbol
+      );
+
+      if (
+        !Number.isFinite(
+          market?.price
+        )
+      ) {
+        continue;
+      }
+
+      const result =
+        closePaperPosition(
+          paperState,
+          position.id,
+          {
+            rawExitPrice: market.price,
+            nowIso,
+            reason:
+              "HARD_DRAWDOWN_HALT",
+          }
+        );
+
+      if (result.closed) {
+        paperTrades.unshift(
+          result.trade
+        );
+      }
+    }
+
+    paperEvents.push({
+      type: "PAPER_HARD_HALT",
+      symbol: "PORTFOLIO",
+      message: `Paper portfolio: hard drawdown stop ${PAPER_POLICY.hardDrawdownStopPct}% — nowe wejścia zablokowane`,
+    });
+  }
+
+  snapshot = paperSnapshot(
+    paperState,
+    priceMap
+  );
+
+  if (paperState.dailyHalt) {
+    paperEvents.push({
+      type: "PAPER_DAILY_HALT",
+      symbol: "PORTFOLIO",
+      message: `Paper portfolio: dzienny limit straty ${PAPER_POLICY.dailyLossLimitPct}% — brak nowych wejść do kolejnego dnia UTC`,
+    });
+  }
+
+  const candidates = deep
+    .filter((x) => x.paperReady)
+    .filter(
+      (x) =>
+        !paperState.openPositions.some(
+          (p) => p.symbol === x.symbol
+        )
+    )
+    .sort(
+      (a, b) =>
+        (b.returnToDrawdown ?? -999) -
+          (a.returnToDrawdown ?? -999) ||
+        (b.excessPct ?? -999) -
+          (a.excessPct ?? -999)
+    );
+
+  for (const candidate of candidates) {
+    snapshot = paperSnapshot(
+      paperState,
+      priceMap
+    );
+
+    if (
+      paperState.halted ||
+      paperState.dailyHalt
+    ) {
+      break;
+    }
+
+    if (
+      paperState.openPositions.length >=
+      PAPER_POLICY.maxOpenPositions
+    ) {
+      break;
+    }
+
+    try {
+      const market = await getMarketContext(
+        candidate.symbol,
+        marketCache
+      );
+
+      priceMap[candidate.symbol] =
+        market.price;
+
+      const opened = openPaperPosition(
+        paperState,
+        snapshot,
+        {
+          symbol: candidate.symbol,
+          strategyId:
+            candidate.strategyId,
+          strategyName:
+            candidate.strategy,
+          config: candidate.config,
+          rawPrice: market.price,
+          atrPct: market.atrPct,
+          nowIso,
+          entrySignalAt:
+            candidate.entrySignalAt,
+          deepMetrics: {
+            returnPct:
+              candidate.returnPct,
+            excessPct:
+              candidate.excessPct,
+            drawdownPct:
+              candidate.drawdownPct,
+            profitFactor:
+              candidate.profitFactor,
+            wfPositive:
+              candidate.wfPositive,
+            wfTotal:
+              candidate.wfTotal,
+            parameterStabilityPct:
+              candidate.parameterStabilityPct,
+          },
+        }
+      );
+
+      if (opened.opened) {
+        paperEvents.push({
+          type: "PAPER_OPENED",
+          symbol:
+            candidate.symbol,
+          message: `${candidate.symbol}: otwarto paper LONG, notional ${round(opened.position.notionalPln, 2)} PLN, ryzyko ${round(opened.position.riskPln, 2)} PLN`,
+        });
+      }
+    } catch (error) {
+      failures.push({
+        stage: "paper-open",
+        symbol: candidate.symbol,
+        error:
+          error?.message ||
+          String(error),
+      });
+    }
+  }
+
+  snapshot = paperSnapshot(
+    paperState,
+    priceMap
+  );
+
+  paperState.peakEquityPln =
+    Math.max(
+      paperState.peakEquityPln || 0,
+      snapshot.equityPln
+    );
+
+  paperState.lastUpdatedAt = nowIso;
+  paperTrades =
+    paperTrades.slice(0, 500);
+
   const current = {
-    schemaVersion: 1,
-    appVersion: "0.6.0",
-    mode: "AUTONOMOUS_RESEARCH_ONLY",
+    schemaVersion: 2,
+    appVersion: "0.7.0",
+    mode:
+      "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
-    completedAt: new Date().toISOString(),
-    source: "Binance public market-data-only endpoint",
+    completedAt:
+      new Date().toISOString(),
+    source:
+      "Binance public market-data-only endpoint",
     scheduleTarget: "every 2 hours",
     screen,
     deep,
-    screenPass: screen.filter((x) => x.eligible).map((x) => x.symbol),
-    deepPass: deep.filter((x) => x.eligible).map((x) => x.symbol),
-    paperReady: deep.filter((x) => x.paperReady).map((x) => x.symbol),
+    screenPass: screen
+      .filter((x) => x.eligible)
+      .map((x) => x.symbol),
+    deepPass: deep
+      .filter((x) => x.eligible)
+      .map((x) => x.symbol),
+    paperReady: deep
+      .filter((x) => x.paperReady)
+      .map((x) => x.symbol),
     failures,
     safeguards: {
       liveTrading: false,
       brokerConnected: false,
       noSecretsStored: true,
-      persistenceContainsPublicResearchOnly: true,
+      paperOnly: true,
+      persistenceContainsOnlyPublicResearchAndSimulatedPositions:
+        true,
     },
   };
 
-  const events = detectEvents(previousLatest, current);
-  current.events = events;
+  const researchEvents =
+    detectResearchEvents(
+      previousLatest,
+      current
+    );
+
+  current.events = [
+    ...researchEvents,
+    ...paperEvents,
+  ].map((x) => ({
+    ...x,
+    at: current.completedAt,
+  }));
+
+  current.paperPortfolio =
+    publicPaperSummary(
+      paperState,
+      paperTrades,
+      priceMap,
+      current.completedAt
+    );
 
   const runRecord = {
     at: current.completedAt,
-    screenPass: current.screenPass,
-    deepPass: current.deepPass,
-    paperReady: current.paperReady,
-    failures: current.failures,
-    events,
+    screenPass:
+      current.screenPass,
+    deepPass:
+      current.deepPass,
+    paperReady:
+      current.paperReady,
+    failures:
+      current.failures,
+    events:
+      current.events,
+    paper: {
+      equityPln:
+        current.paperPortfolio
+          .equityPln,
+      totalPnlPln:
+        current.paperPortfolio
+          .totalPnlPln,
+      openPositionsCount:
+        current.paperPortfolio
+          .openPositionsCount,
+      closedTradesCount:
+        current.paperPortfolio
+          .closedTradesCount,
+      drawdownPct:
+        current.paperPortfolio
+          .drawdownPct,
+      dailyHalt:
+        current.paperPortfolio
+          .dailyHalt,
+      halted:
+        current.paperPortfolio
+          .halted,
+    },
     deep: current.deep.map((x) => ({
       symbol: x.symbol,
       strategy: x.strategy,
@@ -199,32 +907,104 @@ async function main() {
       signalNow: x.signalNow,
       returnPct: x.returnPct,
       excessPct: x.excessPct,
-      drawdownPct: x.drawdownPct,
+      drawdownPct:
+        x.drawdownPct,
       trades: x.trades,
     })),
   };
 
-  const history = [runRecord, ...(Array.isArray(previousHistory) ? previousHistory : [])]
-    .slice(0, 240);
+  const history = [
+    runRecord,
+    ...(Array.isArray(previousHistory)
+      ? previousHistory
+      : []),
+  ].slice(0, 240);
 
   fs.writeFileSync(
-    path.join(OUT_DIR, "latest.json"),
-    JSON.stringify(current, null, 2) + "\n"
-  );
-  fs.writeFileSync(
-    path.join(OUT_DIR, "history.json"),
-    JSON.stringify(history, null, 2) + "\n"
+    path.join(
+      OUT_DIR,
+      "latest.json"
+    ),
+    JSON.stringify(
+      current,
+      null,
+      2
+    ) + "\n"
   );
 
-  console.log(JSON.stringify({
-    ok: true,
-    completedAt: current.completedAt,
-    screenPass: current.screenPass,
-    deepPass: current.deepPass,
-    paperReady: current.paperReady,
-    failures: current.failures.length,
-    events: current.events.map((x) => x.type),
-  }, null, 2));
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
+      "history.json"
+    ),
+    JSON.stringify(
+      history,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
+      "paper.json"
+    ),
+    JSON.stringify(
+      paperState,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
+      "paper-trades.json"
+    ),
+    JSON.stringify(
+      paperTrades,
+      null,
+      2
+    ) + "\n"
+  );
+
+  console.log(
+    JSON.stringify(
+      {
+        ok: true,
+        completedAt:
+          current.completedAt,
+        screenPass:
+          current.screenPass,
+        deepPass:
+          current.deepPass,
+        paperReady:
+          current.paperReady,
+        paper: {
+          equityPln:
+            current.paperPortfolio
+              .equityPln,
+          open:
+            current.paperPortfolio
+              .openPositionsCount,
+          closed:
+            current.paperPortfolio
+              .closedTradesCount,
+          halted:
+            current.paperPortfolio
+              .halted,
+        },
+        failures:
+          current.failures.length,
+        events:
+          current.events.map(
+            (x) => x.type
+          ),
+      },
+      null,
+      2
+    )
+  );
 }
 
 main().catch((error) => {

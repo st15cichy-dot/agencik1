@@ -8,3 +8,8 @@
 .eventList>div b{color:#87b9e8}
 .eventList>div span{color:#a2afbf}
 @media(max-width:640px){.eventList>div{grid-template-columns:1fr}}
+
+
+.paperAuto{margin-top:18px}
+.sectionDivider{height:1px;background:#29425c;margin:18px 0}
+.paperAuto h3{margin:12px 0 6px}

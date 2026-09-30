@@ -169,7 +169,7 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "v0.5 deep-validated candidate",
+      source: "manual browser sandbox v0.7",
     }, ...p].slice(0, 100));
   }
 
@@ -189,7 +189,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v05-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v07-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -208,7 +208,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po pierwszym wdrożeniu v0.6."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.7."
           : `HTTP ${r.status}`
       );
     }
@@ -232,9 +232,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.6</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.7</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous heartbeat + durable research memory + deep validation</p>
+          <p className="muted">Autonomous research + paper portfolio + hard risk engine</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -244,16 +244,16 @@ useEffect(() => {
       </header>
 
       <section className="warning">
-        <strong>Brak wymuszania transakcji.</strong>
-        <span> Screening wybiera tylko kandydatów do głębokiego testu; paper wymaga osobnego Deep PASS + aktywnego LONG.</span>
+        <strong>Realne zlecenia są wyłączone.</strong>
+        <span> v0.7 może sam otwierać i zamykać wyłącznie pozycje PAPER po Deep PASS + aktywnym wejściu LONG.</span>
       </section>
 
       <section className="metrics">
-        <Metric label="Autonomia" value="2 h" sub="heartbeat target" />
-        <Metric label="Pamięć" value="GitHub" sub="research-data branch" />
-        <Metric label="Deep historia" value="5000 h" sub="~208 dni" />
-        <Metric label="Final OOS" value="30%" sub="nietknięty" />
-        <Metric label="Ryzyko / trade" value={money(STARTING_CAPITAL * RISK_PER_TRADE)} sub="0,50%" />
+        <Metric label="Paper equity" value={money(autoMemory?.paperPortfolio?.equityPln ?? STARTING_CAPITAL)} sub="kapitał symulacyjny" />
+        <Metric label="Otwarte paper" value={String(autoMemory?.paperPortfolio?.openPositionsCount ?? 0)} sub="maks. 3" />
+        <Metric label="P/L paper" value={money(autoMemory?.paperPortfolio?.totalPnlPln ?? 0)} sub={pct(autoMemory?.paperPortfolio?.totalReturnPct ?? 0)} />
+        <Metric label="Portfolio DD" value={pct(autoMemory?.paperPortfolio?.drawdownPct ?? 0)} sub="hard stop -10%" />
+        <Metric label="Ryzyko / trade" value={money((autoMemory?.paperPortfolio?.equityPln ?? STARTING_CAPITAL) * RISK_PER_TRADE)} sub="0,50%" />
         <Metric label="Live trading" value="OFF" sub="XTB niepołączony" />
       </section>
 
@@ -382,6 +382,94 @@ useEffect(() => {
       ) : (
         <div className="placeholder">W ostatnim heartbeat screening nie wybrał kandydatów do Deep Lab.</div>
       )}
+
+
+{autoMemory.paperPortfolio && (
+  <div className="paperAuto">
+    <div className="sectionDivider" />
+    <div className="cardTitle">
+      <div>
+        <h3>Autonomous paper portfolio</h3>
+        <p className="muted">
+          Pozycje są symulowane i zarządzane przez heartbeat. Brak połączenia z brokerem.
+        </p>
+      </div>
+      <span className={`signal ${autoMemory.paperPortfolio.halted ? "bad" : "good"}`}>
+        {autoMemory.paperPortfolio.halted
+          ? "HARD HALT"
+          : autoMemory.paperPortfolio.dailyHalt
+            ? "DAILY HALT"
+            : "ACTIVE"}
+      </span>
+    </div>
+
+    <div className="metricStrip">
+      <Metric label="Equity" value={money(autoMemory.paperPortfolio.equityPln)} sub="paper PLN" />
+      <Metric label="Cash" value={money(autoMemory.paperPortfolio.cashPln)} sub="wolne środki" />
+      <Metric label="Realized" value={money(autoMemory.paperPortfolio.realizedPnlPln)} sub="zamknięte pozycje" />
+      <Metric label="Unrealized" value={money(autoMemory.paperPortfolio.unrealizedPnlPln)} sub="otwarte pozycje" />
+      <Metric label="Daily P/L" value={pct(autoMemory.paperPortfolio.dailyPnlPct)} sub="halt przy -2%" />
+      <Metric label="Win rate" value={pct(autoMemory.paperPortfolio.winRatePct)} sub={`${autoMemory.paperPortfolio.closedTradesCount} zamkniętych`} />
+    </div>
+
+    {(autoMemory.paperPortfolio.openPositions || []).length > 0 ? (
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Symbol</th><th>Strategia</th><th>Wejście</th><th>Teraz</th>
+              <th>Stop</th><th>Notional</th><th>Ryzyko</th><th>P/L</th><th>Max hold</th>
+            </tr>
+          </thead>
+          <tbody>
+            {autoMemory.paperPortfolio.openPositions.map((p) => (
+              <tr key={p.id}>
+                <td><b>{p.symbol}</b></td>
+                <td>{p.strategy}</td>
+                <td>{num(p.entryPrice, p.entryPrice < 10 ? 4 : 2)}</td>
+                <td>{num(p.currentPrice, p.currentPrice < 10 ? 4 : 2)}</td>
+                <td>{num(p.stopPrice, p.stopPrice < 10 ? 4 : 2)} · {pct(-p.stopPct)}</td>
+                <td>{money(p.notionalPln)}</td>
+                <td>{money(p.riskPln)}</td>
+                <td className={p.unrealizedPnlPln >= 0 ? "positive" : "negative"}>
+                  {money(p.unrealizedPnlPln)} · {pct(p.pnlPct)}
+                </td>
+                <td>{new Date(p.maxHoldUntil).toLocaleString("pl-PL")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div className="placeholder">Brak otwartych autonomicznych pozycji paper.</div>
+    )}
+
+    {(autoMemory.paperPortfolio.recentClosedTrades || []).length > 0 && (
+      <>
+        <h3>Ostatnio zamknięte paper</h3>
+        <div className="tableWrap compact">
+          <table>
+            <thead>
+              <tr><th>Symbol</th><th>Strategia</th><th>P/L</th><th>Zwrot</th><th>Czas</th><th>Powód</th></tr>
+            </thead>
+            <tbody>
+              {autoMemory.paperPortfolio.recentClosedTrades.map((t, i) => (
+                <tr key={`${t.symbol}-${t.closedAt}-${i}`}>
+                  <td><b>{t.symbol}</b></td>
+                  <td>{t.strategy}</td>
+                  <td className={t.pnlPln >= 0 ? "positive" : "negative"}>{money(t.pnlPln)}</td>
+                  <td>{pct(t.returnPct)}</td>
+                  <td>{num(t.holdingHours, 1)} h</td>
+                  <td>{t.reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>
+    )}
+  </div>
+)}
 
       {(autoMemory.events || []).length > 0 && (
         <div className="eventList">
@@ -579,7 +667,7 @@ useEffect(() => {
                 </p>
               </div>
               <button onClick={addPaperCandidate} disabled={!lab.candidate.paperReady}>
-                Dodaj do paper
+                Dodaj ręcznie
               </button>
             </div>
           </>
@@ -590,8 +678,8 @@ useEffect(() => {
         <article className="card">
           <div className="cardTitle">
             <div>
-              <h2>Paper candidates</h2>
-              <p className="muted">Tylko Deep PASS + aktywny LONG.</p>
+              <h2>Manual paper sandbox</h2>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.7.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -645,21 +733,21 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.6</h2>
+        <h2>Co dodaje v0.7</h2>
         <div className="riskGrid">
-          <div><span>Background</span><b>GitHub Actions</b></div>
-          <div><span>Heartbeat</span><b>co 2 h</b></div>
-          <div><span>Pamięć</span><b>research-data branch</b></div>
-          <div><span>Bez przeglądarki</span><b>TAK</b></div>
-          <div><span>Deep validation</span><b>5000 h + OOS</b></div>
-          <div><span>Zdarzenia</span><b>PASS / signal changes</b></div>
-          <div><span>Dane trwałe</span><b>tylko publiczny research</b></div>
+          <div><span>Autonomous paper</span><b>wejścia + wyjścia</b></div>
+          <div><span>Heartbeat</span><b>co 2 h + signal window</b></div>
+          <div><span>Stan portfolio</span><b>paper.json</b></div>
+          <div><span>Max pozycje</span><b>3</b></div>
+          <div><span>Stop</span><b>2×ATR · 1–5%</b></div>
+          <div><span>Dzienny halt</span><b>-2%</b></div>
+          <div><span>Hard DD stop</span><b>-10%</b></div>
           <div><span>Live trading</span><b className="off">WYŁĄCZONY</b></div>
         </div>
       </section>
 
       <footer>
-        v0.6 · autonomous research heartbeat · durable research memory · live trading OFF
+        v0.7 · autonomous paper portfolio · persistent trade journal · live trading OFF
       </footer>
     </main>
   );

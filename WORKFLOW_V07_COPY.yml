@@ -1,0 +1,99 @@
+name: Autonomous research heartbeat
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: autonomous-research
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout application code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Restore previous autonomous memory
+        shell: bash
+        run: |
+          mkdir -p .auto-memory
+
+          if git ls-remote --exit-code --heads origin research-data >/dev/null 2>&1; then
+            git fetch origin research-data:refs/remotes/origin/research-data
+            git show origin/research-data:latest.json > .auto-memory/latest.json || true
+            git show origin/research-data:history.json > .auto-memory/history.json || true
+            git show origin/research-data:paper.json > .auto-memory/paper.json || true
+            git show origin/research-data:paper-trades.json > .auto-memory/paper-trades.json || true
+          fi
+
+      - name: Run autonomous research and paper engine
+        env:
+          PREVIOUS_LATEST_PATH: .auto-memory/latest.json
+          PREVIOUS_HISTORY_PATH: .auto-memory/history.json
+          PREVIOUS_PAPER_PATH: .auto-memory/paper.json
+          PREVIOUS_TRADES_PATH: .auto-memory/paper-trades.json
+        run: node scripts/autonomous-research.mjs
+
+      - name: Prepare public autonomous memory
+        shell: bash
+        run: |
+          mkdir -p /tmp/autonomous-memory
+          cp .auto-output/latest.json /tmp/autonomous-memory/latest.json
+          cp .auto-output/history.json /tmp/autonomous-memory/history.json
+          cp .auto-output/paper.json /tmp/autonomous-memory/paper.json
+          cp .auto-output/paper-trades.json /tmp/autonomous-memory/paper-trades.json
+
+          cat > /tmp/autonomous-memory/README.md <<'EOF'
+          # Autonomous Investor — public research and simulated paper memory
+
+          This branch is generated automatically.
+
+          It stores only:
+          - public market research results,
+          - simulated paper positions,
+          - simulated paper trade history.
+
+          It must never contain:
+          - broker credentials,
+          - API secrets,
+          - account identifiers,
+          - real-money positions,
+          - private user data.
+
+          Live trading is disabled.
+          EOF
+
+      - name: Publish research-data branch
+        shell: bash
+        run: |
+          git config user.name "autonomous-investor-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          git checkout --orphan research-data-publish
+          git rm -rf . >/dev/null 2>&1 || true
+          git clean -fdx >/dev/null 2>&1 || true
+
+          cp /tmp/autonomous-memory/latest.json latest.json
+          cp /tmp/autonomous-memory/history.json history.json
+          cp /tmp/autonomous-memory/paper.json paper.json
+          cp /tmp/autonomous-memory/paper-trades.json paper-trades.json
+          cp /tmp/autonomous-memory/README.md README.md
+
+          git add latest.json history.json paper.json paper-trades.json README.md
+          git commit -m "Update autonomous research and paper memory"
+          git push --force origin HEAD:research-data
