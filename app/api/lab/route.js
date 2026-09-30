@@ -1,6 +1,6 @@
 import { analyzeSymbol, SYMBOLS } from "../../../lib/research";
 
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -11,11 +11,10 @@ export async function GET(request) {
   }
 
   try {
-    const result = await analyzeSymbol(symbol, 1500);
+    const result = await analyzeSymbol(symbol, "deep");
     return Response.json({
       ...result,
-      source: "Binance public market-data-only endpoint",
-      warning: "Wyniki historyczne i paper-gating nie przewidują przyszłych wyników.",
+      warning: "Final OOS, walk-forward i metryki historyczne nie gwarantują przyszłych wyników.",
     });
   } catch (error) {
     return Response.json(

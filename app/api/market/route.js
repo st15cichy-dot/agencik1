@@ -19,8 +19,12 @@ async function instrument(symbol) {
   ]);
 
   const candles = rows.map((r) => ({
-    time: r[0], open: Number(r[1]), high: Number(r[2]),
-    low: Number(r[3]), close: Number(r[4]), volume: Number(r[5]),
+    time: r[0],
+    open: Number(r[1]),
+    high: Number(r[2]),
+    low: Number(r[3]),
+    close: Number(r[4]),
+    volume: Number(r[5]),
   }));
 
   return {

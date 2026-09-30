@@ -1,65 +1,61 @@
 import { analyzeSymbol, SYMBOLS } from "../../../lib/research";
 
-export const maxDuration = 120;
+export const maxDuration = 240;
 
 export async function GET() {
-  try {
-    const settled = await Promise.allSettled(
-      SYMBOLS.map((symbol) => analyzeSymbol(symbol, 1200))
-    );
+  const results = [];
 
-    const results = settled.map((item, index) => {
-      const symbol = SYMBOLS[index];
-      if (item.status === "rejected") {
-        return { symbol, error: item.reason?.message || "Unknown error" };
-      }
+  for (const symbol of SYMBOLS) {
+    try {
+      const x = await analyzeSymbol(symbol, "screen");
+      const chosen =
+        x.ranking.find((r) => r.id === x.candidate.strategyId) ||
+        x.ranking[0];
 
-      const x = item.value;
-      const top = x.ranking[0];
-      const chosen = x.ranking.find((r) => r.id === x.candidate.strategyId) || top;
-      return {
+      results.push({
         symbol,
-        generatedAt: x.generatedAt,
         strategy: chosen.name,
-        config: chosen.bestConfig,
-        oosReturnPct: chosen.test.totalReturnPct,
-        benchmarkPct: chosen.test.benchmarkPct,
-        excessReturnPct: chosen.test.excessReturnPct,
-        drawdownPct: chosen.test.maxDrawdownPct,
-        profitFactor: chosen.test.profitFactor,
-        trades: chosen.test.trades,
+        config: chosen.config,
+        oosReturnPct: chosen.final.totalReturnPct,
+        buyHoldPct: chosen.final.benchmarkPct,
+        exposureBenchmarkPct: chosen.final.exposureBenchmarkPct,
+        exposureExcessPct: chosen.final.excessVsExposureBenchmarkPct,
+        drawdownPct: chosen.final.maxDrawdownPct,
+        profitFactor: chosen.final.profitFactor,
+        sharpe: chosen.final.sharpe,
+        calmar: chosen.final.calmar,
+        exposurePct: chosen.final.exposurePct,
+        trades: chosen.final.trades,
         wfPositive: chosen.walkForward.positiveFolds,
         wfTotal: chosen.walkForward.totalFolds,
-        wfStabilityPct: chosen.walkForward.stabilityPct,
+        parameterStabilityPct: chosen.walkForward.parameterStabilityPct,
         signalNow: chosen.signalNow,
-        eligible: x.candidate.eligible,
-        paperReady: x.candidate.paperReady,
-        gate: x.candidate.gate,
-        rawScoreLeader: top.name,
-      };
-    });
-
-    const successful = results.filter((x) => !x.error);
-    successful.sort((a, b) => {
-      if (a.paperReady !== b.paperReady) return a.paperReady ? -1 : 1;
-      if (a.eligible !== b.eligible) return a.eligible ? -1 : 1;
-      return b.excessReturnPct - a.excessReturnPct;
-    });
-
-    return Response.json({
-      version: "0.4.0",
-      generatedAt: new Date().toISOString(),
-      analyzed: results.length,
-      successful: successful.length,
-      candidates: successful.filter((x) => x.paperReady),
-      ranking: successful,
-      failures: results.filter((x) => x.error),
-      warning: "Ranking służy wyłącznie do researchu i paper tradingu.",
-    });
-  } catch (error) {
-    return Response.json(
-      { error: "LAB_ALL_UNAVAILABLE", detail: error.message },
-      { status: 502 }
-    );
+        screenPass: x.candidate.screenPass,
+        gate: chosen.gate,
+      });
+    } catch (error) {
+      results.push({
+        symbol,
+        error: error?.message || "Unknown error",
+      });
+    }
   }
+
+  const successful = results.filter((x) => !x.error);
+  successful.sort((a, b) => {
+    if (a.screenPass !== b.screenPass) return a.screenPass ? -1 : 1;
+    return b.exposureExcessPct - a.exposureExcessPct;
+  });
+
+  return Response.json({
+    version: "0.5.0",
+    profile: "screen",
+    generatedAt: new Date().toISOString(),
+    analyzed: results.length,
+    successful: successful.length,
+    deepCheckCandidates: successful.filter((x) => x.screenPass),
+    ranking: successful,
+    failures: results.filter((x) => x.error),
+    warning: "Screen PASS oznacza tylko kandydaturę do głębokiego labu 5000 świec.",
+  });
 }

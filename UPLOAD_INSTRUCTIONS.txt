@@ -1,14 +1,16 @@
-AUTONOMICZNY INWESTOR v0.4 — UPLOAD
+AUTONOMICZNY INWESTOR v0.5
 
 Wgraj do katalogu głównego repozytorium agencik1:
 - package.json
 - next.config.mjs
 - cały folder app
 - cały folder lib
-- opcjonalnie README_V04.md
+- opcjonalnie README_V05.md
 
-Nie wgrywaj folderu nadrzędnego autonomiczny_inwestor_v04.
-Commituj do main.
+Nie wgrywaj nadrzędnego folderu autonomiczny_inwestor_v05.
 
+Commit:
+Upgrade to v0.5: deep OOS and purged walk-forward
+
+Po commicie do main Vercel powinien uruchomić deployment automatycznie.
 Nie dodawaj żadnych kluczy API.
-Live trading pozostaje wyłączony.
