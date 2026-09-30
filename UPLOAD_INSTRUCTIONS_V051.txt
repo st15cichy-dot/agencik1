@@ -1,0 +1,17 @@
+AUTONOMICZNY INWESTOR v0.5.1
+
+Wgraj do katalogu głównego repozytorium:
+- package.json
+- app/layout.js
+- app/page.js
+- app/api/status/route.js
+- lib/backtest.js
+- lib/research.js
+- opcjonalnie README_V051.md
+
+Najprościej: wgraj cały folder app, cały folder lib oraz package.json.
+
+Commit:
+Patch v0.5.1: regime robustness and safer metrics
+
+Nie dodawaj kluczy API.

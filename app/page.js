@@ -191,9 +191,9 @@ export default function Home() {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.5</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.5.1</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Deep OOS + purged walk-forward + regime analysis + exposure benchmark</p>
+          <p className="muted">Deep OOS + purged walk-forward + historical regimes + safer metrics</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -349,9 +349,9 @@ export default function Home() {
             <div className="metricStrip">
               <Metric label="Max DD" value={pct(chosen.final.maxDrawdownPct)} sub="final OOS" />
               <Metric label="Profit Factor" value={num(chosen.final.profitFactor, 2)} sub="final OOS" />
-              <Metric label="Sharpe" value={num(chosen.final.sharpe, 2)} sub="annualizowany 1h" />
-              <Metric label="Calmar" value={num(chosen.final.calmar, 2)} sub="ann. return / DD" />
-              <Metric label="WF dodatnie" value={`${chosen.walkForward.positiveFolds}/${chosen.walkForward.totalFolds}`} sub="purged" />
+              <Metric label="Sharpe (ann.)" value={num(chosen.final.sharpe, 2)} sub={`${num(chosen.final.durationDays, 0)} dni${chosen.final.sharpeShortSample ? " · krótka próba" : ""}`} />
+              <Metric label="Calmar" value={chosen.final.calmar == null ? "N/A" : num(chosen.final.calmar, 2)} sub={chosen.final.calmar == null ? "wymaga ≥180 dni" : "annualized return / DD"} />
+              <Metric label="Return / DD" value={num(chosen.final.returnToDrawdown, 2)} sub="bez annualizacji" />
               <Metric label="Param. stability" value={pct(chosen.walkForward.parameterStabilityPct)} sub="wybrany config" />
             </div>
 
@@ -363,25 +363,33 @@ export default function Home() {
               ))}
             </div>
 
-            <h3>Reżimy final OOS</h3>
+            <h3>Historical regime robustness</h3>
+            <p className="muted">
+              Okna 20-dniowe z całej dostępnej historii Deep. To raport diagnostyczny — nie zmienia gate,
+              żeby nie mieszać danych development z final OOS.
+            </p>
             <div className="tableWrap compact">
               <table>
                 <thead>
                   <tr>
-                    <th>#</th><th>Reżim</th><th>Zmienność</th><th>Rynek</th>
-                    <th>Strategia</th><th>DD</th><th>Trades</th>
+                    <th>Reżim</th><th>Okna</th><th>Śr. rynek</th><th>Śr. strategia</th>
+                    <th>Śr. excess</th><th>Najgorszy DD</th><th>Dodatnie okna</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {chosen.regimes.segments.map((r) => (
-                    <tr key={r.index}>
-                      <td>{r.index}</td>
+                  {chosen.regimeRobustness.summary.map((r) => (
+                    <tr key={r.regime}>
                       <td><b>{r.regime}</b></td>
-                      <td>{r.volatility} · {pct(r.volPct)}</td>
-                      <td>{pct(r.benchmarkPct)}</td>
-                      <td className={r.result.totalReturnPct >= 0 ? "positive" : "negative"}>{pct(r.result.totalReturnPct)}</td>
-                      <td>{pct(r.result.maxDrawdownPct)}</td>
-                      <td>{r.result.trades}</td>
+                      <td>{r.windows}</td>
+                      <td>{r.avgMarketPct == null ? "—" : pct(r.avgMarketPct)}</td>
+                      <td className={r.avgStrategyPct >= 0 ? "positive" : "negative"}>
+                        {r.avgStrategyPct == null ? "—" : pct(r.avgStrategyPct)}
+                      </td>
+                      <td className={r.avgExcessPct >= 0 ? "positive" : "negative"}>
+                        {r.avgExcessPct == null ? "—" : pct(r.avgExcessPct)}
+                      </td>
+                      <td>{r.worstDrawdownPct == null ? "—" : pct(r.worstDrawdownPct)}</td>
+                      <td>{r.windows ? `${r.positiveWindows}/${r.windows} · ${pct(r.positivePct)}` : "—"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -500,7 +508,7 @@ export default function Home() {
       </section>
 
       <section className="card riskCard">
-        <h2>Co poprawia v0.5</h2>
+        <h2>Co poprawia v0.5.1</h2>
         <div className="riskGrid">
           <div><span>Dane Deep</span><b>5000 świec 1h</b></div>
           <div><span>Untouched final OOS</span><b>30%</b></div>
@@ -508,13 +516,13 @@ export default function Home() {
           <div><span>Benchmark</span><b>raw + exposure-adjusted</b></div>
           <div><span>Metryki</span><b>Sharpe + Calmar</b></div>
           <div><span>Parametry</span><b>stability across folds</b></div>
-          <div><span>Reżimy</span><b>3 segmenty OOS</b></div>
+          <div><span>Reżimy</span><b>historyczne okna bull/bear/range</b></div>
           <div><span>Live trading</span><b className="off">WYŁĄCZONY</b></div>
         </div>
       </section>
 
       <footer>
-        v0.5 · research-first · final OOS · purged walk-forward · paper only
+        v0.5.1 · historical regime diagnostics · safer metrics · paper only
       </footer>
     </main>
   );
