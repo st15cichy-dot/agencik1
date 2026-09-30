@@ -37,32 +37,45 @@ jobs:
             git fetch origin research-data:refs/remotes/origin/research-data
             git show origin/research-data:latest.json > .auto-memory/latest.json || true
             git show origin/research-data:history.json > .auto-memory/history.json || true
+            git show origin/research-data:paper.json > .auto-memory/paper.json || true
+            git show origin/research-data:paper-trades.json > .auto-memory/paper-trades.json || true
           fi
 
-      - name: Run research engine
+      - name: Run autonomous research and paper engine
         env:
           PREVIOUS_LATEST_PATH: .auto-memory/latest.json
           PREVIOUS_HISTORY_PATH: .auto-memory/history.json
+          PREVIOUS_PAPER_PATH: .auto-memory/paper.json
+          PREVIOUS_TRADES_PATH: .auto-memory/paper-trades.json
         run: node scripts/autonomous-research.mjs
 
-      - name: Prepare public research memory
+      - name: Prepare public autonomous memory
         shell: bash
         run: |
           mkdir -p /tmp/autonomous-memory
           cp .auto-output/latest.json /tmp/autonomous-memory/latest.json
           cp .auto-output/history.json /tmp/autonomous-memory/history.json
+          cp .auto-output/paper.json /tmp/autonomous-memory/paper.json
+          cp .auto-output/paper-trades.json /tmp/autonomous-memory/paper-trades.json
 
           cat > /tmp/autonomous-memory/README.md <<'EOF'
-          # Autonomous Investor — research memory
+          # Autonomous Investor — public research and simulated paper memory
 
           This branch is generated automatically.
 
-          It stores public market-research results only:
-          - latest.json
-          - history.json
+          It stores only:
+          - public market research results,
+          - simulated paper positions,
+          - simulated paper trade history.
 
-          It must never contain broker credentials, API secrets, account identifiers,
-          real-money positions, or private user data.
+          It must never contain:
+          - broker credentials,
+          - API secrets,
+          - account identifiers,
+          - real-money positions,
+          - private user data.
+
+          Live trading is disabled.
           EOF
 
       - name: Publish research-data branch
@@ -77,8 +90,10 @@ jobs:
 
           cp /tmp/autonomous-memory/latest.json latest.json
           cp /tmp/autonomous-memory/history.json history.json
+          cp /tmp/autonomous-memory/paper.json paper.json
+          cp /tmp/autonomous-memory/paper-trades.json paper-trades.json
           cp /tmp/autonomous-memory/README.md README.md
 
-          git add latest.json history.json README.md
-          git commit -m "Update autonomous research memory"
+          git add latest.json history.json paper.json paper-trades.json README.md
+          git commit -m "Update autonomous research and paper memory"
           git push --force origin HEAD:research-data
