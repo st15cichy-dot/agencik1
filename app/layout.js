@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Autonomiczny Inwestor",
-  description: "Panel badawczy i paper trading — bez realnych transakcji.",
+  title: "Autonomiczny Inwestor v0.2",
+  description: "Live market data, deterministic scanner, backtesting and paper trading.",
 };
 
 export default function RootLayout({ children }) {
