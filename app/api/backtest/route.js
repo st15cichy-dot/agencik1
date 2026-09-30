@@ -1,18 +1,25 @@
 import { maxDrawdown, sma } from "../../../lib/indicators";
 
+const BINANCE_PUBLIC_BASE = "https://data-api.binance.vision";
 const ALLOWED = new Set(["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT"]);
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const symbol = (searchParams.get("symbol") || "BTCUSDT").toUpperCase();
+
   if (!ALLOWED.has(symbol)) {
     return Response.json({ error: "INVALID_SYMBOL" }, { status: 400 });
   }
 
   try {
-    const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=500`;
+    const url = `${BINANCE_PUBLIC_BASE}/api/v3/klines?symbol=${symbol}&interval=1h&limit=500`;
     const res = await fetch(url, { next: { revalidate: 300 } });
-    if (!res.ok) throw new Error(`Binance: ${res.status}`);
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Binance public market data: ${res.status}${body ? ` — ${body.slice(0, 160)}` : ""}`);
+    }
+
     const rows = await res.json();
     const closes = rows.map((r) => Number(r[4]));
 
@@ -27,6 +34,7 @@ export async function GET(request) {
       const hist = closes.slice(0, i + 1);
       const fast = sma(hist, 20);
       const slow = sma(hist, 50);
+
       const prevHist = closes.slice(0, i);
       const prevFast = sma(prevHist, 20);
       const prevSlow = sma(prevHist, 50);
@@ -59,8 +67,10 @@ export async function GET(request) {
     }
 
     const wins = trades.filter((t) => t.returnPct > 0).length;
+
     return Response.json({
-      source: "Binance 1h klines",
+      source: "Binance public market-data endpoint — 1h klines",
+      endpoint: "data-api.binance.vision",
       symbol,
       strategy: "SMA20/SMA50 long-only crossover",
       assumptions: {
@@ -77,6 +87,9 @@ export async function GET(request) {
       warning: "Backtest history is limited and does not predict future results.",
     });
   } catch (error) {
-    return Response.json({ error: "BACKTEST_UNAVAILABLE", detail: error.message }, { status: 502 });
+    return Response.json(
+      { error: "BACKTEST_UNAVAILABLE", detail: error.message },
+      { status: 502 }
+    );
   }
 }

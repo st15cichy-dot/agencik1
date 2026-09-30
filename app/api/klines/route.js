@@ -1,3 +1,4 @@
+const BINANCE_PUBLIC_BASE = "https://data-api.binance.vision";
 const ALLOWED = new Set(["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT"]);
 const INTERVALS = new Set(["15m", "1h", "4h", "1d"]);
 
@@ -12,12 +13,19 @@ export async function GET(request) {
   }
 
   try {
-    const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`;
+    const url = `${BINANCE_PUBLIC_BASE}/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`;
     const res = await fetch(url, { next: { revalidate: 300 } });
-    if (!res.ok) throw new Error(`Binance: ${res.status}`);
+
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error(`Binance public market data: ${res.status}${body ? ` — ${body.slice(0, 160)}` : ""}`);
+    }
+
     const rows = await res.json();
+
     return Response.json({
-      source: "Binance",
+      source: "Binance public market-data endpoint",
+      endpoint: "data-api.binance.vision",
       symbol,
       interval,
       candles: rows.map((r) => ({
@@ -30,6 +38,9 @@ export async function GET(request) {
       })),
     });
   } catch (error) {
-    return Response.json({ error: "KLINES_UNAVAILABLE", detail: error.message }, { status: 502 });
+    return Response.json(
+      { error: "KLINES_UNAVAILABLE", detail: error.message },
+      { status: 502 }
+    );
   }
 }

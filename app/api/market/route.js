@@ -2,13 +2,22 @@ import { scannerScore } from "../../../lib/indicators";
 
 export const revalidate = 60;
 
+const BINANCE_PUBLIC_BASE = "https://data-api.binance.vision";
 const SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT"];
 
+async function fetchJson(path, revalidate = 60) {
+  const url = `${BINANCE_PUBLIC_BASE}${path}`;
+  const res = await fetch(url, { next: { revalidate } });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Binance public market data: ${res.status}${body ? ` — ${body.slice(0, 160)}` : ""}`);
+  }
+  return res.json();
+}
+
 async function fetchKlines(symbol) {
-  const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=120`;
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  if (!res.ok) throw new Error(`Binance klines ${symbol}: ${res.status}`);
-  const rows = await res.json();
+  const rows = await fetchJson(`/api/v3/klines?symbol=${symbol}&interval=1h&limit=120`);
   return rows.map((r) => ({
     time: r[0],
     open: Number(r[1]),
@@ -20,19 +29,21 @@ async function fetchKlines(symbol) {
 }
 
 async function fetchTicker(symbol) {
-  const url = `https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`;
-  const res = await fetch(url, { next: { revalidate: 60 } });
-  if (!res.ok) throw new Error(`Binance ticker ${symbol}: ${res.status}`);
-  return res.json();
+  return fetchJson(`/api/v3/ticker/24hr?symbol=${symbol}`);
 }
 
 export async function GET() {
   try {
     const data = await Promise.all(
       SYMBOLS.map(async (symbol) => {
-        const [ticker, klines] = await Promise.all([fetchTicker(symbol), fetchKlines(symbol)]);
+        const [ticker, klines] = await Promise.all([
+          fetchTicker(symbol),
+          fetchKlines(symbol),
+        ]);
+
         const closes = klines.map((x) => x.close);
         const scan = scannerScore(closes);
+
         return {
           symbol,
           price: Number(ticker.lastPrice),
@@ -46,15 +57,21 @@ export async function GET() {
     );
 
     data.sort((a, b) => b.score - a.score);
+
     return Response.json({
-      source: "Binance public market data",
+      source: "Binance public market-data endpoint",
+      endpoint: "data-api.binance.vision",
       mode: "LIVE_MARKET_DATA_PAPER_TRADING_ONLY",
       asOf: new Date().toISOString(),
       instruments: data,
     });
   } catch (error) {
     return Response.json(
-      { error: "MARKET_DATA_UNAVAILABLE", detail: error.message },
+      {
+        error: "MARKET_DATA_UNAVAILABLE",
+        detail: error.message,
+        hint: "The app uses Binance's official public market-data-only endpoint.",
+      },
       { status: 502 }
     );
   }

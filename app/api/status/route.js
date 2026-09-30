@@ -1,8 +1,9 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.2.0",
-    marketData: "BINANCE_PUBLIC",
+    version: "0.2.1",
+    marketData: "BINANCE_PUBLIC_MARKET_DATA_ONLY",
+    marketDataEndpoint: "data-api.binance.vision",
     scanner: "DETERMINISTIC",
     backtest: "SMA20_SMA50_LONG_ONLY",
     paperTrading: true,
