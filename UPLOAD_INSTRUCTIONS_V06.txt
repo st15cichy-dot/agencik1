@@ -1,0 +1,23 @@
+AUTONOMICZNY INWESTOR v0.6
+
+Wgraj do katalogu głównego repozytorium agencik1:
+- package.json
+- cały folder app
+- cały folder lib
+- cały folder scripts
+- cały folder .github
+- opcjonalnie README_V06.md
+
+WAŻNE:
+Folder .github musi znaleźć się dokładnie w katalogu głównym repo.
+Workflow:
+.github/workflows/autonomous-research.yml
+
+Commit:
+Upgrade to v0.6: autonomous research memory
+
+Po wdrożeniu:
+GitHub -> Actions -> Autonomous research heartbeat -> Run workflow
+
+Nie dodawaj żadnych sekretów ani kluczy API.
+Live trading nadal jest wyłączony.

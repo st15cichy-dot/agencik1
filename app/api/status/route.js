@@ -1,8 +1,16 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.5.1",
+    version: "0.6.0",
+    mode: "AUTONOMOUS_RESEARCH_ONLY",
     marketData: "BINANCE_PUBLIC_MARKET_DATA_ONLY",
+    automation: {
+      engine: "GitHub Actions",
+      targetCadence: "every 2 hours",
+      persistenceBranch: "research-data",
+      browserMayBeClosed: true,
+      liveTrading: false,
+    },
     scannerUniverse: 8,
     strategyFamilies: 4,
     allMarketScreenBars: 3000,
@@ -18,14 +26,15 @@ export async function GET() {
       diagnosticOnly: true,
     },
     benchmark: "raw buy-and-hold + exposure-adjusted benchmark",
-    metrics: {
-      sharpe: "annualized, flagged when sample < 90d",
-      calmar: "reported only when sample >= 180d",
-      returnToDrawdown: true,
-    },
     modeledCosts: {
       feePerSidePct: 0.10,
       slippagePerSidePct: 0.03,
+    },
+    storagePolicy: {
+      publicResearchOnly: true,
+      secrets: false,
+      realMoneyPositions: false,
+      brokerData: false,
     },
     paperTrading: true,
     liveTrading: false,

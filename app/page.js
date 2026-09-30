@@ -5,6 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 const STARTING_CAPITAL = 200;
 const RISK_PER_TRADE = 0.005;
 const AUTO_SCREEN_AFTER_MS = 6 * 60 * 60 * 1000;
+const DEFAULT_MEMORY_URL =
+  "https://raw.githubusercontent.com/st15cichy-dot/agencik1/research-data/latest.json";
+const MEMORY_URL =
+  process.env.NEXT_PUBLIC_AUTONOMOUS_MEMORY_URL || DEFAULT_MEMORY_URL;
 
 function money(x) {
   return new Intl.NumberFormat("pl-PL", { style: "currency", currency: "PLN" }).format(x);
@@ -33,6 +37,9 @@ export default function Home() {
 
   const [paper, setPaper] = useState([]);
   const [history, setHistory] = useState([]);
+  const [autoMemory, setAutoMemory] = useState(null);
+  const [autoMemoryError, setAutoMemoryError] = useState("");
+  const [autoMemoryLoading, setAutoMemoryLoading] = useState(false);
 
   useEffect(() => {
     try {
@@ -169,7 +176,7 @@ export default function Home() {
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.5.0",
+        version: "0.6.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -187,13 +194,47 @@ export default function Home() {
     URL.revokeObjectURL(url);
   }
 
+
+async function refreshAutonomousMemory() {
+  setAutoMemoryLoading(true);
+  setAutoMemoryError("");
+
+  try {
+    const separator = MEMORY_URL.includes("?") ? "&" : "?";
+    const r = await fetch(`${MEMORY_URL}${separator}ts=${Date.now()}`, {
+      cache: "no-store",
+    });
+
+    if (!r.ok) {
+      throw new Error(
+        r.status === 404
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po pierwszym wdrożeniu v0.6."
+          : `HTTP ${r.status}`
+      );
+    }
+
+    const data = await r.json();
+    setAutoMemory(data);
+  } catch (error) {
+    setAutoMemoryError(error?.message || String(error));
+  } finally {
+    setAutoMemoryLoading(false);
+  }
+}
+
+useEffect(() => {
+  refreshAutonomousMemory();
+  const id = setInterval(refreshAutonomousMemory, 10 * 60 * 1000);
+  return () => clearInterval(id);
+}, []);
+
   return (
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.5.1</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.6</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Deep OOS + purged walk-forward + historical regimes + safer metrics</p>
+          <p className="muted">Autonomous heartbeat + durable research memory + deep validation</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -208,10 +249,10 @@ export default function Home() {
       </section>
 
       <section className="metrics">
+        <Metric label="Autonomia" value="2 h" sub="heartbeat target" />
+        <Metric label="Pamięć" value="GitHub" sub="research-data branch" />
         <Metric label="Deep historia" value="5000 h" sub="~208 dni" />
-        <Metric label="Final OOS" value="30%" sub="nieużywany do strojenia" />
-        <Metric label="Purge gap" value="24 h" sub="między train i test" />
-        <Metric label="Reżimy" value="3" sub="final OOS" />
+        <Metric label="Final OOS" value="30%" sub="nietknięty" />
         <Metric label="Ryzyko / trade" value={money(STARTING_CAPITAL * RISK_PER_TRADE)} sub="0,50%" />
         <Metric label="Live trading" value="OFF" sub="XTB niepołączony" />
       </section>
@@ -260,6 +301,102 @@ export default function Home() {
           </table>
         </div>
       </section>
+
+
+<section className="card autonomousCard">
+  <div className="cardTitle">
+    <div>
+      <h2>Autonomous research memory</h2>
+      <p className="muted">
+        Wyniki generowane poza przeglądarką przez GitHub Actions. Ta sekcja działa nawet,
+        gdy panel był zamknięty.
+      </p>
+    </div>
+    <button onClick={refreshAutonomousMemory} disabled={autoMemoryLoading}>
+      {autoMemoryLoading ? "Pobieranie…" : "Odśwież pamięć"}
+    </button>
+  </div>
+
+  {autoMemoryError && <div className="errorBox">{autoMemoryError}</div>}
+
+  {!autoMemory && !autoMemoryError && (
+    <div className="placeholder">Oczekiwanie na pierwszy autonomiczny heartbeat.</div>
+  )}
+
+  {autoMemory && (
+    <>
+      <div className="screenSummary">
+        <Metric
+          label="Ostatni heartbeat"
+          value={new Date(autoMemory.completedAt).toLocaleTimeString("pl-PL")}
+          sub={new Date(autoMemory.completedAt).toLocaleDateString("pl-PL")}
+        />
+        <Metric
+          label="Screen PASS"
+          value={String(autoMemory.screenPass?.length || 0)}
+          sub={(autoMemory.screenPass || []).join(", ") || "brak"}
+        />
+        <Metric
+          label="Deep PASS"
+          value={String(autoMemory.deepPass?.length || 0)}
+          sub={(autoMemory.deepPass || []).join(", ") || "brak"}
+        />
+      </div>
+
+      <div className="memoryStatus">
+        <span className="badge safe">BACKGROUND RESEARCH: ON</span>
+        <span className="badge">BROKER: OFF</span>
+        <span className="badge">PUBLIC RESEARCH MEMORY</span>
+      </div>
+
+      {(autoMemory.deep || []).length > 0 ? (
+        <div className="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Instrument</th><th>Strategia</th><th>OOS</th><th>Excess</th>
+                <th>DD</th><th>Trades</th><th>Deep</th><th>Sygnał</th><th>Paper-ready</th>
+              </tr>
+            </thead>
+            <tbody>
+              {autoMemory.deep.map((x) => (
+                <tr key={x.symbol}>
+                  <td><b>{x.symbol}</b></td>
+                  <td>{x.strategy}</td>
+                  <td className={x.returnPct >= 0 ? "positive" : "negative"}>{pct(x.returnPct)}</td>
+                  <td className={x.excessPct >= 0 ? "positive" : "negative"}>{pct(x.excessPct)}</td>
+                  <td>{pct(x.drawdownPct)}</td>
+                  <td>{x.trades}</td>
+                  <td>
+                    <span className={`signal ${x.eligible ? "good" : "bad"}`}>
+                      {x.eligible ? "PASS" : "FAIL"}
+                    </span>
+                  </td>
+                  <td>{x.signalNow}</td>
+                  <td>{x.paperReady ? "TAK" : "NIE"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="placeholder">W ostatnim heartbeat screening nie wybrał kandydatów do Deep Lab.</div>
+      )}
+
+      {(autoMemory.events || []).length > 0 && (
+        <div className="eventList">
+          <h3>Nowe zdarzenia</h3>
+          {autoMemory.events.map((event, i) => (
+            <div key={`${event.type}-${event.symbol}-${i}`}>
+              <b>{event.type}</b>
+              <span>{event.message}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  )}
+</section>
 
       <section className="card">
         <div className="cardTitle">
@@ -356,7 +493,7 @@ export default function Home() {
             </div>
 
             <div className="gateGrid">
-              {Object.entries(chosen.gate.checks).map(([key, value]) => (
+              {Object.entries(chosen.gate?.checks || {}).map(([key, value]) => (
                 <div key={key} className={value ? "gatePass" : "gateFail"}>
                   <span>{value ? "✓" : "×"}</span><b>{key}</b>
                 </div>
@@ -377,7 +514,7 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  {chosen.regimeRobustness.summary.map((r) => (
+                  {(chosen.regimeRobustness?.summary || []).map((r) => (
                     <tr key={r.regime}>
                       <td><b>{r.regime}</b></td>
                       <td>{r.windows}</td>
@@ -508,21 +645,21 @@ export default function Home() {
       </section>
 
       <section className="card riskCard">
-        <h2>Co poprawia v0.5.1</h2>
+        <h2>Co dodaje v0.6</h2>
         <div className="riskGrid">
-          <div><span>Dane Deep</span><b>5000 świec 1h</b></div>
-          <div><span>Untouched final OOS</span><b>30%</b></div>
-          <div><span>Walk-forward</span><b>anchored + purge 24h</b></div>
-          <div><span>Benchmark</span><b>raw + exposure-adjusted</b></div>
-          <div><span>Metryki</span><b>Sharpe + Calmar</b></div>
-          <div><span>Parametry</span><b>stability across folds</b></div>
-          <div><span>Reżimy</span><b>historyczne okna bull/bear/range</b></div>
+          <div><span>Background</span><b>GitHub Actions</b></div>
+          <div><span>Heartbeat</span><b>co 2 h</b></div>
+          <div><span>Pamięć</span><b>research-data branch</b></div>
+          <div><span>Bez przeglądarki</span><b>TAK</b></div>
+          <div><span>Deep validation</span><b>5000 h + OOS</b></div>
+          <div><span>Zdarzenia</span><b>PASS / signal changes</b></div>
+          <div><span>Dane trwałe</span><b>tylko publiczny research</b></div>
           <div><span>Live trading</span><b className="off">WYŁĄCZONY</b></div>
         </div>
       </section>
 
       <footer>
-        v0.5.1 · historical regime diagnostics · safer metrics · paper only
+        v0.6 · autonomous research heartbeat · durable research memory · live trading OFF
       </footer>
     </main>
   );

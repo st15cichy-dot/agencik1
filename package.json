@@ -1,11 +1,12 @@
 {
   "name": "autonomiczny-inwestor",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "autonomous-research": "node scripts/autonomous-research.mjs"
   },
   "dependencies": {
     "next": "^15.5.4",
@@ -14,5 +15,6 @@
   },
   "engines": {
     "node": ">=20.9.0"
-  }
+  },
+  "type": "module"
 }
