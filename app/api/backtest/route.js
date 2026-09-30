@@ -1,4 +1,4 @@
-import { maxDrawdown, sma } from "../../../lib/indicators";
+import { maxDrawdown, smaAt } from "../../../lib/indicators.js";
 
 const BINANCE_PUBLIC_BASE = "https://data-api.binance.vision";
 const ALLOWED = new Set(["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT"]);
@@ -32,12 +32,12 @@ export async function GET(request) {
 
     for (let i = 55; i < closes.length; i += 1) {
       const hist = closes.slice(0, i + 1);
-      const fast = sma(hist, 20);
-      const slow = sma(hist, 50);
+      const fast = smaAt(hist, 20);
+      const slow = smaAt(hist, 50);
 
       const prevHist = closes.slice(0, i);
-      const prevFast = sma(prevHist, 20);
-      const prevSlow = sma(prevHist, 50);
+      const prevFast = smaAt(prevHist, 20);
+      const prevSlow = smaAt(prevHist, 50);
       const px = closes[i];
 
       if (!inPos && prevFast <= prevSlow && fast > slow) {
