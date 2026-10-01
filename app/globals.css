@@ -40,3 +40,21 @@
 .journalCategory{font-size:10px;font-weight:900;letter-spacing:.08em;border:1px solid #38475a;border-radius:999px;padding:4px 6px}
 .journalReason{min-width:280px;color:#aab5c3}
 @media(max-width:640px){.alertItem{flex-direction:column;gap:5px}.healthScore{min-width:68px}}
+
+.portfolioIntel{margin-top:18px}
+.analyticsGrid{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;margin-top:12px}
+.analyticsPanel{border:1px solid #243043;background:#0b1017;border-radius:14px;padding:14px}
+.analyticsPanel h3{margin-top:0}
+.equityChart{min-height:180px}
+.equityChart svg{display:block;width:100%;height:170px;border:1px solid #202936;border-radius:12px;background:#090e15}
+.equityChart polyline{stroke:#79c7ff;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.chartAxis{display:flex;justify-content:space-between;color:#738196;font-size:11px;margin-top:6px}
+.chartPlaceholder,.analyticsEmpty{border:1px dashed #344054;border-radius:12px;padding:18px;color:#8d9aab;font-size:12px}
+.analyticsFoot{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;color:#8d9aab;font-size:12px}
+.analyticsFoot b{color:#e9eef7}
+.rollingGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rollingGrid>div{border:1px solid #202936;border-radius:12px;padding:12px}
+.rollingGrid span,.rollingGrid small{display:block;color:#7f8da0;font-size:11px}
+.rollingGrid b{display:block;margin:7px 0;font-size:16px}
+@media(max-width:900px){.analyticsGrid{grid-template-columns:1fr}}
+@media(max-width:640px){.rollingGrid{grid-template-columns:1fr}}
