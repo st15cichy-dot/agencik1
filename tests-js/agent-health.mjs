@@ -154,4 +154,47 @@ const basePaper = {
   assert.equal(allocationEntry.metrics.grossWeightPct, 100);
 }
 
+{
+  const health = buildAgentHealth({
+    startedAt: "2026-10-01T10:00:00.000Z",
+    completedAt: "2026-10-01T10:00:30.000Z",
+    expectedSymbols: 16,
+    screen: Array.from({ length: 16 }, (_, i) => ({ symbol: `S${i}` })),
+    deep: [],
+    failures: [],
+    paperPortfolio: {
+      ...basePaper,
+      openPositionsCount: 1,
+      openPositions: [{ symbol: "AVAXUSDT" }],
+    },
+  });
+
+  assert.equal(health.status, "CRITICAL");
+  assert.equal(health.checks.paperUniverseIntegrity, false);
+  assert.ok(
+    health.alerts.some((x) => x.code === "PAPER_UNIVERSE_VIOLATION")
+  );
+}
+
+{
+  const entries = buildDecisionEntries({
+    completedAt: "2026-10-01T10:00:30.000Z",
+    screen: [],
+    deep: [],
+    events: [{
+      type: "SHADOW_UNIVERSE_SIGNAL",
+      symbol: "AVAXUSDT",
+      message: "AVAXUSDT shadow signal",
+      paperAuthority: false,
+    }],
+    paperPortfolio: basePaper,
+    health: { status: "HEALTHY", score: 100, failureCount: 0, screenCoveragePct: 100 },
+  });
+
+  const universeEntry = entries.find((x) => x.category === "UNIVERSE");
+  assert.ok(universeEntry);
+  assert.equal(universeEntry.action, "SHADOW_UNIVERSE_SIGNAL");
+  assert.equal(universeEntry.metrics.paperAuthority, false);
+}
+
 console.log("agent health tests: OK");
