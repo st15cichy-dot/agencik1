@@ -22,6 +22,16 @@ function pct(x) {
 function cfg(x) {
   return x ? Object.entries(x).map(([k, v]) => `${k}:${v}`).join(" · ") : "—";
 }
+function minutesSince(iso) {
+  const t = Date.parse(iso);
+  return Number.isFinite(t) ? Math.max(0, (Date.now() - t) / 60000) : null;
+}
+function healthStatus(memory) {
+  if (!memory?.health) return "WAITING";
+  const age = minutesSince(memory.completedAt);
+  if (Number.isFinite(age) && age > 180) return "STALE";
+  return memory.health.status || "UNKNOWN";
+}
 
 export default function Home() {
   const [market, setMarket] = useState(null);
@@ -169,14 +179,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.8",
+      source: "manual browser sandbox v0.9",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.6.0",
+        version: "0.9.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -189,7 +199,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v07-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v09-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -208,7 +218,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.8."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.9."
           : `HTTP ${r.status}`
       );
     }
@@ -232,9 +242,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.8</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.9</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous paper + resilient data + regression-gated risk engine</p>
+          <p className="muted">Autonomous paper + health score + persistent decision journal</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -245,7 +255,7 @@ useEffect(() => {
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.8 może sam otwierać i zamykać wyłącznie pozycje PAPER po Deep PASS + aktywnym wejściu LONG.</span>
+        <span> v0.9 nadal działa wyłącznie w PAPER. Dodatkowo monitoruje własne zdrowie, alerty i zapisuje uzasadnienia decyzji.</span>
       </section>
 
       <section className="metrics">
@@ -254,7 +264,11 @@ useEffect(() => {
         <Metric label="P/L paper" value={money(autoMemory?.paperPortfolio?.totalPnlPln ?? 0)} sub={pct(autoMemory?.paperPortfolio?.totalReturnPct ?? 0)} />
         <Metric label="Portfolio DD" value={pct(autoMemory?.paperPortfolio?.drawdownPct ?? 0)} sub="hard stop -10%" />
         <Metric label="Ryzyko / trade" value={money((autoMemory?.paperPortfolio?.equityPln ?? STARTING_CAPITAL) * RISK_PER_TRADE)} sub="0,50%" />
-        <Metric label="Live trading" value="OFF" sub="XTB niepołączony" />
+        <Metric
+          label="Agent health"
+          value={autoMemory?.health ? `${autoMemory.health.score}/100` : "—"}
+          sub={healthStatus(autoMemory)}
+        />
       </section>
 
       <section className="card">
@@ -347,7 +361,63 @@ useEffect(() => {
         <span className="badge safe">BACKGROUND RESEARCH: ON</span>
         <span className="badge">BROKER: OFF</span>
         <span className="badge">PUBLIC RESEARCH MEMORY</span>
+        <span className={`badge healthBadge ${healthStatus(autoMemory).toLowerCase()}`}>
+          HEALTH: {healthStatus(autoMemory)}
+        </span>
       </div>
+
+      {autoMemory.health ? (
+        <div className="healthCard">
+          <div className="cardTitle">
+            <div>
+              <h3>Agent health & alerts</h3>
+              <p className="muted">
+                Deterministyczna ocena jakości heartbeat, kompletności danych i integralności paper portfolio.
+              </p>
+            </div>
+            <span className={`healthScore health-${healthStatus(autoMemory).toLowerCase()}`}>
+              {autoMemory.health.score}/100
+            </span>
+          </div>
+
+          <div className="metricStrip">
+            <Metric label="Status" value={healthStatus(autoMemory)} sub="agent runtime" />
+            <Metric label="Heartbeat" value={`${num(autoMemory.health.durationSeconds, 1)} s`} sub="czas wykonania" />
+            <Metric label="Coverage" value={pct(autoMemory.health.screenCoveragePct)} sub={`${autoMemory.health.screenCount}/${autoMemory.health.expectedSymbols} rynków`} />
+            <Metric label="Failures" value={String(autoMemory.health.failureCount || 0)} sub="bieżący run" />
+            <Metric
+              label="Gap"
+              value={autoMemory.health.previousHeartbeatGapHours == null ? "—" : `${num(autoMemory.health.previousHeartbeatGapHours, 2)} h`}
+              sub="od poprzedniego run"
+            />
+            <Metric
+              label="Next target"
+              value={autoMemory.health.expectedNextHeartbeatAt ? new Date(autoMemory.health.expectedNextHeartbeatAt).toLocaleTimeString("pl-PL", { hour: "2-digit", minute: "2-digit" }) : "—"}
+              sub="harmonogram 2 h"
+            />
+          </div>
+
+          {(autoMemory.health.alerts || []).length > 0 ? (
+            <div className="alertList">
+              {autoMemory.health.alerts.map((alert, i) => (
+                <div key={`${alert.code}-${i}`} className={`alertItem ${alert.severity}`}>
+                  <div>
+                    <b>{alert.severity === "critical" ? "CRITICAL" : "WARNING"} · {alert.code}</b>
+                    <span>{alert.message}</span>
+                  </div>
+                  <small>{alert.detail || ""}</small>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="healthOk">Brak aktywnych alertów systemowych w ostatnim heartbeat.</div>
+          )}
+        </div>
+      ) : (
+        <div className="healthWaiting">
+          v0.9 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+        </div>
+      )}
 
       {(autoMemory.deep || []).length > 0 ? (
         <div className="tableWrap">
@@ -470,6 +540,40 @@ useEffect(() => {
     )}
   </div>
 )}
+
+      {autoMemory.decisionJournal?.latest?.length > 0 && (
+        <div className="decisionJournal">
+          <div className="sectionDivider" />
+          <div className="cardTitle">
+            <div>
+              <h3>Decision journal</h3>
+              <p className="muted">
+                Ostatnie uzasadnienia decyzji. Łącznie zapisano {autoMemory.decisionJournal.totalEntries} wpisów.
+              </p>
+            </div>
+            <span className="badge">{autoMemory.decisionJournal.entriesAdded} nowych / run</span>
+          </div>
+
+          <div className="tableWrap compact">
+            <table>
+              <thead>
+                <tr><th>Kategoria</th><th>Instrument</th><th>Decyzja</th><th>Strategia</th><th>Uzasadnienie</th></tr>
+              </thead>
+              <tbody>
+                {autoMemory.decisionJournal.latest.map((entry, i) => (
+                  <tr key={`${entry.at}-${entry.category}-${entry.symbol}-${i}`}>
+                    <td><span className="journalCategory">{entry.category}</span></td>
+                    <td><b>{entry.symbol}</b></td>
+                    <td>{entry.action}</td>
+                    <td>{entry.strategy || "—"}</td>
+                    <td className="journalReason">{entry.reason}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {(autoMemory.events || []).length > 0 && (
         <div className="eventList">
@@ -679,7 +783,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.8.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.9.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -733,21 +837,21 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.8</h2>
+        <h2>Co dodaje v0.9</h2>
         <div className="riskGrid">
-          <div><span>Autonomous paper</span><b>wejścia + wyjścia</b></div>
-          <div><span>Heartbeat</span><b>co 2 h + signal window</b></div>
-          <div><span>Stan portfolio</span><b>paper.json</b></div>
-          <div><span>Max pozycje</span><b>3</b></div>
-          <div><span>Stop</span><b>2×ATR · 1–5%</b></div>
-          <div><span>Dzienny halt</span><b>-2%</b></div>
+          <div><span>Agent health</span><b>0–100 + status</b></div>
+          <div><span>Alerty</span><b>runtime + risk</b></div>
+          <div><span>Decision journal</span><b>trwały JSON</b></div>
+          <div><span>Health history</span><b>48 runów</b></div>
+          <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
+          <div><span>Dzienny halt</span><b>-2%</b></div>
           <div><span>Live trading</span><b className="off">WYŁĄCZONY</b></div>
         </div>
       </section>
 
       <footer>
-        v0.8 · autonomous paper portfolio · persistent trade journal · live trading OFF
+        v0.9 · agent health · persistent decision journal · autonomous paper · live trading OFF
       </footer>
     </main>
   );
