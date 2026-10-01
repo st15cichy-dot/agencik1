@@ -160,4 +160,16 @@ const now = "2026-10-01T00:00:00.000Z";
   assert.equal(state.lastUpdatedAt, now);
 }
 
+{
+  const state = normalizePaperState({
+    dayKey: "2026-10-01",
+  }, now);
+  assert.equal(state.dayKey, "2026-10-01");
+
+  const invalid = normalizePaperState({
+    dayKey: "not-a-day",
+  }, now);
+  assert.equal(invalid.dayKey, "2026-10-01");
+}
+
 console.log("paper portfolio regression suite: OK");
