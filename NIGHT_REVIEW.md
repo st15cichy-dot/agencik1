@@ -12,3 +12,7 @@ Safety scope: paper trading only; live trading remains disabled.
 - Recommended regression coverage: daily halt, hard drawdown halt, max open positions, gross exposure, invalid prices and fee/slippage accounting.
 
 No live broker integration or secrets are required.
+
+## Vercel observation
+
+The production deployment from main is READY. Commits written by the generated `research-data` branch also trigger Vercel preview builds, and those previews fail because that branch intentionally contains only JSON memory files rather than the Next.js application. This does not break production, but it creates noisy failed deployments. Recommended follow-up: configure Vercel to ignore builds from `research-data`.
