@@ -74,3 +74,17 @@
 .governanceEvents b{font-size:11px;color:#c9c0ff}
 .governanceEvents span{font-size:12px;color:#9ca9b9}
 @media(max-width:640px){.governanceEvents>div{grid-template-columns:1fr}}
+
+.allocationIntel{margin-top:18px}
+.allocationBadge{border-color:#2b7180;color:#86e2ef;background:#0b1b20}
+.correlationGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.correlationItem{display:grid;gap:4px;padding:10px 11px;border:1px solid #2c3b4d;border-radius:11px;background:#0b1118}
+.correlationItem b{font-size:11px}
+.correlationItem span,.correlationItem small{font-size:11px;color:#8fa0b3}
+.correlationItem.high_correlation{border-color:#6c5528;background:#19150d}
+.correlationItem.hard_concentration{border-color:#783f45;background:#211214}
+.correlationItem.insufficient_data{border-style:dashed}
+.allocationWarnings{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.allocationWarnings span{font-size:10px;font-weight:800;border:1px solid #6c5528;color:#f2d687;background:#19150d;border-radius:999px;padding:5px 8px}
+@media(max-width:900px){.correlationGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.correlationGrid{grid-template-columns:1fr}}

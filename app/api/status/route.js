@@ -1,7 +1,7 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.11.0",
+    version: "0.12.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     marketData:
@@ -39,6 +39,18 @@ export async function GET() {
       healthScore: true,
       decisionJournal: true,
       persistentAlerts: true,
+      allocationIntelligence: {
+        mode: "SHADOW_ONLY",
+        paperAuthority: false,
+        maxSelectedCandidates: 3,
+        maxGrossWeightPct: 100,
+        maxSingleWeightPct: 50,
+        correlationWarning: 0.75,
+        correlationHardLimit: 0.90,
+        inverseVolatilityWeights: true,
+        concentrationDiagnostics: true,
+        automaticPaperEnforcement: false,
+      },
       strategyGovernance: {
         mode: "SHADOW_ONLY",
         paperAuthority: false,

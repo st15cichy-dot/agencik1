@@ -182,14 +182,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.11",
+      source: "manual browser sandbox v0.12",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.11.0",
+        version: "0.12.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -202,7 +202,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v011-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v012-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -221,7 +221,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.11."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.12."
           : `HTTP ${r.status}`
       );
     }
@@ -245,9 +245,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.11</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.12</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous paper + shadow strategy governance + portfolio intelligence</p>
+          <p className="muted">Autonomous paper + shadow allocation intelligence + strategy governance</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -256,12 +256,13 @@ useEffect(() => {
           <span className="badge">WATCHDOG: ON</span>
           <span className="badge">PORTFOLIO INTELLIGENCE</span>
           <span className="badge governanceBadge">GOVERNANCE: SHADOW</span>
+          <span className="badge allocationBadge">ALLOCATION: SHADOW</span>
         </div>
       </header>
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.11 nadal działa wyłącznie w PAPER. Governance obserwuje wersje strategii i champion/challenger, ale nie ma jeszcze prawa sterować wejściami.</span>
+        <span> v0.12 nadal działa wyłącznie w PAPER. Allocation Intelligence oblicza ranking, korelację i hipotetyczne wagi, ale nie ma prawa zmieniać wejść ani wielkości pozycji.</span>
       </section>
 
       <section className="metrics">
@@ -421,7 +422,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.11 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.12 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -459,6 +460,94 @@ useEffect(() => {
         <div className="placeholder">W ostatnim heartbeat screening nie wybrał kandydatów do Deep Lab.</div>
       )}
 
+
+{autoMemory.allocationIntelligence && (
+  <div className="allocationIntel">
+    <div className="sectionDivider" />
+    <div className="cardTitle">
+      <div>
+        <h3>Allocation Intelligence · shadow mode</h3>
+        <p className="muted">
+          Diagnostyczny ranking kandydatów z kontrolą korelacji, koncentracji i wag inverse-volatility.
+          <b> Nie wpływa na faktyczne PAPER wejścia ani sizing.</b>
+        </p>
+      </div>
+      <span className="badge allocationBadge">
+        PAPER AUTHORITY: {autoMemory.allocationIntelligence.paperAuthority ? "ON" : "OFF"}
+      </span>
+    </div>
+
+    <div className="metricStrip">
+      <Metric label="Eligible" value={String(autoMemory.allocationIntelligence.summary?.eligibleCandidates || 0)} sub="Deep PASS" />
+      <Metric label="Shadow selected" value={String(autoMemory.allocationIntelligence.summary?.selectedCandidates || 0)} sub="maks. 3" />
+      <Metric label="Gross weight" value={`${num(autoMemory.allocationIntelligence.summary?.grossWeightPct, 1)}%`} sub="shadow basket" />
+      <Metric label="Cash weight" value={`${num(autoMemory.allocationIntelligence.summary?.cashWeightPct, 1)}%`} sub="diagnostycznie" />
+      <Metric label="Max corr" value={num(autoMemory.allocationIntelligence.summary?.maxPairCorrelation, 2)} sub="|ρ| w basket" />
+      <Metric label="Risk ref." value={moneyOrDash(autoMemory.allocationIntelligence.summary?.referenceRiskPerTradePln)} sub="0,50% equity" />
+    </div>
+
+    {(autoMemory.allocationIntelligence.rankedCandidates || []).length > 0 ? (
+      <div className="tableWrap compact">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Instrument</th><th>Strategia</th><th>Lifecycle</th>
+              <th>Quality</th><th>Vol</th><th>Max corr</th><th>Decyzja</th>
+              <th>Waga</th><th>Notional</th>
+            </tr>
+          </thead>
+          <tbody>
+            {autoMemory.allocationIntelligence.rankedCandidates.map((c) => (
+              <tr key={c.symbol}>
+                <td>{c.rank}</td>
+                <td><b>{c.symbol}</b></td>
+                <td>{c.strategy}</td>
+                <td>{c.lifecycle}</td>
+                <td>{num(c.qualityScore, 1)}</td>
+                <td>{pct(c.realizedVolPct)}</td>
+                <td>{num(c.maxCorrelationToSelected, 2)}</td>
+                <td>
+                  <span className={`signal ${c.selected ? "good" : ""}`}>
+                    {c.decision}
+                  </span>
+                </td>
+                <td>{`${num(c.recommendedWeightPct, 1)}%`}</td>
+                <td>{moneyOrDash(c.recommendedNotionalPln)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div className="analyticsEmpty">
+        Allocation Intelligence jest aktywne, ale ostatni heartbeat nie miał kandydatów Deep PASS.
+      </div>
+    )}
+
+    {(autoMemory.allocationIntelligence.pairwiseCorrelations || []).length > 0 && (
+      <>
+        <h3>Correlation diagnostics</h3>
+        <div className="correlationGrid">
+          {autoMemory.allocationIntelligence.pairwiseCorrelations.slice(0, 12).map((p) => (
+            <div key={`${p.a}-${p.b}`} className={`correlationItem ${String(p.flag).toLowerCase()}`}>
+              <b>{p.a} × {p.b}</b>
+              <span>ρ {num(p.correlation, 2)} · {p.samples} próbek</span>
+              <small>{p.flag}</small>
+            </div>
+          ))}
+        </div>
+      </>
+    )}
+
+    {(autoMemory.allocationIntelligence.summary?.warnings || []).length > 0 && (
+      <div className="allocationWarnings">
+        {(autoMemory.allocationIntelligence.summary.warnings || []).map((warning) => (
+          <span key={warning}>{warning}</span>
+        ))}
+      </div>
+    )}
+  </div>
+)}
 
 {autoMemory.strategyGovernance && (
   <div className="strategyGovernance">
@@ -518,7 +607,7 @@ useEffect(() => {
       </div>
     ) : (
       <div className="analyticsEmpty">
-        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.11.
+        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.12.
       </div>
     )}
 
@@ -996,7 +1085,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.11.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.12.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -1050,12 +1139,12 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.11</h2>
+        <h2>Co dodaje v0.12</h2>
         <div className="riskGrid">
-          <div><span>Strategy versions</span><b>config fingerprint</b></div>
-          <div><span>Lifecycle</span><b>candidate → retired</b></div>
-          <div><span>Champion / challenger</span><b>shadow ranking</b></div>
-          <div><span>Governance authority</span><b className="off">OFF dla paper</b></div>
+          <div><span>Candidate ranking</span><b>quality + volatility</b></div>
+          <div><span>Correlation guard</span><b>0,75 / 0,90</b></div>
+          <div><span>Shadow weights</span><b>inverse volatility</b></div>
+          <div><span>Allocation authority</span><b className="off">OFF dla paper</b></div>
           <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
           <div><span>Dzienny halt</span><b>-2%</b></div>
@@ -1064,7 +1153,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.11 · strategy governance shadow · portfolio intelligence · live trading OFF
+        v0.12 · allocation shadow · strategy governance · live trading OFF
       </footer>
     </main>
   );

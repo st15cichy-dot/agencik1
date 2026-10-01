@@ -129,4 +129,29 @@ const basePaper = {
   assert.equal(governanceEntry.metrics.to, "VALIDATED");
 }
 
+{
+  const entries = buildDecisionEntries({
+    completedAt: "2026-10-01T10:00:30.000Z",
+    screen: [],
+    deep: [],
+    events: [{
+      type: "ALLOCATION_SHADOW_UPDATED",
+      symbol: "PORTFOLIO",
+      message: "Shadow allocation updated",
+      selectedCandidates: 2,
+      eligibleCandidates: 3,
+      grossWeightPct: 100,
+      maxPairCorrelation: 0.62,
+    }],
+    paperPortfolio: basePaper,
+    health: { status: "HEALTHY", score: 100, failureCount: 0, screenCoveragePct: 100 },
+  });
+
+  const allocationEntry = entries.find((x) => x.category === "ALLOCATION");
+  assert.ok(allocationEntry);
+  assert.equal(allocationEntry.action, "ALLOCATION_SHADOW_UPDATED");
+  assert.equal(allocationEntry.metrics.selectedCandidates, 2);
+  assert.equal(allocationEntry.metrics.grossWeightPct, 100);
+}
+
 console.log("agent health tests: OK");
