@@ -9,6 +9,8 @@ import {
   isResearchSymbol,
   marketSymbolMeta,
   publicUniverseSummary,
+  splitPaperReadyCandidates,
+  paperUniverseViolations,
 } from "../lib/market-universe.js";
 
 assert.equal(RESEARCH_SYMBOLS.length, 16);
@@ -42,5 +44,37 @@ assert.deepEqual(
   [...PAPER_SYMBOLS].sort(),
   MARKET_UNIVERSE.filter((x) => x.paperEnabled).map((x) => x.symbol).sort()
 );
+
+{
+  const split = splitPaperReadyCandidates(
+    [
+      { symbol: "BTCUSDT", paperReady: true },
+      { symbol: "AVAXUSDT", paperReady: true },
+      { symbol: "ETHUSDT", paperReady: false },
+      { symbol: "BNBUSDT", paperReady: true },
+    ],
+    [{ symbol: "BNBUSDT" }]
+  );
+
+  assert.deepEqual(
+    split.paperCandidates.map((x) => x.symbol),
+    ["BTCUSDT"]
+  );
+  assert.deepEqual(
+    split.shadowSignals.map((x) => x.symbol),
+    ["AVAXUSDT"]
+  );
+}
+
+{
+  assert.deepEqual(
+    paperUniverseViolations([
+      { symbol: "BTCUSDT" },
+      { symbol: "AVAXUSDT" },
+      { symbol: "AAVEUSDT" },
+    ]),
+    ["AVAXUSDT", "AAVEUSDT"]
+  );
+}
 
 console.log("market universe tests: OK");
