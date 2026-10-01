@@ -1079,6 +1079,18 @@ async function main() {
   fs.writeFileSync(
     path.join(
       OUT_DIR,
+      "analytics.json"
+    ),
+    JSON.stringify(
+      current.portfolioAnalytics,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
       "journal.json"
     ),
     JSON.stringify(
