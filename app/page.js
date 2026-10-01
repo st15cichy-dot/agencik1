@@ -165,7 +165,12 @@ export default function Home() {
   }, [lab]);
 
   function addPaperCandidate() {
-    if (!lab?.candidate?.paperReady || !selectedRow || !chosen) return;
+    if (
+      !lab?.candidate?.paperReady ||
+      !selectedRow ||
+      !selectedRow.paperEnabled ||
+      !chosen
+    ) return;
 
     const atrStopPct = Math.max(1, Math.min(5, (selectedRow.atrPct || 1) * 2));
     const riskPln = STARTING_CAPITAL * RISK_PER_TRADE;
@@ -182,14 +187,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.12",
+      source: "manual browser sandbox v0.13",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.12.0",
+        version: "0.13.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -202,7 +207,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v012-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v013-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -221,7 +226,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.12."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.13."
           : `HTTP ${r.status}`
       );
     }
@@ -245,9 +250,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.12</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.13</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous paper + shadow allocation intelligence + strategy governance</p>
+          <p className="muted">16-market research universe + 8-market PAPER core + shadow expansion</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -257,12 +262,13 @@ useEffect(() => {
           <span className="badge">PORTFOLIO INTELLIGENCE</span>
           <span className="badge governanceBadge">GOVERNANCE: SHADOW</span>
           <span className="badge allocationBadge">ALLOCATION: SHADOW</span>
+          <span className="badge universeBadge">RESEARCH 16 · PAPER 8</span>
         </div>
       </header>
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.12 nadal działa wyłącznie w PAPER. Allocation Intelligence oblicza ranking, korelację i hipotetyczne wagi, ale nie ma prawa zmieniać wejść ani wielkości pozycji.</span>
+        <span> v0.13 rozszerza badania do 16 rynków, ale nowe 8 instrumentów jest SHADOW_RESEARCH: mogą być analizowane, lecz nie mogą otwierać pozycji PAPER.</span>
       </section>
 
       <section className="metrics">
@@ -422,7 +428,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.12 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.13 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -607,7 +613,7 @@ useEffect(() => {
       </div>
     ) : (
       <div className="analyticsEmpty">
-        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.12.
+        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.13.
       </div>
     )}
 
@@ -896,10 +902,10 @@ useEffect(() => {
         <div className="cardTitle">
           <div>
             <h2>Etap 1 · All-market screening</h2>
-            <p className="muted">3000 świec / instrument. PASS oznacza tylko „warto zrobić Deep Lab”.</p>
+            <p className="muted">16 rynków research: 8 CORE_PAPER + 8 SHADOW_RESEARCH. PASS oznacza tylko „warto zrobić Deep Lab”.</p>
           </div>
           <button onClick={runScreen} disabled={screenLoading}>
-            {screenLoading ? "Screening 8 rynków…" : "Uruchom screening"}
+            {screenLoading ? "Screening 16 rynków…" : "Uruchom screening"}
           </button>
         </div>
 
@@ -918,7 +924,7 @@ useEffect(() => {
               <table>
                 <thead>
                   <tr>
-                    <th>Instrument</th><th>Strategia</th><th>OOS</th><th>Exposure bench</th>
+                    <th>Instrument</th><th>Tier</th><th>Strategia</th><th>OOS</th><th>Exposure bench</th>
                     <th>Excess</th><th>DD</th><th>PF</th><th>Sharpe</th><th>Trades</th>
                     <th>WF</th><th>Stabilność</th><th>Screen</th><th></th>
                   </tr>
@@ -927,6 +933,11 @@ useEffect(() => {
                   {(screen.ranking || []).map((r) => (
                     <tr key={r.symbol}>
                       <td><b>{r.symbol}</b></td>
+                      <td>
+                        <span className={`tierBadge ${r.paperEnabled ? "core" : "shadow"}`}>
+                          {r.paperEnabled ? "CORE_PAPER" : "SHADOW"}
+                        </span>
+                      </td>
                       <td>{r.strategy}</td>
                       <td className={r.oosReturnPct >= 0 ? "positive" : "negative"}>{pct(r.oosReturnPct)}</td>
                       <td>{pct(r.exposureBenchmarkPct)}</td>
@@ -1063,17 +1074,30 @@ useEffect(() => {
 
             <div className={`candidateBox ${lab.candidate.paperReady ? "pass" : "fail"}`}>
               <div>
-                <b>{lab.candidate.paperReady ? "PAPER READY" : lab.candidate.eligible ? "DEEP PASS, BRAK LONG" : "DEEP FAIL"}</b>
+                <b>
+                  {lab.candidate.paperReady
+                    ? selectedRow?.paperEnabled
+                      ? "PAPER READY"
+                      : "SHADOW SIGNAL · PAPER BLOCKED"
+                    : lab.candidate.eligible
+                      ? "DEEP PASS, BRAK LONG"
+                      : "DEEP FAIL"}
+                </b>
                 <p>
                   {lab.candidate.paperReady
-                    ? "Strategia przeszła walidację i ma aktywny sygnał LONG."
+                    ? selectedRow?.paperEnabled
+                      ? "Strategia przeszła walidację i ma aktywny sygnał LONG w CORE_PAPER."
+                      : "Sygnał jest badany, ale ten instrument należy do SHADOW_RESEARCH i nie ma PAPER authority."
                     : lab.candidate.eligible
                       ? "Strategia przeszła walidację, ale aktualnie nie ma wejścia LONG."
                       : "Nie spełniono wszystkich kryteriów Deep Lab."}
                 </p>
               </div>
-              <button onClick={addPaperCandidate} disabled={!lab.candidate.paperReady}>
-                Dodaj ręcznie
+              <button
+                onClick={addPaperCandidate}
+                disabled={!lab.candidate.paperReady || !selectedRow?.paperEnabled}
+              >
+                {selectedRow?.paperEnabled ? "Dodaj ręcznie" : "Shadow only"}
               </button>
             </div>
           </>
@@ -1085,7 +1109,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.12.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.13.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -1139,12 +1163,12 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.12</h2>
+        <h2>Co dodaje v0.13</h2>
         <div className="riskGrid">
-          <div><span>Candidate ranking</span><b>quality + volatility</b></div>
-          <div><span>Correlation guard</span><b>0,75 / 0,90</b></div>
-          <div><span>Shadow weights</span><b>inverse volatility</b></div>
-          <div><span>Allocation authority</span><b className="off">OFF dla paper</b></div>
+          <div><span>Research universe</span><b>16 rynków</b></div>
+          <div><span>Paper core</span><b>8 rynków</b></div>
+          <div><span>Shadow expansion</span><b>8 rynków</b></div>
+          <div><span>Shadow PAPER authority</span><b className="off">OFF</b></div>
           <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
           <div><span>Dzienny halt</span><b>-2%</b></div>
@@ -1153,7 +1177,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.12 · allocation shadow · strategy governance · live trading OFF
+        v0.13 · 16-market research · 8-market paper core · live trading OFF
       </footer>
     </main>
   );

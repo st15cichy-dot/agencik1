@@ -88,3 +88,8 @@
 .allocationWarnings span{font-size:10px;font-weight:800;border:1px solid #6c5528;color:#f2d687;background:#19150d;border-radius:999px;padding:5px 8px}
 @media(max-width:900px){.correlationGrid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.correlationGrid{grid-template-columns:1fr}}
+
+.universeBadge{border-color:#386a5b;color:#82dfbd;background:#0d1b17}
+.tierBadge{display:inline-flex;border:1px solid #445267;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:900;letter-spacing:.04em;white-space:nowrap}
+.tierBadge.core{border-color:#27795a;color:#6de2ae;background:#0d1915}
+.tierBadge.shadow{border-color:#6556a8;color:#c9c0ff;background:#141126}
