@@ -154,7 +154,7 @@ const now = "2026-10-01T00:00:00.000Z";
     }],
     lastUpdatedAt: "not-a-date",
   }, now);
-  assert.equal(state.appVersion, "0.10.0");
+  assert.equal(state.appVersion, "0.11.0");
   assert.equal(state.cashPln, 200);
   assert.equal(state.totalFeesPln, 0);
   assert.equal(state.openPositions.length, 0);
@@ -198,6 +198,31 @@ const now = "2026-10-01T00:00:00.000Z";
   approx(closed.trade.mfePct, 5);
   approx(closed.trade.maePct, -2);
   assert.ok(Number.isFinite(closed.trade.rMultiple));
+}
+
+{
+  const state = defaultPaperState(now);
+  const opened = openPaperPosition(state, paperSnapshot(state, {}), {
+    symbol: "VERSIONUSDT",
+    strategyId: "breakout",
+    strategyName: "Breakout",
+    strategyVersion: "breakout@abc123",
+    config: { lookback: 20, exitLookback: 10 },
+    rawPrice: 100,
+    atrPct: 1,
+    nowIso: now,
+  });
+
+  assert.equal(opened.opened, true);
+  assert.equal(opened.position.strategyVersion, "breakout@abc123");
+
+  const closed = closePaperPosition(state, opened.position.id, {
+    rawExitPrice: 101,
+    nowIso: "2026-10-01T02:00:00.000Z",
+    reason: "TEST_EXIT",
+  });
+
+  assert.equal(closed.trade.strategyVersion, "breakout@abc123");
 }
 
 console.log("paper portfolio regression suite: OK");

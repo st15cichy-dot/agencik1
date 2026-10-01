@@ -106,4 +106,27 @@ const basePaper = {
   assert.ok(entries.some((x) => x.action === "HEARTBEAT_SUMMARY"));
 }
 
+{
+  const entries = buildDecisionEntries({
+    completedAt: "2026-10-01T10:00:30.000Z",
+    screen: [],
+    deep: [],
+    events: [{
+      type: "GOVERNANCE_PROMOTED",
+      symbol: "BTCUSDT",
+      strategyVersion: "breakout@test",
+      from: "SHADOW",
+      to: "VALIDATED",
+      message: "BTCUSDT governance promotion",
+    }],
+    paperPortfolio: basePaper,
+    health: { status: "HEALTHY", score: 100, failureCount: 0, screenCoveragePct: 100 },
+  });
+
+  const governanceEntry = entries.find((x) => x.category === "GOVERNANCE");
+  assert.ok(governanceEntry);
+  assert.equal(governanceEntry.action, "GOVERNANCE_PROMOTED");
+  assert.equal(governanceEntry.metrics.to, "VALIDATED");
+}
+
 console.log("agent health tests: OK");
