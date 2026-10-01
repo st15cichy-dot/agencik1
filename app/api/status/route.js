@@ -1,7 +1,7 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.7.0",
+    version: "0.8.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     marketData:
@@ -29,6 +29,13 @@ export async function GET() {
         "2x ATR, min 1%, max 5%",
       feePerSidePct: 0.10,
       slippagePerSidePct: 0.03,
+    },
+    resilience: {
+      marketDataTimeoutMs: 10000,
+      marketDataMaxAttempts: 3,
+      maxMarketDataStalenessHours: 4,
+      heartbeatPreflightTests: true,
+      ciBuildGate: true,
     },
     scannerUniverse: 8,
     strategyFamilies: 4,
