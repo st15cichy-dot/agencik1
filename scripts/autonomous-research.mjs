@@ -811,7 +811,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.7.0",
+    appVersion: "0.8.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,

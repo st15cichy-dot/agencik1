@@ -169,7 +169,7 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.7",
+      source: "manual browser sandbox v0.8",
     }, ...p].slice(0, 100));
   }
 
@@ -208,7 +208,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.7."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.8."
           : `HTTP ${r.status}`
       );
     }
@@ -232,9 +232,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.7</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.8</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous research + paper portfolio + hard risk engine</p>
+          <p className="muted">Autonomous paper + resilient data + regression-gated risk engine</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -245,7 +245,7 @@ useEffect(() => {
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.7 może sam otwierać i zamykać wyłącznie pozycje PAPER po Deep PASS + aktywnym wejściu LONG.</span>
+        <span> v0.8 może sam otwierać i zamykać wyłącznie pozycje PAPER po Deep PASS + aktywnym wejściu LONG.</span>
       </section>
 
       <section className="metrics">
@@ -679,7 +679,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.7.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.8.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -733,7 +733,7 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.7</h2>
+        <h2>Co dodaje v0.8</h2>
         <div className="riskGrid">
           <div><span>Autonomous paper</span><b>wejścia + wyjścia</b></div>
           <div><span>Heartbeat</span><b>co 2 h + signal window</b></div>
@@ -747,7 +747,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.7 · autonomous paper portfolio · persistent trade journal · live trading OFF
+        v0.8 · autonomous paper portfolio · persistent trade journal · live trading OFF
       </footer>
     </main>
   );

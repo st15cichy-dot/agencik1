@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Autonomiczny Inwestor v0.7",
-  description: "Autonomous research, persistent simulated paper portfolio and hard risk controls.",
+  title: "Autonomiczny Inwestor v0.8",
+  description: "Autonomous paper research with regression gates, resilient market data and hard risk controls.",
 };
 
 export default function RootLayout({ children }) {

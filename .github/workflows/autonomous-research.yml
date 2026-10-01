@@ -28,6 +28,13 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Syntax and paper risk regression checks
+        run: |
+          node --check lib/research.js
+          node --check lib/paper-portfolio.js
+          node --check scripts/autonomous-research.mjs
+          npm run test-paper
+
       - name: Restore previous autonomous memory
         shell: bash
         run: |
@@ -73,6 +80,15 @@ jobs:
           real-money positions, or private user data.
           EOF
 
+          cat > /tmp/autonomous-memory/vercel.json <<'EOF'
+          {
+            "$schema": "https://openapi.vercel.sh/vercel.json",
+            "git": {
+              "deploymentEnabled": false
+            }
+          }
+          EOF
+
       - name: Publish research-data branch
         shell: bash
         run: |
@@ -88,7 +104,8 @@ jobs:
           cp /tmp/autonomous-memory/paper.json paper.json
           cp /tmp/autonomous-memory/paper-trades.json paper-trades.json
           cp /tmp/autonomous-memory/README.md README.md
+          cp /tmp/autonomous-memory/vercel.json vercel.json
 
-          git add latest.json history.json paper.json paper-trades.json README.md
+          git add latest.json history.json paper.json paper-trades.json README.md vercel.json
           git commit -m "Update autonomous research and paper memory"
           git push --force origin HEAD:research-data
