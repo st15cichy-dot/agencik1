@@ -153,7 +153,7 @@ const now = "2026-10-01T00:00:00.000Z";
     }],
     lastUpdatedAt: "not-a-date",
   }, now);
-  assert.equal(state.appVersion, "0.8.0");
+  assert.equal(state.appVersion, "0.9.0");
   assert.equal(state.cashPln, 200);
   assert.equal(state.totalFeesPln, 0);
   assert.equal(state.openPositions.length, 0);

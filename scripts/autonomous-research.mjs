@@ -17,6 +17,10 @@ import {
   closePaperPosition,
   publicPaperSummary,
 } from "../lib/paper-portfolio.js";
+import {
+  buildAgentHealth,
+  buildDecisionEntries,
+} from "../lib/agent-health.js";
 
 const OUT_DIR = path.resolve(".auto-output");
 const previousLatestPath =
@@ -27,6 +31,8 @@ const previousPaperPath =
   process.env.PREVIOUS_PAPER_PATH || "";
 const previousTradesPath =
   process.env.PREVIOUS_TRADES_PATH || "";
+const previousJournalPath =
+  process.env.PREVIOUS_JOURNAL_PATH || "";
 
 function readJson(file, fallback) {
   try {
@@ -269,6 +275,10 @@ async function main() {
   );
   const previousTrades = readJson(
     previousTradesPath,
+    []
+  );
+  const previousJournal = readJson(
+    previousJournalPath,
     []
   );
 
@@ -811,7 +821,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.8.0",
+    appVersion: "0.9.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -864,6 +874,42 @@ async function main() {
       current.completedAt
     );
 
+
+  current.health = buildAgentHealth({
+    startedAt: current.startedAt,
+    completedAt: current.completedAt,
+    previousCompletedAt:
+      previousLatest?.completedAt || null,
+    expectedSymbols: SYMBOLS.length,
+    screen: current.screen,
+    deep: current.deep,
+    failures: current.failures,
+    paperPortfolio: current.paperPortfolio,
+  });
+
+  const newDecisionEntries =
+    buildDecisionEntries({
+      completedAt: current.completedAt,
+      screen: current.screen,
+      deep: current.deep,
+      events: current.events,
+      paperPortfolio: current.paperPortfolio,
+      health: current.health,
+    });
+
+  const decisionJournal = [
+    ...newDecisionEntries,
+    ...(Array.isArray(previousJournal)
+      ? previousJournal
+      : []),
+  ].slice(0, 1500);
+
+  current.decisionJournal = {
+    entriesAdded: newDecisionEntries.length,
+    totalEntries: decisionJournal.length,
+    latest: decisionJournal.slice(0, 12),
+  };
+
   const runRecord = {
     at: current.completedAt,
     screenPass:
@@ -876,6 +922,9 @@ async function main() {
       current.failures,
     events:
       current.events,
+    health: current.health,
+    journalEntriesAdded:
+      current.decisionJournal.entriesAdded,
     paper: {
       equityPln:
         current.paperPortfolio
@@ -968,6 +1017,39 @@ async function main() {
     ) + "\n"
   );
 
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
+      "journal.json"
+    ),
+    JSON.stringify(
+      decisionJournal,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
+      "health.json"
+    ),
+    JSON.stringify(
+      {
+        schemaVersion: 1,
+        appVersion: "0.9.0",
+        current: current.health,
+        recent: history.slice(0, 48).map((run) => ({
+          at: run.at,
+          health: run.health || null,
+        })),
+      },
+      null,
+      2
+    ) + "\n"
+  );
+
   console.log(
     JSON.stringify(
       {
@@ -996,6 +1078,13 @@ async function main() {
         },
         failures:
           current.failures.length,
+        health: {
+          score: current.health.score,
+          status: current.health.status,
+          alerts: current.health.alerts.map((x) => x.code),
+        },
+        journalEntriesAdded:
+          current.decisionJournal.entriesAdded,
         events:
           current.events.map(
             (x) => x.type

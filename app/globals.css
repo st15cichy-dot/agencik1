@@ -13,3 +13,30 @@
 .paperAuto{margin-top:18px}
 .sectionDivider{height:1px;background:#29425c;margin:18px 0}
 .paperAuto h3{margin:12px 0 6px}
+
+.healthCard{margin-top:14px;border:1px solid #2b4259;background:#0b121b;border-radius:16px;padding:16px}
+.healthScore{display:inline-flex;align-items:center;justify-content:center;min-width:78px;height:42px;border-radius:999px;border:1px solid #37506a;font-weight:900;font-size:16px}
+.health-healthy{color:#6de2ae;border-color:#27795a;background:#0d1915}
+.health-watch{color:#f2d687;border-color:#705a27;background:#1b170d}
+.health-degraded,.health-stale{color:#ffbd7a;border-color:#7a5330;background:#21170d}
+.health-critical{color:#ff999f;border-color:#7b3f45;background:#211214}
+.healthBadge.healthy{border-color:#27795a;color:#6de2ae}
+.healthBadge.watch{border-color:#705a27;color:#f2d687}
+.healthBadge.degraded,.healthBadge.stale{border-color:#7a5330;color:#ffbd7a}
+.healthBadge.critical{border-color:#7b3f45;color:#ff999f}
+.alertList{display:grid;gap:8px;margin-top:12px}
+.alertItem{display:flex;justify-content:space-between;gap:16px;padding:11px 12px;border-radius:12px;border:1px solid #3b4655;background:#0d1219}
+.alertItem>div{display:grid;gap:3px}
+.alertItem b{font-size:12px}
+.alertItem span,.alertItem small{font-size:12px;color:#9da9b7}
+.alertItem.warning{border-color:#6c5528;background:#19150d}
+.alertItem.warning b{color:#f2d687}
+.alertItem.critical{border-color:#783f45;background:#211214}
+.alertItem.critical b{color:#ff999f}
+.healthOk,.healthWaiting{margin-top:12px;padding:11px 12px;border-radius:12px;font-size:12px}
+.healthOk{border:1px solid #27795a;background:#0d1915;color:#6de2ae}
+.healthWaiting{border:1px dashed #344054;color:#8d9aab}
+.decisionJournal{margin-top:18px}
+.journalCategory{font-size:10px;font-weight:900;letter-spacing:.08em;border:1px solid #38475a;border-radius:999px;padding:4px 6px}
+.journalReason{min-width:280px;color:#aab5c3}
+@media(max-width:640px){.alertItem{flex-direction:column;gap:5px}.healthScore{min-width:68px}}

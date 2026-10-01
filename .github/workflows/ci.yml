@@ -38,9 +38,10 @@ jobs:
           node --check lib/research.js
           node --check lib/paper-portfolio.js
           node --check scripts/autonomous-research.mjs
+          node --check lib/agent-health.js
 
-      - name: Paper risk regression suite
-        run: npm run test-paper
+      - name: Core regression suites
+        run: npm run test-core
 
       - name: Next.js production build
         run: npm run build
