@@ -4,9 +4,9 @@ import {
   analyzeSymbol,
   fetchBars,
   SYMBOLS,
-  isPaperEligibleSymbol,
   marketSymbolMeta,
   publicUniverseSummary,
+  splitPaperReadyCandidates,
 } from "../lib/research.js";
 import { atrSeries } from "../lib/indicators.js";
 import { prepareStrategy } from "../lib/strategies.js";
@@ -749,20 +749,19 @@ async function main() {
     });
   }
 
-  const shadowPaperReady = deep
-    .filter((x) => x.paperReady && !isPaperEligibleSymbol(x.symbol))
-    .map((x) => x.symbol);
+  const splitCandidates =
+    splitPaperReadyCandidates(
+      deep,
+      paperState.openPositions
+    );
 
-  const candidates = deep
-    .filter((x) => x.paperReady)
-    .filter((x) => isPaperEligibleSymbol(x.symbol))
-    .filter(
-      (x) =>
-        !paperState.openPositions.some(
-          (p) => p.symbol === x.symbol
-        )
-    )
-    .sort(
+  const shadowPaperReady =
+    splitCandidates.shadowSignals.map(
+      (x) => x.symbol
+    );
+
+  const candidates =
+    splitCandidates.paperCandidates.sort(
       (a, b) =>
         (b.returnToDrawdown ?? -999) -
           (a.returnToDrawdown ?? -999) ||
