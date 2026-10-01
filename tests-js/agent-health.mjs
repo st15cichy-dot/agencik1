@@ -230,4 +230,27 @@ const basePaper = {
   assert.equal(entries.some((x) => x.action === "PAPER_ENTRY_CANDIDATE"), false);
 }
 
+{
+  const entries = buildDecisionEntries({
+    completedAt: "2026-10-01T10:00:30.000Z",
+    screen: [],
+    deep: [],
+    events: [{
+      type: "EXECUTION_SHADOW_INTENT_CREATED",
+      symbol: "BTCUSDT",
+      intentId: "shadow:BTCUSDT-1",
+      paperPositionId: "BTCUSDT-1",
+      executable: false,
+      message: "shadow intent",
+    }],
+    paperPortfolio: basePaper,
+    health: { status: "HEALTHY", score: 100, failureCount: 0, screenCoveragePct: 100 },
+  });
+
+  const execution = entries.find((x) => x.category === "EXECUTION");
+  assert.ok(execution);
+  assert.equal(execution.metrics.intentId, "shadow:BTCUSDT-1");
+  assert.equal(execution.metrics.executable, false);
+}
+
 console.log("agent health tests: OK");
