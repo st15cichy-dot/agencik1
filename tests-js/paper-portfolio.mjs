@@ -9,6 +9,7 @@ import {
   paperSnapshot,
   refreshDayState,
   updateRiskFlags,
+  updatePositionExcursions,
 } from "../lib/paper-portfolio.js";
 
 function approx(actual, expected, tolerance = 1e-8) {
@@ -153,7 +154,7 @@ const now = "2026-10-01T00:00:00.000Z";
     }],
     lastUpdatedAt: "not-a-date",
   }, now);
-  assert.equal(state.appVersion, "0.9.0");
+  assert.equal(state.appVersion, "0.10.0");
   assert.equal(state.cashPln, 200);
   assert.equal(state.totalFeesPln, 0);
   assert.equal(state.openPositions.length, 0);
@@ -170,6 +171,33 @@ const now = "2026-10-01T00:00:00.000Z";
     dayKey: "not-a-day",
   }, now);
   assert.equal(invalid.dayKey, "2026-10-01");
+}
+
+{
+  const state = defaultPaperState(now);
+  const opened = openTestPosition(state, now, "MOVEUSDT", 100, 1);
+  assert.equal(opened.opened, true);
+
+  updatePositionExcursions(opened.position, [
+    { high: 105, low: 98 },
+    { high: 103, low: 99 },
+  ]);
+
+  assert.equal(opened.position.highestMarketPrice, 105);
+  assert.equal(opened.position.lowestMarketPrice, 98);
+  approx(opened.position.mfePct, 5);
+  approx(opened.position.maePct, -2);
+
+  const closed = closePaperPosition(state, opened.position.id, {
+    rawExitPrice: 104,
+    nowIso: "2026-10-01T04:00:00.000Z",
+    reason: "TEST_EXIT",
+  });
+
+  assert.equal(closed.closed, true);
+  approx(closed.trade.mfePct, 5);
+  approx(closed.trade.maePct, -2);
+  assert.ok(Number.isFinite(closed.trade.rMultiple));
 }
 
 console.log("paper portfolio regression suite: OK");

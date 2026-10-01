@@ -16,11 +16,15 @@ import {
   openPaperPosition,
   closePaperPosition,
   publicPaperSummary,
+  updatePositionExcursions,
 } from "../lib/paper-portfolio.js";
 import {
   buildAgentHealth,
   buildDecisionEntries,
 } from "../lib/agent-health.js";
+import {
+  buildPortfolioAnalytics,
+} from "../lib/portfolio-analytics.js";
 
 const OUT_DIR = path.resolve(".auto-output");
 const previousLatestPath =
@@ -461,11 +465,24 @@ async function main() {
         (c) => c.time > lastCheckedMs
       );
 
-    const stopHit = freshBars.find(
+    const stopIndex = freshBars.findIndex(
       (c) => c.low <= position.stopPrice
     );
+    const stopHit =
+      stopIndex >= 0 ? freshBars[stopIndex] : null;
 
     if (stopHit) {
+      updatePositionExcursions(
+        position,
+        freshBars.slice(0, stopIndex)
+      );
+      updatePositionExcursions(
+        position,
+        [{
+          high: position.stopPrice,
+          low: position.stopPrice,
+        }]
+      );
       const result =
         closePaperPosition(
           paperState,
@@ -490,6 +507,11 @@ async function main() {
       }
       continue;
     }
+
+    updatePositionExcursions(
+      position,
+      freshBars
+    );
 
     const deepNow = deepBySymbol.get(
       position.symbol
@@ -821,7 +843,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.9.0",
+    appVersion: "0.10.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -874,6 +896,28 @@ async function main() {
       current.completedAt
     );
 
+  current.portfolioAnalytics =
+    buildPortfolioAnalytics({
+      paperState,
+      trades: paperTrades,
+      history: [
+        {
+          at: current.completedAt,
+          paper: {
+            equityPln:
+              current.paperPortfolio.equityPln,
+            totalPnlPln:
+              current.paperPortfolio.totalPnlPln,
+            drawdownPct:
+              current.paperPortfolio.drawdownPct,
+          },
+        },
+        ...(Array.isArray(previousHistory)
+          ? previousHistory
+          : []),
+      ],
+      nowIso: current.completedAt,
+    });
 
   current.health = buildAgentHealth({
     startedAt: current.startedAt,
@@ -925,6 +969,20 @@ async function main() {
     health: current.health,
     journalEntriesAdded:
       current.decisionJournal.entriesAdded,
+    analytics: {
+      sampleStatus:
+        current.portfolioAnalytics.sampleStatus,
+      trades:
+        current.portfolioAnalytics.stats.trades,
+      expectancyPln:
+        current.portfolioAnalytics.stats.expectancyPln,
+      profitFactor:
+        current.portfolioAnalytics.stats.profitFactor,
+      avgRMultiple:
+        current.portfolioAnalytics.stats.avgRMultiple,
+      maxObservedDrawdownPct:
+        current.portfolioAnalytics.stats.maxObservedDrawdownPct,
+    },
     paper: {
       equityPln:
         current.paperPortfolio
@@ -1038,7 +1096,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.9.0",
+        appVersion: "0.10.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
@@ -1085,6 +1143,16 @@ async function main() {
         },
         journalEntriesAdded:
           current.decisionJournal.entriesAdded,
+        analytics: {
+          sampleStatus:
+            current.portfolioAnalytics.sampleStatus,
+          trades:
+            current.portfolioAnalytics.stats.trades,
+          expectancyPln:
+            current.portfolioAnalytics.stats.expectancyPln,
+          avgRMultiple:
+            current.portfolioAnalytics.stats.avgRMultiple,
+        },
         events:
           current.events.map(
             (x) => x.type
