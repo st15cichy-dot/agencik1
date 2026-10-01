@@ -179,7 +179,7 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.9",
+      source: "manual browser sandbox v0.9.1",
     }, ...p].slice(0, 100));
   }
 
@@ -218,7 +218,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.9."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.9.1."
           : `HTTP ${r.status}`
       );
     }
@@ -242,7 +242,7 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.9</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.9.1</p>
           <h1>Research Quality Engine</h1>
           <p className="muted">Autonomous paper + health score + persistent decision journal</p>
         </div>
@@ -250,12 +250,13 @@ useEffect(() => {
           <span className="badge safe">PAPER ONLY</span>
           <span className="badge">XTB: NIEPOŁĄCZONY</span>
           <span className="badge live">BINANCE LIVE</span>
+          <span className="badge">WATCHDOG: ON</span>
         </div>
       </header>
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.9 nadal działa wyłącznie w PAPER. Dodatkowo monitoruje własne zdrowie, alerty i zapisuje uzasadnienia decyzji.</span>
+        <span> v0.9.1 nadal działa wyłącznie w PAPER. Dodatkowo monitoruje własne zdrowie, alerty i zapisuje uzasadnienia decyzji.</span>
       </section>
 
       <section className="metrics">
@@ -415,7 +416,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.9 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.9.1 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -783,7 +784,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.9.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.9.1.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -837,11 +838,11 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.9</h2>
+        <h2>Co dodaje v0.9.1</h2>
         <div className="riskGrid">
           <div><span>Agent health</span><b>0–100 + status</b></div>
-          <div><span>Alerty</span><b>runtime + risk</b></div>
-          <div><span>Decision journal</span><b>trwały JSON</b></div>
+          <div><span>Watchdog</span><b>co 1 h</b></div>
+          <div><span>Alert issue</span><b>auto open / close</b></div>
           <div><span>Health history</span><b>48 runów</b></div>
           <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
@@ -851,7 +852,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.9 · agent health · persistent decision journal · autonomous paper · live trading OFF
+        v0.9.1 · health watchdog · decision journal · autonomous paper · live trading OFF
       </footer>
     </main>
   );
