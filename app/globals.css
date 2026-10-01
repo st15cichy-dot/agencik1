@@ -58,3 +58,19 @@
 .rollingGrid b{display:block;margin:7px 0;font-size:16px}
 @media(max-width:900px){.analyticsGrid{grid-template-columns:1fr}}
 @media(max-width:640px){.rollingGrid{grid-template-columns:1fr}}
+
+.strategyGovernance{margin-top:18px}
+.governanceBadge{border-color:#6556a8;color:#c9c0ff;background:#141126}
+.lifecycle{display:inline-flex;padding:4px 7px;border-radius:999px;border:1px solid #3b4655;font-size:10px;font-weight:900;letter-spacing:.05em}
+.lifecycle-active{border-color:#27795a;color:#6de2ae;background:#0d1915}
+.lifecycle-validated{border-color:#346a8b;color:#8bd7ff;background:#0c1720}
+.lifecycle-shadow{border-color:#6556a8;color:#c9c0ff;background:#141126}
+.lifecycle-candidate{border-color:#586579;color:#aeb9c8}
+.lifecycle-degraded{border-color:#7a5330;color:#ffbd7a;background:#21170d}
+.lifecycle-retired{border-color:#7b3f45;color:#ff999f;background:#211214}
+.versionCell{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;white-space:nowrap}
+.governanceEvents{display:grid;gap:7px;margin-top:14px}
+.governanceEvents>div{display:grid;grid-template-columns:minmax(150px,auto) 1fr;gap:10px;padding:9px 11px;border:1px solid #273447;border-radius:10px}
+.governanceEvents b{font-size:11px;color:#c9c0ff}
+.governanceEvents span{font-size:12px;color:#9ca9b9}
+@media(max-width:640px){.governanceEvents>div{grid-template-columns:1fr}}

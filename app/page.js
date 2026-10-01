@@ -182,14 +182,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.10",
+      source: "manual browser sandbox v0.11",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.10.0",
+        version: "0.11.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -202,7 +202,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v010-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v011-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -221,7 +221,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.10."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.11."
           : `HTTP ${r.status}`
       );
     }
@@ -245,9 +245,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.10</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.11</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous paper + portfolio intelligence + health watchdog</p>
+          <p className="muted">Autonomous paper + shadow strategy governance + portfolio intelligence</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -255,12 +255,13 @@ useEffect(() => {
           <span className="badge live">BINANCE LIVE</span>
           <span className="badge">WATCHDOG: ON</span>
           <span className="badge">PORTFOLIO INTELLIGENCE</span>
+          <span className="badge governanceBadge">GOVERNANCE: SHADOW</span>
         </div>
       </header>
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.10 nadal działa wyłącznie w PAPER. Mierzy teraz jakość wyników, koszt ryzyka, MFE/MAE i statystyki strategii.</span>
+        <span> v0.11 nadal działa wyłącznie w PAPER. Governance obserwuje wersje strategii i champion/challenger, ale nie ma jeszcze prawa sterować wejściami.</span>
       </section>
 
       <section className="metrics">
@@ -420,7 +421,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.10 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.11 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -458,6 +459,82 @@ useEffect(() => {
         <div className="placeholder">W ostatnim heartbeat screening nie wybrał kandydatów do Deep Lab.</div>
       )}
 
+
+{autoMemory.strategyGovernance && (
+  <div className="strategyGovernance">
+    <div className="sectionDivider" />
+    <div className="cardTitle">
+      <div>
+        <h3>Strategy Governance · shadow mode</h3>
+        <p className="muted">
+          Każda konfiguracja ma własną wersję i historię Deep PASS/FAIL. Ten moduł jest obserwacyjny:
+          <b> nie może otworzyć ani zablokować pozycji PAPER</b>.
+        </p>
+      </div>
+      <span className="badge governanceBadge">
+        PAPER AUTHORITY: {autoMemory.strategyGovernance.paperAuthority ? "ON" : "OFF"}
+      </span>
+    </div>
+
+    <div className="metricStrip">
+      <Metric label="Candidate" value={String(autoMemory.strategyGovernance.counts?.CANDIDATE || 0)} sub="nowa wersja" />
+      <Metric label="Shadow" value={String(autoMemory.strategyGovernance.counts?.SHADOW || 0)} sub="zbiera obserwacje" />
+      <Metric label="Validated" value={String(autoMemory.strategyGovernance.counts?.VALIDATED || 0)} sub="powtarzalny Deep PASS" />
+      <Metric label="Active" value={String(autoMemory.strategyGovernance.counts?.ACTIVE || 0)} sub="lider governance" />
+      <Metric label="Degraded" value={String(autoMemory.strategyGovernance.counts?.DEGRADED || 0)} sub="seria FAIL" />
+      <Metric label="Retired" value={String(autoMemory.strategyGovernance.counts?.RETIRED || 0)} sub="wycofana wersja" />
+    </div>
+
+    {(autoMemory.strategyGovernance.champions || []).length > 0 ? (
+      <div className="tableWrap compact">
+        <table>
+          <thead>
+            <tr>
+              <th>Instrument</th><th>Champion</th><th>Strategia</th><th>Lifecycle</th>
+              <th>Obs.</th><th>Pass rate</th><th>Score</th><th>Challengers</th>
+            </tr>
+          </thead>
+          <tbody>
+            {autoMemory.strategyGovernance.champions.map((g) => (
+              <tr key={g.symbol}>
+                <td><b>{g.symbol}</b></td>
+                <td className="versionCell">{g.champion?.version || "—"}</td>
+                <td>{g.champion?.strategy || "—"}</td>
+                <td>
+                  {g.champion ? (
+                    <span className={`lifecycle lifecycle-${String(g.champion.lifecycle).toLowerCase()}`}>
+                      {g.champion.lifecycle}
+                    </span>
+                  ) : "—"}
+                </td>
+                <td>{g.champion?.observations ?? "—"}</td>
+                <td>{g.champion ? pct(g.champion.passRatePct) : "—"}</td>
+                <td>{num(g.champion?.governanceScore, 1)}</td>
+                <td>{(g.challengers || []).map((x) => x.version).join(", ") || "brak"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div className="analyticsEmpty">
+        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.11.
+      </div>
+    )}
+
+    {(autoMemory.strategyGovernance.recentEvents || []).length > 0 && (
+      <div className="governanceEvents">
+        <h3>Ostatnie zmiany lifecycle</h3>
+        {autoMemory.strategyGovernance.recentEvents.slice(-6).reverse().map((event, i) => (
+          <div key={`${event.type}-${event.strategyVersion}-${i}`}>
+            <b>{event.type}</b>
+            <span>{event.message}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
 
 {autoMemory.paperPortfolio && (
   <div className="paperAuto">
@@ -919,7 +996,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.10.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.11.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -973,12 +1050,12 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.10</h2>
+        <h2>Co dodaje v0.11</h2>
         <div className="riskGrid">
-          <div><span>Expectancy / PF</span><b>per trade</b></div>
-          <div><span>R-multiple</span><b>risk efficiency</b></div>
-          <div><span>MFE / MAE</span><b>trade diagnostics</b></div>
-          <div><span>Equity curve</span><b>heartbeat history</b></div>
+          <div><span>Strategy versions</span><b>config fingerprint</b></div>
+          <div><span>Lifecycle</span><b>candidate → retired</b></div>
+          <div><span>Champion / challenger</span><b>shadow ranking</b></div>
+          <div><span>Governance authority</span><b className="off">OFF dla paper</b></div>
           <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
           <div><span>Dzienny halt</span><b>-2%</b></div>
@@ -987,7 +1064,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.10 · portfolio intelligence · health watchdog · autonomous paper · live trading OFF
+        v0.11 · strategy governance shadow · portfolio intelligence · live trading OFF
       </footer>
     </main>
   );
