@@ -1,13 +1,14 @@
 {
   "name": "autonomiczny-inwestor",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "autonomous-research": "node scripts/autonomous-research.mjs",
-    "test-paper": "node tests-js/paper-portfolio.mjs"
+    "test-paper": "node tests-js/paper-portfolio.mjs",
+    "check": "npm run test-paper && npm run build"
   },
   "dependencies": {
     "next": "^15.5.4",
