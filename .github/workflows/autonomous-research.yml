@@ -36,6 +36,7 @@ jobs:
           node --check lib/agent-health.js
           node --check lib/portfolio-analytics.js
           node --check lib/strategy-governance.js
+          node --check lib/allocation-intelligence.js
           npm run test-core
 
       - name: Restore previous autonomous memory
@@ -75,6 +76,7 @@ jobs:
           cp .auto-output/health.json /tmp/autonomous-memory/health.json
           cp .auto-output/analytics.json /tmp/autonomous-memory/analytics.json
           cp .auto-output/governance.json /tmp/autonomous-memory/governance.json
+          cp .auto-output/allocation.json /tmp/autonomous-memory/allocation.json
 
           cat > /tmp/autonomous-memory/README.md <<'EOF'
           # Autonomous Investor — research & paper memory
@@ -90,6 +92,7 @@ jobs:
           - health.json
           - analytics.json
           - governance.json
+          - allocation.json
 
           It must never contain broker credentials, API secrets, account identifiers,
           real-money positions, or private user data.
@@ -122,9 +125,10 @@ jobs:
           cp /tmp/autonomous-memory/health.json health.json
           cp /tmp/autonomous-memory/analytics.json analytics.json
           cp /tmp/autonomous-memory/governance.json governance.json
+          cp /tmp/autonomous-memory/allocation.json allocation.json
           cp /tmp/autonomous-memory/README.md README.md
           cp /tmp/autonomous-memory/vercel.json vercel.json
 
-          git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json governance.json README.md vercel.json
+          git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json governance.json allocation.json README.md vercel.json
           git commit -m "Update autonomous research and paper memory"
           git push --force origin HEAD:research-data
