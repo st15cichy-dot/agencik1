@@ -934,6 +934,8 @@ async function main() {
     safeguards: {
       liveTrading: false,
       brokerConnected: false,
+      orderSubmission: false,
+      brokerAdapter: "NONE",
       noSecretsStored: true,
       paperOnly: true,
       persistenceContainsOnlyPublicResearchAndSimulatedPositions:
