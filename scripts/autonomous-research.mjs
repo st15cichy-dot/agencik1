@@ -4,6 +4,9 @@ import {
   analyzeSymbol,
   fetchBars,
   SYMBOLS,
+  isPaperEligibleSymbol,
+  marketSymbolMeta,
+  publicUniverseSummary,
 } from "../lib/research.js";
 import { atrSeries } from "../lib/indicators.js";
 import { prepareStrategy } from "../lib/strategies.js";
@@ -81,9 +84,13 @@ function summarize(result, stage) {
     };
   }
 
+  const meta = marketSymbolMeta(result.symbol);
+
   return {
     symbol: result.symbol,
     stage,
+    universeTier: meta?.tier || "UNKNOWN",
+    paperEligible: Boolean(meta?.paperEnabled),
     strategyId: chosen.id,
     strategy: chosen.name,
     strategyVersion: strategyVersion(chosen.id, chosen.config),
@@ -742,8 +749,13 @@ async function main() {
     });
   }
 
+  const shadowPaperReady = deep
+    .filter((x) => x.paperReady && !isPaperEligibleSymbol(x.symbol))
+    .map((x) => x.symbol);
+
   const candidates = deep
     .filter((x) => x.paperReady)
+    .filter((x) => isPaperEligibleSymbol(x.symbol))
     .filter(
       (x) =>
         !paperState.openPositions.some(
@@ -859,7 +871,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.12.0",
+    appVersion: "0.13.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -868,6 +880,7 @@ async function main() {
     source:
       "Binance public market-data-only endpoint",
     scheduleTarget: "every 2 hours",
+    universe: publicUniverseSummary(),
     screen,
     deep,
     screenPass: screen
@@ -877,8 +890,9 @@ async function main() {
       .filter((x) => x.eligible)
       .map((x) => x.symbol),
     paperReady: deep
-      .filter((x) => x.paperReady)
+      .filter((x) => x.paperReady && x.paperEligible)
       .map((x) => x.symbol),
+    shadowPaperReady,
     failures,
     safeguards: {
       liveTrading: false,
@@ -926,6 +940,13 @@ async function main() {
       nowIso: current.completedAt,
     });
 
+  const shadowUniverseEvents = shadowPaperReady.map((symbol) => ({
+    type: "SHADOW_UNIVERSE_SIGNAL",
+    symbol,
+    message: `${symbol}: Deep PASS + aktywne wejście, ale instrument jest SHADOW_RESEARCH i nie ma PAPER authority`,
+    paperAuthority: false,
+  }));
+
   const allocationEvents = [{
     type: "ALLOCATION_SHADOW_UPDATED",
     symbol: "PORTFOLIO",
@@ -950,6 +971,7 @@ async function main() {
   current.events = [
     ...researchEvents,
     ...governanceUpdate.events,
+    ...shadowUniverseEvents,
     ...allocationEvents,
     ...paperEvents,
   ].map((x) => ({
@@ -1031,6 +1053,10 @@ async function main() {
       current.deepPass,
     paperReady:
       current.paperReady,
+    shadowPaperReady:
+      current.shadowPaperReady,
+    universe:
+      current.universe,
     failures:
       current.failures,
     events:
@@ -1225,7 +1251,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.12.0",
+        appVersion: "0.13.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
