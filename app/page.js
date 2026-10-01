@@ -13,6 +13,9 @@ const MEMORY_URL =
 function money(x) {
   return new Intl.NumberFormat("pl-PL", { style: "currency", currency: "PLN" }).format(x);
 }
+function moneyOrDash(x) {
+  return Number.isFinite(x) ? money(x) : "—";
+}
 function num(x, digits = 2) {
   return Number.isFinite(x) ? x.toLocaleString("pl-PL", { maximumFractionDigits: digits }) : "—";
 }
@@ -179,14 +182,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.9.1",
+      source: "manual browser sandbox v0.10",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.9.0",
+        version: "0.10.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -199,7 +202,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v09-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v010-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -218,7 +221,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.9.1."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.10."
           : `HTTP ${r.status}`
       );
     }
@@ -242,21 +245,22 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.9.1</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.10</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">Autonomous paper + health score + persistent decision journal</p>
+          <p className="muted">Autonomous paper + portfolio intelligence + health watchdog</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
           <span className="badge">XTB: NIEPOŁĄCZONY</span>
           <span className="badge live">BINANCE LIVE</span>
           <span className="badge">WATCHDOG: ON</span>
+          <span className="badge">PORTFOLIO INTELLIGENCE</span>
         </div>
       </header>
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.9.1 nadal działa wyłącznie w PAPER. Dodatkowo monitoruje własne zdrowie, alerty i zapisuje uzasadnienia decyzji.</span>
+        <span> v0.10 nadal działa wyłącznie w PAPER. Mierzy teraz jakość wyników, koszt ryzyka, MFE/MAE i statystyki strategii.</span>
       </section>
 
       <section className="metrics">
@@ -416,7 +420,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.9.1 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.10 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -541,6 +545,137 @@ useEffect(() => {
     )}
   </div>
 )}
+      
+      {autoMemory.portfolioAnalytics && (
+        <div className="portfolioIntel">
+          <div className="sectionDivider" />
+          <div className="cardTitle">
+            <div>
+              <h3>Portfolio Intelligence</h3>
+              <p className="muted">
+                Statystyki wyłącznie z zamkniętych transakcji PAPER. Przy małej próbie panel nie traktuje wyniku jako stabilnego.
+              </p>
+            </div>
+            <span className="badge">{autoMemory.portfolioAnalytics.sampleStatus}</span>
+          </div>
+
+          <div className="metricStrip">
+            <Metric label="Closed trades" value={String(autoMemory.portfolioAnalytics.stats.trades || 0)} sub="próba paper" />
+            <Metric label="Expectancy" value={moneyOrDash(autoMemory.portfolioAnalytics.stats.expectancyPln)} sub="średni P/L / trade" />
+            <Metric label="Profit Factor" value={num(autoMemory.portfolioAnalytics.stats.profitFactor, 2)} sub="gross profit / loss" />
+            <Metric label="Avg R" value={num(autoMemory.portfolioAnalytics.stats.avgRMultiple, 2)} sub="P/L / planned risk" />
+            <Metric label="Avg MFE" value={pct(autoMemory.portfolioAnalytics.stats.avgMfePct)} sub="max ruch na plus" />
+            <Metric label="Avg MAE" value={pct(autoMemory.portfolioAnalytics.stats.avgMaePct)} sub="max ruch przeciw pozycji" />
+          </div>
+
+          <div className="analyticsGrid">
+            <div className="analyticsPanel">
+              <h3>Paper equity curve</h3>
+              <EquitySparkline points={autoMemory.portfolioAnalytics.equityCurve || []} />
+              <div className="analyticsFoot">
+                <span>Observed DD <b>{pct(autoMemory.portfolioAnalytics.stats.maxObservedDrawdownPct)}</b></span>
+                <span>Fees <b>{moneyOrDash(autoMemory.portfolioAnalytics.stats.totalFeesPln)}</b></span>
+                <span>Risk budget <b>{moneyOrDash(autoMemory.portfolioAnalytics.stats.riskBudgetUsedPln)}</b></span>
+              </div>
+            </div>
+
+            <div className="analyticsPanel">
+              <h3>Rolling windows</h3>
+              <div className="rollingGrid">
+                {(autoMemory.portfolioAnalytics.rolling || []).map((r) => (
+                  <div key={r.days}>
+                    <span>{r.days} dni</span>
+                    <b>{moneyOrDash(r.totalPnlPln)}</b>
+                    <small>{r.trades} trades · WR {pct(r.winRatePct)} · Avg R {num(r.avgRMultiple, 2)}</small>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {(autoMemory.portfolioAnalytics.byStrategy || []).length > 0 ? (
+            <>
+              <h3>Wynik według strategii</h3>
+              <div className="tableWrap compact">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Strategia</th><th>Trades</th><th>P/L</th><th>WR</th><th>Expectancy</th>
+                      <th>PF</th><th>Avg R</th><th>MFE</th><th>MAE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {autoMemory.portfolioAnalytics.byStrategy.map((s) => (
+                      <tr key={s.strategy}>
+                        <td><b>{s.strategy}</b></td>
+                        <td>{s.trades}</td>
+                        <td className={(s.totalPnlPln || 0) >= 0 ? "positive" : "negative"}>{moneyOrDash(s.totalPnlPln)}</td>
+                        <td>{pct(s.winRatePct)}</td>
+                        <td>{moneyOrDash(s.expectancyPln)}</td>
+                        <td>{num(s.profitFactor, 2)}</td>
+                        <td>{num(s.avgRMultiple, 2)}</td>
+                        <td>{pct(s.avgMfePct)}</td>
+                        <td>{pct(s.avgMaePct)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>Wynik według instrumentu</h3>
+              <div className="tableWrap compact">
+                <table>
+                  <thead>
+                    <tr><th>Instrument</th><th>Trades</th><th>P/L</th><th>WR</th><th>Expectancy</th><th>Avg R</th></tr>
+                  </thead>
+                  <tbody>
+                    {autoMemory.portfolioAnalytics.bySymbol.map((s) => (
+                      <tr key={s.symbol}>
+                        <td><b>{s.symbol}</b></td>
+                        <td>{s.trades}</td>
+                        <td className={(s.totalPnlPln || 0) >= 0 ? "positive" : "negative"}>{moneyOrDash(s.totalPnlPln)}</td>
+                        <td>{pct(s.winRatePct)}</td>
+                        <td>{moneyOrDash(s.expectancyPln)}</td>
+                        <td>{num(s.avgRMultiple, 2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          ) : (
+            <div className="analyticsEmpty">
+              Portfolio Intelligence jest aktywne. Pełne expectancy / PF / R / MFE / MAE pojawią się po pierwszych zamkniętych transakcjach PAPER.
+            </div>
+          )}
+
+          {(autoMemory.portfolioAnalytics.recentTrades || []).length > 0 && (
+            <>
+              <h3>Trade diagnostics</h3>
+              <div className="tableWrap compact">
+                <table>
+                  <thead>
+                    <tr><th>Symbol</th><th>Strategia</th><th>P/L</th><th>R</th><th>MFE</th><th>MAE</th><th>Powód wyjścia</th></tr>
+                  </thead>
+                  <tbody>
+                    {autoMemory.portfolioAnalytics.recentTrades.map((t) => (
+                      <tr key={t.id}>
+                        <td><b>{t.symbol}</b></td>
+                        <td>{t.strategy}</td>
+                        <td className={(t.pnlPln || 0) >= 0 ? "positive" : "negative"}>{moneyOrDash(t.pnlPln)}</td>
+                        <td>{num(t.rMultiple, 2)}</td>
+                        <td>{pct(t.mfePct)}</td>
+                        <td>{pct(t.maePct)}</td>
+                        <td>{t.reason}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       {autoMemory.decisionJournal?.latest?.length > 0 && (
         <div className="decisionJournal">
@@ -784,7 +919,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.9.1.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.10.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -838,12 +973,12 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.9.1</h2>
+        <h2>Co dodaje v0.10</h2>
         <div className="riskGrid">
-          <div><span>Agent health</span><b>0–100 + status</b></div>
-          <div><span>Watchdog</span><b>co 1 h</b></div>
-          <div><span>Alert issue</span><b>auto open / close</b></div>
-          <div><span>Health history</span><b>48 runów</b></div>
+          <div><span>Expectancy / PF</span><b>per trade</b></div>
+          <div><span>R-multiple</span><b>risk efficiency</b></div>
+          <div><span>MFE / MAE</span><b>trade diagnostics</b></div>
+          <div><span>Equity curve</span><b>heartbeat history</b></div>
           <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
           <div><span>Dzienny halt</span><b>-2%</b></div>
@@ -852,9 +987,41 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.9.1 · health watchdog · decision journal · autonomous paper · live trading OFF
+        v0.10 · portfolio intelligence · health watchdog · autonomous paper · live trading OFF
       </footer>
     </main>
+  );
+}
+
+function EquitySparkline({ points = [] }) {
+  const clean = points.filter((p) => Number.isFinite(p?.equityPln));
+  if (clean.length < 2) {
+    return <div className="chartPlaceholder">Krzywa pojawi się po kolejnych heartbeat.</div>;
+  }
+
+  const width = 720;
+  const height = 170;
+  const pad = 12;
+  const values = clean.map((p) => p.equityPln);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const span = Math.max(0.01, max - min);
+  const coords = clean.map((p, i) => {
+    const x = pad + (i / Math.max(1, clean.length - 1)) * (width - pad * 2);
+    const y = height - pad - ((p.equityPln - min) / span) * (height - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+
+  return (
+    <div className="equityChart">
+      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Paper equity curve">
+        <polyline points={coords} fill="none" vectorEffect="non-scaling-stroke" />
+      </svg>
+      <div className="chartAxis">
+        <span>{money(min)}</span>
+        <span>{money(max)}</span>
+      </div>
+    </div>
   );
 }
 
