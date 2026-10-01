@@ -29,6 +29,9 @@ import {
   strategyVersion,
   updateStrategyGovernance,
 } from "../lib/strategy-governance.js";
+import {
+  buildAllocationIntelligence,
+} from "../lib/allocation-intelligence.js";
 
 const OUT_DIR = path.resolve(".auto-output");
 const previousLatestPath =
@@ -856,7 +859,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.11.0",
+    appVersion: "0.12.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -910,6 +913,34 @@ async function main() {
   current.strategyGovernance =
     strategyGovernance;
 
+  const marketBySymbol = Object.fromEntries(
+    [...marketCache.entries()]
+  );
+
+  current.allocationIntelligence =
+    buildAllocationIntelligence({
+      deep: current.deep,
+      marketBySymbol,
+      portfolioEquityPln:
+        snapshot.equityPln,
+      nowIso: current.completedAt,
+    });
+
+  const allocationEvents = [{
+    type: "ALLOCATION_SHADOW_UPDATED",
+    symbol: "PORTFOLIO",
+    message:
+      `Shadow allocation: ${current.allocationIntelligence.summary.selectedCandidates}/${current.allocationIntelligence.summary.eligibleCandidates} kandydatów, gross ${current.allocationIntelligence.summary.grossWeightPct}%`,
+    selectedCandidates:
+      current.allocationIntelligence.summary.selectedCandidates,
+    eligibleCandidates:
+      current.allocationIntelligence.summary.eligibleCandidates,
+    grossWeightPct:
+      current.allocationIntelligence.summary.grossWeightPct,
+    maxPairCorrelation:
+      current.allocationIntelligence.summary.maxPairCorrelation,
+  }];
+
   const researchEvents =
     detectResearchEvents(
       previousLatest,
@@ -919,6 +950,7 @@ async function main() {
   current.events = [
     ...researchEvents,
     ...governanceUpdate.events,
+    ...allocationEvents,
     ...paperEvents,
   ].map((x) => ({
     ...x,
@@ -1015,6 +1047,16 @@ async function main() {
         current.strategyGovernance.counts,
       champions:
         current.strategyGovernance.champions,
+    },
+    allocation: {
+      mode:
+        current.allocationIntelligence.mode,
+      paperAuthority:
+        current.allocationIntelligence.paperAuthority,
+      summary:
+        current.allocationIntelligence.summary,
+      shadowBasket:
+        current.allocationIntelligence.shadowBasket,
     },
     analytics: {
       sampleStatus:
@@ -1130,6 +1172,18 @@ async function main() {
   fs.writeFileSync(
     path.join(
       OUT_DIR,
+      "allocation.json"
+    ),
+    JSON.stringify(
+      current.allocationIntelligence,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
       "governance.json"
     ),
     JSON.stringify(
@@ -1171,7 +1225,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.11.0",
+        appVersion: "0.12.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
@@ -1218,6 +1272,16 @@ async function main() {
         },
         journalEntriesAdded:
           current.decisionJournal.entriesAdded,
+        allocation: {
+          selected:
+            current.allocationIntelligence.summary.selectedCandidates,
+          eligible:
+            current.allocationIntelligence.summary.eligibleCandidates,
+          grossWeightPct:
+            current.allocationIntelligence.summary.grossWeightPct,
+          maxPairCorrelation:
+            current.allocationIntelligence.summary.maxPairCorrelation,
+        },
         analytics: {
           sampleStatus:
             current.portfolioAnalytics.sampleStatus,
