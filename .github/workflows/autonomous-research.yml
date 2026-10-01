@@ -37,6 +37,7 @@ jobs:
           node --check lib/portfolio-analytics.js
           node --check lib/strategy-governance.js
           node --check lib/allocation-intelligence.js
+          node --check lib/market-universe.js
           npm run test-core
 
       - name: Restore previous autonomous memory
