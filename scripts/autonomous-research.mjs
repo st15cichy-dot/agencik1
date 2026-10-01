@@ -25,6 +25,10 @@ import {
 import {
   buildPortfolioAnalytics,
 } from "../lib/portfolio-analytics.js";
+import {
+  strategyVersion,
+  updateStrategyGovernance,
+} from "../lib/strategy-governance.js";
 
 const OUT_DIR = path.resolve(".auto-output");
 const previousLatestPath =
@@ -37,6 +41,8 @@ const previousTradesPath =
   process.env.PREVIOUS_TRADES_PATH || "";
 const previousJournalPath =
   process.env.PREVIOUS_JOURNAL_PATH || "";
+const previousGovernancePath =
+  process.env.PREVIOUS_GOVERNANCE_PATH || "";
 
 function readJson(file, fallback) {
   try {
@@ -77,6 +83,7 @@ function summarize(result, stage) {
     stage,
     strategyId: chosen.id,
     strategy: chosen.name,
+    strategyVersion: strategyVersion(chosen.id, chosen.config),
     config: chosen.config,
     robustScore: round(chosen.robustScore),
     returnPct: round(chosen.final?.totalReturnPct),
@@ -284,6 +291,10 @@ async function main() {
   const previousJournal = readJson(
     previousJournalPath,
     []
+  );
+  const previousGovernance = readJson(
+    previousGovernancePath,
+    null
   );
 
   const nowIso = new Date().toISOString();
@@ -782,6 +793,8 @@ async function main() {
             candidate.strategyId,
           strategyName:
             candidate.strategy,
+          strategyVersion:
+            candidate.strategyVersion,
           config: candidate.config,
           rawPrice: market.price,
           atrPct: market.atrPct,
@@ -843,7 +856,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.10.0",
+    appVersion: "0.11.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -874,6 +887,29 @@ async function main() {
     },
   };
 
+  const governanceUpdate =
+    updateStrategyGovernance({
+      previous: previousGovernance,
+      deep: current.deep,
+      nowIso: current.completedAt,
+    });
+
+  const strategyGovernance =
+    governanceUpdate.governance;
+
+  for (const item of current.deep) {
+    const id = `${item.symbol}|${item.strategyVersion}`;
+    const annotation =
+      governanceUpdate.annotations[id];
+
+    if (annotation) {
+      item.governance = annotation;
+    }
+  }
+
+  current.strategyGovernance =
+    strategyGovernance;
+
   const researchEvents =
     detectResearchEvents(
       previousLatest,
@@ -882,6 +918,7 @@ async function main() {
 
   current.events = [
     ...researchEvents,
+    ...governanceUpdate.events,
     ...paperEvents,
   ].map((x) => ({
     ...x,
@@ -969,6 +1006,16 @@ async function main() {
     health: current.health,
     journalEntriesAdded:
       current.decisionJournal.entriesAdded,
+    governance: {
+      mode:
+        current.strategyGovernance.mode,
+      paperAuthority:
+        current.strategyGovernance.paperAuthority,
+      counts:
+        current.strategyGovernance.counts,
+      champions:
+        current.strategyGovernance.champions,
+    },
     analytics: {
       sampleStatus:
         current.portfolioAnalytics.sampleStatus,
@@ -1009,6 +1056,10 @@ async function main() {
     deep: current.deep.map((x) => ({
       symbol: x.symbol,
       strategy: x.strategy,
+      strategyVersion:
+        x.strategyVersion,
+      governanceLifecycle:
+        x.governance?.lifecycle || null,
       eligible: x.eligible,
       paperReady: x.paperReady,
       signalNow: x.signalNow,
@@ -1079,6 +1130,18 @@ async function main() {
   fs.writeFileSync(
     path.join(
       OUT_DIR,
+      "governance.json"
+    ),
+    JSON.stringify(
+      strategyGovernance,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
       "analytics.json"
     ),
     JSON.stringify(
@@ -1108,7 +1171,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.10.0",
+        appVersion: "0.11.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,

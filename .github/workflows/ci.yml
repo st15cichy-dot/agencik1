@@ -41,6 +41,7 @@ jobs:
           node --check lib/agent-health.js
           node --check lib/watchdog.js
           node --check lib/portfolio-analytics.js
+          node --check lib/strategy-governance.js
           node --check scripts/health-watchdog.mjs
 
       - name: Core regression suites

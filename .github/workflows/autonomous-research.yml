@@ -35,6 +35,7 @@ jobs:
           node --check scripts/autonomous-research.mjs
           node --check lib/agent-health.js
           node --check lib/portfolio-analytics.js
+          node --check lib/strategy-governance.js
           npm run test-core
 
       - name: Restore previous autonomous memory
@@ -49,6 +50,7 @@ jobs:
             git show origin/research-data:paper.json > .auto-memory/paper.json || true
             git show origin/research-data:paper-trades.json > .auto-memory/paper-trades.json || true
             git show origin/research-data:journal.json > .auto-memory/journal.json || true
+            git show origin/research-data:governance.json > .auto-memory/governance.json || true
           fi
 
       - name: Run autonomous research and paper engine
@@ -58,6 +60,7 @@ jobs:
           PREVIOUS_PAPER_PATH: .auto-memory/paper.json
           PREVIOUS_TRADES_PATH: .auto-memory/paper-trades.json
           PREVIOUS_JOURNAL_PATH: .auto-memory/journal.json
+          PREVIOUS_GOVERNANCE_PATH: .auto-memory/governance.json
         run: node scripts/autonomous-research.mjs
 
       - name: Prepare public autonomous memory
@@ -71,6 +74,7 @@ jobs:
           cp .auto-output/journal.json /tmp/autonomous-memory/journal.json
           cp .auto-output/health.json /tmp/autonomous-memory/health.json
           cp .auto-output/analytics.json /tmp/autonomous-memory/analytics.json
+          cp .auto-output/governance.json /tmp/autonomous-memory/governance.json
 
           cat > /tmp/autonomous-memory/README.md <<'EOF'
           # Autonomous Investor — research & paper memory
@@ -85,6 +89,7 @@ jobs:
           - journal.json
           - health.json
           - analytics.json
+          - governance.json
 
           It must never contain broker credentials, API secrets, account identifiers,
           real-money positions, or private user data.
@@ -116,9 +121,10 @@ jobs:
           cp /tmp/autonomous-memory/journal.json journal.json
           cp /tmp/autonomous-memory/health.json health.json
           cp /tmp/autonomous-memory/analytics.json analytics.json
+          cp /tmp/autonomous-memory/governance.json governance.json
           cp /tmp/autonomous-memory/README.md README.md
           cp /tmp/autonomous-memory/vercel.json vercel.json
 
-          git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json README.md vercel.json
+          git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json governance.json README.md vercel.json
           git commit -m "Update autonomous research and paper memory"
           git push --force origin HEAD:research-data
