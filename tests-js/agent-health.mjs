@@ -154,4 +154,80 @@ const basePaper = {
   assert.equal(allocationEntry.metrics.grossWeightPct, 100);
 }
 
+{
+  const health = buildAgentHealth({
+    startedAt: "2026-10-01T10:00:00.000Z",
+    completedAt: "2026-10-01T10:00:30.000Z",
+    expectedSymbols: 16,
+    screen: Array.from({ length: 16 }, (_, i) => ({ symbol: `S${i}` })),
+    deep: [],
+    failures: [],
+    paperPortfolio: {
+      ...basePaper,
+      openPositionsCount: 1,
+      openPositions: [{ symbol: "AVAXUSDT" }],
+    },
+  });
+
+  assert.equal(health.status, "CRITICAL");
+  assert.equal(health.checks.paperUniverseIntegrity, false);
+  assert.ok(
+    health.alerts.some((x) => x.code === "PAPER_UNIVERSE_VIOLATION")
+  );
+}
+
+{
+  const entries = buildDecisionEntries({
+    completedAt: "2026-10-01T10:00:30.000Z",
+    screen: [],
+    deep: [],
+    events: [{
+      type: "SHADOW_UNIVERSE_SIGNAL",
+      symbol: "AVAXUSDT",
+      message: "AVAXUSDT shadow signal",
+      paperAuthority: false,
+    }],
+    paperPortfolio: basePaper,
+    health: { status: "HEALTHY", score: 100, failureCount: 0, screenCoveragePct: 100 },
+  });
+
+  const universeEntry = entries.find((x) => x.category === "UNIVERSE");
+  assert.ok(universeEntry);
+  assert.equal(universeEntry.action, "SHADOW_UNIVERSE_SIGNAL");
+  assert.equal(universeEntry.metrics.paperAuthority, false);
+}
+
+{
+  const entries = buildDecisionEntries({
+    completedAt: "2026-10-01T10:00:30.000Z",
+    screen: [],
+    deep: [{
+      symbol: "AVAXUSDT",
+      eligible: true,
+      paperReady: true,
+      paperEligible: false,
+      universeTier: "SHADOW_RESEARCH",
+      signalNow: "LONG",
+      strategy: "Breakout",
+      gate: { checks: { a: true } },
+      returnPct: 9,
+      excessPct: 4,
+      drawdownPct: -6,
+      profitFactor: 1.7,
+      wfPositive: 4,
+      wfTotal: 5,
+    }],
+    events: [],
+    paperPortfolio: basePaper,
+    health: { status: "HEALTHY", score: 100, failureCount: 0, screenCoveragePct: 100 },
+  });
+
+  const shadow = entries.find((x) => x.action === "SHADOW_ENTRY_SIGNAL");
+  assert.ok(shadow);
+  assert.equal(shadow.symbol, "AVAXUSDT");
+  assert.equal(shadow.metrics.paperEligible, false);
+  assert.equal(shadow.metrics.universeTier, "SHADOW_RESEARCH");
+  assert.equal(entries.some((x) => x.action === "PAPER_ENTRY_CANDIDATE"), false);
+}
+
 console.log("agent health tests: OK");

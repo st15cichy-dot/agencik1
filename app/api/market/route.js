@@ -1,5 +1,5 @@
 import { scannerScore } from "../../../lib/indicators";
-import { BASE, SYMBOLS } from "../../../lib/research";
+import { BASE, SYMBOLS, marketSymbolMeta } from "../../../lib/research";
 
 export const revalidate = 60;
 
@@ -27,8 +27,13 @@ async function instrument(symbol) {
     volume: Number(r[5]),
   }));
 
+  const meta = marketSymbolMeta(symbol);
+
   return {
     symbol,
+    universeTier: meta?.tier || "UNKNOWN",
+    paperEnabled: Boolean(meta?.paperEnabled),
+    liveEnabled: false,
     price: Number(ticker.lastPrice),
     change24h: Number(ticker.priceChangePercent),
     quoteVolume24h: Number(ticker.quoteVolume),
@@ -44,6 +49,9 @@ export async function GET() {
     return Response.json({
       source: "Binance public market-data-only endpoint",
       asOf: new Date().toISOString(),
+      researchUniverse: instruments.length,
+      paperUniverse: instruments.filter((x) => x.paperEnabled).length,
+      shadowUniverse: instruments.filter((x) => !x.paperEnabled).length,
       instruments,
     });
   } catch (error) {

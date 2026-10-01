@@ -1,7 +1,7 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.12.0",
+    version: "0.13.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     marketData:
@@ -76,7 +76,16 @@ export async function GET() {
         singleIssueAlert: true,
       },
     },
-    scannerUniverse: 8,
+    marketUniverse: {
+      provider: "BINANCE_SPOT_PUBLIC",
+      assetClass: "CRYPTO",
+      researchUniverse: 16,
+      paperUniverse: 8,
+      shadowResearchUniverse: 8,
+      shadowPaperAuthority: false,
+      expansionMode: "SHADOW_RESEARCH_FIRST",
+    },
+    scannerUniverse: 16,
     strategyFamilies: 4,
     allMarketScreenBars: 3000,
     deepLabBars: 5000,
