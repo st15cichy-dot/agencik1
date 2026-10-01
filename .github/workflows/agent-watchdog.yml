@@ -1,0 +1,156 @@
+name: Agent health watchdog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "42 * * * *"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: agent-health-watchdog
+  cancel-in-progress: false
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout application code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Watchdog regression check
+        run: |
+          node --check lib/watchdog.js
+          node --check scripts/health-watchdog.mjs
+          npm run test-watchdog
+
+      - name: Restore latest autonomous heartbeat
+        shell: bash
+        run: |
+          mkdir -p .watchdog
+          if git ls-remote --exit-code --heads origin research-data >/dev/null 2>&1; then
+            git fetch origin research-data:refs/remotes/origin/research-data
+            git show origin/research-data:latest.json > .watchdog/latest.json || echo '{}' > .watchdog/latest.json
+          else
+            echo '{}' > .watchdog/latest.json
+          fi
+
+      - name: Evaluate autonomous health
+        env:
+          LATEST_PATH: .watchdog/latest.json
+        run: npm run watchdog
+
+      - name: Maintain single health alert issue
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require("fs");
+            const result = JSON.parse(
+              fs.readFileSync(".watchdog-output/result.json", "utf8")
+            );
+
+            const title = "[Agent Watchdog] Autonomiczny Inwestor wymaga uwagi";
+            const fingerprintLine = `Fingerprint: ${result.fingerprint}`;
+            const reasons = (result.reasons || [])
+              .map((x) => `- **${x.code}** — ${x.message}`)
+              .join("\n") || "- Brak szczegółów.";
+
+            const body = [
+              "## Autonomous health alert",
+              "",
+              `**Severity:** ${result.severity.toUpperCase()}`,
+              `**Heartbeat:** ${result.heartbeatAt || "brak"}`,
+              `**Age:** ${result.ageHours == null ? "—" : result.ageHours + " h"}`,
+              `**Health:** ${result.healthStatus || "—"} ${result.healthScore == null ? "" : result.healthScore + "/100"}`,
+              "",
+              "### Powody",
+              reasons,
+              "",
+              "Live trading nie jest przez ten workflow włączany ani modyfikowany.",
+              "",
+              fingerprintLine,
+            ].join("\n");
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              ...context.repo,
+              state: "open",
+              per_page: 100,
+            });
+
+            const existing = issues.find(
+              (issue) => !issue.pull_request && issue.title === title
+            );
+
+            if (result.alert) {
+              if (!existing) {
+                await github.rest.issues.create({
+                  ...context.repo,
+                  title,
+                  body,
+                });
+              } else if (!String(existing.body || "").includes(fingerprintLine)) {
+                await github.rest.issues.createComment({
+                  ...context.repo,
+                  issue_number: existing.number,
+                  body: [
+                    "### Zmiana stanu watchdog",
+                    "",
+                    body,
+                  ].join("\n"),
+                });
+                await github.rest.issues.update({
+                  ...context.repo,
+                  issue_number: existing.number,
+                  body,
+                });
+              }
+            } else if (existing) {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: existing.number,
+                body: `✅ Watchdog wrócił do stanu HEALTHY. Ostatni heartbeat: ${result.heartbeatAt}.`,
+              });
+              await github.rest.issues.update({
+                ...context.repo,
+                issue_number: existing.number,
+                state: "closed",
+              });
+            }
+
+      - name: Write watchdog summary
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import fs from "node:fs";
+          const r = JSON.parse(fs.readFileSync(".watchdog-output/result.json", "utf8"));
+          console.log("# Agent health watchdog");
+          console.log("");
+          console.log(`- Status: **${r.status}**`);
+          console.log(`- Severity: **${r.severity}**`);
+          console.log(`- Heartbeat age: **${r.ageHours ?? "—"} h**`);
+          console.log(`- Health: **${r.healthStatus ?? "—"} ${r.healthScore ?? "—"}/100**`);
+          console.log(`- Fingerprint: \`${r.fingerprint}\``);
+          NODE
+
+      - name: Fail on critical alert
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const r = JSON.parse(fs.readFileSync(".watchdog-output/result.json", "utf8"));
+          if (r.severity === "critical") {
+            console.error("Critical watchdog alert:", r.fingerprint);
+            process.exit(1);
+          }
+          NODE
