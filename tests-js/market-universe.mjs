@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
 import {
+  splitPaperReadyCandidates as splitPaperReadyCandidatesFromResearch,
+} from "../lib/research.js";
+import {
   MARKET_UNIVERSE,
   MARKET_UNIVERSE_POLICY,
   PAPER_SYMBOLS,
@@ -13,6 +16,7 @@ import {
   paperUniverseViolations,
 } from "../lib/market-universe.js";
 
+assert.equal(typeof splitPaperReadyCandidatesFromResearch, "function");
 assert.equal(RESEARCH_SYMBOLS.length, 16);
 assert.equal(PAPER_SYMBOLS.length, 8);
 assert.equal(SHADOW_SYMBOLS.length, 8);
