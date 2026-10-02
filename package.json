@@ -1,6 +1,6 @@
 {
   "name": "autonomiczny-inwestor",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,14 +10,15 @@
     "test-paper": "node tests-js/paper-portfolio.mjs",
     "check": "npm run test-core && npm run build",
     "test-health": "node tests-js/agent-health.mjs",
-    "test-core": "npm run test-paper && npm run test-health && npm run test-watchdog && npm run test-analytics && npm run test-governance && npm run test-allocation && npm run test-universe && npm run test-execution",
+    "test-core": "npm run test-paper && npm run test-health && npm run test-watchdog && npm run test-analytics && npm run test-governance && npm run test-allocation && npm run test-universe && npm run test-execution && npm run test-fabric",
     "test-watchdog": "node tests-js/watchdog.mjs",
     "watchdog": "node scripts/health-watchdog.mjs",
     "test-analytics": "node tests-js/portfolio-analytics.mjs",
     "test-governance": "node tests-js/strategy-governance.mjs",
     "test-allocation": "node tests-js/allocation-intelligence.mjs",
     "test-universe": "node tests-js/market-universe.mjs",
-    "test-execution": "node tests-js/shadow-execution.mjs"
+    "test-execution": "node tests-js/shadow-execution.mjs",
+    "test-fabric": "node tests-js/agent-fabric.mjs"
   },
   "dependencies": {
     "next": "^15.5.4",
