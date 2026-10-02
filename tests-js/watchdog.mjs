@@ -19,6 +19,12 @@ function healthyLatest(overrides = {}) {
       liveTrading: false,
       brokerConnected: false,
       paperOnly: true,
+      orderSubmission: false,
+    },
+    shadowExecution: {
+      executable: false,
+      canSubmitOrders: false,
+      brokerConnected: false,
     },
     ...overrides,
   };
@@ -84,6 +90,49 @@ function healthyLatest(overrides = {}) {
   const r = evaluateWatchdog(null, now);
   assert.equal(r.status, "CRITICAL");
   assert.equal(r.fingerprint, "MISSING_HEARTBEAT");
+}
+
+{
+  const r = evaluateWatchdog(
+    healthyLatest({
+      shadowExecution: {
+        executable: true,
+        canSubmitOrders: false,
+        brokerConnected: false,
+      },
+    }),
+    now
+  );
+  assert.equal(r.status, "CRITICAL");
+  assert.ok(
+    r.reasons.some(
+      (x) =>
+        x.code === "SAFETY_INVARIANT_VIOLATION" &&
+        x.message.includes("shadowExecution.executable")
+    )
+  );
+}
+
+{
+  const r = evaluateWatchdog(
+    healthyLatest({
+      safeguards: {
+        liveTrading: false,
+        brokerConnected: false,
+        paperOnly: true,
+        orderSubmission: true,
+      },
+    }),
+    now
+  );
+  assert.equal(r.status, "CRITICAL");
+  assert.ok(
+    r.reasons.some(
+      (x) =>
+        x.code === "SAFETY_INVARIANT_VIOLATION" &&
+        x.message.includes("orderSubmission")
+    )
+  );
 }
 
 console.log("watchdog tests: OK");

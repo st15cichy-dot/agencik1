@@ -187,14 +187,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.13",
+      source: "manual browser sandbox v0.14",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.13.0",
+        version: "0.14.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -207,7 +207,7 @@ export default function Home() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `autonomiczny-inwestor-v013-${Date.now()}.json`;
+    a.download = `autonomiczny-inwestor-v014-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -226,7 +226,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.13."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.14."
           : `HTTP ${r.status}`
       );
     }
@@ -250,9 +250,9 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.13</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.14</p>
           <h1>Research Quality Engine</h1>
-          <p className="muted">16-market research universe + 8-market PAPER core + shadow expansion</p>
+          <p className="muted">16-market research + 8-market PAPER core + non-executable shadow execution</p>
         </div>
         <div className="badges">
           <span className="badge safe">PAPER ONLY</span>
@@ -263,12 +263,13 @@ useEffect(() => {
           <span className="badge governanceBadge">GOVERNANCE: SHADOW</span>
           <span className="badge allocationBadge">ALLOCATION: SHADOW</span>
           <span className="badge universeBadge">RESEARCH 16 · PAPER 8</span>
+          <span className="badge executionBadge">EXECUTION: SHADOW</span>
         </div>
       </header>
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.13 rozszerza badania do 16 rynków, ale nowe 8 instrumentów jest SHADOW_RESEARCH: mogą być analizowane, lecz nie mogą otwierać pozycji PAPER.</span>
+        <span> v0.14 zapisuje nieegzekwowalne intencje wykonawcze dla nowych pozycji PAPER. Nie ma adaptera brokera, ilości brokerskiej ani możliwości wysłania zlecenia.</span>
       </section>
 
       <section className="metrics">
@@ -428,7 +429,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.13 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.14 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -466,6 +467,60 @@ useEffect(() => {
         <div className="placeholder">W ostatnim heartbeat screening nie wybrał kandydatów do Deep Lab.</div>
       )}
 
+
+{autoMemory.shadowExecution && (
+  <div className="executionPanel">
+    <div className="sectionDivider" />
+    <div className="cardTitle">
+      <div>
+        <h3>Shadow Execution · non-executable</h3>
+        <p className="muted">
+          Audyt tego, co warstwa wykonawcza musiałaby przygotować po otwarciu pozycji PAPER.
+          Intencje nie zawierają wykonywalnej ilości brokerskiej i nie mogą zostać wysłane do brokera.
+        </p>
+      </div>
+      <span className="badge executionBadge">CAN SUBMIT: OFF</span>
+    </div>
+
+    <div className="metricStrip">
+      <Metric label="Execution mode" value="SHADOW" sub="non-executable" />
+      <Metric label="Broker" value="NIEPOŁĄCZONY" sub="adapter NONE" />
+      <Metric label="Intents" value={String(autoMemory.shadowExecution.totalIntents || 0)} sub="historia shadow" />
+      <Metric label="Can submit" value="NIE" sub="twardy bezpiecznik" />
+    </div>
+
+    {(autoMemory.shadowExecution.latest || []).length > 0 ? (
+      <div className="tableWrap compact">
+        <table>
+          <thead>
+            <tr>
+              <th>Instrument</th><th>Action</th><th>Notional</th><th>Risk</th>
+              <th>Ref. price</th><th>Stop</th><th>Strategy version</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {autoMemory.shadowExecution.latest.map((x) => (
+              <tr key={x.intentId}>
+                <td><b>{x.marketSymbol}</b></td>
+                <td>{x.action}</td>
+                <td>{moneyOrDash(x.requestedNotionalPln)}</td>
+                <td>{moneyOrDash(x.plannedRiskPln)}</td>
+                <td>{num(x.referenceMarketPrice, 6)}</td>
+                <td>{num(x.protectiveStopPrice, 6)}</td>
+                <td className="versionCell">{x.strategyVersion || "—"}</td>
+                <td><span className="signal bad">NON-EXECUTABLE</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ) : (
+      <div className="analyticsEmpty">
+        Warstwa jest aktywna. Pierwsza intencja pojawi się dopiero po rzeczywistym otwarciu nowej pozycji PAPER.
+      </div>
+    )}
+  </div>
+)}
 
 {autoMemory.allocationIntelligence && (
   <div className="allocationIntel">
@@ -613,7 +668,7 @@ useEffect(() => {
       </div>
     ) : (
       <div className="analyticsEmpty">
-        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.13.
+        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.14.
       </div>
     )}
 
@@ -1109,7 +1164,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.13.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.14.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -1163,12 +1218,12 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Co dodaje v0.13</h2>
+        <h2>Co dodaje v0.14</h2>
         <div className="riskGrid">
-          <div><span>Research universe</span><b>16 rynków</b></div>
-          <div><span>Paper core</span><b>8 rynków</b></div>
-          <div><span>Shadow expansion</span><b>8 rynków</b></div>
-          <div><span>Shadow PAPER authority</span><b className="off">OFF</b></div>
+          <div><span>Shadow execution</span><b>intents only</b></div>
+          <div><span>Broker adapter</span><b className="off">NONE</b></div>
+          <div><span>Order submission</span><b className="off">OFF</b></div>
+          <div><span>Broker quantity</span><b className="off">BLOCKED</b></div>
           <div><span>Heartbeat</span><b>co 2 h</b></div>
           <div><span>Hard DD stop</span><b>-10%</b></div>
           <div><span>Dzienny halt</span><b>-2%</b></div>
@@ -1177,7 +1232,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.13 · 16-market research · 8-market paper core · live trading OFF
+        v0.14 · shadow execution non-executable · live trading OFF
       </footer>
     </main>
   );

@@ -35,6 +35,11 @@ import {
 import {
   buildAllocationIntelligence,
 } from "../lib/allocation-intelligence.js";
+import {
+  buildShadowExecutionIntent,
+  mergeShadowExecutionIntents,
+  publicShadowExecutionSummary,
+} from "../lib/shadow-execution.js";
 
 const OUT_DIR = path.resolve(".auto-output");
 const previousLatestPath =
@@ -49,6 +54,8 @@ const previousJournalPath =
   process.env.PREVIOUS_JOURNAL_PATH || "";
 const previousGovernancePath =
   process.env.PREVIOUS_GOVERNANCE_PATH || "";
+const previousExecutionIntentsPath =
+  process.env.PREVIOUS_EXECUTION_INTENTS_PATH || "";
 
 function readJson(file, fallback) {
   try {
@@ -306,6 +313,10 @@ async function main() {
     previousGovernancePath,
     null
   );
+  const previousExecutionIntents = readJson(
+    previousExecutionIntentsPath,
+    []
+  );
 
   const nowIso = new Date().toISOString();
   const startedAt = nowIso;
@@ -313,6 +324,8 @@ async function main() {
   const deep = [];
   const failures = [];
   const paperEvents = [];
+  const executionEvents = [];
+  const newExecutionIntents = [];
   const marketCache = new Map();
 
   let paperState = normalizePaperState(
@@ -841,6 +854,31 @@ async function main() {
             candidate.symbol,
           message: `${candidate.symbol}: otwarto paper LONG, notional ${round(opened.position.notionalPln, 2)} PLN, ryzyko ${round(opened.position.riskPln, 2)} PLN`,
         });
+
+        const shadowIntent =
+          buildShadowExecutionIntent(
+            opened.position,
+            nowIso
+          );
+
+        if (shadowIntent) {
+          newExecutionIntents.push(
+            shadowIntent
+          );
+          executionEvents.push({
+            type:
+              "EXECUTION_SHADOW_INTENT_CREATED",
+            symbol:
+              candidate.symbol,
+            intentId:
+              shadowIntent.intentId,
+            paperPositionId:
+              opened.position.id,
+            executable: false,
+            message:
+              `${candidate.symbol}: zapisano nieegzekwowalny shadow execution intent dla pozycji PAPER`,
+          });
+        }
       }
     } catch (error) {
       failures.push({
@@ -870,7 +908,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.13.0",
+    appVersion: "0.14.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -896,6 +934,8 @@ async function main() {
     safeguards: {
       liveTrading: false,
       brokerConnected: false,
+      orderSubmission: false,
+      brokerAdapter: "NONE",
       noSecretsStored: true,
       paperOnly: true,
       persistenceContainsOnlyPublicResearchAndSimulatedPositions:
@@ -967,11 +1007,23 @@ async function main() {
       current
     );
 
+  const executionIntents =
+    mergeShadowExecutionIntents(
+      previousExecutionIntents,
+      newExecutionIntents
+    );
+
+  current.shadowExecution =
+    publicShadowExecutionSummary(
+      executionIntents
+    );
+
   current.events = [
     ...researchEvents,
     ...governanceUpdate.events,
     ...shadowUniverseEvents,
     ...allocationEvents,
+    ...executionEvents,
     ...paperEvents,
   ].map((x) => ({
     ...x,
@@ -1072,6 +1124,16 @@ async function main() {
         current.strategyGovernance.counts,
       champions:
         current.strategyGovernance.champions,
+    },
+    execution: {
+      mode:
+        current.shadowExecution.mode,
+      executable:
+        current.shadowExecution.executable,
+      totalIntents:
+        current.shadowExecution.totalIntents,
+      newIntents:
+        newExecutionIntents.length,
     },
     allocation: {
       mode:
@@ -1197,6 +1259,18 @@ async function main() {
   fs.writeFileSync(
     path.join(
       OUT_DIR,
+      "execution-intents.json"
+    ),
+    JSON.stringify(
+      executionIntents,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
       "allocation.json"
     ),
     JSON.stringify(
@@ -1250,7 +1324,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.13.0",
+        appVersion: "0.14.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
@@ -1297,6 +1371,14 @@ async function main() {
         },
         journalEntriesAdded:
           current.decisionJournal.entriesAdded,
+        shadowExecution: {
+          totalIntents:
+            current.shadowExecution.totalIntents,
+          newIntents:
+            newExecutionIntents.length,
+          executable:
+            current.shadowExecution.executable,
+        },
         allocation: {
           selected:
             current.allocationIntelligence.summary.selectedCandidates,
