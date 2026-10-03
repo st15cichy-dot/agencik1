@@ -1,0 +1,12 @@
+import assert from "node:assert/strict";
+import {EXECUTION_QUALITY_POLICY,simulateShadowFill,buildExecutionQualityMetrics,mergeExecutionQualityAudit} from "../lib/execution-quality.js";
+const preflight={intentId:"shadow:BTC-1",marketSymbol:"BTCUSDT",acceptedForSimulation:true,rejectReasons:[],requested:{price:100.013,notionalPln:50},normalized:{price:100,quantity:.5}};
+const a=simulateShadowFill({preflight,strategyId:"breakout",market:{spreadBps:2,volatilityBps:40,liquidityBps:1}});
+const b=simulateShadowFill({preflight,strategyId:"breakout",market:{spreadBps:2,volatilityBps:40,liquidityBps:1}});
+assert.deepEqual(a,b); assert.equal(a.status,"SIMULATED"); assert.equal(a.executable,false); assert.equal(a.canSubmitOrders,false); assert.equal(a.brokerAdapter,"NONE"); assert.ok(a.fillPrice>=100);
+const rejected=simulateShadowFill({preflight:{...preflight,acceptedForSimulation:false,rejectReasons:["BELOW_MINIMUM_NOTIONAL"]}});
+assert.equal(rejected.status,"REJECTED"); assert.deepEqual(rejected.rejectReasons,["BELOW_MINIMUM_NOTIONAL"]);
+const metrics=buildExecutionQualityMetrics([a]); assert.equal(metrics.bySymbol.BTCUSDT.fills,1); assert.equal(metrics.byStrategy.breakout.fills,1);
+const audit=mergeExecutionQualityAudit([], [{...a,auditId:"fill:1"}]); assert.equal(audit[0].executable,false); assert.equal(audit[0].canSubmitOrders,false);
+assert.equal(EXECUTION_QUALITY_POLICY.mode,"SHADOW_ONLY"); assert.equal(EXECUTION_QUALITY_POLICY.canSubmitOrders,false);
+console.log("execution quality tests: OK");
