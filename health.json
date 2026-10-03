@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.16.0",
+  "current": {
+    "score": 85,
+    "status": "WATCH",
+    "durationSeconds": 11.2,
+    "screenCoveragePct": 100,
+    "screenCount": 16,
+    "expectedSymbols": 16,
+    "deepCount": 2,
+    "failureCount": 0,
+    "previousHeartbeatGapHours": 4.82,
+    "expectedNextHeartbeatAt": "2026-10-03T22:09:45.514Z",
+    "checks": {
+      "runCompleted": true,
+      "fullScreenCoverage": true,
+      "noRunFailures": true,
+      "heartbeatDurationOk": true,
+      "scheduleContinuity": false,
+      "paperStateIntegrity": true,
+      "paperUniverseIntegrity": true,
+      "riskEngineNotHardHalted": true
+    },
+    "alerts": [
+      {
+        "severity": "warning",
+        "code": "MISSED_HEARTBEAT_WINDOW",
+        "message": "Przerwa między heartbeatami była zbyt długa.",
+        "detail": "4.82 h"
+      }
+    ]
+  },
+  "recent": [
+    {
+      "at": "2026-10-03T20:09:45.514Z",
+      "health": {
+        "score": 85,
+        "status": "WATCH",
+        "durationSeconds": 11.2,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 4.82,
+        "expectedNextHeartbeatAt": "2026-10-03T22:09:45.514Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": false,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": [
+          {
+            "severity": "warning",
+            "code": "MISSED_HEARTBEAT_WINDOW",
+            "message": "Przerwa między heartbeatami była zbyt długa.",
+            "detail": "4.82 h"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-03T15:20:27.717Z",
+      "health": {
+        "score": 85,
+        "status": "WATCH",
+        "durationSeconds": 8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 4.79,
+        "expectedNextHeartbeatAt": "2026-10-03T17:20:27.717Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": false,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": [
+          {
+            "severity": "warning",
+            "code": "MISSED_HEARTBEAT_WINDOW",
+            "message": "Przerwa między heartbeatami była zbyt długa.",
+            "detail": "4.79 h"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-03T10:33:11.193Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.03,
+        "expectedNextHeartbeatAt": "2026-10-03T12:33:11.193Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-03T08:31:24.529Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.5,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.76,
+        "expectedNextHeartbeatAt": "2026-10-03T10:31:24.529Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-03T06:45:35.440Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 10.2,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.22,
+        "expectedNextHeartbeatAt": "2026-10-03T08:45:35.440Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-03T04:32:25.339Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 11.9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.93,
+        "expectedNextHeartbeatAt": "2026-10-03T06:32:25.339Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-03T02:36:29.873Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13.9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.98,
+        "expectedNextHeartbeatAt": "2026-10-03T04:36:29.873Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-03T00:37:12.082Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.12,
+        "expectedNextHeartbeatAt": "2026-10-03T02:37:12.082Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T22:29:48.671Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.7,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2,
+        "expectedNextHeartbeatAt": "2026-10-03T00:29:48.671Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T20:29:45.296Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.9,
+        "expectedNextHeartbeatAt": "2026-10-02T22:29:45.296Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T18:35:40.109Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.6,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-02T20:35:40.109Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T16:34:46.870Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 8.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-02T18:34:46.870Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T14:34:15.264Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.5,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.94,
+        "expectedNextHeartbeatAt": "2026-10-02T16:34:15.264Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T12:37:34.595Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.5,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.11,
+        "expectedNextHeartbeatAt": "2026-10-02T14:37:34.595Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T10:31:02.725Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 8.5,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.96,
+        "expectedNextHeartbeatAt": "2026-10-02T12:31:02.725Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-02T08:33:35.109Z",
+      "health": {
+        "score": 85,
+        "status": "WATCH",
+        "durationSeconds": 7.4,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 1,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 16.04,
+        "expectedNextHeartbeatAt": "2026-10-02T10:33:35.109Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": false,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": [
+          {
+            "severity": "critical",
+            "code": "MISSED_HEARTBEAT_WINDOW",
+            "message": "Przerwa między heartbeatami była zbyt długa.",
+            "detail": "16.04 h"
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-10-01T16:31:19.663Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 6,
+        "screenCoveragePct": 100,
+        "screenCount": 8,
+        "expectedSymbols": 8,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.93,
+        "expectedNextHeartbeatAt": "2026-10-01T18:31:19.663Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-01T14:35:11.392Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 5.4,
+        "screenCoveragePct": 100,
+        "screenCount": 8,
+        "expectedSymbols": 8,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.94,
+        "expectedNextHeartbeatAt": "2026-10-01T16:35:11.392Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-01T12:38:57.221Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 4.7,
+        "screenCoveragePct": 100,
+        "screenCount": 8,
+        "expectedSymbols": 8,
+        "deepCount": 1,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.11,
+        "expectedNextHeartbeatAt": "2026-10-01T14:38:57.221Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-01T10:32:32.830Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 4.9,
+        "screenCoveragePct": 100,
+        "screenCount": 8,
+        "expectedSymbols": 8,
+        "deepCount": 1,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.96,
+        "expectedNextHeartbeatAt": "2026-10-01T12:32:32.830Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-01T08:34:41.610Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 7.5,
+        "screenCoveragePct": 100,
+        "screenCount": 8,
+        "expectedSymbols": 8,
+        "deepCount": 2,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.93,
+        "expectedNextHeartbeatAt": "2026-10-01T10:34:41.610Z",
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-01T06:38:50.747Z",
+      "health": null
+    },
+    {
+      "at": "2026-10-01T04:32:40.714Z",
+      "health": null
+    },
+    {
+      "at": "2026-10-01T02:30:10.763Z",
+      "health": null
+    },
+    {
+      "at": "2026-10-01T00:40:36.581Z",
+      "health": null
+    },
+    {
+      "at": "2026-09-30T23:06:01.077Z",
+      "health": null
+    },
+    {
+      "at": "2026-09-30T22:33:59.684Z",
+      "health": null
+    }
+  ]
+}

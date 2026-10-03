@@ -1,0 +1,4903 @@
+[
+  {
+    "at": "2026-10-03T20:09:45.514Z",
+    "screenPass": [
+      "BTCUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "BTCUSDT"
+    ],
+    "paperReady": [
+      "BTCUSDT"
+    ],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_GAINED",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: Deep gate FAIL → PASS",
+        "at": "2026-10-03T20:09:45.514Z"
+      },
+      {
+        "type": "PAPER_READY_NEW",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: Deep PASS + aktywne wejście LONG w oknie heartbeat",
+        "at": "2026-10-03T20:09:45.514Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 0/1 kandydatów, gross 0%",
+        "selectedCandidates": 0,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 0,
+        "maxPairCorrelation": null,
+        "at": "2026-10-03T20:09:45.514Z"
+      },
+      {
+        "type": "EXECUTION_SHADOW_INTENT_CREATED",
+        "symbol": "BTCUSDT",
+        "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+        "paperPositionId": "BTCUSDT-1791058174312-diljse",
+        "executable": false,
+        "message": "BTCUSDT: zapisano nieegzekwowalny shadow execution intent dla pozycji PAPER",
+        "at": "2026-10-03T20:09:45.514Z"
+      },
+      {
+        "type": "PAPER_OPENED",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: otwarto paper LONG, notional 100 PLN, ryzyko 1 PLN",
+        "at": "2026-10-03T20:09:45.514Z"
+      }
+    ],
+    "health": {
+      "score": 85,
+      "status": "WATCH",
+      "durationSeconds": 11.2,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 4.82,
+      "expectedNextHeartbeatAt": "2026-10-03T22:09:45.514Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": false,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": [
+        {
+          "severity": "warning",
+          "code": "MISSED_HEARTBEAT_WINDOW",
+          "message": "Przerwa między heartbeatami była zbyt długa.",
+          "detail": "4.82 h"
+        }
+      ]
+    },
+    "journalEntriesAdded": 23,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 2,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 83.33,
+            "observations": 6,
+            "governanceScore": 585.8483
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 159.1279
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 11,
+            "governanceScore": 606.2538
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 1,
+      "newIntents": 1
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 0,
+        "grossWeightPct": 0,
+        "cashWeightPct": 100,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 199.87,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": []
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": -0.065
+    },
+    "paper": {
+      "equityPln": 199.87,
+      "totalPnlPln": -0.13,
+      "openPositionsCount": 1,
+      "closedTradesCount": 0,
+      "drawdownPct": -0.065,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": true,
+        "paperReady": true,
+        "signalNow": "FLAT",
+        "returnPct": 18.8484,
+        "excessPct": 4.2038,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "EMA Momentum",
+        "strategyVersion": "ema_momentum@065dxno",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 47.9673,
+        "excessPct": 16.934,
+        "drawdownPct": -15.4547,
+        "trades": 24
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T15:20:27.717Z",
+    "screenPass": [
+      "BTCUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 0/0 kandydatów, gross 0%",
+        "selectedCandidates": 0,
+        "eligibleCandidates": 0,
+        "grossWeightPct": 0,
+        "maxPairCorrelation": null,
+        "at": "2026-10-03T15:20:27.717Z"
+      }
+    ],
+    "health": {
+      "score": 85,
+      "status": "WATCH",
+      "durationSeconds": 8,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 4.79,
+      "expectedNextHeartbeatAt": "2026-10-03T17:20:27.717Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": false,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": [
+        {
+          "severity": "warning",
+          "code": "MISSED_HEARTBEAT_WINDOW",
+          "message": "Przerwa między heartbeatami była zbyt długa.",
+          "detail": "4.79 h"
+        }
+      ]
+    },
+    "journalEntriesAdded": 20,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 2,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 83.33,
+            "observations": 6,
+            "governanceScore": 585.8483
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 2,
+            "governanceScore": 159.2641
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 11,
+            "governanceScore": 606.2538
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 0,
+        "selectedCandidates": 0,
+        "grossWeightPct": 0,
+        "cashWeightPct": 100,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "NO_DEEP_ELIGIBLE_CANDIDATES"
+        ]
+      },
+      "shadowBasket": []
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 5.0054,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "EMA Momentum",
+        "strategyVersion": "ema_momentum@065dxno",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 47.9673,
+        "excessPct": 17.4482,
+        "drawdownPct": -15.4547,
+        "trades": 24
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T10:33:11.193Z",
+    "screenPass": [
+      "BTCUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 0/0 kandydatów, gross 0%",
+        "selectedCandidates": 0,
+        "eligibleCandidates": 0,
+        "grossWeightPct": 0,
+        "maxPairCorrelation": null,
+        "at": "2026-10-03T10:33:11.193Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 12.1,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.03,
+      "expectedNextHeartbeatAt": "2026-10-03T12:33:11.193Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 20,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 2,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 83.33,
+            "observations": 6,
+            "governanceScore": 585.8483
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 158.7011
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 11,
+            "governanceScore": 606.2538
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 0,
+        "selectedCandidates": 0,
+        "grossWeightPct": 0,
+        "cashWeightPct": 100,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "NO_DEEP_ELIGIBLE_CANDIDATES"
+        ]
+      },
+      "shadowBasket": []
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.6245,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 20.307,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T08:31:24.529Z",
+    "screenPass": [
+      "BTCUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 1/1 kandydatów, gross 50%",
+        "selectedCandidates": 1,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 50,
+        "maxPairCorrelation": null,
+        "at": "2026-10-03T08:31:24.529Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 9.5,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 3,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.76,
+      "expectedNextHeartbeatAt": "2026-10-03T10:31:24.529Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 21,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 2,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 83.33,
+            "observations": 6,
+            "governanceScore": 585.8483
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 158.7011
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 11,
+            "governanceScore": 606.2538
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 1,
+        "grossWeightPct": 50,
+        "cashWeightPct": 50,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.26,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 10.1289,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.507,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 10.1289,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 19.8176,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T06:45:35.440Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 2/2 kandydatów, gross 100%",
+        "selectedCandidates": 2,
+        "eligibleCandidates": 2,
+        "grossWeightPct": 100,
+        "maxPairCorrelation": 0.8414,
+        "at": "2026-10-03T06:45:35.440Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 10.2,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 4,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.22,
+      "expectedNextHeartbeatAt": "2026-10-03T08:45:35.440Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 22,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 2,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 83.33,
+            "observations": 6,
+            "governanceScore": 585.8483
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 158.7011
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 10,
+            "governanceScore": 606.1167
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 2,
+        "selectedCandidates": 2,
+        "grossWeightPct": 100,
+        "cashWeightPct": 0,
+        "maxPairCorrelation": 0.8414,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "CORRELATION_CONCENTRATION_PRESENT"
+        ]
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.33,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 9.6115,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        },
+        {
+          "rank": 2,
+          "symbol": "BNBUSDT",
+          "strategy": "SMA Trend",
+          "strategyId": "sma_trend",
+          "strategyVersion": "sma_trend@1urtnm7",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 89.03,
+          "realizedVolPct": 34.13,
+          "returnToDrawdown": 2.1312,
+          "excessPct": 0.8038,
+          "drawdownPct": -7.2691,
+          "profitFactor": 2.7431,
+          "selected": true,
+          "decision": "SELECTED_WITH_CORRELATION_WARNING",
+          "maxCorrelationToSelected": 0.8414,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.3928,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "SMA Trend",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.4921,
+        "excessPct": 0.8038,
+        "drawdownPct": -7.2691,
+        "trades": 9
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 9.6115,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 18.914,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T04:32:25.339Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_TRANSITION",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: sma_trend@1urtnm7 VALIDATED → ACTIVE (shadow only)",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "from": "VALIDATED",
+        "to": "ACTIVE",
+        "at": "2026-10-03T04:32:25.339Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 2/2 kandydatów, gross 100%",
+        "selectedCandidates": 2,
+        "eligibleCandidates": 2,
+        "grossWeightPct": 100,
+        "maxPairCorrelation": 0.8422,
+        "at": "2026-10-03T04:32:25.339Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 11.9,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 4,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.93,
+      "expectedNextHeartbeatAt": "2026-10-03T06:32:25.339Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 23,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 2,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 80,
+            "observations": 5,
+            "governanceScore": 582.591
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 158.7011
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 9,
+            "governanceScore": 606.4715
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 2,
+        "selectedCandidates": 2,
+        "grossWeightPct": 100,
+        "cashWeightPct": 0,
+        "maxPairCorrelation": 0.8422,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "CORRELATION_CONCENTRATION_PRESENT"
+        ]
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.31,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 10.9504,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        },
+        {
+          "rank": 2,
+          "symbol": "BNBUSDT",
+          "strategy": "SMA Trend",
+          "strategyId": "sma_trend",
+          "strategyVersion": "sma_trend@1urtnm7",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 89.31,
+          "realizedVolPct": 34.18,
+          "returnToDrawdown": 2.1379,
+          "excessPct": 1.0519,
+          "drawdownPct": -7.2691,
+          "profitFactor": 2.7478,
+          "selected": true,
+          "decision": "SELECTED_WITH_CORRELATION_WARNING",
+          "maxCorrelationToSelected": 0.8422,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.7456,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "SMA Trend",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.5403,
+        "excessPct": 1.0519,
+        "drawdownPct": -7.2691,
+        "trades": 9
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 10.9504,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 20.5325,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T02:36:29.873Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_RETIRED",
+        "symbol": "LINKUSDT",
+        "message": "LINKUSDT: breakout@0r5gt25 CANDIDATE → RETIRED (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": "CANDIDATE",
+        "to": "RETIRED",
+        "at": "2026-10-03T02:36:29.873Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 2/2 kandydatów, gross 100%",
+        "selectedCandidates": 2,
+        "eligibleCandidates": 2,
+        "grossWeightPct": 100,
+        "maxPairCorrelation": 0.8411,
+        "at": "2026-10-03T02:36:29.873Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 13.9,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 4,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.98,
+      "expectedNextHeartbeatAt": "2026-10-03T04:36:29.873Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 23,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 1,
+        "ACTIVE": 1,
+        "DEGRADED": 0,
+        "RETIRED": 2
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "VALIDATED",
+            "passRatePct": 75,
+            "observations": 4,
+            "governanceScore": 477.6992
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 158.7011
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 8,
+            "governanceScore": 606.5226
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 2,
+        "selectedCandidates": 2,
+        "grossWeightPct": 100,
+        "cashWeightPct": 0,
+        "maxPairCorrelation": 0.8411,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "CORRELATION_CONCENTRATION_PRESENT"
+        ]
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.46,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 11.1433,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        },
+        {
+          "rank": 2,
+          "symbol": "BNBUSDT",
+          "strategy": "SMA Trend",
+          "strategyId": "sma_trend",
+          "strategyVersion": "sma_trend@1urtnm7",
+          "lifecycle": "VALIDATED",
+          "paperReady": false,
+          "qualityScore": 85.03,
+          "realizedVolPct": 34.14,
+          "returnToDrawdown": 2.1781,
+          "excessPct": 1.3014,
+          "drawdownPct": -7.2691,
+          "profitFactor": 2.7762,
+          "selected": true,
+          "decision": "SELECTED_WITH_CORRELATION_WARNING",
+          "maxCorrelationToSelected": 0.8411,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.8469,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "SMA Trend",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "governanceLifecycle": "VALIDATED",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.8328,
+        "excessPct": 1.3014,
+        "drawdownPct": -7.2691,
+        "trades": 9
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 11.1433,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 20.5595,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-03T00:37:12.082Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_NEW",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: pierwszy zapisany Deep PASS",
+        "at": "2026-10-03T00:37:12.082Z"
+      },
+      {
+        "type": "GOVERNANCE_PROMOTED",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: sma_trend@1urtnm7 SHADOW → VALIDATED (shadow only)",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "from": "SHADOW",
+        "to": "VALIDATED",
+        "at": "2026-10-03T00:37:12.082Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 2/2 kandydatów, gross 100%",
+        "selectedCandidates": 2,
+        "eligibleCandidates": 2,
+        "grossWeightPct": 100,
+        "maxPairCorrelation": 0.84,
+        "at": "2026-10-03T00:37:12.082Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 9.9,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 4,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.12,
+      "expectedNextHeartbeatAt": "2026-10-03T02:37:12.082Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 23,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 3,
+        "SHADOW": 0,
+        "VALIDATED": 1,
+        "ACTIVE": 1,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "VALIDATED",
+            "passRatePct": 66.67,
+            "observations": 3,
+            "governanceScore": 469.4052
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 159.5746
+          },
+          "challengers": [
+            {
+              "version": "ema_momentum@065dxno",
+              "strategy": "EMA Momentum",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 158.7011
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 7,
+            "governanceScore": 606.4959
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 2,
+        "selectedCandidates": 2,
+        "grossWeightPct": 100,
+        "cashWeightPct": 0,
+        "maxPairCorrelation": 0.84,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "CORRELATION_CONCENTRATION_PRESENT"
+        ]
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.67,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 11.0425,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        },
+        {
+          "rank": 2,
+          "symbol": "BNBUSDT",
+          "strategy": "SMA Trend",
+          "strategyId": "sma_trend",
+          "strategyVersion": "sma_trend@1urtnm7",
+          "lifecycle": "VALIDATED",
+          "paperReady": false,
+          "qualityScore": 85.34,
+          "realizedVolPct": 34.14,
+          "returnToDrawdown": 2.1986,
+          "excessPct": 1.3563,
+          "drawdownPct": -7.2691,
+          "profitFactor": 2.7907,
+          "selected": true,
+          "decision": "SELECTED_WITH_CORRELATION_WARNING",
+          "maxCorrelationToSelected": 0.84,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.8343,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "SMA Trend",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "governanceLifecycle": "VALIDATED",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.982,
+        "excessPct": 1.3563,
+        "drawdownPct": -7.2691,
+        "trades": 9
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 11.0425,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 20.6872,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T22:29:48.671Z",
+    "screenPass": [
+      "BTCUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 1/1 kandydatów, gross 50%",
+        "selectedCandidates": 1,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 50,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T22:29:48.671Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 12.7,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 3,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2,
+      "expectedNextHeartbeatAt": "2026-10-03T00:29:48.671Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 21,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 3,
+        "SHADOW": 1,
+        "VALIDATED": 0,
+        "ACTIVE": 1,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "SHADOW",
+            "passRatePct": 50,
+            "observations": 2,
+            "governanceScore": 353.437
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 2,
+            "governanceScore": 159.7512
+          },
+          "challengers": [
+            {
+              "version": "ema_momentum@065dxno",
+              "strategy": "EMA Momentum",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 158.7011
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 6,
+            "governanceScore": 606.5896
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 1,
+        "grossWeightPct": 50,
+        "cashWeightPct": 50,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.61,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 11.3961,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 4.8718,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 11.3961,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 21.3536,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T20:29:45.296Z",
+    "screenPass": [
+      "BTCUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_TRANSITION",
+        "symbol": "SOLUSDT",
+        "message": "SOLUSDT: breakout@0r5gt25 VALIDATED → ACTIVE (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": "VALIDATED",
+        "to": "ACTIVE",
+        "at": "2026-10-02T20:29:45.296Z"
+      },
+      {
+        "type": "GOVERNANCE_OBSERVED",
+        "symbol": "LINKUSDT",
+        "message": "LINKUSDT: nowa wersja breakout@0r5gt25 → CANDIDATE (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": null,
+        "to": "CANDIDATE",
+        "at": "2026-10-02T20:29:45.296Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 1/1 kandydatów, gross 50%",
+        "selectedCandidates": 1,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 50,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T20:29:45.296Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 12.8,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 3,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.9,
+      "expectedNextHeartbeatAt": "2026-10-02T22:29:45.296Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 23,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 3,
+        "SHADOW": 1,
+        "VALIDATED": 0,
+        "ACTIVE": 1,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "SHADOW",
+            "passRatePct": 50,
+            "observations": 2,
+            "governanceScore": 353.437
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 159.862
+          },
+          "challengers": [
+            {
+              "version": "ema_momentum@065dxno",
+              "strategy": "EMA Momentum",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 158.7011
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "ACTIVE",
+            "passRatePct": 100,
+            "observations": 5,
+            "governanceScore": 606.655
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 1,
+        "grossWeightPct": 50,
+        "cashWeightPct": 50,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "ACTIVE",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 59.07,
+          "returnToDrawdown": 3.0238,
+          "excessPct": 11.643,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3419,
+        "excessPct": 5.0427,
+        "drawdownPct": -9.0041,
+        "trades": 21
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "ACTIVE",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 33.488,
+        "excessPct": 11.643,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 46.6384,
+        "excessPct": 21.7718,
+        "drawdownPct": -16.6132,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T18:35:40.109Z",
+    "screenPass": [
+      "BTCUSDT",
+      "SOLUSDT",
+      "LINKUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_OBSERVED",
+        "symbol": "LINKUSDT",
+        "message": "LINKUSDT: nowa wersja ema_momentum@065dxno → CANDIDATE (shadow only)",
+        "strategyVersion": "ema_momentum@065dxno",
+        "from": null,
+        "to": "CANDIDATE",
+        "at": "2026-10-02T18:35:40.109Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 1/1 kandydatów, gross 50%",
+        "selectedCandidates": 1,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 50,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T18:35:40.109Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 9.6,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 3,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.01,
+      "expectedNextHeartbeatAt": "2026-10-02T20:35:40.109Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 22,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 1,
+        "VALIDATED": 1,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "SHADOW",
+            "passRatePct": 50,
+            "observations": 2,
+            "governanceScore": 353.437
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "LINKUSDT",
+          "champion": {
+            "version": "ema_momentum@065dxno",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 158.7011
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "VALIDATED",
+            "passRatePct": 100,
+            "observations": 4,
+            "governanceScore": 506.7257
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 1,
+        "grossWeightPct": 50,
+        "cashWeightPct": 50,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "VALIDATED",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.73,
+          "returnToDrawdown": 3.0992,
+          "excessPct": 11.5373,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.6054,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 17.685,
+        "excessPct": 2.7805,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "VALIDATED",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.323,
+        "excessPct": 11.5373,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      },
+      {
+        "symbol": "LINKUSDT",
+        "strategy": "EMA Momentum",
+        "strategyVersion": "ema_momentum@065dxno",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 47.9673,
+        "excessPct": 16.0782,
+        "drawdownPct": -15.4547,
+        "trades": 24
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T16:34:46.870Z",
+    "screenPass": [
+      "BTCUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_PROMOTED",
+        "symbol": "SOLUSDT",
+        "message": "SOLUSDT: breakout@0r5gt25 SHADOW → VALIDATED (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": "SHADOW",
+        "to": "VALIDATED",
+        "at": "2026-10-02T16:34:46.870Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 1/1 kandydatów, gross 50%",
+        "selectedCandidates": 1,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 50,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T16:34:46.870Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 8.8,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.01,
+      "expectedNextHeartbeatAt": "2026-10-02T18:34:46.870Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 21,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 1,
+        "SHADOW": 1,
+        "VALIDATED": 1,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "SHADOW",
+            "passRatePct": 50,
+            "observations": 2,
+            "governanceScore": 353.437
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "VALIDATED",
+            "passRatePct": 100,
+            "observations": 3,
+            "governanceScore": 506.864
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 1,
+        "grossWeightPct": 50,
+        "cashWeightPct": 50,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "VALIDATED",
+          "paperReady": false,
+          "qualityScore": 100,
+          "realizedVolPct": 58.63,
+          "returnToDrawdown": 3.1639,
+          "excessPct": 11.7372,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.674,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 17.9417,
+        "excessPct": 2.5154,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "VALIDATED",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 35.0392,
+        "excessPct": 11.7372,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T14:34:15.264Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_GAINED",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: Deep gate FAIL → PASS",
+        "at": "2026-10-02T14:34:15.264Z"
+      },
+      {
+        "type": "GOVERNANCE_TRANSITION",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: sma_trend@1urtnm7 CANDIDATE → SHADOW (shadow only)",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "from": "CANDIDATE",
+        "to": "SHADOW",
+        "at": "2026-10-02T14:34:15.264Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 2/2 kandydatów, gross 100%",
+        "selectedCandidates": 2,
+        "eligibleCandidates": 2,
+        "grossWeightPct": 100,
+        "maxPairCorrelation": 0.8296,
+        "at": "2026-10-02T14:34:15.264Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 9.5,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 3,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.94,
+      "expectedNextHeartbeatAt": "2026-10-02T16:34:15.264Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 22,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 1,
+        "SHADOW": 2,
+        "VALIDATED": 0,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "SHADOW",
+            "passRatePct": 50,
+            "observations": 2,
+            "governanceScore": 353.437
+          },
+          "challengers": [
+            {
+              "version": "breakout@1txjkz9",
+              "strategy": "Breakout",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 3,
+              "governanceScore": 155.5401
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "SHADOW",
+            "passRatePct": 100,
+            "observations": 2,
+            "governanceScore": 406.9428
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 2,
+        "selectedCandidates": 2,
+        "grossWeightPct": 100,
+        "cashWeightPct": 0,
+        "maxPairCorrelation": 0.8296,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "CORRELATION_CONCENTRATION_PRESENT"
+        ]
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "SHADOW",
+          "paperReady": false,
+          "qualityScore": 97.19,
+          "realizedVolPct": 58.26,
+          "returnToDrawdown": 3.2276,
+          "excessPct": 11.7488,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.7002,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        },
+        {
+          "rank": 2,
+          "symbol": "BNBUSDT",
+          "strategy": "SMA Trend",
+          "strategyId": "sma_trend",
+          "strategyVersion": "sma_trend@1urtnm7",
+          "lifecycle": "SHADOW",
+          "paperReady": false,
+          "qualityScore": 84.29,
+          "realizedVolPct": 32.8,
+          "returnToDrawdown": 2.3917,
+          "excessPct": 3.3803,
+          "drawdownPct": -7.1933,
+          "profitFactor": 2.9094,
+          "selected": true,
+          "decision": "SELECTED_WITH_CORRELATION_WARNING",
+          "maxCorrelationToSelected": 0.8296,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 18.7794,
+        "excessPct": 2.8756,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "SMA Trend",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "governanceLifecycle": "SHADOW",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 17.2046,
+        "excessPct": 3.3803,
+        "drawdownPct": -7.1933,
+        "trades": 9
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "SHADOW",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 35.7443,
+        "excessPct": 11.7488,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T12:37:34.595Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_NEW",
+        "symbol": "SOLUSDT",
+        "message": "SOLUSDT: pierwszy zapisany Deep PASS",
+        "at": "2026-10-02T12:37:34.595Z"
+      },
+      {
+        "type": "GOVERNANCE_OBSERVED",
+        "symbol": "SOLUSDT",
+        "message": "SOLUSDT: nowa wersja breakout@0r5gt25 → SHADOW (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": null,
+        "to": "SHADOW",
+        "at": "2026-10-02T12:37:34.595Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 1/1 kandydatów, gross 50%",
+        "selectedCandidates": 1,
+        "eligibleCandidates": 1,
+        "grossWeightPct": 50,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T12:37:34.595Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 9.5,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 3,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.11,
+      "expectedNextHeartbeatAt": "2026-10-02T14:37:34.595Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 22,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 1,
+        "VALIDATED": 0,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "breakout@1txjkz9",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 155.5401
+          },
+          "challengers": [
+            {
+              "version": "sma_trend@1urtnm7",
+              "strategy": "SMA Trend",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 153.0637
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "SOLUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "SHADOW",
+            "passRatePct": 100,
+            "observations": 1,
+            "governanceScore": 407.3309
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "execution": {
+      "mode": "SHADOW_NON_EXECUTABLE",
+      "executable": false,
+      "totalIntents": 0,
+      "newIntents": 0
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 1,
+        "selectedCandidates": 1,
+        "grossWeightPct": 50,
+        "cashWeightPct": 50,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": []
+      },
+      "shadowBasket": [
+        {
+          "rank": 1,
+          "symbol": "SOLUSDT",
+          "strategy": "Breakout",
+          "strategyId": "breakout",
+          "strategyVersion": "breakout@0r5gt25",
+          "lifecycle": "SHADOW",
+          "paperReady": false,
+          "qualityScore": 99.37,
+          "realizedVolPct": 58.74,
+          "returnToDrawdown": 3.3539,
+          "excessPct": 12.6461,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.7521,
+          "selected": true,
+          "decision": "SELECTED",
+          "maxCorrelationToSelected": null,
+          "recommendedWeightPct": 50,
+          "recommendedNotionalPln": 100,
+          "referenceRiskPerTradePln": 1
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.1334,
+        "excessPct": 3.5232,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@1txjkz9",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.5253,
+        "excessPct": 12.1083,
+        "drawdownPct": -6.008,
+        "trades": 7
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "SHADOW",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 37.1434,
+        "excessPct": 12.6461,
+        "drawdownPct": -11.0747,
+        "trades": 20
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T10:31:02.725Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_RETIRED",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: breakout@0r5gt25 CANDIDATE → RETIRED (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": "CANDIDATE",
+        "to": "RETIRED",
+        "at": "2026-10-02T10:31:02.725Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 0/0 kandydatów, gross 0%",
+        "selectedCandidates": 0,
+        "eligibleCandidates": 0,
+        "grossWeightPct": 0,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T10:31:02.725Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 8.5,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.96,
+      "expectedNextHeartbeatAt": "2026-10-02T12:31:02.725Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 21,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 1
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "breakout@1txjkz9",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 2,
+            "governanceScore": 155.3469
+          },
+          "challengers": [
+            {
+              "version": "sma_trend@1urtnm7",
+              "strategy": "SMA Trend",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 153.0637
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": null,
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 0,
+        "selectedCandidates": 0,
+        "grossWeightPct": 0,
+        "cashWeightPct": 100,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "NO_DEEP_ELIGIBLE_CANDIDATES"
+        ]
+      },
+      "shadowBasket": []
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "RETIRED",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3968,
+        "excessPct": 3.1896,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@1txjkz9",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 18.9327,
+        "excessPct": 11.6027,
+        "drawdownPct": -6.008,
+        "trades": 7
+      }
+    ]
+  },
+  {
+    "at": "2026-10-02T08:33:35.109Z",
+    "screenPass": [
+      "BTCUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "shadowPaperReady": [],
+    "universe": {
+      "version": "0.13.0",
+      "provider": "BINANCE_SPOT_PUBLIC",
+      "assetClass": "CRYPTO",
+      "researchCount": 16,
+      "paperCount": 8,
+      "shadowCount": 8,
+      "shadowPaperAuthority": false,
+      "tiers": {
+        "CORE_PAPER": [
+          "BTCUSDT",
+          "ETHUSDT",
+          "BNBUSDT",
+          "SOLUSDT",
+          "XRPUSDT",
+          "ADAUSDT",
+          "DOGEUSDT",
+          "LINKUSDT"
+        ],
+        "SHADOW_RESEARCH": [
+          "AVAXUSDT",
+          "DOTUSDT",
+          "LTCUSDT",
+          "TRXUSDT",
+          "BCHUSDT",
+          "NEARUSDT",
+          "UNIUSDT",
+          "AAVEUSDT"
+        ]
+      }
+    },
+    "failures": [],
+    "events": [
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 0/0 kandydatów, gross 0%",
+        "selectedCandidates": 0,
+        "eligibleCandidates": 0,
+        "grossWeightPct": 0,
+        "maxPairCorrelation": null,
+        "at": "2026-10-02T08:33:35.109Z"
+      }
+    ],
+    "health": {
+      "score": 85,
+      "status": "WATCH",
+      "durationSeconds": 7.4,
+      "screenCoveragePct": 100,
+      "screenCount": 16,
+      "expectedSymbols": 16,
+      "deepCount": 1,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 16.04,
+      "expectedNextHeartbeatAt": "2026-10-02T10:33:35.109Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": false,
+        "paperStateIntegrity": true,
+        "paperUniverseIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": [
+        {
+          "severity": "critical",
+          "code": "MISSED_HEARTBEAT_WINDOW",
+          "message": "Przerwa między heartbeatami była zbyt długa.",
+          "detail": "16.04 h"
+        }
+      ]
+    },
+    "journalEntriesAdded": 19,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 3,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 0
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "breakout@1txjkz9",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 155.2735
+          },
+          "challengers": [
+            {
+              "version": "sma_trend@1urtnm7",
+              "strategy": "SMA Trend",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 153.0637
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 153.1612
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 0,
+        "selectedCandidates": 0,
+        "grossWeightPct": 0,
+        "cashWeightPct": 100,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "NO_DEEP_ELIGIBLE_CANDIDATES"
+        ]
+      },
+      "shadowBasket": []
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 19.3185,
+        "excessPct": 3.1995,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T16:31:19.663Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_OBSERVED",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: nowa wersja breakout@1txjkz9 → CANDIDATE (shadow only)",
+        "strategyVersion": "breakout@1txjkz9",
+        "from": null,
+        "to": "CANDIDATE",
+        "at": "2026-10-01T16:31:19.663Z"
+      },
+      {
+        "type": "ALLOCATION_SHADOW_UPDATED",
+        "symbol": "PORTFOLIO",
+        "message": "Shadow allocation: 0/0 kandydatów, gross 0%",
+        "selectedCandidates": 0,
+        "eligibleCandidates": 0,
+        "grossWeightPct": 0,
+        "maxPairCorrelation": null,
+        "at": "2026-10-01T16:31:19.663Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 6,
+      "screenCoveragePct": 100,
+      "screenCount": 8,
+      "expectedSymbols": 8,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.93,
+      "expectedNextHeartbeatAt": "2026-10-01T18:31:19.663Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 13,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 3,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 0
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "breakout@1txjkz9",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 155.2735
+          },
+          "challengers": [
+            {
+              "version": "sma_trend@1urtnm7",
+              "strategy": "SMA Trend",
+              "lifecycle": "CANDIDATE",
+              "passRatePct": 0,
+              "observations": 1,
+              "governanceScore": 153.0637
+            }
+          ],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 2,
+            "governanceScore": 152.834
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "allocation": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "summary": {
+        "eligibleCandidates": 0,
+        "selectedCandidates": 0,
+        "grossWeightPct": 0,
+        "cashWeightPct": 100,
+        "maxPairCorrelation": null,
+        "referencePortfolioEquityPln": 200,
+        "referenceRiskPerTradePln": 1,
+        "warnings": [
+          "NO_DEEP_ELIGIBLE_CANDIDATES"
+        ]
+      },
+      "shadowBasket": []
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 16.5959,
+        "excessPct": 3.229,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@1txjkz9",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.245,
+        "drawdownPct": -6.008,
+        "trades": 6
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T14:35:11.392Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "failures": [],
+    "events": [
+      {
+        "type": "GOVERNANCE_OBSERVED",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: nowa wersja breakout@0r5gt25 → CANDIDATE (shadow only)",
+        "strategyVersion": "breakout@0r5gt25",
+        "from": null,
+        "to": "CANDIDATE",
+        "at": "2026-10-01T14:35:11.392Z"
+      },
+      {
+        "type": "GOVERNANCE_OBSERVED",
+        "symbol": "BNBUSDT",
+        "message": "BNBUSDT: nowa wersja sma_trend@1urtnm7 → CANDIDATE (shadow only)",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "from": null,
+        "to": "CANDIDATE",
+        "at": "2026-10-01T14:35:11.392Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 5.4,
+      "screenCoveragePct": 100,
+      "screenCount": 8,
+      "expectedSymbols": 8,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.94,
+      "expectedNextHeartbeatAt": "2026-10-01T16:35:11.392Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 13,
+    "governance": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "counts": {
+        "CANDIDATE": 2,
+        "SHADOW": 0,
+        "VALIDATED": 0,
+        "ACTIVE": 0,
+        "DEGRADED": 0,
+        "RETIRED": 0
+      },
+      "champions": [
+        {
+          "symbol": "BNBUSDT",
+          "champion": {
+            "version": "sma_trend@1urtnm7",
+            "strategy": "SMA Trend",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 153.0637
+          },
+          "challengers": [],
+          "paperAuthority": false
+        },
+        {
+          "symbol": "BTCUSDT",
+          "champion": {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 1,
+            "governanceScore": 152.7863
+          },
+          "challengers": [],
+          "paperAuthority": false
+        }
+      ]
+    },
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 16.3826,
+        "excessPct": 3.151,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "SMA Trend",
+        "strategyVersion": "sma_trend@1urtnm7",
+        "governanceLifecycle": "CANDIDATE",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 16.0107,
+        "excessPct": 2.9726,
+        "drawdownPct": -7.1933,
+        "trades": 9
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T12:38:57.221Z",
+    "screenPass": [
+      "BTCUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "failures": [],
+    "events": [],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 4.7,
+      "screenCoveragePct": 100,
+      "screenCount": 8,
+      "expectedSymbols": 8,
+      "deepCount": 1,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 2.11,
+      "expectedNextHeartbeatAt": "2026-10-01T14:38:57.221Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 10,
+    "analytics": {
+      "sampleStatus": "NO_CLOSED_TRADES",
+      "trades": 0,
+      "expectancyPln": null,
+      "profitFactor": null,
+      "avgRMultiple": null,
+      "maxObservedDrawdownPct": 0
+    },
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.9679,
+        "excessPct": 3.3106,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T10:32:32.830Z",
+    "screenPass": [
+      "BTCUSDT"
+    ],
+    "deepPass": [],
+    "paperReady": [],
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_LOST",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: Deep gate PASS → FAIL",
+        "at": "2026-10-01T10:32:32.830Z"
+      }
+    ],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 4.9,
+      "screenCoveragePct": 100,
+      "screenCount": 8,
+      "expectedSymbols": 8,
+      "deepCount": 1,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.96,
+      "expectedNextHeartbeatAt": "2026-10-01T12:32:32.830Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 10,
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.8123,
+        "excessPct": 3.3649,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T08:34:41.610Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT"
+    ],
+    "deepPass": [
+      "BTCUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [],
+    "health": {
+      "score": 100,
+      "status": "HEALTHY",
+      "durationSeconds": 7.5,
+      "screenCoveragePct": 100,
+      "screenCount": 8,
+      "expectedSymbols": 8,
+      "deepCount": 2,
+      "failureCount": 0,
+      "previousHeartbeatGapHours": 1.93,
+      "expectedNextHeartbeatAt": "2026-10-01T10:34:41.610Z",
+      "checks": {
+        "runCompleted": true,
+        "fullScreenCoverage": true,
+        "noRunFailures": true,
+        "heartbeatDurationOk": true,
+        "scheduleContinuity": true,
+        "paperStateIntegrity": true,
+        "riskEngineNotHardHalted": true
+      },
+      "alerts": []
+    },
+    "journalEntriesAdded": 11,
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.0308,
+        "excessPct": 2.9132,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.5409,
+        "drawdownPct": -6.008,
+        "trades": 6
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T06:38:50.747Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "BTCUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [],
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 16.3523,
+        "excessPct": 3.6216,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.4295,
+        "drawdownPct": -6.008,
+        "trades": 6
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.7513,
+        "excessPct": 13.1574,
+        "drawdownPct": -11.0747,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T04:32:40.714Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "BTCUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [],
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.8463,
+        "excessPct": 3.4714,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.4209,
+        "drawdownPct": -6.008,
+        "trades": 6
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.7513,
+        "excessPct": 13.4805,
+        "drawdownPct": -11.0747,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T02:30:10.763Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "BTCUSDT",
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_GAINED",
+        "symbol": "BTCUSDT",
+        "message": "BTCUSDT: Deep gate FAIL → PASS",
+        "at": "2026-10-01T02:30:10.763Z"
+      }
+    ],
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.4841,
+        "excessPct": 3.2019,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.2028,
+        "drawdownPct": -6.008,
+        "trades": 6
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.7513,
+        "excessPct": 13.6731,
+        "drawdownPct": -11.0747,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-10-01T00:40:36.581Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [],
+    "paper": {
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "openPositionsCount": 0,
+      "closedTradesCount": 0,
+      "drawdownPct": 0,
+      "dailyHalt": false,
+      "halted": false
+    },
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.4275,
+        "excessPct": 3.3984,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.0746,
+        "drawdownPct": -6.008,
+        "trades": 6
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.7513,
+        "excessPct": 13.5356,
+        "drawdownPct": -11.0747,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-09-30T23:06:01.077Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [],
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.7163,
+        "excessPct": 3.4704,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.1714,
+        "drawdownPct": -6.008,
+        "trades": 6
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.7513,
+        "excessPct": 13.3094,
+        "drawdownPct": -11.0747,
+        "trades": 19
+      }
+    ]
+  },
+  {
+    "at": "2026-09-30T22:33:59.684Z",
+    "screenPass": [
+      "BTCUSDT",
+      "BNBUSDT",
+      "SOLUSDT"
+    ],
+    "deepPass": [
+      "SOLUSDT"
+    ],
+    "paperReady": [],
+    "failures": [],
+    "events": [
+      {
+        "type": "DEEP_PASS_NEW",
+        "symbol": "SOLUSDT",
+        "message": "SOLUSDT: pierwszy zapisany Deep PASS",
+        "at": "2026-09-30T22:33:59.684Z"
+      }
+    ],
+    "deep": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 15.8746,
+        "excessPct": 3.4063,
+        "drawdownPct": -9.0041,
+        "trades": 22
+      },
+      {
+        "symbol": "BNBUSDT",
+        "strategy": "Breakout",
+        "eligible": false,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 20.0469,
+        "excessPct": 13.1532,
+        "drawdownPct": -6.008,
+        "trades": 6
+      },
+      {
+        "symbol": "SOLUSDT",
+        "strategy": "Breakout",
+        "eligible": true,
+        "paperReady": false,
+        "signalNow": "FLAT",
+        "returnPct": 34.7513,
+        "excessPct": 13.068,
+        "drawdownPct": -11.0747,
+        "trades": 19
+      }
+    ]
+  }
+]

@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-03T20:09:45.514Z",
+  "sampleStatus": "NO_CLOSED_TRADES",
+  "stats": {
+    "trades": 0,
+    "wins": 0,
+    "losses": 0,
+    "winRatePct": 0,
+    "totalPnlPln": 0,
+    "totalReturnPct": 0,
+    "expectancyPln": null,
+    "expectancyPct": null,
+    "avgWinPln": null,
+    "avgLossPln": null,
+    "payoffRatio": null,
+    "profitFactor": null,
+    "avgHoldingHours": null,
+    "avgRMultiple": null,
+    "medianRMultiple": null,
+    "avgMfePct": null,
+    "avgMaePct": null,
+    "totalFeesPln": 0,
+    "maxObservedDrawdownPct": -0.065,
+    "riskBudgetUsedPln": 0,
+    "pnlPerRiskBudget": null,
+    "currentEquityPln": 199.87,
+    "cashBaselinePnlPln": -0.13
+  },
+  "byStrategy": [],
+  "bySymbol": [],
+  "exitReasons": [],
+  "rolling": [
+    {
+      "days": 7,
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "winRatePct": 0,
+      "totalPnlPln": 0,
+      "totalReturnPct": 0,
+      "expectancyPln": null,
+      "expectancyPct": null,
+      "avgWinPln": null,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "avgHoldingHours": null,
+      "avgRMultiple": null,
+      "medianRMultiple": null,
+      "avgMfePct": null,
+      "avgMaePct": null,
+      "totalFeesPln": 0
+    },
+    {
+      "days": 30,
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "winRatePct": 0,
+      "totalPnlPln": 0,
+      "totalReturnPct": 0,
+      "expectancyPln": null,
+      "expectancyPct": null,
+      "avgWinPln": null,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "avgHoldingHours": null,
+      "avgRMultiple": null,
+      "medianRMultiple": null,
+      "avgMfePct": null,
+      "avgMaePct": null,
+      "totalFeesPln": 0
+    },
+    {
+      "days": 90,
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "winRatePct": 0,
+      "totalPnlPln": 0,
+      "totalReturnPct": 0,
+      "expectancyPln": null,
+      "expectancyPct": null,
+      "avgWinPln": null,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "avgHoldingHours": null,
+      "avgRMultiple": null,
+      "medianRMultiple": null,
+      "avgMfePct": null,
+      "avgMaePct": null,
+      "totalFeesPln": 0
+    }
+  ],
+  "equityCurve": [
+    {
+      "at": "2026-10-01T00:40:36.581Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T02:30:10.763Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T04:32:40.714Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T06:38:50.747Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T08:34:41.610Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T10:32:32.830Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T12:38:57.221Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T14:35:11.392Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T16:31:19.663Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T08:33:35.109Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T10:31:02.725Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T12:37:34.595Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T14:34:15.264Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T16:34:46.870Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T18:35:40.109Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T20:29:45.296Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T22:29:48.671Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T00:37:12.082Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T02:36:29.873Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T04:32:25.339Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T06:45:35.440Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T08:31:24.529Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T10:33:11.193Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T15:20:27.717Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T20:09:45.514Z",
+      "equityPln": 199.87,
+      "totalPnlPln": -0.13,
+      "drawdownPct": -0.065
+    }
+  ],
+  "recentTrades": []
+}

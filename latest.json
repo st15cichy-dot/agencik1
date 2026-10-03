@@ -1,0 +1,1888 @@
+{
+  "schemaVersion": 2,
+  "appVersion": "0.16.0",
+  "mode": "AUTONOMOUS_RESEARCH_AND_PAPER",
+  "startedAt": "2026-10-03T20:09:34.312Z",
+  "completedAt": "2026-10-03T20:09:45.514Z",
+  "source": "Binance public market-data-only endpoint",
+  "scheduleTarget": "every 2 hours",
+  "universe": {
+    "version": "0.13.0",
+    "provider": "BINANCE_SPOT_PUBLIC",
+    "assetClass": "CRYPTO",
+    "researchCount": 16,
+    "paperCount": 8,
+    "shadowCount": 8,
+    "shadowPaperAuthority": false,
+    "tiers": {
+      "CORE_PAPER": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "ADAUSDT",
+        "DOGEUSDT",
+        "LINKUSDT"
+      ],
+      "SHADOW_RESEARCH": [
+        "AVAXUSDT",
+        "DOTUSDT",
+        "LTCUSDT",
+        "TRXUSDT",
+        "BCHUSDT",
+        "NEARUSDT",
+        "UNIUSDT",
+        "AAVEUSDT"
+      ]
+    }
+  },
+  "screen": [
+    {
+      "symbol": "BTCUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@0x6eokb",
+      "config": {
+        "entry": 30,
+        "exit": 52
+      },
+      "robustScore": 10.9926,
+      "returnPct": 0.2091,
+      "exposureBenchmarkPct": 0.5785,
+      "excessPct": -0.3694,
+      "drawdownPct": -1.9596,
+      "profitFactor": 1.1521,
+      "sharpe": 0.2567,
+      "returnToDrawdown": 0.1067,
+      "exposurePct": 9.6667,
+      "trades": 6,
+      "wfPositive": 3,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:35.892Z"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": -3.0617,
+      "returnPct": -2.1304,
+      "exposureBenchmarkPct": 1.9345,
+      "excessPct": -4.0649,
+      "drawdownPct": -8.4953,
+      "profitFactor": 0.831,
+      "sharpe": -0.4868,
+      "returnToDrawdown": -0.2508,
+      "exposurePct": 33.4444,
+      "trades": 12,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": false,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": false,
+          "exposureAdjustedEdge": false,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 4,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:36.447Z"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@19ldn64",
+      "config": {
+        "lookback": 55,
+        "exitLookback": 20
+      },
+      "robustScore": 21.4614,
+      "returnPct": 8.0429,
+      "exposureBenchmarkPct": 2.9709,
+      "excessPct": 5.072,
+      "drawdownPct": -5.1509,
+      "profitFactor": 5.1841,
+      "sharpe": 3.3724,
+      "returnToDrawdown": 1.5614,
+      "exposurePct": 28.2222,
+      "trades": 5,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:36.970Z"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@065dxno",
+      "config": {
+        "fast": 12,
+        "slow": 26,
+        "rsiFloor": 50
+      },
+      "robustScore": 5.5277,
+      "returnPct": 4.7638,
+      "exposureBenchmarkPct": 5.9234,
+      "excessPct": -1.1596,
+      "drawdownPct": -8.6315,
+      "profitFactor": 1.3835,
+      "sharpe": 1.3916,
+      "returnToDrawdown": 0.5519,
+      "exposurePct": 43,
+      "trades": 15,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:37.487Z"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@0akttwj",
+      "config": {
+        "entry": 25,
+        "exit": 50
+      },
+      "robustScore": -3.9679,
+      "returnPct": 1.2407,
+      "exposureBenchmarkPct": 0.1211,
+      "excessPct": 1.1196,
+      "drawdownPct": -3.0131,
+      "profitFactor": 99,
+      "sharpe": 1.0832,
+      "returnToDrawdown": 0.4118,
+      "exposurePct": 3.4444,
+      "trades": 2,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": false,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:38.006Z"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@0x6eokb",
+      "config": {
+        "entry": 30,
+        "exit": 52
+      },
+      "robustScore": 13.4563,
+      "returnPct": 4.3759,
+      "exposureBenchmarkPct": 1.2383,
+      "excessPct": 3.1376,
+      "drawdownPct": -5.9518,
+      "profitFactor": 2.429,
+      "sharpe": 2.1614,
+      "returnToDrawdown": 0.7352,
+      "exposurePct": 9.3333,
+      "trades": 5,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:38.522Z"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@0tz21ye",
+      "config": {
+        "fast": 20,
+        "slow": 50,
+        "rsiFloor": 52
+      },
+      "robustScore": 8.0627,
+      "returnPct": 7.3042,
+      "exposureBenchmarkPct": 1.2684,
+      "excessPct": 6.0359,
+      "drawdownPct": -17.5156,
+      "profitFactor": 1.6526,
+      "sharpe": 1.6122,
+      "returnToDrawdown": 0.417,
+      "exposurePct": 30.2222,
+      "trades": 10,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:39.033Z"
+    },
+    {
+      "symbol": "LINKUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@065dxno",
+      "config": {
+        "fast": 12,
+        "slow": 26,
+        "rsiFloor": 50
+      },
+      "robustScore": 41.3759,
+      "returnPct": 21.6114,
+      "exposureBenchmarkPct": 7.2915,
+      "excessPct": 14.3199,
+      "drawdownPct": -8.8898,
+      "profitFactor": 2.7564,
+      "sharpe": 3.624,
+      "returnToDrawdown": 2.431,
+      "exposurePct": 42.6667,
+      "trades": 11,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:39.542Z"
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@0tz21ye",
+      "config": {
+        "fast": 20,
+        "slow": 50,
+        "rsiFloor": 52
+      },
+      "robustScore": 32.5066,
+      "returnPct": 24.3366,
+      "exposureBenchmarkPct": 12.5339,
+      "excessPct": 11.8027,
+      "drawdownPct": -16.2024,
+      "profitFactor": 2.8852,
+      "sharpe": 3.6834,
+      "returnToDrawdown": 1.502,
+      "exposurePct": 29.7778,
+      "trades": 11,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:40.051Z"
+    },
+    {
+      "symbol": "DOTUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@19ldn64",
+      "config": {
+        "lookback": 55,
+        "exitLookback": 20
+      },
+      "robustScore": 28.6816,
+      "returnPct": 17.7914,
+      "exposureBenchmarkPct": 9.6384,
+      "excessPct": 8.1531,
+      "drawdownPct": -12.2597,
+      "profitFactor": 2.9608,
+      "sharpe": 2.7266,
+      "returnToDrawdown": 1.4512,
+      "exposurePct": 31.7778,
+      "trades": 5,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:40.563Z"
+    },
+    {
+      "symbol": "LTCUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@09wr3xs",
+      "config": {
+        "fast": 20,
+        "slow": 50
+      },
+      "robustScore": 46.181,
+      "returnPct": 31.6318,
+      "exposureBenchmarkPct": 20.7763,
+      "excessPct": 10.8555,
+      "drawdownPct": -10.5964,
+      "profitFactor": 7.9134,
+      "sharpe": 4.5109,
+      "returnToDrawdown": 2.9852,
+      "exposurePct": 59.8889,
+      "trades": 9,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:41.075Z"
+    },
+    {
+      "symbol": "TRXUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@1txjkz9",
+      "config": {
+        "lookback": 72,
+        "exitLookback": 24
+      },
+      "robustScore": 1.2829,
+      "returnPct": -1.4623,
+      "exposureBenchmarkPct": -0.1259,
+      "excessPct": -1.3365,
+      "drawdownPct": -3.7495,
+      "profitFactor": 0.4256,
+      "sharpe": -1.3669,
+      "returnToDrawdown": -0.39,
+      "exposurePct": 33.2222,
+      "trades": 5,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": false,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": false,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:41.586Z"
+    },
+    {
+      "symbol": "BCHUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@12gnu8y",
+      "config": {
+        "fast": 40,
+        "slow": 120
+      },
+      "robustScore": 62.6022,
+      "returnPct": 43.1862,
+      "exposureBenchmarkPct": 6.5301,
+      "excessPct": 36.6561,
+      "drawdownPct": -8.9142,
+      "profitFactor": 14.3807,
+      "sharpe": 5.0965,
+      "returnToDrawdown": 4.8447,
+      "exposurePct": 44.6667,
+      "trades": 3,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": false,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:42.097Z"
+    },
+    {
+      "symbol": "NEARUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@12gnu8y",
+      "config": {
+        "fast": 40,
+        "slow": 120
+      },
+      "robustScore": 157.3872,
+      "returnPct": 132.4551,
+      "exposureBenchmarkPct": 81.6384,
+      "excessPct": 50.8167,
+      "drawdownPct": -19.1357,
+      "profitFactor": 17.9773,
+      "sharpe": 7.0006,
+      "returnToDrawdown": 6.9219,
+      "exposurePct": 66.4444,
+      "trades": 4,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": false,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 4,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:42.607Z"
+    },
+    {
+      "symbol": "UNIUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@1tdanb4",
+      "config": {
+        "fast": 21,
+        "slow": 55,
+        "rsiFloor": 50
+      },
+      "robustScore": 46.5115,
+      "returnPct": 36.263,
+      "exposureBenchmarkPct": 24.6323,
+      "excessPct": 11.6307,
+      "drawdownPct": -16.2488,
+      "profitFactor": 3.3312,
+      "sharpe": 4.2667,
+      "returnToDrawdown": 2.2317,
+      "exposurePct": 31.2222,
+      "trades": 7,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:43.118Z"
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@1rg1mwz",
+      "config": {
+        "fast": 10,
+        "slow": 30
+      },
+      "robustScore": 40.874,
+      "returnPct": 28.8001,
+      "exposureBenchmarkPct": 18.8066,
+      "excessPct": 9.9935,
+      "drawdownPct": -11.2806,
+      "profitFactor": 3.9038,
+      "sharpe": 3.9601,
+      "returnToDrawdown": 2.5531,
+      "exposurePct": 52.2222,
+      "trades": 14,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-03T20:09:43.626Z"
+    }
+  ],
+  "deep": [
+    {
+      "symbol": "BTCUSDT",
+      "stage": "deep",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": 31.1681,
+      "returnPct": 18.8484,
+      "exposureBenchmarkPct": 14.6446,
+      "excessPct": 4.2038,
+      "drawdownPct": -9.0041,
+      "profitFactor": 2.5703,
+      "sharpe": 3.4973,
+      "returnToDrawdown": 2.0933,
+      "exposurePct": 46.7333,
+      "trades": 22,
+      "wfPositive": 3,
+      "wfTotal": 5,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": true,
+      "signalNow": "FLAT",
+      "entryWindowLong": true,
+      "entrySignalAt": "2026-10-03T17:00:00.000Z",
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 3
+      },
+      "generatedAt": "2026-10-03T20:09:44.491Z",
+      "governance": {
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 18,
+        "passRatePct": 5.56,
+        "governanceScore": 9.0674,
+        "paperAuthority": false
+      }
+    },
+    {
+      "symbol": "LINKUSDT",
+      "stage": "deep",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@065dxno",
+      "config": {
+        "fast": 12,
+        "slow": 26,
+        "rsiFloor": 50
+      },
+      "robustScore": 65.1379,
+      "returnPct": 47.9673,
+      "exposureBenchmarkPct": 31.0333,
+      "excessPct": 16.934,
+      "drawdownPct": -15.4547,
+      "profitFactor": 3.007,
+      "sharpe": 4.1657,
+      "returnToDrawdown": 3.1037,
+      "exposurePct": 52.2,
+      "trades": 24,
+      "wfPositive": 4,
+      "wfTotal": 5,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 3
+      },
+      "generatedAt": "2026-10-03T20:09:45.358Z",
+      "governance": {
+        "version": "ema_momentum@065dxno",
+        "lifecycle": "CANDIDATE",
+        "observations": 3,
+        "passRatePct": 0,
+        "governanceScore": 159.1279,
+        "paperAuthority": false
+      }
+    }
+  ],
+  "screenPass": [
+    "BTCUSDT",
+    "LINKUSDT"
+  ],
+  "deepPass": [
+    "BTCUSDT"
+  ],
+  "paperReady": [
+    "BTCUSDT"
+  ],
+  "shadowPaperReady": [],
+  "failures": [],
+  "safeguards": {
+    "liveTrading": false,
+    "brokerConnected": false,
+    "orderSubmission": false,
+    "brokerAdapter": "NONE",
+    "noSecretsStored": true,
+    "paperOnly": true,
+    "persistenceContainsOnlyPublicResearchAndSimulatedPositions": true
+  },
+  "strategyGovernance": {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "generatedAt": "2026-10-03T20:09:45.514Z",
+    "policy": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "validatedMinObservations": 3,
+      "validatedMinPassRatePct": 66.67,
+      "activeMinObservations": 5,
+      "activeMinPassRatePct": 80,
+      "recoveryConsecutivePasses": 2,
+      "degradeConsecutiveFails": 2,
+      "retireConsecutiveFails": 4,
+      "maxScoreHistory": 24
+    },
+    "counts": {
+      "CANDIDATE": 2,
+      "SHADOW": 0,
+      "VALIDATED": 0,
+      "ACTIVE": 2,
+      "DEGRADED": 0,
+      "RETIRED": 2
+    },
+    "records": [
+      {
+        "id": "BNBUSDT|sma_trend@1urtnm7",
+        "symbol": "BNBUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 30,
+          "slow": 100
+        },
+        "version": "sma_trend@1urtnm7",
+        "lifecycle": "ACTIVE",
+        "observations": 6,
+        "passes": 5,
+        "fails": 1,
+        "passRatePct": 83.33,
+        "consecutivePasses": 5,
+        "consecutiveFails": 0,
+        "firstSeenAt": "2026-10-01T14:35:11.392Z",
+        "lastSeenAt": "2026-10-03T06:45:35.440Z",
+        "lastEligible": true,
+        "lastMetrics": {
+          "robustScore": 27.2103,
+          "returnPct": 15.4921,
+          "excessPct": 0.8038,
+          "drawdownPct": -7.2691,
+          "profitFactor": 2.7431,
+          "wfPositive": 3,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 585.8483,
+        "paperAuthority": false
+      },
+      {
+        "id": "BNBUSDT|breakout@1txjkz9",
+        "symbol": "BNBUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 72,
+          "exitLookback": 24
+        },
+        "version": "breakout@1txjkz9",
+        "lifecycle": "CANDIDATE",
+        "observations": 3,
+        "passes": 0,
+        "fails": 3,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 3,
+        "firstSeenAt": "2026-10-01T16:31:19.663Z",
+        "lastSeenAt": "2026-10-02T12:37:34.595Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 34.1888,
+          "returnPct": 19.5253,
+          "excessPct": 12.1083,
+          "drawdownPct": -6.008,
+          "profitFactor": 8.1453,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 155.5401,
+        "paperAuthority": false
+      },
+      {
+        "id": "BTCUSDT|breakout@0r5gt25",
+        "symbol": "BTCUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 18,
+        "passes": 1,
+        "fails": 17,
+        "passRatePct": 5.56,
+        "consecutivePasses": 1,
+        "consecutiveFails": 0,
+        "firstSeenAt": "2026-10-01T14:35:11.392Z",
+        "lastSeenAt": "2026-10-03T20:09:45.514Z",
+        "lastEligible": true,
+        "lastMetrics": {
+          "robustScore": 31.1681,
+          "returnPct": 18.8484,
+          "excessPct": 4.2038,
+          "drawdownPct": -9.0041,
+          "profitFactor": 2.5703,
+          "wfPositive": 3,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 9.0674,
+        "paperAuthority": false
+      },
+      {
+        "id": "LINKUSDT|ema_momentum@065dxno",
+        "symbol": "LINKUSDT",
+        "strategyId": "ema_momentum",
+        "strategyName": "EMA Momentum",
+        "config": {
+          "fast": 12,
+          "slow": 26,
+          "rsiFloor": 50
+        },
+        "version": "ema_momentum@065dxno",
+        "lifecycle": "CANDIDATE",
+        "observations": 3,
+        "passes": 0,
+        "fails": 3,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 3,
+        "firstSeenAt": "2026-10-02T18:35:40.109Z",
+        "lastSeenAt": "2026-10-03T20:09:45.514Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 65.1379,
+          "returnPct": 47.9673,
+          "excessPct": 16.934,
+          "drawdownPct": -15.4547,
+          "profitFactor": 3.007,
+          "wfPositive": 4,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 159.1279,
+        "paperAuthority": false
+      },
+      {
+        "id": "LINKUSDT|breakout@0r5gt25",
+        "symbol": "LINKUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 8,
+        "passes": 0,
+        "fails": 8,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 8,
+        "firstSeenAt": "2026-10-02T20:29:45.296Z",
+        "lastSeenAt": "2026-10-03T10:33:11.193Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 62.4306,
+          "returnPct": 46.6384,
+          "excessPct": 20.307,
+          "drawdownPct": -16.6132,
+          "profitFactor": 2.9069,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 9.4738,
+        "paperAuthority": false
+      },
+      {
+        "id": "SOLUSDT|breakout@0r5gt25",
+        "symbol": "SOLUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "ACTIVE",
+        "observations": 11,
+        "passes": 11,
+        "fails": 0,
+        "passRatePct": 100,
+        "consecutivePasses": 11,
+        "consecutiveFails": 0,
+        "firstSeenAt": "2026-10-02T12:37:34.595Z",
+        "lastSeenAt": "2026-10-03T08:31:24.529Z",
+        "lastEligible": true,
+        "lastMetrics": {
+          "robustScore": 47.8176,
+          "returnPct": 33.488,
+          "excessPct": 10.1289,
+          "drawdownPct": -11.0747,
+          "profitFactor": 2.5296,
+          "wfPositive": 3,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 606.2538,
+        "paperAuthority": false
+      }
+    ],
+    "champions": [
+      {
+        "symbol": "BNBUSDT",
+        "champion": {
+          "version": "sma_trend@1urtnm7",
+          "strategy": "SMA Trend",
+          "lifecycle": "ACTIVE",
+          "passRatePct": 83.33,
+          "observations": 6,
+          "governanceScore": 585.8483
+        },
+        "challengers": [
+          {
+            "version": "breakout@1txjkz9",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 155.5401
+          }
+        ],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "BTCUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "LINKUSDT",
+        "champion": {
+          "version": "ema_momentum@065dxno",
+          "strategy": "EMA Momentum",
+          "lifecycle": "CANDIDATE",
+          "passRatePct": 0,
+          "observations": 3,
+          "governanceScore": 159.1279
+        },
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "SOLUSDT",
+        "champion": {
+          "version": "breakout@0r5gt25",
+          "strategy": "Breakout",
+          "lifecycle": "ACTIVE",
+          "passRatePct": 100,
+          "observations": 11,
+          "governanceScore": 606.2538
+        },
+        "challengers": [],
+        "paperAuthority": false
+      }
+    ],
+    "recentEvents": []
+  },
+  "allocationIntelligence": {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "generatedAt": "2026-10-03T20:09:45.514Z",
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "policy": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "maxSelectedCandidates": 3,
+      "maxGrossWeightPct": 100,
+      "maxSingleWeightPct": 50,
+      "correlationWindowBars": 168,
+      "minCorrelationSamples": 48,
+      "correlationWarning": 0.75,
+      "correlationHardLimit": 0.9,
+      "maxSameStrategyFamily": 2,
+      "referenceRiskPerTradePct": 0.5
+    },
+    "summary": {
+      "eligibleCandidates": 1,
+      "selectedCandidates": 0,
+      "grossWeightPct": 0,
+      "cashWeightPct": 100,
+      "maxPairCorrelation": null,
+      "referencePortfolioEquityPln": 199.87,
+      "referenceRiskPerTradePln": 1,
+      "warnings": []
+    },
+    "rankedCandidates": [
+      {
+        "rank": 1,
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyId": "breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "paperReady": true,
+        "qualityScore": 29.35,
+        "realizedVolPct": 32.77,
+        "returnToDrawdown": 2.0933,
+        "excessPct": 4.2038,
+        "drawdownPct": -9.0041,
+        "profitFactor": 2.5703,
+        "selected": false,
+        "decision": "SHADOW_GOVERNANCE_RETIRED",
+        "maxCorrelationToSelected": null,
+        "recommendedWeightPct": 0,
+        "recommendedNotionalPln": 0,
+        "referenceRiskPerTradePln": 1
+      }
+    ],
+    "pairwiseCorrelations": [],
+    "shadowBasket": []
+  },
+  "shadowExecution": {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "mode": "SHADOW_NON_EXECUTABLE",
+    "executable": false,
+    "brokerConnected": false,
+    "canSubmitOrders": false,
+    "totalIntents": 1,
+    "latest": [
+      {
+        "schemaVersion": 1,
+        "appVersion": "0.14.0",
+        "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+        "paperPositionId": "BTCUSDT-1791058174312-diljse",
+        "createdAt": "2026-10-03T20:09:34.312Z",
+        "source": "PAPER_OPENED",
+        "mode": "SHADOW_NON_EXECUTABLE",
+        "executable": false,
+        "broker": "NOT_CONNECTED",
+        "brokerAdapter": "NONE",
+        "action": "BUY",
+        "orderType": "MARKET_REFERENCE_WITH_PROTECTIVE_STOP",
+        "marketSymbol": "BTCUSDT",
+        "brokerInstrumentId": null,
+        "accountCurrency": "PLN",
+        "marketQuoteCurrency": "USDT",
+        "requestedNotionalPln": 100,
+        "plannedRiskPln": 1,
+        "referenceMarketPrice": 84881.03,
+        "simulatedFillPrice": 84906.494309,
+        "protectiveStopPrice": 84057.429366,
+        "stopPct": 1,
+        "brokerQuantity": null,
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "entrySignalAt": "2026-10-03T17:00:00.000Z",
+        "blockers": [
+          "LIVE_TRADING_DISABLED",
+          "BROKER_NOT_CONNECTED",
+          "INSTRUMENT_MAPPING_REQUIRED",
+          "ACCOUNT_QUOTE_FX_REQUIRED",
+          "BROKER_PRECISION_RULES_REQUIRED"
+        ],
+        "safety": {
+          "canSubmit": false,
+          "liveTrading": false,
+          "brokerConnected": false,
+          "paperOnly": true
+        }
+      }
+    ],
+    "requiredBeforeAnyExecution": [
+      "BROKER_ADAPTER",
+      "INSTRUMENT_MAPPING",
+      "ACCOUNT_QUOTE_FX",
+      "BROKER_PRECISION_RULES",
+      "SEPARATE_EXECUTION_SAFETY_REVIEW"
+    ]
+  },
+  "events": [
+    {
+      "type": "DEEP_PASS_GAINED",
+      "symbol": "BTCUSDT",
+      "message": "BTCUSDT: Deep gate FAIL → PASS",
+      "at": "2026-10-03T20:09:45.514Z"
+    },
+    {
+      "type": "PAPER_READY_NEW",
+      "symbol": "BTCUSDT",
+      "message": "BTCUSDT: Deep PASS + aktywne wejście LONG w oknie heartbeat",
+      "at": "2026-10-03T20:09:45.514Z"
+    },
+    {
+      "type": "ALLOCATION_SHADOW_UPDATED",
+      "symbol": "PORTFOLIO",
+      "message": "Shadow allocation: 0/1 kandydatów, gross 0%",
+      "selectedCandidates": 0,
+      "eligibleCandidates": 1,
+      "grossWeightPct": 0,
+      "maxPairCorrelation": null,
+      "at": "2026-10-03T20:09:45.514Z"
+    },
+    {
+      "type": "EXECUTION_SHADOW_INTENT_CREATED",
+      "symbol": "BTCUSDT",
+      "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+      "paperPositionId": "BTCUSDT-1791058174312-diljse",
+      "executable": false,
+      "message": "BTCUSDT: zapisano nieegzekwowalny shadow execution intent dla pozycji PAPER",
+      "at": "2026-10-03T20:09:45.514Z"
+    },
+    {
+      "type": "PAPER_OPENED",
+      "symbol": "BTCUSDT",
+      "message": "BTCUSDT: otwarto paper LONG, notional 100 PLN, ryzyko 1 PLN",
+      "at": "2026-10-03T20:09:45.514Z"
+    }
+  ],
+  "paperPortfolio": {
+    "mode": "AUTONOMOUS_PAPER_ONLY",
+    "currency": "PLN",
+    "startingCapitalPln": 200,
+    "equityPln": 199.87,
+    "cashPln": 99.9,
+    "grossExposurePln": 99.97,
+    "grossExposurePct": 50.0175,
+    "realizedPnlPln": 0,
+    "unrealizedPnlPln": -0.13,
+    "totalPnlPln": -0.13,
+    "totalReturnPct": -0.065,
+    "drawdownPct": -0.065,
+    "dailyPnlPct": -0.065,
+    "openPositionsCount": 1,
+    "closedTradesCount": 0,
+    "wins": 0,
+    "losses": 0,
+    "winRatePct": 0,
+    "dailyHalt": false,
+    "halted": false,
+    "haltReason": null,
+    "policy": {
+      "startingCapitalPln": 200,
+      "riskPerTradePct": 0.5,
+      "maxOpenPositions": 3,
+      "maxGrossExposurePct": 100,
+      "maxSinglePositionPct": 50,
+      "hardDrawdownStopPct": 10,
+      "dailyLossLimitPct": 2,
+      "maxHoldingHours": 168,
+      "atrMultiple": 2,
+      "minStopPct": 1,
+      "maxStopPct": 5,
+      "minPositionPln": 10,
+      "feePerSidePct": 0.1,
+      "slippagePerSidePct": 0.03
+    },
+    "openPositions": [
+      {
+        "id": "BTCUSDT-1791058174312-diljse",
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "openedAt": "2026-10-03T20:09:34.312Z",
+        "entryPrice": 84906.494309,
+        "currentPrice": 84881.03,
+        "stopPrice": 84057.42936591,
+        "stopPct": 1,
+        "notionalPln": 100,
+        "riskPln": 1,
+        "unrealizedPnlPln": -0.13,
+        "pnlPct": -0.13,
+        "mfePct": 0,
+        "maePct": 0,
+        "maxHoldUntil": "2026-10-10T20:09:34.312Z"
+      }
+    ],
+    "recentClosedTrades": [],
+    "updatedAt": "2026-10-03T20:09:45.514Z"
+  },
+  "portfolioAnalytics": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-03T20:09:45.514Z",
+    "sampleStatus": "NO_CLOSED_TRADES",
+    "stats": {
+      "trades": 0,
+      "wins": 0,
+      "losses": 0,
+      "winRatePct": 0,
+      "totalPnlPln": 0,
+      "totalReturnPct": 0,
+      "expectancyPln": null,
+      "expectancyPct": null,
+      "avgWinPln": null,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "avgHoldingHours": null,
+      "avgRMultiple": null,
+      "medianRMultiple": null,
+      "avgMfePct": null,
+      "avgMaePct": null,
+      "totalFeesPln": 0,
+      "maxObservedDrawdownPct": -0.065,
+      "riskBudgetUsedPln": 0,
+      "pnlPerRiskBudget": null,
+      "currentEquityPln": 199.87,
+      "cashBaselinePnlPln": -0.13
+    },
+    "byStrategy": [],
+    "bySymbol": [],
+    "exitReasons": [],
+    "rolling": [
+      {
+        "days": 7,
+        "trades": 0,
+        "wins": 0,
+        "losses": 0,
+        "winRatePct": 0,
+        "totalPnlPln": 0,
+        "totalReturnPct": 0,
+        "expectancyPln": null,
+        "expectancyPct": null,
+        "avgWinPln": null,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "avgHoldingHours": null,
+        "avgRMultiple": null,
+        "medianRMultiple": null,
+        "avgMfePct": null,
+        "avgMaePct": null,
+        "totalFeesPln": 0
+      },
+      {
+        "days": 30,
+        "trades": 0,
+        "wins": 0,
+        "losses": 0,
+        "winRatePct": 0,
+        "totalPnlPln": 0,
+        "totalReturnPct": 0,
+        "expectancyPln": null,
+        "expectancyPct": null,
+        "avgWinPln": null,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "avgHoldingHours": null,
+        "avgRMultiple": null,
+        "medianRMultiple": null,
+        "avgMfePct": null,
+        "avgMaePct": null,
+        "totalFeesPln": 0
+      },
+      {
+        "days": 90,
+        "trades": 0,
+        "wins": 0,
+        "losses": 0,
+        "winRatePct": 0,
+        "totalPnlPln": 0,
+        "totalReturnPct": 0,
+        "expectancyPln": null,
+        "expectancyPct": null,
+        "avgWinPln": null,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "avgHoldingHours": null,
+        "avgRMultiple": null,
+        "medianRMultiple": null,
+        "avgMfePct": null,
+        "avgMaePct": null,
+        "totalFeesPln": 0
+      }
+    ],
+    "equityCurve": [
+      {
+        "at": "2026-10-01T00:40:36.581Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T02:30:10.763Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T04:32:40.714Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T06:38:50.747Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T08:34:41.610Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T10:32:32.830Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T12:38:57.221Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T14:35:11.392Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T16:31:19.663Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T08:33:35.109Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T10:31:02.725Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T12:37:34.595Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T14:34:15.264Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T16:34:46.870Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T18:35:40.109Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T20:29:45.296Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T22:29:48.671Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T00:37:12.082Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T02:36:29.873Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T04:32:25.339Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T06:45:35.440Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T08:31:24.529Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T10:33:11.193Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T15:20:27.717Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "equityPln": 199.87,
+        "totalPnlPln": -0.13,
+        "drawdownPct": -0.065
+      }
+    ],
+    "recentTrades": []
+  },
+  "health": {
+    "score": 85,
+    "status": "WATCH",
+    "durationSeconds": 11.2,
+    "screenCoveragePct": 100,
+    "screenCount": 16,
+    "expectedSymbols": 16,
+    "deepCount": 2,
+    "failureCount": 0,
+    "previousHeartbeatGapHours": 4.82,
+    "expectedNextHeartbeatAt": "2026-10-03T22:09:45.514Z",
+    "checks": {
+      "runCompleted": true,
+      "fullScreenCoverage": true,
+      "noRunFailures": true,
+      "heartbeatDurationOk": true,
+      "scheduleContinuity": false,
+      "paperStateIntegrity": true,
+      "paperUniverseIntegrity": true,
+      "riskEngineNotHardHalted": true
+    },
+    "alerts": [
+      {
+        "severity": "warning",
+        "code": "MISSED_HEARTBEAT_WINDOW",
+        "message": "Przerwa między heartbeatami była zbyt długa.",
+        "detail": "4.82 h"
+      }
+    ]
+  },
+  "decisionJournal": {
+    "entriesAdded": 23,
+    "totalEntries": 403,
+    "latest": [
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "BTCUSDT",
+        "action": "SCREEN_PASS",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Gate 7/7",
+        "metrics": {
+          "returnPct": 0.2091,
+          "excessPct": -0.3694,
+          "drawdownPct": -1.9596,
+          "trades": 6
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "ETHUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "Breakout",
+        "reason": "Niespełnione: oosReturnPositive, profitFactor, exposureAdjustedEdge",
+        "metrics": {
+          "returnPct": -2.1304,
+          "excessPct": -4.0649,
+          "drawdownPct": -8.4953,
+          "trades": 12
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "BNBUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "Breakout",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 8.0429,
+          "excessPct": 5.072,
+          "drawdownPct": -5.1509,
+          "trades": 5
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "SOLUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "EMA Momentum",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 4.7638,
+          "excessPct": -1.1596,
+          "drawdownPct": -8.6315,
+          "trades": 15
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "XRPUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Niespełnione: enoughOosTrades, purgedWalkForward",
+        "metrics": {
+          "returnPct": 1.2407,
+          "excessPct": 1.1196,
+          "drawdownPct": -3.0131,
+          "trades": 2
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "ADAUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 4.3759,
+          "excessPct": 3.1376,
+          "drawdownPct": -5.9518,
+          "trades": 5
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "DOGEUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "EMA Momentum",
+        "reason": "Niespełnione: drawdownWithinLimit, purgedWalkForward",
+        "metrics": {
+          "returnPct": 7.3042,
+          "excessPct": 6.0359,
+          "drawdownPct": -17.5156,
+          "trades": 10
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "LINKUSDT",
+        "action": "SCREEN_PASS",
+        "strategy": "EMA Momentum",
+        "reason": "Gate 7/7",
+        "metrics": {
+          "returnPct": 21.6114,
+          "excessPct": 14.3199,
+          "drawdownPct": -8.8898,
+          "trades": 11
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "AVAXUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "EMA Momentum",
+        "reason": "Niespełnione: drawdownWithinLimit, purgedWalkForward",
+        "metrics": {
+          "returnPct": 24.3366,
+          "excessPct": 11.8027,
+          "drawdownPct": -16.2024,
+          "trades": 11
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "DOTUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "Breakout",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 17.7914,
+          "excessPct": 8.1531,
+          "drawdownPct": -12.2597,
+          "trades": 5
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "LTCUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "SMA Trend",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 31.6318,
+          "excessPct": 10.8555,
+          "drawdownPct": -10.5964,
+          "trades": 9
+        }
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "category": "SCREEN",
+        "symbol": "TRXUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "Breakout",
+        "reason": "Niespełnione: oosReturnPositive, profitFactor",
+        "metrics": {
+          "returnPct": -1.4623,
+          "excessPct": -1.3365,
+          "drawdownPct": -3.7495,
+          "trades": 5
+        }
+      }
+    ]
+  }
+}

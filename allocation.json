@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.14.0",
+  "generatedAt": "2026-10-03T20:09:45.514Z",
+  "mode": "SHADOW_ONLY",
+  "paperAuthority": false,
+  "policy": {
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "maxSelectedCandidates": 3,
+    "maxGrossWeightPct": 100,
+    "maxSingleWeightPct": 50,
+    "correlationWindowBars": 168,
+    "minCorrelationSamples": 48,
+    "correlationWarning": 0.75,
+    "correlationHardLimit": 0.9,
+    "maxSameStrategyFamily": 2,
+    "referenceRiskPerTradePct": 0.5
+  },
+  "summary": {
+    "eligibleCandidates": 1,
+    "selectedCandidates": 0,
+    "grossWeightPct": 0,
+    "cashWeightPct": 100,
+    "maxPairCorrelation": null,
+    "referencePortfolioEquityPln": 199.87,
+    "referenceRiskPerTradePln": 1,
+    "warnings": []
+  },
+  "rankedCandidates": [
+    {
+      "rank": 1,
+      "symbol": "BTCUSDT",
+      "strategy": "Breakout",
+      "strategyId": "breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "lifecycle": "RETIRED",
+      "paperReady": true,
+      "qualityScore": 29.35,
+      "realizedVolPct": 32.77,
+      "returnToDrawdown": 2.0933,
+      "excessPct": 4.2038,
+      "drawdownPct": -9.0041,
+      "profitFactor": 2.5703,
+      "selected": false,
+      "decision": "SHADOW_GOVERNANCE_RETIRED",
+      "maxCorrelationToSelected": null,
+      "recommendedWeightPct": 0,
+      "recommendedNotionalPln": 0,
+      "referenceRiskPerTradePln": 1
+    }
+  ],
+  "pairwiseCorrelations": [],
+  "shadowBasket": []
+}

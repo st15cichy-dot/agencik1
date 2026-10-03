@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.14.0",
+  "mode": "SHADOW_ONLY",
+  "paperAuthority": false,
+  "generatedAt": "2026-10-03T20:09:45.514Z",
+  "policy": {
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "validatedMinObservations": 3,
+    "validatedMinPassRatePct": 66.67,
+    "activeMinObservations": 5,
+    "activeMinPassRatePct": 80,
+    "recoveryConsecutivePasses": 2,
+    "degradeConsecutiveFails": 2,
+    "retireConsecutiveFails": 4,
+    "maxScoreHistory": 24
+  },
+  "counts": {
+    "CANDIDATE": 2,
+    "SHADOW": 0,
+    "VALIDATED": 0,
+    "ACTIVE": 2,
+    "DEGRADED": 0,
+    "RETIRED": 2
+  },
+  "records": [
+    {
+      "id": "BNBUSDT|sma_trend@1urtnm7",
+      "symbol": "BNBUSDT",
+      "strategyId": "sma_trend",
+      "strategyName": "SMA Trend",
+      "config": {
+        "fast": 30,
+        "slow": 100
+      },
+      "version": "sma_trend@1urtnm7",
+      "lifecycle": "ACTIVE",
+      "observations": 6,
+      "passes": 5,
+      "fails": 1,
+      "passRatePct": 83.33,
+      "consecutivePasses": 5,
+      "consecutiveFails": 0,
+      "firstSeenAt": "2026-10-01T14:35:11.392Z",
+      "lastSeenAt": "2026-10-03T06:45:35.440Z",
+      "lastEligible": true,
+      "lastMetrics": {
+        "robustScore": 27.2103,
+        "returnPct": 15.4921,
+        "excessPct": 0.8038,
+        "drawdownPct": -7.2691,
+        "profitFactor": 2.7431,
+        "wfPositive": 3,
+        "wfTotal": 5,
+        "parameterStabilityPct": 100
+      },
+      "governanceScore": 585.8483,
+      "paperAuthority": false
+    },
+    {
+      "id": "BNBUSDT|breakout@1txjkz9",
+      "symbol": "BNBUSDT",
+      "strategyId": "breakout",
+      "strategyName": "Breakout",
+      "config": {
+        "lookback": 72,
+        "exitLookback": 24
+      },
+      "version": "breakout@1txjkz9",
+      "lifecycle": "CANDIDATE",
+      "observations": 3,
+      "passes": 0,
+      "fails": 3,
+      "passRatePct": 0,
+      "consecutivePasses": 0,
+      "consecutiveFails": 3,
+      "firstSeenAt": "2026-10-01T16:31:19.663Z",
+      "lastSeenAt": "2026-10-02T12:37:34.595Z",
+      "lastEligible": false,
+      "lastMetrics": {
+        "robustScore": 34.1888,
+        "returnPct": 19.5253,
+        "excessPct": 12.1083,
+        "drawdownPct": -6.008,
+        "profitFactor": 8.1453,
+        "wfPositive": 2,
+        "wfTotal": 5,
+        "parameterStabilityPct": 100
+      },
+      "governanceScore": 155.5401,
+      "paperAuthority": false
+    },
+    {
+      "id": "BTCUSDT|breakout@0r5gt25",
+      "symbol": "BTCUSDT",
+      "strategyId": "breakout",
+      "strategyName": "Breakout",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "version": "breakout@0r5gt25",
+      "lifecycle": "RETIRED",
+      "observations": 18,
+      "passes": 1,
+      "fails": 17,
+      "passRatePct": 5.56,
+      "consecutivePasses": 1,
+      "consecutiveFails": 0,
+      "firstSeenAt": "2026-10-01T14:35:11.392Z",
+      "lastSeenAt": "2026-10-03T20:09:45.514Z",
+      "lastEligible": true,
+      "lastMetrics": {
+        "robustScore": 31.1681,
+        "returnPct": 18.8484,
+        "excessPct": 4.2038,
+        "drawdownPct": -9.0041,
+        "profitFactor": 2.5703,
+        "wfPositive": 3,
+        "wfTotal": 5,
+        "parameterStabilityPct": 100
+      },
+      "governanceScore": 9.0674,
+      "paperAuthority": false
+    },
+    {
+      "id": "LINKUSDT|ema_momentum@065dxno",
+      "symbol": "LINKUSDT",
+      "strategyId": "ema_momentum",
+      "strategyName": "EMA Momentum",
+      "config": {
+        "fast": 12,
+        "slow": 26,
+        "rsiFloor": 50
+      },
+      "version": "ema_momentum@065dxno",
+      "lifecycle": "CANDIDATE",
+      "observations": 3,
+      "passes": 0,
+      "fails": 3,
+      "passRatePct": 0,
+      "consecutivePasses": 0,
+      "consecutiveFails": 3,
+      "firstSeenAt": "2026-10-02T18:35:40.109Z",
+      "lastSeenAt": "2026-10-03T20:09:45.514Z",
+      "lastEligible": false,
+      "lastMetrics": {
+        "robustScore": 65.1379,
+        "returnPct": 47.9673,
+        "excessPct": 16.934,
+        "drawdownPct": -15.4547,
+        "profitFactor": 3.007,
+        "wfPositive": 4,
+        "wfTotal": 5,
+        "parameterStabilityPct": 100
+      },
+      "governanceScore": 159.1279,
+      "paperAuthority": false
+    },
+    {
+      "id": "LINKUSDT|breakout@0r5gt25",
+      "symbol": "LINKUSDT",
+      "strategyId": "breakout",
+      "strategyName": "Breakout",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "version": "breakout@0r5gt25",
+      "lifecycle": "RETIRED",
+      "observations": 8,
+      "passes": 0,
+      "fails": 8,
+      "passRatePct": 0,
+      "consecutivePasses": 0,
+      "consecutiveFails": 8,
+      "firstSeenAt": "2026-10-02T20:29:45.296Z",
+      "lastSeenAt": "2026-10-03T10:33:11.193Z",
+      "lastEligible": false,
+      "lastMetrics": {
+        "robustScore": 62.4306,
+        "returnPct": 46.6384,
+        "excessPct": 20.307,
+        "drawdownPct": -16.6132,
+        "profitFactor": 2.9069,
+        "wfPositive": 2,
+        "wfTotal": 5,
+        "parameterStabilityPct": 100
+      },
+      "governanceScore": 9.4738,
+      "paperAuthority": false
+    },
+    {
+      "id": "SOLUSDT|breakout@0r5gt25",
+      "symbol": "SOLUSDT",
+      "strategyId": "breakout",
+      "strategyName": "Breakout",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "version": "breakout@0r5gt25",
+      "lifecycle": "ACTIVE",
+      "observations": 11,
+      "passes": 11,
+      "fails": 0,
+      "passRatePct": 100,
+      "consecutivePasses": 11,
+      "consecutiveFails": 0,
+      "firstSeenAt": "2026-10-02T12:37:34.595Z",
+      "lastSeenAt": "2026-10-03T08:31:24.529Z",
+      "lastEligible": true,
+      "lastMetrics": {
+        "robustScore": 47.8176,
+        "returnPct": 33.488,
+        "excessPct": 10.1289,
+        "drawdownPct": -11.0747,
+        "profitFactor": 2.5296,
+        "wfPositive": 3,
+        "wfTotal": 5,
+        "parameterStabilityPct": 100
+      },
+      "governanceScore": 606.2538,
+      "paperAuthority": false
+    }
+  ],
+  "champions": [
+    {
+      "symbol": "BNBUSDT",
+      "champion": {
+        "version": "sma_trend@1urtnm7",
+        "strategy": "SMA Trend",
+        "lifecycle": "ACTIVE",
+        "passRatePct": 83.33,
+        "observations": 6,
+        "governanceScore": 585.8483
+      },
+      "challengers": [
+        {
+          "version": "breakout@1txjkz9",
+          "strategy": "Breakout",
+          "lifecycle": "CANDIDATE",
+          "passRatePct": 0,
+          "observations": 3,
+          "governanceScore": 155.5401
+        }
+      ],
+      "paperAuthority": false
+    },
+    {
+      "symbol": "BTCUSDT",
+      "champion": null,
+      "challengers": [],
+      "paperAuthority": false
+    },
+    {
+      "symbol": "LINKUSDT",
+      "champion": {
+        "version": "ema_momentum@065dxno",
+        "strategy": "EMA Momentum",
+        "lifecycle": "CANDIDATE",
+        "passRatePct": 0,
+        "observations": 3,
+        "governanceScore": 159.1279
+      },
+      "challengers": [],
+      "paperAuthority": false
+    },
+    {
+      "symbol": "SOLUSDT",
+      "champion": {
+        "version": "breakout@0r5gt25",
+        "strategy": "Breakout",
+        "lifecycle": "ACTIVE",
+        "passRatePct": 100,
+        "observations": 11,
+        "governanceScore": 606.2538
+      },
+      "challengers": [],
+      "paperAuthority": false
+    }
+  ],
+  "recentEvents": []
+}

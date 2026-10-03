@@ -1,0 +1,44 @@
+[
+  {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+    "paperPositionId": "BTCUSDT-1791058174312-diljse",
+    "createdAt": "2026-10-03T20:09:34.312Z",
+    "source": "PAPER_OPENED",
+    "mode": "SHADOW_NON_EXECUTABLE",
+    "executable": false,
+    "broker": "NOT_CONNECTED",
+    "brokerAdapter": "NONE",
+    "action": "BUY",
+    "orderType": "MARKET_REFERENCE_WITH_PROTECTIVE_STOP",
+    "marketSymbol": "BTCUSDT",
+    "brokerInstrumentId": null,
+    "accountCurrency": "PLN",
+    "marketQuoteCurrency": "USDT",
+    "requestedNotionalPln": 100,
+    "plannedRiskPln": 1,
+    "referenceMarketPrice": 84881.03,
+    "simulatedFillPrice": 84906.494309,
+    "protectiveStopPrice": 84057.429366,
+    "stopPct": 1,
+    "brokerQuantity": null,
+    "strategyId": "breakout",
+    "strategyName": "Breakout",
+    "strategyVersion": "breakout@0r5gt25",
+    "entrySignalAt": "2026-10-03T17:00:00.000Z",
+    "blockers": [
+      "LIVE_TRADING_DISABLED",
+      "BROKER_NOT_CONNECTED",
+      "INSTRUMENT_MAPPING_REQUIRED",
+      "ACCOUNT_QUOTE_FX_REQUIRED",
+      "BROKER_PRECISION_RULES_REQUIRED"
+    ],
+    "safety": {
+      "canSubmit": false,
+      "liveTrading": false,
+      "brokerConnected": false,
+      "paperOnly": true
+    }
+  }
+]
