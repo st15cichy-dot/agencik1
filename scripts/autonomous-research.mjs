@@ -40,6 +40,25 @@ import {
   mergeShadowExecutionIntents,
   publicShadowExecutionSummary,
 } from "../lib/shadow-execution.js";
+import {
+  mapShadowInstrument,
+} from "../lib/broker-mapping.js";
+import {
+  preflightShadowOrder,
+  reconcileShadowOrder,
+  buildShadowPreflightAudit,
+} from "../lib/shadow-order-preflight.js";
+import {
+  EXECUTION_QUALITY_POLICY,
+  simulateShadowFill,
+  buildExecutionQualityMetrics,
+  mergeExecutionQualityAudit,
+} from "../lib/execution-quality.js";
+import {
+  SHADOW_DIAGNOSTIC_POLICY,
+  DIAGNOSTIC_INSTRUMENT_SPECS,
+  publicMarketExecutionInputs,
+} from "../lib/shadow-diagnostic-fixtures.js";
 
 const OUT_DIR = path.resolve(".auto-output");
 const previousLatestPath =
@@ -56,6 +75,10 @@ const previousGovernancePath =
   process.env.PREVIOUS_GOVERNANCE_PATH || "";
 const previousExecutionIntentsPath =
   process.env.PREVIOUS_EXECUTION_INTENTS_PATH || "";
+const previousPreflightAuditPath =
+  process.env.PREVIOUS_PREFLIGHT_AUDIT_PATH || "";
+const previousExecutionQualityPath =
+  process.env.PREVIOUS_EXECUTION_QUALITY_PATH || "";
 
 function readJson(file, fallback) {
   try {
@@ -316,6 +339,14 @@ async function main() {
   const previousExecutionIntents = readJson(
     previousExecutionIntentsPath,
     []
+  );
+  const previousPreflightAudit = readJson(
+    previousPreflightAuditPath,
+    []
+  );
+  const previousExecutionQuality = readJson(
+    previousExecutionQualityPath,
+    { audit: [] }
   );
 
   const nowIso = new Date().toISOString();
@@ -908,7 +939,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.16.0",
+    appVersion: "0.17.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -1017,6 +1048,142 @@ async function main() {
     publicShadowExecutionSummary(
       executionIntents
     );
+
+  const existingQualityIntentIds = new Set(
+    (Array.isArray(previousExecutionQuality?.audit)
+      ? previousExecutionQuality.audit
+      : [])
+      .map((x) => x?.intentId)
+      .filter(Boolean)
+  );
+
+  const preflightAdditions = [];
+  const qualityAdditions = [];
+
+  for (const intent of executionIntents) {
+    if (
+      !intent?.intentId ||
+      existingQualityIntentIds.has(intent.intentId)
+    ) {
+      continue;
+    }
+
+    const instrument = mapShadowInstrument(
+      intent.marketSymbol,
+      DIAGNOSTIC_INSTRUMENT_SPECS
+    );
+
+    const preflight = preflightShadowOrder({
+      intent,
+      instrument,
+      plnPerQuoteUnit:
+        SHADOW_DIAGNOSTIC_POLICY.plnPerQuoteUnit,
+    });
+
+    const reconciliation = reconcileShadowOrder({
+      preflight,
+      simulatedExecution:
+        preflight.acceptedForSimulation
+          ? {
+              brokerSymbol:
+                preflight.brokerSymbol,
+              price:
+                preflight.normalized.price,
+              quantity:
+                preflight.normalized.quantity,
+            }
+          : null,
+    });
+
+    preflightAdditions.push(
+      buildShadowPreflightAudit({
+        preflight,
+        reconciliation,
+        at: current.completedAt,
+      })
+    );
+
+    const market = marketCache.get(
+      intent.marketSymbol
+    );
+
+    const quality = simulateShadowFill({
+      preflight,
+      strategyId:
+        intent.strategyId || null,
+      market:
+        publicMarketExecutionInputs(
+          market?.candles || []
+        ),
+    });
+
+    qualityAdditions.push({
+      ...quality,
+      auditId:
+        `quality:${intent.intentId}`,
+      at: current.completedAt,
+      diagnosticSpecSource:
+        SHADOW_DIAGNOSTIC_POLICY.instrumentSpecSource,
+      diagnosticFxSource:
+        SHADOW_DIAGNOSTIC_POLICY.fxSource,
+      marketInputSource:
+        "PUBLIC_OHLCV_PROXY",
+      executable: false,
+      canSubmitOrders: false,
+      brokerAdapter: "NONE",
+    });
+  }
+
+  const preflightAudit = [
+    ...preflightAdditions,
+    ...(Array.isArray(previousPreflightAudit)
+      ? previousPreflightAudit
+      : []),
+  ].slice(0, 1000);
+
+  const executionQualityAudit =
+    mergeExecutionQualityAudit(
+      Array.isArray(previousExecutionQuality?.audit)
+        ? previousExecutionQuality.audit
+        : [],
+      qualityAdditions
+    );
+
+  current.shadowOrderPreflight = {
+    schemaVersion: 1,
+    appVersion: "0.17.0",
+    mode: "SHADOW_ONLY",
+    executable: false,
+    canSubmitOrders: false,
+    brokerConnected: false,
+    brokerAdapter: "NONE",
+    diagnosticSpecSource:
+      SHADOW_DIAGNOSTIC_POLICY.instrumentSpecSource,
+    diagnosticFxSource:
+      SHADOW_DIAGNOSTIC_POLICY.fxSource,
+    totalAudits: preflightAudit.length,
+    latest: preflightAudit.slice(0, 10),
+  };
+
+  current.executionQuality = {
+    schemaVersion: 1,
+    appVersion:
+      EXECUTION_QUALITY_POLICY.appVersion,
+    mode:
+      EXECUTION_QUALITY_POLICY.mode,
+    executable: false,
+    canSubmitOrders: false,
+    brokerConnected: false,
+    brokerAdapter: "NONE",
+    totalAudits:
+      executionQualityAudit.length,
+    metrics:
+      buildExecutionQualityMetrics(
+        executionQualityAudit
+      ),
+    latest:
+      executionQualityAudit.slice(0, 10),
+  };
 
   current.events = [
     ...researchEvents,
@@ -1134,6 +1301,12 @@ async function main() {
         current.shadowExecution.totalIntents,
       newIntents:
         newExecutionIntents.length,
+      preflightAudits:
+        current.shadowOrderPreflight.totalAudits,
+      executionQualityAudits:
+        current.executionQuality.totalAudits,
+      executionQualityMetrics:
+        current.executionQuality.metrics,
     },
     allocation: {
       mode:
@@ -1271,6 +1444,41 @@ async function main() {
   fs.writeFileSync(
     path.join(
       OUT_DIR,
+      "preflight-audit.json"
+    ),
+    JSON.stringify(
+      preflightAudit,
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
+      "execution-quality.json"
+    ),
+    JSON.stringify(
+      {
+        schemaVersion: 1,
+        appVersion: "0.17.0",
+        mode: "SHADOW_ONLY",
+        executable: false,
+        canSubmitOrders: false,
+        brokerConnected: false,
+        brokerAdapter: "NONE",
+        audit: executionQualityAudit,
+        metrics:
+          current.executionQuality.metrics,
+      },
+      null,
+      2
+    ) + "\n"
+  );
+
+  fs.writeFileSync(
+    path.join(
+      OUT_DIR,
       "allocation.json"
     ),
     JSON.stringify(
@@ -1324,7 +1532,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.16.0",
+        appVersion: "0.17.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
@@ -1378,6 +1586,22 @@ async function main() {
             newExecutionIntents.length,
           executable:
             current.shadowExecution.executable,
+        },
+        shadowPreflight: {
+          totalAudits:
+            current.shadowOrderPreflight.totalAudits,
+          executable:
+            current.shadowOrderPreflight.executable,
+        },
+        executionQuality: {
+          totalAudits:
+            current.executionQuality.totalAudits,
+          fills:
+            current.executionQuality.metrics.fills,
+          rejections:
+            current.executionQuality.metrics.rejections,
+          executable:
+            current.executionQuality.executable,
         },
         allocation: {
           selected:
