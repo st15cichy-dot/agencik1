@@ -39,6 +39,10 @@ jobs:
           node --check lib/allocation-intelligence.js
           node --check lib/market-universe.js
           node --check lib/shadow-execution.js
+          node --check lib/broker-mapping.js
+          node --check lib/shadow-order-preflight.js
+          node --check lib/execution-quality.js
+          node --check lib/shadow-diagnostic-fixtures.js
           npm run test-core
 
       - name: Restore previous autonomous memory
@@ -55,6 +59,8 @@ jobs:
             git show origin/research-data:journal.json > .auto-memory/journal.json || true
             git show origin/research-data:governance.json > .auto-memory/governance.json || true
             git show origin/research-data:execution-intents.json > .auto-memory/execution-intents.json || true
+            git show origin/research-data:preflight-audit.json > .auto-memory/preflight-audit.json || true
+            git show origin/research-data:execution-quality.json > .auto-memory/execution-quality.json || true
           fi
 
       - name: Run autonomous research and paper engine
@@ -66,6 +72,8 @@ jobs:
           PREVIOUS_JOURNAL_PATH: .auto-memory/journal.json
           PREVIOUS_GOVERNANCE_PATH: .auto-memory/governance.json
           PREVIOUS_EXECUTION_INTENTS_PATH: .auto-memory/execution-intents.json
+          PREVIOUS_PREFLIGHT_AUDIT_PATH: .auto-memory/preflight-audit.json
+          PREVIOUS_EXECUTION_QUALITY_PATH: .auto-memory/execution-quality.json
         run: node scripts/autonomous-research.mjs
 
       - name: Prepare public autonomous memory
@@ -82,6 +90,8 @@ jobs:
           cp .auto-output/governance.json /tmp/autonomous-memory/governance.json
           cp .auto-output/allocation.json /tmp/autonomous-memory/allocation.json
           cp .auto-output/execution-intents.json /tmp/autonomous-memory/execution-intents.json
+          cp .auto-output/preflight-audit.json /tmp/autonomous-memory/preflight-audit.json
+          cp .auto-output/execution-quality.json /tmp/autonomous-memory/execution-quality.json
 
           cat > /tmp/autonomous-memory/README.md <<'EOF'
           # Autonomous Investor — research & paper memory
@@ -99,6 +109,8 @@ jobs:
           - governance.json
           - allocation.json
           - execution-intents.json
+          - preflight-audit.json
+          - execution-quality.json
 
           It must never contain broker credentials, API secrets, account identifiers,
           real-money positions, or private user data.
@@ -133,9 +145,11 @@ jobs:
           cp /tmp/autonomous-memory/governance.json governance.json
           cp /tmp/autonomous-memory/allocation.json allocation.json
           cp /tmp/autonomous-memory/execution-intents.json execution-intents.json
+          cp /tmp/autonomous-memory/preflight-audit.json preflight-audit.json
+          cp /tmp/autonomous-memory/execution-quality.json execution-quality.json
           cp /tmp/autonomous-memory/README.md README.md
           cp /tmp/autonomous-memory/vercel.json vercel.json
 
-          git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json governance.json allocation.json execution-intents.json README.md vercel.json
+          git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json governance.json allocation.json execution-intents.json preflight-audit.json execution-quality.json README.md vercel.json
           git commit -m "Update autonomous research and paper memory"
           git push --force origin HEAD:research-data

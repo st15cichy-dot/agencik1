@@ -1,7 +1,7 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.16.0",
+    version: "0.17.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     marketData:
@@ -57,6 +57,20 @@ export async function GET() {
           minimumValidation: true,
           reconciliation: "SIMULATED_ONLY",
           auditTrail: true,
+        },
+        executionQuality: {
+          mode: "SHADOW_ONLY",
+          executable: false,
+          brokerConnected: false,
+          brokerAdapter: "NONE",
+          canSubmitOrders: false,
+          fillSimulation: true,
+          publicOhlcvProxyInputs: true,
+          persistentAudit: true,
+          metricsBySymbol: true,
+          metricsByStrategy: true,
+          instrumentSpecSource: "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+          fxSource: "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
         },
         brokerMappingReadiness: {
           mode: "SHADOW_ONLY",
