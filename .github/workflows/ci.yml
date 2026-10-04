@@ -45,6 +45,10 @@ jobs:
           node --check lib/allocation-intelligence.js
           node --check lib/market-universe.js
           node --check lib/shadow-execution.js
+          node --check lib/broker-mapping.js
+          node --check lib/shadow-order-preflight.js
+          node --check lib/execution-quality.js
+          node --check lib/shadow-diagnostic-fixtures.js
           node --check scripts/health-watchdog.mjs
 
       - name: Core regression suites
