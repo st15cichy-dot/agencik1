@@ -1,5 +1,19 @@
 # Autonomous Investor — Free Core
 
+Aktualny produkt: **v0.18, Next.js + deterministyczny silnik JS**. Współpraca
+agentów przy implementacji, testach i przeglądzie: [README_V018.md](README_V018.md)
+i [AGENTS.md](AGENTS.md). Praca w tle używa istniejących GitHub Actions, bez API LLM.
+
+```bash
+npm install --no-audit --no-fund
+npm run dev
+# Testy, build i raport dla przekazania pracy:
+npm run verify-development
+```
+
+Poniżej zachowano opis starszego rdzenia Python; jego konfiguracja i testy
+nie są bramką wydania aktualnego silnika JS.
+
 Darmowy, lokalny rdzeń autonomicznego agenta inwestycyjnego.
 Domyślnie działa WYŁĄCZNIE w paper trading.
 

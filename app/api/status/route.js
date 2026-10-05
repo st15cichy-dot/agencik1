@@ -1,7 +1,7 @@
 export async function GET() {
   return Response.json({
     name: "Autonomiczny Inwestor",
-    version: "0.17.0",
+    version: "0.18.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     marketData:
