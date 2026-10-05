@@ -55,6 +55,11 @@ jobs:
           node --check lib/paper-evidence.js
           bash -n scripts/restore-autonomous-memory.sh
 
+      - name: Test isolated IBKR mock executor
+        run: |
+          python -m unittest discover -s experiments/ibkr-paper -p 'test_*.py' -v
+          python experiments/ibkr-paper/adapter.py --self-demo
+
       - name: Verify development handoff (core, safety and build)
         run: npm run verify-development
 
