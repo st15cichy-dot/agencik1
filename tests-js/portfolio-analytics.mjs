@@ -103,7 +103,7 @@ for (const paper of [null, {}, { equityPln: -1 }, { equityPln: NaN }, { equityPl
   assert.equal(report.stats.maxObservedDrawdownPct, null);
 }
 
-for (const drawdownPct of [undefined, null, NaN, Infinity, "0", 1]) {
+for (const drawdownPct of [undefined, null, NaN, Infinity, "0", 1, 0.00001]) {
   const report = observed([{ at: now, paper: { equityPln: 201, drawdownPct } }]);
   assert.equal(report.stats.currentEquityPln, 201);
   assert.equal(report.stats.cashBaselinePnlPln, 1);
