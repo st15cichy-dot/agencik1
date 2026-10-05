@@ -51,6 +51,20 @@ klawisza. Logi to `.development-output/screen-demo/instalacja-ocr.log` oraz
 `uruchomienie.log` w katalogu głównym repo/paczki. Instalator i launcher nadal
 wymagają pierwszego wykonania na natywnym Windows; nie były uruchamiane na Linux.
 
+### Gdy pojawia się HALT / Stopped
+
+Dialog pokazuje zapisany kod zatrzymania i rzeczywistą ścieżkę dziennika
+`native-execution.jsonl`. Przycisk `POKAZ_DIAGNOSTYKE.cmd` tylko odczytuje ten
+dziennik i `uruchomienie.log`; nie uruchamia demo, nie zmienia zapisów ani nie
+odblokowuje wykonawcy. Można skopiować pełną historię z terminala do diagnozy.
+Przycisk należy uruchomić z tej samej paczki, w której wystąpił problem;
+nowy rozpakowany katalog nie zawiera poprzednich lokalnych dzienników.
+
+Sam komunikat o istniejącym HALT nie ustala pierwotnej przyczyny. Istotny jest
+pierwszy wpis HALT i wcześniejsze PENDING/CONFIRMED. Zamknięcie okna, STOP i ESC
+zapisują `OPERATOR_STOP`, który może stać się ostatnim powodem w historii.
+Nie usuwaj dziennika i nie ponawiaj próby, zanim wynik zostanie wyjaśniony.
+
 W tym katalogu możesz uruchomić `URUCHOM_DEMO.cmd` albo wykonać w terminalu:
 
 ```bat

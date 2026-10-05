@@ -508,7 +508,12 @@ def run_windows_demo(intent, *, tesseract_cmd=None, log_path=None):
         if executing:
             return
         if executor.halted:
-            messagebox.showwarning("Stopped", "HALT. No automatic retry. Review screen-demo.jsonl.")
+            messagebox.showwarning(
+                "Stopped",
+                "HALT: " + str(executor.halt_reason or "UNKNOWN")
+                + "\nNo automatic retry. Review the full journal for the first HALT."
+                + "\nLog: " + str(log_path),
+            )
             return
         try:
             executing = True
@@ -529,7 +534,10 @@ def run_windows_demo(intent, *, tesseract_cmd=None, log_path=None):
                 window_exists = False
             if window_exists:
                 draw("HALTED")
-                messagebox.showwarning("HALT", code + "\nNo retry. No real broker was contacted.")
+                messagebox.showwarning(
+                    "HALT", code + "\nNo retry. No real broker was contacted."
+                    + "\nLog: " + str(log_path),
+                )
         finally:
             executing = False
     tk.Button(root, text="Run ONE screenshot/OCR/mock click", command=automate).pack(pady=8)
