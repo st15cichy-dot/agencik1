@@ -50,9 +50,34 @@ jobs:
           node --check lib/execution-quality.js
           node --check lib/shadow-diagnostic-fixtures.js
           node --check scripts/health-watchdog.mjs
+          node --check scripts/verify-development.mjs
 
-      - name: Core regression suites
-        run: npm run test-core
+      - name: Verify development handoff (core, safety and build)
+        run: npm run verify-development
 
-      - name: Next.js production build
-        run: npm run build
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: development-verification-${{ github.sha }}
+          path: .development-output/verification.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Write verification summary
+        if: always()
+        run: |
+          node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import fs from "node:fs";
+          const file = ".development-output/verification.json";
+          console.log("# Development verification");
+          if (!fs.existsSync(file)) {
+            console.log("No report: verification did not start or could not write evidence. Check job logs.");
+          } else {
+            const report = JSON.parse(fs.readFileSync(file, "utf8"));
+            console.log(`Status: **${report.status}**`);
+            console.log("See the verification artifact for the tested commit, source fingerprint and check results.");
+            console.log("Independent code review must be recorded in the PR; this deterministic job does not perform AI review.");
+          }
+          NODE
