@@ -19,7 +19,37 @@ Wymagane: Python 3.11 lub nowszy z Tcl/Tk, Pillow oraz bezpłatny Tesseract
 z językiem `eng`. Tesseract jest osobnym programem: wybierz instalator Windows
 ze źródła wskazanego w [dokumentacji Tesseract](https://tesseract-ocr.github.io/tessdoc/Installation.html).
 Wykonawca nie loguje się do usług. Launcher instaluje Pillow z PyPI w lokalnym
-środowisku `.venv`; Python i Tesseract należy zainstalować wcześniej.
+środowisku `.venv`; Python należy zainstalować wcześniej.
+
+### Gdy pojawia się „Brak lokalnego Tesseract OCR”
+
+Uruchom **`INSTALUJ_OCR.cmd`** z tego samego katalogu. Sprawdza istniejący
+OCR, a jeśli go nie wykryje, uruchamia instalację bezpłatnego pakietu
+`UB-Mannheim.TesseractOCR` ze źródła `winget`. Windows może poprosić
+o potwierdzenie instalacji lub uprawnienia administratora. Po instalacji
+skrypt sprawdza działający program i język `eng`, następnie uruchamia demo.
+Sam kod wyjścia instalatora nie jest uznawany za dowód poprawnej instalacji.
+
+Instalacja wymaga internetu i narzędzia winget z Windows App Installer.
+Jeśli winget nie jest dostępne, skrypt otwiera oficjalną instrukcję instalacji;
+nie zmienia polityki PowerShell ani globalnego PATH. Zwykłe `URUCHOM_DEMO.cmd`
+nie instaluje Tesseracta automatycznie.
+
+`ZNAJDZ_OCR.cmd` sprawdza `TESSERACT_CMD`, PATH oraz standardowe katalogi
+Program Files, Program Files (x86) i lokalne katalogi użytkownika. Przekazuje
+wykrytą pełną ścieżkę do programu Python przez `--tesseract`. Wartość
+`TESSERACT_CMD` powinna być ścieżką do pliku exe bez dodatkowych cudzysłowów.
+Niestandardową lokalizację można wskazać w otwartym oknie:
+
+```bat
+set "TESSERACT_CMD=C:\moj-katalog\tesseract.exe"
+INSTALUJ_OCR.cmd --inside
+```
+
+Oba przyciski otwierają trwałe okno terminala: błąd nie znika po naciśnięciu
+klawisza. Logi to `.development-output/screen-demo/instalacja-ocr.log` oraz
+`uruchomienie.log` w katalogu głównym repo/paczki. Instalator i launcher nadal
+wymagają pierwszego wykonania na natywnym Windows; nie były uruchamiane na Linux.
 
 W tym katalogu możesz uruchomić `URUCHOM_DEMO.cmd` albo wykonać w terminalu:
 
