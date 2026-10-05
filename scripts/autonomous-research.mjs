@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { loadAutonomousMemory } from "../lib/autonomous-memory.js";
 import {
   analyzeSymbol,
   fetchBars,
@@ -79,15 +80,6 @@ const previousPreflightAuditPath =
   process.env.PREVIOUS_PREFLIGHT_AUDIT_PATH || "";
 const previousExecutionQualityPath =
   process.env.PREVIOUS_EXECUTION_QUALITY_PATH || "";
-
-function readJson(file, fallback) {
-  try {
-    if (!file || !fs.existsSync(file)) return fallback;
-    return JSON.parse(fs.readFileSync(file, "utf8"));
-  } catch {
-    return fallback;
-  }
-}
 
 function round(value, digits = 4) {
   return Number.isFinite(value)
@@ -308,46 +300,23 @@ async function getMarketContext(
 }
 
 async function main() {
+  const {
+    latest: previousLatest, history: previousHistory, paper: previousPaper,
+    trades: previousTrades, journal: previousJournal, governance: previousGovernance,
+    executionIntents: previousExecutionIntents, preflightAudit: previousPreflightAudit,
+    executionQuality: previousExecutionQuality,
+  } = loadAutonomousMemory({
+    mode: process.env.AUTONOMOUS_MEMORY_MODE,
+    paths: {
+      latest: previousLatestPath, history: previousHistoryPath, paper: previousPaperPath,
+      trades: previousTradesPath, journal: previousJournalPath, governance: previousGovernancePath,
+      executionIntents: previousExecutionIntentsPath, preflightAudit: previousPreflightAuditPath,
+      executionQuality: previousExecutionQualityPath,
+    },
+  });
   fs.mkdirSync(OUT_DIR, {
     recursive: true,
   });
-
-  const previousLatest = readJson(
-    previousLatestPath,
-    null
-  );
-  const previousHistory = readJson(
-    previousHistoryPath,
-    []
-  );
-  const previousPaper = readJson(
-    previousPaperPath,
-    null
-  );
-  const previousTrades = readJson(
-    previousTradesPath,
-    []
-  );
-  const previousJournal = readJson(
-    previousJournalPath,
-    []
-  );
-  const previousGovernance = readJson(
-    previousGovernancePath,
-    null
-  );
-  const previousExecutionIntents = readJson(
-    previousExecutionIntentsPath,
-    []
-  );
-  const previousPreflightAudit = readJson(
-    previousPreflightAuditPath,
-    []
-  );
-  const previousExecutionQuality = readJson(
-    previousExecutionQualityPath,
-    { audit: [] }
-  );
 
   const nowIso = new Date().toISOString();
   const startedAt = nowIso;
@@ -939,7 +908,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.18.0",
+    appVersion: "0.19.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -1151,7 +1120,7 @@ async function main() {
 
   current.shadowOrderPreflight = {
     schemaVersion: 1,
-    appVersion: "0.18.0",
+    appVersion: "0.19.0",
     mode: "SHADOW_ONLY",
     executable: false,
     canSubmitOrders: false,
@@ -1461,7 +1430,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.18.0",
+        appVersion: "0.19.0",
         mode: "SHADOW_ONLY",
         executable: false,
         canSubmitOrders: false,
@@ -1532,7 +1501,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.18.0",
+        appVersion: "0.19.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
@@ -1635,6 +1604,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error);
+  console.error(/^MEMORY_[A-Z_]+$/.test(error.code || "") ? error.code : "AUTONOMOUS_RESEARCH_FAILED");
   process.exit(1);
 });
