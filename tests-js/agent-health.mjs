@@ -47,7 +47,7 @@ const basePaper = {
   assert.ok(health.score < 75);
   assert.ok(health.alerts.some((x) => x.code === "RUN_FAILURES"));
   assert.ok(health.alerts.some((x) => x.code === "SCREEN_COVERAGE"));
-  assert.ok(health.alerts.some((x) => x.code === "MISSED_HEARTBEAT_WINDOW"));
+  assert.ok(health.scheduleEvents.some((x) => x.code === "MISSED_HEARTBEAT_WINDOW"));
 }
 
 {
@@ -251,6 +251,28 @@ const basePaper = {
   assert.ok(execution);
   assert.equal(execution.metrics.intentId, "shadow:BTCUSDT-1");
   assert.equal(execution.metrics.executable, false);
+}
+
+// Recovered schedule gaps remain visible without penalizing the current run.
+for (const [previousCompletedAt, code, gap] of [
+  ["2026-10-01T06:30:00.000Z", "HEARTBEAT_LATE", 3.5],
+  ["2026-10-01T03:15:36.000Z", "MISSED_HEARTBEAT_WINDOW", 6.74],
+]) {
+  const health = buildAgentHealth({
+    startedAt: "2026-10-01T10:00:00.000Z",
+    completedAt: "2026-10-01T10:00:30.000Z",
+    previousCompletedAt,
+    expectedSymbols: 16,
+    screen: Array.from({ length: 16 }, (_, i) => ({ symbol: `S${i}` })),
+    paperPortfolio: basePaper,
+  });
+  assert.equal(health.score, 100);
+  assert.equal(health.status, "HEALTHY");
+  assert.deepEqual(health.alerts, []);
+  assert.equal(health.previousHeartbeatGapHours, gap);
+  assert.equal(health.checks.scheduleContinuity, false);
+  assert.equal(health.scheduleEvents[0].code, code);
+  assert.equal(health.scheduleEvents[0].severity, "info");
 }
 
 console.log("agent health tests: OK");
