@@ -55,6 +55,33 @@ jobs:
           node --check lib/paper-evidence.js
           bash -n scripts/restore-autonomous-memory.sh
 
+      - name: Install local OCR test tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y tesseract-ocr
+          python -m venv .development-output/screen-venv
+          .development-output/screen-venv/bin/python -m pip install -r experiments/screen-demo/requirements.txt
+
+      - name: Test isolated screen mock and real OCR
+        run: |
+          mkdir -p .development-output/screen-demo-evidence
+          .development-output/screen-venv/bin/python -m unittest discover -s experiments/screen-demo -p 'test_*.py' -v
+          .development-output/screen-venv/bin/python experiments/screen-demo/screen_demo.py --render-fixtures .development-output/screen-demo-evidence
+          .development-output/screen-venv/bin/python experiments/screen-demo/screen_demo.py --self-demo --output .development-output/screen-demo-evidence > .development-output/screen-demo-evidence/self-demo.json
+          .development-output/screen-venv/bin/python experiments/screen-demo/screen_demo.py --self-demo --side SELL --intent DEMO002 --output .development-output/screen-demo-evidence > .development-output/screen-demo-evidence/sell-demo.json
+          cat .development-output/screen-demo-evidence/self-demo.json
+          cat .development-output/screen-demo-evidence/sell-demo.json
+
+      - name: Upload mock screen evidence (not native Windows)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screen-mock-evidence-${{ github.sha }}
+          path: .development-output/screen-demo-evidence/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Verify development handoff (core, safety and build)
         run: npm run verify-development
 
