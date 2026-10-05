@@ -1,6 +1,6 @@
 {
   "name": "autonomiczny-inwestor",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,7 @@
     "check": "npm run test-core && npm run build",
     "test-health": "node tests-js/agent-health.mjs",
     "test-execution-quality": "node tests-js/execution-quality.mjs",
-    "test-core": "npm run test-paper && npm run test-health && npm run test-watchdog && npm run test-analytics && npm run test-governance && npm run test-allocation && npm run test-universe && npm run test-execution && npm run test-mapping && npm run test-preflight && npm run test-execution-quality && npm run test-execution-quality-integration && npm run test-safety && npm run test-development && npm run test-memory",
+    "test-core": "npm run test-paper && npm run test-health && npm run test-watchdog && npm run test-analytics && npm run test-governance && npm run test-allocation && npm run test-universe && npm run test-execution && npm run test-mapping && npm run test-preflight && npm run test-execution-quality && npm run test-execution-quality-integration && npm run test-safety && npm run test-development && npm run test-memory && npm run test-evidence",
     "test-watchdog": "node tests-js/watchdog.mjs",
     "watchdog": "node scripts/health-watchdog.mjs",
     "test-analytics": "node tests-js/portfolio-analytics.mjs",
@@ -25,7 +25,8 @@
     "test-development": "node tests-js/development-collaboration.mjs",
     "test-safety": "node tests-js/safety-contract.mjs",
     "verify-development": "node scripts/verify-development.mjs",
-    "test-memory": "node tests-js/autonomous-memory.mjs"
+    "test-memory": "node tests-js/autonomous-memory.mjs",
+    "test-evidence": "node tests-js/paper-evidence.mjs"
   },
   "dependencies": {
     "next": "^15.5.4",

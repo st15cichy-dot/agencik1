@@ -1,6 +1,6 @@
 # Autonomous Investor — Free Core
 
-Aktualny produkt: **v0.19, Next.js + deterministyczny silnik JS**. Ochrona pamięci: [README_V019.md](README_V019.md). Współpraca
+Aktualny produkt: **v0.20, Next.js + deterministyczny silnik JS**. Zakres dowodów wyników: [README_V020.md](README_V020.md). Ochrona pamięci: [README_V019.md](README_V019.md). Współpraca
 agentów przy implementacji, testach i przeglądzie: [README_V018.md](README_V018.md)
 i [AGENTS.md](AGENTS.md). Praca w tle używa istniejących GitHub Actions, bez API LLM.
 

@@ -52,6 +52,7 @@ jobs:
           node --check scripts/health-watchdog.mjs
           node --check scripts/verify-development.mjs
           node --check lib/autonomous-memory.js
+          node --check lib/paper-evidence.js
           bash -n scripts/restore-autonomous-memory.sh
 
       - name: Verify development handoff (core, safety and build)

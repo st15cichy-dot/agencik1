@@ -37,6 +37,7 @@ jobs:
           bash -n scripts/restore-autonomous-memory.sh
           node --check lib/agent-health.js
           node --check lib/portfolio-analytics.js
+          node --check lib/paper-evidence.js
           node --check lib/strategy-governance.js
           node --check lib/allocation-intelligence.js
           node --check lib/market-universe.js
