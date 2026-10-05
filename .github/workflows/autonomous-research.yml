@@ -32,7 +32,9 @@ jobs:
         run: |
           node --check lib/research.js
           node --check lib/paper-portfolio.js
+          node --check lib/autonomous-memory.js
           node --check scripts/autonomous-research.mjs
+          bash -n scripts/restore-autonomous-memory.sh
           node --check lib/agent-health.js
           node --check lib/portfolio-analytics.js
           node --check lib/strategy-governance.js
@@ -47,21 +49,7 @@ jobs:
 
       - name: Restore previous autonomous memory
         shell: bash
-        run: |
-          mkdir -p .auto-memory
-
-          if git ls-remote --exit-code --heads origin research-data >/dev/null 2>&1; then
-            git fetch origin research-data:refs/remotes/origin/research-data
-            git show origin/research-data:latest.json > .auto-memory/latest.json || true
-            git show origin/research-data:history.json > .auto-memory/history.json || true
-            git show origin/research-data:paper.json > .auto-memory/paper.json || true
-            git show origin/research-data:paper-trades.json > .auto-memory/paper-trades.json || true
-            git show origin/research-data:journal.json > .auto-memory/journal.json || true
-            git show origin/research-data:governance.json > .auto-memory/governance.json || true
-            git show origin/research-data:execution-intents.json > .auto-memory/execution-intents.json || true
-            git show origin/research-data:preflight-audit.json > .auto-memory/preflight-audit.json || true
-            git show origin/research-data:execution-quality.json > .auto-memory/execution-quality.json || true
-          fi
+        run: bash scripts/restore-autonomous-memory.sh
 
       - name: Run autonomous research and paper engine
         env:
@@ -128,6 +116,14 @@ jobs:
       - name: Publish research-data branch
         shell: bash
         run: |
+          set -euo pipefail
+          [[ "${AUTONOMOUS_MEMORY_MODE:-}" == RESTORE || "${AUTONOMOUS_MEMORY_MODE:-}" == BOOTSTRAP ]] || { echo MEMORY_MODE_REQUIRED >&2; exit 1; }
+          [[ -v MEMORY_BASE_SHA ]] || { echo MEMORY_BASE_REQUIRED >&2; exit 1; }
+          if [[ "$AUTONOMOUS_MEMORY_MODE" == RESTORE ]]; then
+            [[ "$MEMORY_BASE_SHA" =~ ^([0-9a-f]{40}|[0-9a-f]{64})$ ]] || { echo MEMORY_BASE_INVALID >&2; exit 1; }
+          else
+            [[ -z "$MEMORY_BASE_SHA" ]] || { echo MEMORY_BASE_INVALID >&2; exit 1; }
+          fi
           git config user.name "autonomous-investor-bot"
           git config user.email "actions@users.noreply.github.com"
 
@@ -152,4 +148,4 @@ jobs:
 
           git add latest.json history.json paper.json paper-trades.json journal.json health.json analytics.json governance.json allocation.json execution-intents.json preflight-audit.json execution-quality.json README.md vercel.json
           git commit -m "Update autonomous research and paper memory"
-          git push --force origin HEAD:research-data
+          git push --force-with-lease="refs/heads/research-data:${MEMORY_BASE_SHA}" origin HEAD:refs/heads/research-data >/dev/null 2>&1 || { echo MEMORY_PUBLISH_FAILED >&2; exit 1; }
