@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { buildOperationsMonitor } from "../lib/operations-monitor.js";
 import path from "node:path";
 import { loadAutonomousMemory } from "../lib/autonomous-memory.js";
 import {
@@ -152,6 +153,7 @@ function summarize(result, stage) {
       result.candidate?.gate ||
       null,
     generatedAt: result.generatedAt,
+    forecastDiagnostics: result.forecastDiagnostics ? { ...result.forecastDiagnostics, predictions: undefined } : null,
   };
 }
 
@@ -1184,6 +1186,13 @@ async function main() {
     deep: current.deep,
     failures: current.failures,
     paperPortfolio: current.paperPortfolio,
+  });
+
+  current.operationsMonitor = buildOperationsMonitor({
+    nowMs: Date.parse(current.completedAt),
+    heartbeatAt: current.completedAt,
+    forecasts: current.screen,
+    expectedSymbols: SYMBOLS.length,
   });
 
   current.portfolioAnalytics =
