@@ -51,12 +51,16 @@ jobs:
           node --check lib/shadow-diagnostic-fixtures.js
           node --check scripts/health-watchdog.mjs
           node --check scripts/verify-development.mjs
+          node --check scripts/check-development-evidence.mjs
           node --check lib/autonomous-memory.js
           node --check lib/paper-evidence.js
           bash -n scripts/restore-autonomous-memory.sh
 
       - name: Verify development handoff (core, safety and build)
         run: npm run verify-development
+
+      - name: Check evidence matches current source and required checks
+        run: npm run check-development-evidence
 
       - name: Upload verification evidence
         if: always()

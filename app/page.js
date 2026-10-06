@@ -187,14 +187,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.20",
+      source: "manual browser sandbox v0.21",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.20.0",
+        version: "0.21.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -226,7 +226,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.20."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.21."
           : `HTTP ${r.status}`
       );
     }
@@ -250,7 +250,7 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.20</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.21</p>
           <h1>Research Quality Engine</h1>
           <p className="muted">16-market research + 8-market PAPER core + non-executable shadow execution</p>
         </div>
@@ -269,7 +269,7 @@ useEffect(() => {
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.20 zapisuje nieegzekwowalne intencje wykonawcze dla nowych pozycji PAPER. Nie ma adaptera brokera, ilości brokerskiej ani możliwości wysłania zlecenia.</span>
+        <span> v0.21 zapisuje nieegzekwowalne intencje wykonawcze dla nowych pozycji PAPER. Nie ma adaptera brokera, ilości brokerskiej ani możliwości wysłania zlecenia.</span>
       </section>
 
       <section className="metrics">
@@ -429,7 +429,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.20 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.21 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -668,7 +668,7 @@ useEffect(() => {
       </div>
     ) : (
       <div className="analyticsEmpty">
-        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.20.
+        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.21.
       </div>
     )}
 
@@ -1191,7 +1191,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.20.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.21.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -1245,7 +1245,7 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Tryb i bezpieczniki v0.20</h2>
+        <h2>Tryb i bezpieczniki v0.21</h2>
         <div className="riskGrid">
           <div><span>Shadow execution</span><b>intents only</b></div>
           <div><span>Broker adapter</span><b className="off">NONE</b></div>
@@ -1259,7 +1259,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.20 · shadow execution non-executable · live trading OFF
+        v0.21 · shadow execution non-executable · live trading OFF
       </footer>
     </main>
   );

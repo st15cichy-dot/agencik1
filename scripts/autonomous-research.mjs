@@ -908,7 +908,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.20.0",
+    appVersion: "0.21.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -1120,7 +1120,7 @@ async function main() {
 
   current.shadowOrderPreflight = {
     schemaVersion: 1,
-    appVersion: "0.20.0",
+    appVersion: "0.21.0",
     mode: "SHADOW_ONLY",
     executable: false,
     canSubmitOrders: false,
@@ -1432,7 +1432,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.20.0",
+        appVersion: "0.21.0",
         mode: "SHADOW_ONLY",
         executable: false,
         canSubmitOrders: false,
@@ -1503,7 +1503,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.20.0",
+        appVersion: "0.21.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
