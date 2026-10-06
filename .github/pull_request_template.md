@@ -14,6 +14,7 @@ Jeżeli role wykonał ten sam wykonawca, zapisz to wprost.
 
 - HEAD i odcisk źródeł z `.development-output/verification.json`:
 - Wynik `npm run verify-development` / link do CI i artifactu:
+- Wynik `npm run check-development-evidence` na aktualnym kodzie (nie zastępuje przeglądu):
 - Znane problemy i ograniczenia pracy w tle:
 
 ## Bezpieczniki

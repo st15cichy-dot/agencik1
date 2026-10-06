@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -8,6 +8,22 @@ export const DEFAULT_CHECKS = [
   { name: "test-core", command: "npm", args: ["run", "test-core"], timeoutMs: 300_000 },
   { name: "build", command: "npm", args: ["run", "build"], timeoutMs: 720_000 },
 ];
+
+// The digest identifies the actual commands without exposing arguments in evidence.
+export function checkProfile(commands) {
+  return createHash("sha256").update(JSON.stringify(commands.map(({name, command, args, timeoutMs}) =>
+    ({name, command, args, timeoutMs})))).digest("hex");
+}
+
+function writeReport(destination, report) {
+  const temporary = `${destination}.${randomUUID()}.tmp`;
+  try {
+    fs.writeFileSync(temporary, JSON.stringify(report, null, 2) + "\n", { mode: 0o600, flag: "wx" });
+    fs.renameSync(temporary, destination);
+  } finally {
+    try { fs.unlinkSync(temporary); } catch (error) { if (error.code !== "ENOENT") throw error; }
+  }
+}
 
 // Length prefixes and raw Git path bytes also handle spaces, newlines and symlinks.
 export function captureSnapshot(cwd = process.cwd()) {
@@ -119,19 +135,31 @@ export async function verifyDevelopment({
   cwd = process.cwd(), commands = DEFAULT_CHECKS, outputPath = ".development-output/verification.json",
 } = {}) {
   const report = {
-    schemaVersion: 1, status: "FAIL", startedAt: new Date().toISOString(), finishedAt: null,
+    schemaVersion: 2, status: "RUNNING", startedAt: new Date().toISOString(), finishedAt: null,
     commit: null, sourceFingerprint: null, before: null, after: null, sourceChanged: null,
-    checks: [], errors: [],
+    checks: [], errors: [], checkProfile: null,
     independentReview: { automated: false, status: "REQUIRED", scope: "session-or-human-review-of-diff" },
   };
-  let phase = "configuration";
+  let phase = "report";
+  const destination = path.resolve(cwd, outputPath);
+  const lockPath = `${destination}.lock`;
+  let ownsLock = false;
   try {
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    const lock = fs.openSync(lockPath, "wx", 0o600);
+    ownsLock = true;
+    try { fs.writeFileSync(lock, JSON.stringify({ pid: process.pid, startedAt: report.startedAt })); }
+    finally { fs.closeSync(lock); }
+    // Replace previous PASS before running any checks, including after an interrupted run.
+    writeReport(destination, report);
+    phase = "configuration";
     if (!Array.isArray(commands) || commands.length === 0 || commands.some((check) =>
       !check || typeof check.name !== "string" || !check.name || typeof check.command !== "string" || !check.command ||
       !Array.isArray(check.args) || check.args.some((arg) => typeof arg !== "string") ||
       !Number.isSafeInteger(check.timeoutMs) || check.timeoutMs <= 0 || check.timeoutMs > 2_147_483_647)) {
       throw new Error("At least one valid check with a positive bounded timeout is required");
     }
+    report.checkProfile = checkProfile(commands);
     phase = "snapshot";
     report.before = captureSnapshot(cwd);
     report.commit = report.before.commit;
@@ -149,19 +177,24 @@ export async function verifyDevelopment({
     report.after = captureSnapshot(cwd);
     report.sourceChanged = report.before.fingerprint !== report.after.fingerprint;
     if (report.sourceChanged) report.errors.push("Repository source changed during verification");
-    if (!failed && !report.sourceChanged) report.status = "PASS";
+    report.status = !failed && !report.sourceChanged ? "PASS" : "FAIL";
   } catch {
+    report.status = "FAIL";
     report.errors.push(phase === "configuration" ? "Invalid check configuration" :
-      phase === "snapshot" ? "Source snapshot could not be captured" : "Development verification failed");
+      phase === "snapshot" ? "Source snapshot could not be captured" :
+      phase === "report" ? "Verification report locked or unavailable" : "Development verification failed");
   } finally {
     report.finishedAt = new Date().toISOString();
-    try {
-      const destination = path.resolve(cwd, outputPath);
-      fs.mkdirSync(path.dirname(destination), { recursive: true });
-      fs.writeFileSync(destination, JSON.stringify(report, null, 2) + "\n", { mode: 0o600 });
-    } catch {
-      report.status = "FAIL";
-      report.errors.push("Verification report could not be written");
+    // A competing invocation never replaces the owner's report or removes its lock.
+    if (ownsLock) {
+      try {
+        writeReport(destination, report);
+        fs.unlinkSync(lockPath);
+      } catch {
+        report.status = "FAIL";
+        report.errors.push("Verification report could not be written or unlocked");
+        // Retain the lock on publication failure: consumers must reject stale evidence.
+      }
     }
   }
   return report;

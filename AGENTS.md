@@ -32,6 +32,10 @@ poprzedniej wersji nie jest dowodem dla nowej wersji.
 plików roboczych. Różnica źródeł przed i po weryfikacji powoduje błąd; chwilowa
 zmiana cofnięta przed końcem nie jest wykrywana, więc nie edytuj równolegle kodu. Raport CI
 jest do pobrania jako artifact; niezależny przegląd kodu opisuje wykonawca w PR.
+Przed przekazaniem pracy uruchom `npm run check-development-evidence`.
+Polecenie odrzuca raport ze starszego HEAD/kodu, innego zestawu testów, błędem
+lub blokadą aktywnego/przerwanego uruchomienia. Zasady odzyskiwania blokady
+i ograniczenia są w [README_V021.md](README_V021.md).
 Stan `independentReview` w raporcie nie potwierdza wykonania przeglądu.
 
 Przygotuj PR z opisem zachowania, wynikami weryfikacji, autorami ról, SHA

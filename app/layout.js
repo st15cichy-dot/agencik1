@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Autonomiczny Inwestor v0.20",
+  title: "Autonomiczny Inwestor v0.21",
   description: "Autonomous paper research with shadow execution-quality simulation, market expansion and hard risk controls.",
 };
 
