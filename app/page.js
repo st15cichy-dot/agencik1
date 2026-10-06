@@ -187,14 +187,14 @@ export default function Home() {
       riskPln,
       positionPln,
       createdAt: new Date().toISOString(),
-      source: "manual browser sandbox v0.19",
+      source: "manual browser sandbox v0.20",
     }, ...p].slice(0, 100));
   }
 
   function exportResearch() {
     const blob = new Blob(
       [JSON.stringify({
-        version: "0.19.0",
+        version: "0.20.0",
         exportedAt: new Date().toISOString(),
         screen,
         lastDeepLab: lab,
@@ -226,7 +226,7 @@ async function refreshAutonomousMemory() {
     if (!r.ok) {
       throw new Error(
         r.status === 404
-          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.19."
+          ? "Brak gałęzi research-data — uruchom workflow Autonomous research heartbeat po wdrożeniu v0.20."
           : `HTTP ${r.status}`
       );
     }
@@ -250,7 +250,7 @@ useEffect(() => {
     <main>
       <header className="topbar">
         <div>
-          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.19</p>
+          <p className="eyebrow">AUTONOMICZNY INWESTOR · v0.20</p>
           <h1>Research Quality Engine</h1>
           <p className="muted">16-market research + 8-market PAPER core + non-executable shadow execution</p>
         </div>
@@ -269,7 +269,7 @@ useEffect(() => {
 
       <section className="warning">
         <strong>Realne zlecenia są wyłączone.</strong>
-        <span> v0.19 zapisuje nieegzekwowalne intencje wykonawcze dla nowych pozycji PAPER. Nie ma adaptera brokera, ilości brokerskiej ani możliwości wysłania zlecenia.</span>
+        <span> v0.20 zapisuje nieegzekwowalne intencje wykonawcze dla nowych pozycji PAPER. Nie ma adaptera brokera, ilości brokerskiej ani możliwości wysłania zlecenia.</span>
       </section>
 
       <section className="metrics">
@@ -429,7 +429,7 @@ useEffect(() => {
         </div>
       ) : (
         <div className="healthWaiting">
-          v0.19 czeka na pierwszy heartbeat, który zapisze health score i alerty.
+          v0.20 czeka na pierwszy heartbeat, który zapisze health score i alerty.
         </div>
       )}
 
@@ -668,7 +668,7 @@ useEffect(() => {
       </div>
     ) : (
       <div className="analyticsEmpty">
-        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.19.
+        Governance czeka na pierwsze obserwacje Deep wykonane kodem v0.20.
       </div>
     )}
 
@@ -789,11 +789,35 @@ useEffect(() => {
           <div className="metricStrip">
             <Metric label="Closed trades" value={String(autoMemory.portfolioAnalytics.stats.trades || 0)} sub="próba paper" />
             <Metric label="Expectancy" value={moneyOrDash(autoMemory.portfolioAnalytics.stats.expectancyPln)} sub="średni P/L / trade" />
-            <Metric label="Profit Factor" value={num(autoMemory.portfolioAnalytics.stats.profitFactor, 2)} sub="gross profit / loss" />
+            <Metric label="Profit Factor" value={num(autoMemory.portfolioAnalytics.stats.profitFactor, 2)} sub={autoMemory.portfolioAnalytics.stats.profitFactorStatus === "NO_LOSING_TRADES" ? "Brak strat: PF niedostępny" : "gross profit / loss"} />
             <Metric label="Avg R" value={num(autoMemory.portfolioAnalytics.stats.avgRMultiple, 2)} sub="P/L / planned risk" />
             <Metric label="Avg MFE" value={pct(autoMemory.portfolioAnalytics.stats.avgMfePct)} sub="max ruch na plus" />
             <Metric label="Avg MAE" value={pct(autoMemory.portfolioAnalytics.stats.avgMaePct)} sub="max ruch przeciw pozycji" />
           </div>
+
+          {autoMemory.portfolioAnalytics.evidence ? (
+            <div className="analyticsPanel" role="note">
+              <h3>Zakres dostępnych danych</h3>
+              <p className="muted">
+                {autoMemory.portfolioAnalytics.evidence.closedTrades.validUniqueCount} unikalnych zamkniętych transakcji PAPER ·
+                {" "}{autoMemory.portfolioAnalytics.evidence.history.validUniqueCount} zachowanych heartbeatów ·
+                {" "}{num(autoMemory.portfolioAnalytics.evidence.history.observedSpanDays, 1)} dni między pierwszą i ostatnią obserwacją.
+              </p>
+              <p className="muted">
+                Największa przerwa: {num(autoMemory.portfolioAnalytics.evidence.history.maxGapHours, 1)} h.
+                Brakujące obserwacje health: {autoMemory.portfolioAnalytics.evidence.history.missingHealthCount};
+                {" "}equity: {autoMemory.portfolioAnalytics.evidence.history.missingEquityCount}.
+                Odrzucone transakcje: {autoMemory.portfolioAnalytics.evidence.closedTrades.invalidCount};
+                {" "}duplikaty: {autoMemory.portfolioAnalytics.evidence.closedTrades.duplicateCount}.
+              </p>
+              <p className="muted">
+                To zachowany fragment historii, z możliwymi lukami. Liczba transakcji i zakres dat nie potwierdzają przewagi strategii ani gotowości LIVE.
+                Symulacje SHADOW są osobną diagnostyką, bez porównywalnego portfolio.
+              </p>
+            </div>
+          ) : (
+            <p className="muted">Raport zakresu danych pojawi się po aktualizacji heartbeat.</p>
+          )}
 
           <div className="analyticsGrid">
             <div className="analyticsPanel">
@@ -801,7 +825,7 @@ useEffect(() => {
               <EquitySparkline points={autoMemory.portfolioAnalytics.equityCurve || []} />
               <div className="analyticsFoot">
                 <span>Observed DD <b>{pct(autoMemory.portfolioAnalytics.stats.maxObservedDrawdownPct)}</b></span>
-                <span>Fees <b>{moneyOrDash(autoMemory.portfolioAnalytics.stats.totalFeesPln)}</b></span>
+                <span>Koszty zapisane <b>{moneyOrDash(autoMemory.portfolioAnalytics.stats.totalFeesPln)}</b></span>
                 <span>Risk budget <b>{moneyOrDash(autoMemory.portfolioAnalytics.stats.riskBudgetUsedPln)}</b></span>
               </div>
             </div>
@@ -814,6 +838,9 @@ useEffect(() => {
                     <span>{r.days} dni</span>
                     <b>{moneyOrDash(r.totalPnlPln)}</b>
                     <small>{r.trades} trades · WR {pct(r.winRatePct)} · Avg R {num(r.avgRMultiple, 2)}</small>
+                    {autoMemory.portfolioAnalytics.evidence?.windows?.find((w) => w.days === r.days) ? (
+                      <small>Zakres dat: {num(autoMemory.portfolioAnalytics.evidence.windows.find((w) => w.days === r.days).retainedSpanDays, 1)} z {r.days} dni; pełne pokrycie niepotwierdzone</small>
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -1164,7 +1191,7 @@ useEffect(() => {
           <div className="cardTitle">
             <div>
               <h2>Manual paper sandbox</h2>
-              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.19.</p>
+              <p className="muted">Lokalny, ręczny sandbox w przeglądarce. Nie jest częścią autonomicznego portfolio v0.20.</p>
             </div>
             <button onClick={exportResearch}>Eksport JSON</button>
           </div>
@@ -1218,7 +1245,7 @@ useEffect(() => {
       </section>
 
       <section className="card riskCard">
-        <h2>Tryb i bezpieczniki v0.19</h2>
+        <h2>Tryb i bezpieczniki v0.20</h2>
         <div className="riskGrid">
           <div><span>Shadow execution</span><b>intents only</b></div>
           <div><span>Broker adapter</span><b className="off">NONE</b></div>
@@ -1232,7 +1259,7 @@ useEffect(() => {
       </section>
 
       <footer>
-        v0.19 · shadow execution non-executable · live trading OFF
+        v0.20 · shadow execution non-executable · live trading OFF
       </footer>
     </main>
   );

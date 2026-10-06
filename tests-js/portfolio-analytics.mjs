@@ -86,5 +86,48 @@ assert.equal(empty.sampleStatus, "NO_CLOSED_TRADES");
 assert.equal(empty.stats.trades, 0);
 assert.equal(empty.stats.profitFactor, null);
 assert.deepEqual(empty.equityCurve, []);
+assert.equal(empty.stats.currentEquityPln, null, "starting capital is not an observed equity value");
+assert.equal(empty.stats.cashBaselinePnlPln, null);
+assert.equal(empty.stats.maxObservedDrawdownPct, null);
+
+function observed(history) {
+  return buildPortfolioAnalytics({
+    paperState: { startingCapitalPln: 200 }, trades: [], history, nowIso: now,
+  });
+}
+
+for (const paper of [null, {}, { equityPln: -1 }, { equityPln: NaN }, { equityPln: "200" }]) {
+  const report = observed([{ at: now, paper }]);
+  assert.equal(report.stats.currentEquityPln, null, "invalid equity cannot become starting capital");
+  assert.equal(report.stats.cashBaselinePnlPln, null);
+  assert.equal(report.stats.maxObservedDrawdownPct, null);
+}
+
+for (const drawdownPct of [undefined, null, NaN, Infinity, "0", 1, 0.00001]) {
+  const report = observed([{ at: now, paper: { equityPln: 201, drawdownPct } }]);
+  assert.equal(report.stats.currentEquityPln, 201);
+  assert.equal(report.stats.cashBaselinePnlPln, 1);
+  assert.equal(report.stats.maxObservedDrawdownPct, null, "missing or invalid drawdown is unknown, not zero");
+}
+
+for (const drawdownPct of [0, -0.5, -10]) {
+  const report = observed([{ at: now, paper: { equityPln: 200, drawdownPct } }]);
+  assert.equal(report.stats.maxObservedDrawdownPct, drawdownPct);
+}
+
+const mixedObservations = observed([
+  { at: "2026-10-01T11:00:00.000Z", paper: { equityPln: 203, drawdownPct: 2 } },
+  { at: now, paper: null },
+  { at: "2026-10-01T08:00:00.000Z", paper: { equityPln: 199, drawdownPct: -0.5 } },
+  { at: "2026-10-01T09:00:00.000Z", paper: { equityPln: 200 } },
+]);
+assert.equal(mixedObservations.stats.currentEquityPln, 203, "use the latest valid observation regardless of input order");
+assert.equal(mixedObservations.stats.cashBaselinePnlPln, 3);
+assert.equal(mixedObservations.stats.maxObservedDrawdownPct, -0.5);
+
+const zeroEquity = observed([{ at: now, paper: { equityPln: 0, drawdownPct: -100 } }]);
+assert.equal(zeroEquity.stats.currentEquityPln, 0, "zero is an observed value, not missing data");
+assert.equal(zeroEquity.stats.cashBaselinePnlPln, -200);
+assert.equal(zeroEquity.stats.maxObservedDrawdownPct, -100);
 
 console.log("portfolio analytics tests: OK");

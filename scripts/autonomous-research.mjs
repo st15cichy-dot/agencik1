@@ -908,7 +908,7 @@ async function main() {
 
   const current = {
     schemaVersion: 2,
-    appVersion: "0.19.0",
+    appVersion: "0.20.0",
     mode:
       "AUTONOMOUS_RESEARCH_AND_PAPER",
     startedAt,
@@ -1120,7 +1120,7 @@ async function main() {
 
   current.shadowOrderPreflight = {
     schemaVersion: 1,
-    appVersion: "0.19.0",
+    appVersion: "0.20.0",
     mode: "SHADOW_ONLY",
     executable: false,
     canSubmitOrders: false,
@@ -1174,13 +1174,27 @@ async function main() {
       current.completedAt
     );
 
+  current.health = buildAgentHealth({
+    startedAt: current.startedAt,
+    completedAt: current.completedAt,
+    previousCompletedAt:
+      previousLatest?.completedAt || null,
+    expectedSymbols: SYMBOLS.length,
+    screen: current.screen,
+    deep: current.deep,
+    failures: current.failures,
+    paperPortfolio: current.paperPortfolio,
+  });
+
   current.portfolioAnalytics =
     buildPortfolioAnalytics({
       paperState,
       trades: paperTrades,
+      shadowAudit: executionQualityAudit,
       history: [
         {
           at: current.completedAt,
+          health: current.health,
           paper: {
             equityPln:
               current.paperPortfolio.equityPln,
@@ -1196,18 +1210,6 @@ async function main() {
       ],
       nowIso: current.completedAt,
     });
-
-  current.health = buildAgentHealth({
-    startedAt: current.startedAt,
-    completedAt: current.completedAt,
-    previousCompletedAt:
-      previousLatest?.completedAt || null,
-    expectedSymbols: SYMBOLS.length,
-    screen: current.screen,
-    deep: current.deep,
-    failures: current.failures,
-    paperPortfolio: current.paperPortfolio,
-  });
 
   const newDecisionEntries =
     buildDecisionEntries({
@@ -1430,7 +1432,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.19.0",
+        appVersion: "0.20.0",
         mode: "SHADOW_ONLY",
         executable: false,
         canSubmitOrders: false,
@@ -1501,7 +1503,7 @@ async function main() {
     JSON.stringify(
       {
         schemaVersion: 1,
-        appVersion: "0.19.0",
+        appVersion: "0.20.0",
         current: current.health,
         recent: history.slice(0, 48).map((run) => ({
           at: run.at,
