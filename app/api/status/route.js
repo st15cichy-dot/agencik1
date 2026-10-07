@@ -31,6 +31,17 @@ export async function GET() {
       slippagePerSidePct: 0.03,
     },
     resilience: {
+      executionPreparation: {
+        implemented: true,
+        runtimeConnected: false,
+        canSubmitOrders: false,
+        durableStore: "LOCAL_SINGLE_WORKER_NOT_DEPLOYED",
+        liveRiskGateIntegrated: false,
+        forecastModel: "ROLLING_UP_FREQUENCY_LAPLACE_DIAGNOSTIC_ONLY",
+        forecastExecutionAuthority: false,
+        marketDataClosedCandlesOnly: true,
+        missingClosedHourBlocksAnalysis: true,
+      },
       marketDataTimeoutMs: 10000,
       marketDataMaxAttempts: 3,
       maxMarketDataStalenessHours: 4,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { buildOperationsMonitor } from "../lib/operations-monitor.js";
 
 const STARTING_CAPITAL = 200;
 const RISK_PER_TRADE = 0.005;
@@ -34,6 +35,45 @@ function healthStatus(memory) {
   const age = minutesSince(memory.completedAt);
   if (Number.isFinite(age) && age > 180) return "STALE";
   return memory.health.status || "UNKNOWN";
+}
+
+function OperationsPanel({ memory }) {
+  const [nowMs, setNowMs] = useState(null);
+  useEffect(() => {
+    setNowMs(Date.now());
+    const timer = setInterval(() => setNowMs(Date.now()), 30000);
+    return () => clearInterval(timer);
+  }, []);
+  const rows = Array.isArray(memory?.screen) ? memory.screen : [];
+  const monitor = buildOperationsMonitor({ nowMs, heartbeatAt: memory?.completedAt, forecasts: rows });
+  const issues = {
+    HEARTBEAT_UNAVAILABLE_OR_STALE: "Brak aktualnego heartbeat.",
+    INVALID_FORECAST_COVERAGE: "Niespójna lista prognoz.",
+    FORECAST_COVERAGE_INCOMPLETE: "Niepełne pokrycie rynków prognozami.",
+    FORECAST_DATA_UNAVAILABLE: "Część prognoz jest niedostępna lub ma nieaktualne dane.",
+    FORECAST_BELOW_BASELINE: "Część modeli ma większy błąd niż prognoza bazowa 50/50.",
+  };
+  return <div className="healthCard">
+    <div className="cardTitle"><div>
+      <h3>Monitoring wykonania i prognoz</h3>
+      <p className="muted">Handel rzeczywisty: wyłączony. Wykonawca nie jest podłączony do konta ani uruchomiony jako usługa.</p>
+    </div><span className="badge">LIVE: OFF</span></div>
+    <div className="screenSummary">
+      <Metric label="Heartbeat" value={monitor.heartbeat.fresh ? "Aktualny" : "Brak / nieaktualny"} sub="wiek sprawdzany co 30 s" />
+      <Metric label="Aktualne prognozy" value={`${monitor.forecasts.ready}/${monitor.forecasts.expected}`} sub="dane zamkniętych świec" />
+      <Metric label="Zlecenia rzeczywiste" value="Brak połączenia" sub="nie oznacza zerowej liczby zleceń na koncie" />
+    </div>
+    {monitor.alerts.length > 0 && <ul className="muted">{monitor.alerts.map((alert, i) => <li key={`${alert.code}-${i}`}>{issues[alert.code]}</li>)}</ul>}
+    <p className="muted">Prognoza dotyczy następnej godziny po ostatniej zamkniętej świecy, a nie chwili odświeżenia panelu. Częstość wzrostów z historii nie jest skalibrowaną pewnością modelu. Brier: mniejszy błąd jest lepszy, baza 50/50 = 0,25. Prognozy nie sterują zleceniami.</p>
+    {rows.some((row) => row.forecastDiagnostics) ? <div className="tableWrap"><table>
+      <thead><tr><th>Rynek</th><th>Stan obliczenia</th><th>Wzrost — estymata</th><th>Próbki oceny</th><th>Błąd Brier</th></tr></thead>
+      <tbody>{rows.map((row) => { const f = row.forecastDiagnostics; return <tr key={row.symbol}>
+        <td>{row.symbol}</td><td>{f?.status === "READY" ? "Obliczona" : f?.status === "BLOCKED" ? "Dane zablokowane" : "Za mało danych"}</td>
+        <td>{Number.isFinite(f?.next?.upProbability) ? `${num(f.next.upProbability * 100, 1)}%` : "—"}</td>
+        <td>{f?.evaluation?.sampleCount ?? "—"}</td><td>{num(f?.evaluation?.brierScore, 4)}</td>
+      </tr>; })}</tbody>
+    </table></div> : <p className="muted">Oczekiwanie na heartbeat z nową diagnostyką prognoz.</p>}
+  </div>;
 }
 
 export default function Home() {
@@ -346,6 +386,8 @@ useEffect(() => {
   </div>
 
   {autoMemoryError && <div className="errorBox">{autoMemoryError}</div>}
+
+  <OperationsPanel memory={autoMemory} />
 
   {!autoMemory && !autoMemoryError && (
     <div className="placeholder">Oczekiwanie na pierwszy autonomiczny heartbeat.</div>

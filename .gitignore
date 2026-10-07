@@ -11,3 +11,6 @@ node_modules/
 .watchdog-output/
 .watchdog/
 .env.*
+
+# Private execution ledger; never publish account/order state
+.execution-private/
