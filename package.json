@@ -11,7 +11,7 @@
     "check": "npm run test-core && npm run build",
     "test-health": "node tests-js/agent-health.mjs",
     "test-execution-quality": "node tests-js/execution-quality.mjs",
-    "test-core": "npm run test-paper && npm run test-health && npm run test-watchdog && npm run test-analytics && npm run test-governance && npm run test-allocation && npm run test-universe && npm run test-execution && npm run test-mapping && npm run test-preflight && npm run test-execution-quality && npm run test-execution-quality-integration && npm run test-safety && npm run test-development && npm run test-memory && npm run test-evidence && npm run test-verification-freshness && npm run test-binance-testnet && npm run test-order-executor && npm run test-binance-order-transport && npm run test-forecast-diagnostics && npm run test-operations-monitor && npm run test-execution-integration && npm run test-bitvavo-order-transport && npm run test-bitvavo-execution-integration",
+    "test-core": "npm run test-paper && npm run test-health && npm run test-watchdog && npm run test-analytics && npm run test-governance && npm run test-allocation && npm run test-universe && npm run test-execution && npm run test-mapping && npm run test-preflight && npm run test-execution-quality && npm run test-execution-quality-integration && npm run test-safety && npm run test-development && npm run test-memory && npm run test-evidence && npm run test-verification-freshness && npm run test-binance-testnet && npm run test-order-executor && npm run test-binance-order-transport && npm run test-forecast-diagnostics && npm run test-operations-monitor && npm run test-execution-integration && npm run test-bitvavo-order-transport && npm run test-bitvavo-execution-integration && npm run test-bitvavo-account-readonly && npm run test-bitvavo-balance-cli",
     "test-watchdog": "node tests-js/watchdog.mjs",
     "watchdog": "node scripts/health-watchdog.mjs",
     "test-analytics": "node tests-js/portfolio-analytics.mjs",
@@ -36,7 +36,10 @@
     "test-operations-monitor": "node tests-js/operations-monitor.mjs",
     "test-execution-integration": "node tests-js/execution-integration.mjs",
     "test-bitvavo-order-transport": "node tests-js/bitvavo-order-transport.mjs",
-    "test-bitvavo-execution-integration": "node tests-js/bitvavo-execution-integration.mjs"
+    "test-bitvavo-execution-integration": "node tests-js/bitvavo-execution-integration.mjs",
+    "bitvavo-balance": "node scripts/bitvavo-balance.mjs",
+    "test-bitvavo-account-readonly": "node tests-js/bitvavo-account-readonly.mjs",
+    "test-bitvavo-balance-cli": "node tests-js/bitvavo-balance-cli.mjs"
   },
   "dependencies": {
     "next": "^15.5.4",
