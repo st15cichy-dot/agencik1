@@ -1,0 +1,1326 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.21.0",
+  "current": {
+    "score": 100,
+    "status": "HEALTHY",
+    "durationSeconds": 9.9,
+    "screenCoveragePct": 100,
+    "screenCount": 16,
+    "expectedSymbols": 16,
+    "deepCount": 4,
+    "failureCount": 0,
+    "previousHeartbeatGapHours": 2.01,
+    "expectedNextHeartbeatAt": "2026-10-10T18:30:45.280Z",
+    "scheduleEvents": [],
+    "checks": {
+      "runCompleted": true,
+      "fullScreenCoverage": true,
+      "noRunFailures": true,
+      "heartbeatDurationOk": true,
+      "scheduleContinuity": true,
+      "paperStateIntegrity": true,
+      "paperUniverseIntegrity": true,
+      "riskEngineNotHardHalted": true
+    },
+    "alerts": []
+  },
+  "recent": [
+    {
+      "at": "2026-10-10T16:30:45.280Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-10T18:30:45.280Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T14:30:09.779Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.4,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.89,
+        "expectedNextHeartbeatAt": "2026-10-10T16:30:09.779Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T12:36:41.356Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.2,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.1,
+        "expectedNextHeartbeatAt": "2026-10-10T14:36:41.356Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T10:30:34.342Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.6,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.98,
+        "expectedNextHeartbeatAt": "2026-10-10T12:30:34.342Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T08:31:41.561Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 14.5,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.9,
+        "expectedNextHeartbeatAt": "2026-10-10T10:31:41.561Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T06:37:31.735Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13.9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.07,
+        "expectedNextHeartbeatAt": "2026-10-10T08:37:31.735Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T04:32:51.390Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 10,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-10T06:32:51.390Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T02:32:22.486Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.3,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 5,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.8,
+        "expectedNextHeartbeatAt": "2026-10-10T04:32:22.486Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-10T00:43:52.441Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 16,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.19,
+        "expectedNextHeartbeatAt": "2026-10-10T02:43:52.441Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T22:32:13.974Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-10T00:32:13.974Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T20:31:39.616Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.3,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.93,
+        "expectedNextHeartbeatAt": "2026-10-09T22:31:39.616Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T18:35:56.267Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 16.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.03,
+        "expectedNextHeartbeatAt": "2026-10-09T20:35:56.267Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T16:33:58.620Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 17.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.93,
+        "expectedNextHeartbeatAt": "2026-10-09T18:33:58.620Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T14:37:41.318Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 16.6,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.99,
+        "expectedNextHeartbeatAt": "2026-10-09T16:37:41.318Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T12:38:16.247Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.05,
+        "expectedNextHeartbeatAt": "2026-10-09T14:38:16.247Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T10:34:46.686Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.99,
+        "expectedNextHeartbeatAt": "2026-10-09T12:34:46.686Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T08:35:27.685Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.4,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.91,
+        "expectedNextHeartbeatAt": "2026-10-09T10:35:27.685Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T06:40:32.625Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13.3,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.1,
+        "expectedNextHeartbeatAt": "2026-10-09T08:40:32.625Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T04:34:30.831Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13.2,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.04,
+        "expectedNextHeartbeatAt": "2026-10-09T06:34:30.831Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T02:31:47.078Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 18.5,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 9,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.77,
+        "expectedNextHeartbeatAt": "2026-10-09T04:31:47.078Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-09T00:45:33.078Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.22,
+        "expectedNextHeartbeatAt": "2026-10-09T02:45:33.078Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T22:32:22.177Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.95,
+        "expectedNextHeartbeatAt": "2026-10-09T00:32:22.177Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T20:34:53.929Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.95,
+        "expectedNextHeartbeatAt": "2026-10-08T22:34:53.929Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T18:37:29.996Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 11.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-08T20:37:29.996Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T16:36:45.217Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 11.7,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.99,
+        "expectedNextHeartbeatAt": "2026-10-08T18:36:45.217Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T14:36:51.881Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.6,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.92,
+        "expectedNextHeartbeatAt": "2026-10-08T16:36:51.881Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T12:41:17.860Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 11.7,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.1,
+        "expectedNextHeartbeatAt": "2026-10-08T14:41:17.860Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T10:35:05.458Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 17.2,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.99,
+        "expectedNextHeartbeatAt": "2026-10-08T12:35:05.458Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T08:35:33.249Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.91,
+        "expectedNextHeartbeatAt": "2026-10-08T10:35:33.249Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T06:40:34.520Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 17,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.11,
+        "expectedNextHeartbeatAt": "2026-10-08T08:40:34.520Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T04:33:40.589Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.04,
+        "expectedNextHeartbeatAt": "2026-10-08T06:33:40.589Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T02:30:45.509Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.3,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.79,
+        "expectedNextHeartbeatAt": "2026-10-08T04:30:45.509Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-08T00:42:58.320Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 16.4,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 8,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.21,
+        "expectedNextHeartbeatAt": "2026-10-08T02:42:58.320Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T22:30:08.681Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 14.4,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 7,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.96,
+        "expectedNextHeartbeatAt": "2026-10-08T00:30:08.681Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T20:32:34.705Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.91,
+        "expectedNextHeartbeatAt": "2026-10-07T22:32:34.705Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T18:37:37.615Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 14.3,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 5,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.02,
+        "expectedNextHeartbeatAt": "2026-10-07T20:37:37.615Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T16:36:13.014Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 15.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 6,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.03,
+        "expectedNextHeartbeatAt": "2026-10-07T18:36:13.014Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T14:34:03.198Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.88,
+        "expectedNextHeartbeatAt": "2026-10-07T16:34:03.198Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T12:40:49.913Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.7,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.12,
+        "expectedNextHeartbeatAt": "2026-10-07T14:40:49.913Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T10:33:34.089Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 11.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.97,
+        "expectedNextHeartbeatAt": "2026-10-07T12:33:34.089Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T08:35:21.939Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.95,
+        "expectedNextHeartbeatAt": "2026-10-07T10:35:21.939Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T06:38:20.178Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 10.3,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.07,
+        "expectedNextHeartbeatAt": "2026-10-07T08:38:20.178Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T04:33:56.571Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 3,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.02,
+        "expectedNextHeartbeatAt": "2026-10-07T06:33:56.571Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T02:32:42.592Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 10.7,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.82,
+        "expectedNextHeartbeatAt": "2026-10-07T04:32:42.592Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-07T00:43:34.975Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 14.1,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 5,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.21,
+        "expectedNextHeartbeatAt": "2026-10-07T02:43:34.975Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-06T22:30:54.996Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 9.8,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.96,
+        "expectedNextHeartbeatAt": "2026-10-07T00:30:54.996Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-06T20:32:54.926Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 13.2,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 1.95,
+        "expectedNextHeartbeatAt": "2026-10-06T22:32:54.926Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    },
+    {
+      "at": "2026-10-06T18:35:33.976Z",
+      "health": {
+        "score": 100,
+        "status": "HEALTHY",
+        "durationSeconds": 12.7,
+        "screenCoveragePct": 100,
+        "screenCount": 16,
+        "expectedSymbols": 16,
+        "deepCount": 4,
+        "failureCount": 0,
+        "previousHeartbeatGapHours": 2.01,
+        "expectedNextHeartbeatAt": "2026-10-06T20:35:33.976Z",
+        "scheduleEvents": [],
+        "checks": {
+          "runCompleted": true,
+          "fullScreenCoverage": true,
+          "noRunFailures": true,
+          "heartbeatDurationOk": true,
+          "scheduleContinuity": true,
+          "paperStateIntegrity": true,
+          "paperUniverseIntegrity": true,
+          "riskEngineNotHardHalted": true
+        },
+        "alerts": []
+      }
+    }
+  ]
+}

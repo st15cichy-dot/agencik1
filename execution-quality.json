@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.21.0",
+  "mode": "SHADOW_ONLY",
+  "executable": false,
+  "canSubmitOrders": false,
+  "brokerConnected": false,
+  "brokerAdapter": "NONE",
+  "audit": [
+    {
+      "schemaVersion": 1,
+      "appVersion": "0.17.0",
+      "mode": "SHADOW_ONLY",
+      "executable": false,
+      "canSubmitOrders": false,
+      "brokerConnected": false,
+      "brokerAdapter": "NONE",
+      "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+      "marketSymbol": "BTCUSDT",
+      "strategyId": "breakout",
+      "status": "SIMULATED",
+      "rejectReasons": [],
+      "fillPrice": 84890.64023022,
+      "quantity": 0.000294,
+      "fillCost": 24.95784823,
+      "referenceCost": 24.95502282,
+      "slippageBps": 1.1322,
+      "intentVsFillBps": 1.1322,
+      "roundingPriceBps": 0,
+      "roundingAttribution": {
+        "requestedPrice": 84881.03,
+        "normalizedPrice": 84881.03,
+        "normalizedQuantity": 0.000294,
+        "priceDeltaBps": 0
+      },
+      "costAttribution": {
+        "slippageCost": 0.00282541,
+        "totalSimulatedCost": 24.95784823
+      },
+      "auditId": "quality:shadow:BTCUSDT-1791058174312-diljse",
+      "at": "2026-10-04T13:44:23.771Z",
+      "diagnosticSpecSource": "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+      "diagnosticFxSource": "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+      "marketInputSource": "PUBLIC_OHLCV_PROXY"
+    }
+  ],
+  "metrics": {
+    "fills": 1,
+    "rejections": 0,
+    "bySymbol": {
+      "BTCUSDT": {
+        "fills": 1,
+        "rejections": 0,
+        "totalSlippageBps": 1.1322,
+        "totalIntentVsFillBps": 1.1322,
+        "avgSlippageBps": 1.1322,
+        "avgIntentVsFillBps": 1.1322
+      }
+    },
+    "byStrategy": {
+      "breakout": {
+        "fills": 1,
+        "rejections": 0,
+        "totalSlippageBps": 1.1322,
+        "totalIntentVsFillBps": 1.1322,
+        "avgSlippageBps": 1.1322,
+        "avgIntentVsFillBps": 1.1322
+      }
+    }
+  }
+}

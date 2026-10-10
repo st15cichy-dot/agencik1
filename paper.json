@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.14.0",
+  "currency": "PLN",
+  "startingCapitalPln": 200,
+  "cashPln": 201.65848273651048,
+  "realizedPnlPln": 1.6584827365104728,
+  "totalFeesPln": 0.20186034307959005,
+  "openPositions": [],
+  "peakEquityPln": 201.65848273651048,
+  "dayKey": "2026-10-10",
+  "dayStartEquityPln": 201.65848273651048,
+  "dailyHalt": false,
+  "halted": false,
+  "haltReason": null,
+  "lastUpdatedAt": "2026-10-10T16:30:35.385Z"
+}

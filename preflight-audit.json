@@ -1,0 +1,43 @@
+[
+  {
+    "schemaVersion": 1,
+    "appVersion": "0.16.0",
+    "at": "2026-10-04T13:44:23.771Z",
+    "mode": "SHADOW_ONLY",
+    "executable": false,
+    "canSubmitOrders": false,
+    "brokerAdapter": "NONE",
+    "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+    "marketSymbol": "BTCUSDT",
+    "preflight": {
+      "schemaVersion": 1,
+      "appVersion": "0.16.0",
+      "mode": "SHADOW_ONLY",
+      "executable": false,
+      "canSubmitOrders": false,
+      "brokerConnected": false,
+      "brokerAdapter": "NONE",
+      "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+      "marketSymbol": "BTCUSDT",
+      "brokerSymbol": "SIM_BTCUSDT",
+      "requested": {
+        "price": 84881.03,
+        "notionalPln": 100
+      },
+      "normalized": {
+        "price": 84881.03,
+        "quantity": 0.000294,
+        "quoteNotional": 25
+      },
+      "acceptedForSimulation": true,
+      "rejectReasons": []
+    },
+    "reconciliation": {
+      "matched": true,
+      "executable": false,
+      "canSubmitOrders": false,
+      "status": "SIMULATED_RECONCILED",
+      "rejectReasons": []
+    }
+  }
+]

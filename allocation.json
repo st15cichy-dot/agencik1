@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "appVersion": "0.14.0",
+  "generatedAt": "2026-10-10T16:30:45.280Z",
+  "mode": "SHADOW_ONLY",
+  "paperAuthority": false,
+  "policy": {
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "maxSelectedCandidates": 3,
+    "maxGrossWeightPct": 100,
+    "maxSingleWeightPct": 50,
+    "correlationWindowBars": 168,
+    "minCorrelationSamples": 48,
+    "correlationWarning": 0.75,
+    "correlationHardLimit": 0.9,
+    "maxSameStrategyFamily": 2,
+    "referenceRiskPerTradePct": 0.5
+  },
+  "summary": {
+    "eligibleCandidates": 0,
+    "selectedCandidates": 0,
+    "grossWeightPct": 0,
+    "cashWeightPct": 100,
+    "maxPairCorrelation": null,
+    "referencePortfolioEquityPln": 201.66,
+    "referenceRiskPerTradePln": 1.01,
+    "warnings": [
+      "NO_DEEP_ELIGIBLE_CANDIDATES"
+    ]
+  },
+  "rankedCandidates": [],
+  "pairwiseCorrelations": [],
+  "shadowBasket": []
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "id": "BTCUSDT-1791058174312-diljse",
+    "symbol": "BTCUSDT",
+    "side": "LONG",
+    "strategyId": "breakout",
+    "strategyName": "Breakout",
+    "strategyVersion": "breakout@0r5gt25",
+    "config": {
+      "lookback": 20,
+      "exitLookback": 10
+    },
+    "openedAt": "2026-10-03T20:09:34.312Z",
+    "closedAt": "2026-10-05T00:41:30.099Z",
+    "holdingHours": 28.532163055555557,
+    "entryMarketPrice": 84881.03,
+    "entryPrice": 84906.494309,
+    "stopPrice": 84057.42936591001,
+    "exitMarketPrice": 86512,
+    "exitPrice": 86486.0464,
+    "notionalPln": 100,
+    "plannedRiskPln": 1,
+    "entryFeePln": 0.1,
+    "exitFeePln": 0.10186034307959006,
+    "pnlPln": 1.6584827365104728,
+    "returnPct": 1.6584827365104728,
+    "reason": "DEEP_GATE_LOST",
+    "mfePct": 2.2607760532594945,
+    "maePct": -0.38056795493645046,
+    "mfePln": 2.2607760532594945,
+    "maePln": -0.38056795493645046,
+    "rMultiple": 1.6584827365104728,
+    "deepMetricsAtEntry": {
+      "returnPct": 18.8484,
+      "excessPct": 4.2038,
+      "drawdownPct": -9.0041,
+      "profitFactor": 2.5703,
+      "wfPositive": 3,
+      "wfTotal": 5,
+      "parameterStabilityPct": 100
+    }
+  }
+]

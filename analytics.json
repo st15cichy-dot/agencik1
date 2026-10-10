@@ -1,0 +1,881 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-10T16:30:45.280Z",
+  "sampleStatus": "VERY_EARLY_SAMPLE",
+  "evidence": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-10T16:30:45.280Z",
+    "status": "DESCRIPTIVE_ONLY",
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "executable": false,
+    "brokerConnected": false,
+    "brokerAdapter": "NONE",
+    "canSubmitOrders": false,
+    "inferenceSupported": false,
+    "liveReadiness": false,
+    "closedTrades": {
+      "retainedCount": 1,
+      "validUniqueCount": 1,
+      "invalidCount": 0,
+      "duplicateCount": 0,
+      "missingIdCount": 0,
+      "earliestClosedAt": "2026-10-05T00:41:30.099Z",
+      "latestClosedAt": "2026-10-05T00:41:30.099Z",
+      "observedSpanDays": 0,
+      "optionalMetrics": {
+        "rMultiple": {
+          "availableCount": 1,
+          "missingCount": 0
+        },
+        "plannedRiskPln": {
+          "availableCount": 1,
+          "missingCount": 0
+        },
+        "holdingHours": {
+          "availableCount": 1,
+          "missingCount": 0
+        },
+        "mfePct": {
+          "availableCount": 1,
+          "missingCount": 0
+        },
+        "maePct": {
+          "availableCount": 1,
+          "missingCount": 0
+        },
+        "fees": {
+          "availableCount": 1,
+          "missingCount": 0
+        }
+      }
+    },
+    "history": {
+      "retainedCount": 101,
+      "validUniqueCount": 101,
+      "invalidCount": 0,
+      "duplicateCount": 0,
+      "equityPoints": 99,
+      "missingHealthCount": 6,
+      "missingEquityCount": 2,
+      "earliestAt": "2026-09-30T22:33:59.684Z",
+      "latestAt": "2026-10-10T16:30:45.280Z",
+      "observedSpanDays": 9.7477,
+      "maxGapHours": 16.0376,
+      "latestAgeHours": 0
+    },
+    "windows": [
+      {
+        "days": 7,
+        "closedTrades": 1,
+        "heartbeats": 75,
+        "equityPoints": 75,
+        "retainedSpanDays": 7,
+        "spanCoveragePct": 100,
+        "coverage": "RETAINED_SPAN_REACHES_WINDOW",
+        "completeCoverage": false
+      },
+      {
+        "days": 30,
+        "closedTrades": 1,
+        "heartbeats": 101,
+        "equityPoints": 99,
+        "retainedSpanDays": 9.7477,
+        "spanCoveragePct": 32.4925,
+        "coverage": "PARTIAL_RETAINED_SPAN",
+        "completeCoverage": false
+      },
+      {
+        "days": 90,
+        "closedTrades": 1,
+        "heartbeats": 101,
+        "equityPoints": 99,
+        "retainedSpanDays": 9.7477,
+        "spanCoveragePct": 10.8308,
+        "coverage": "PARTIAL_RETAINED_SPAN",
+        "completeCoverage": false
+      }
+    ],
+    "shadow": {
+      "retainedCount": 1,
+      "simulatedFills": 1,
+      "rejections": 0,
+      "invalidCount": 0,
+      "duplicateCount": 0,
+      "earliestAt": "2026-10-04T13:44:23.771Z",
+      "latestAt": "2026-10-04T13:44:23.771Z",
+      "observedSpanDays": 0,
+      "comparableToPaper": false
+    },
+    "limitations": [
+      "RETAINED_DATA_ONLY",
+      "TIME_BOUNDS_DO_NOT_PROVE_CONTINUOUS_COVERAGE",
+      "DESCRIPTIVE_STATISTICS_DO_NOT_ESTABLISH_EDGE",
+      "TRADES_MAY_BE_DEPENDENT",
+      "PAPER_RESULTS_ARE_SIMULATED",
+      "SHADOW_FILLS_ARE_NOT_A_COMPARABLE_PORTFOLIO",
+      "LIVE_READINESS_NOT_ASSESSED"
+    ]
+  },
+  "stats": {
+    "trades": 1,
+    "wins": 1,
+    "losses": 0,
+    "winRatePct": 100,
+    "totalPnlPln": 1.6585,
+    "totalReturnPct": 1.6585,
+    "expectancyPln": 1.6585,
+    "expectancyPct": 1.6585,
+    "avgWinPln": 1.6585,
+    "avgLossPln": null,
+    "payoffRatio": null,
+    "profitFactor": null,
+    "profitFactorStatus": "NO_LOSING_TRADES",
+    "avgHoldingHours": 28.5322,
+    "avgRMultiple": 1.6585,
+    "medianRMultiple": 1.6585,
+    "avgMfePct": 2.2608,
+    "avgMaePct": -0.3806,
+    "totalFeesPln": 0.2019,
+    "maxObservedDrawdownPct": -0.108,
+    "riskBudgetUsedPln": 1,
+    "pnlPerRiskBudget": 1.6585,
+    "currentEquityPln": 201.6585,
+    "cashBaselinePnlPln": 1.6585
+  },
+  "byStrategy": [
+    {
+      "strategy": "Breakout",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRatePct": 100,
+      "totalPnlPln": 1.6585,
+      "totalReturnPct": 1.6585,
+      "expectancyPln": 1.6585,
+      "expectancyPct": 1.6585,
+      "avgWinPln": 1.6585,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "profitFactorStatus": "NO_LOSING_TRADES",
+      "avgHoldingHours": 28.5322,
+      "avgRMultiple": 1.6585,
+      "medianRMultiple": 1.6585,
+      "avgMfePct": 2.2608,
+      "avgMaePct": -0.3806,
+      "totalFeesPln": 0.2019
+    }
+  ],
+  "bySymbol": [
+    {
+      "symbol": "BTCUSDT",
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRatePct": 100,
+      "totalPnlPln": 1.6585,
+      "totalReturnPct": 1.6585,
+      "expectancyPln": 1.6585,
+      "expectancyPct": 1.6585,
+      "avgWinPln": 1.6585,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "profitFactorStatus": "NO_LOSING_TRADES",
+      "avgHoldingHours": 28.5322,
+      "avgRMultiple": 1.6585,
+      "medianRMultiple": 1.6585,
+      "avgMfePct": 2.2608,
+      "avgMaePct": -0.3806,
+      "totalFeesPln": 0.2019
+    }
+  ],
+  "exitReasons": [
+    {
+      "reason": "DEEP_GATE_LOST",
+      "trades": 1,
+      "pnlPln": 1.6585
+    }
+  ],
+  "rolling": [
+    {
+      "days": 7,
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRatePct": 100,
+      "totalPnlPln": 1.6585,
+      "totalReturnPct": 1.6585,
+      "expectancyPln": 1.6585,
+      "expectancyPct": 1.6585,
+      "avgWinPln": 1.6585,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "profitFactorStatus": "NO_LOSING_TRADES",
+      "avgHoldingHours": 28.5322,
+      "avgRMultiple": 1.6585,
+      "medianRMultiple": 1.6585,
+      "avgMfePct": 2.2608,
+      "avgMaePct": -0.3806,
+      "totalFeesPln": 0.2019
+    },
+    {
+      "days": 30,
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRatePct": 100,
+      "totalPnlPln": 1.6585,
+      "totalReturnPct": 1.6585,
+      "expectancyPln": 1.6585,
+      "expectancyPct": 1.6585,
+      "avgWinPln": 1.6585,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "profitFactorStatus": "NO_LOSING_TRADES",
+      "avgHoldingHours": 28.5322,
+      "avgRMultiple": 1.6585,
+      "medianRMultiple": 1.6585,
+      "avgMfePct": 2.2608,
+      "avgMaePct": -0.3806,
+      "totalFeesPln": 0.2019
+    },
+    {
+      "days": 90,
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRatePct": 100,
+      "totalPnlPln": 1.6585,
+      "totalReturnPct": 1.6585,
+      "expectancyPln": 1.6585,
+      "expectancyPct": 1.6585,
+      "avgWinPln": 1.6585,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "profitFactorStatus": "NO_LOSING_TRADES",
+      "avgHoldingHours": 28.5322,
+      "avgRMultiple": 1.6585,
+      "medianRMultiple": 1.6585,
+      "avgMfePct": 2.2608,
+      "avgMaePct": -0.3806,
+      "totalFeesPln": 0.2019
+    }
+  ],
+  "equityCurve": [
+    {
+      "at": "2026-10-01T00:40:36.581Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T02:30:10.763Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T04:32:40.714Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T06:38:50.747Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T08:34:41.610Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T10:32:32.830Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T12:38:57.221Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T14:35:11.392Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-01T16:31:19.663Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T08:33:35.109Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T10:31:02.725Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T12:37:34.595Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T14:34:15.264Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T16:34:46.870Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T18:35:40.109Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T20:29:45.296Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-02T22:29:48.671Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T00:37:12.082Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T02:36:29.873Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T04:32:25.339Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T06:45:35.440Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T08:31:24.529Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T10:33:11.193Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T15:20:27.717Z",
+      "equityPln": 200,
+      "totalPnlPln": 0,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-03T20:09:45.514Z",
+      "equityPln": 199.87,
+      "totalPnlPln": -0.13,
+      "drawdownPct": -0.065
+    },
+    {
+      "at": "2026-10-04T02:39:46.994Z",
+      "equityPln": 199.784,
+      "totalPnlPln": -0.216,
+      "drawdownPct": -0.108
+    },
+    {
+      "at": "2026-10-04T06:08:46.595Z",
+      "equityPln": 199.9188,
+      "totalPnlPln": -0.0812,
+      "drawdownPct": -0.0406
+    },
+    {
+      "at": "2026-10-04T13:44:23.771Z",
+      "equityPln": 200.2857,
+      "totalPnlPln": 0.2857,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-04T20:28:48.765Z",
+      "equityPln": 200.5546,
+      "totalPnlPln": 0.5546,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-04T22:29:55.567Z",
+      "equityPln": 201.4703,
+      "totalPnlPln": 1.4703,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T00:41:41.246Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T02:31:47.612Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T04:35:55.705Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T06:43:37.102Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T08:36:03.708Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T10:34:14.980Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T12:39:52.222Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T14:37:05.213Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T15:15:29.411Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T16:34:23.844Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T18:38:10.844Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-05T22:29:45.703Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T00:42:40.693Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T02:31:28.958Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T04:33:00.218Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T06:38:46.292Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T08:33:42.947Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T10:32:47.411Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T12:38:21.292Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T14:33:35.949Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T16:34:43.258Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T18:35:33.976Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T20:32:54.926Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-06T22:30:54.996Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T00:43:34.975Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T02:32:42.592Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T04:33:56.571Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T06:38:20.178Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T08:35:21.939Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T10:33:34.089Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T12:40:49.913Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T14:34:03.198Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T16:36:13.014Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T18:37:37.615Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T20:32:34.705Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-07T22:30:08.681Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T00:42:58.320Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T02:30:45.509Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T04:33:40.589Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T06:40:34.520Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T08:35:33.249Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T10:35:05.458Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T12:41:17.860Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T14:36:51.881Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T16:36:45.217Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T18:37:29.996Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T20:34:53.929Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-08T22:32:22.177Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T00:45:33.078Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T02:31:47.078Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T04:34:30.831Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T06:40:32.625Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T08:35:27.685Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T10:34:46.686Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T12:38:16.247Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T14:37:41.318Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T16:33:58.620Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T18:35:56.267Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T20:31:39.616Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-09T22:32:13.974Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T00:43:52.441Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T02:32:22.486Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T04:32:51.390Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T06:37:31.735Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T08:31:41.561Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T10:30:34.342Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T12:36:41.356Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T14:30:09.779Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    },
+    {
+      "at": "2026-10-10T16:30:45.280Z",
+      "equityPln": 201.6585,
+      "totalPnlPln": 1.6585,
+      "drawdownPct": 0
+    }
+  ],
+  "recentTrades": [
+    {
+      "id": "BTCUSDT-1791058174312-diljse",
+      "symbol": "BTCUSDT",
+      "strategy": "Breakout",
+      "openedAt": "2026-10-03T20:09:34.312Z",
+      "closedAt": "2026-10-05T00:41:30.099Z",
+      "holdingHours": 28.53,
+      "pnlPln": 1.6585,
+      "returnPct": 1.6585,
+      "rMultiple": 1.6585,
+      "mfePct": 2.2608,
+      "maePct": -0.3806,
+      "reason": "DEEP_GATE_LOST"
+    }
+  ]
+}

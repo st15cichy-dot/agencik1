@@ -1,0 +1,3914 @@
+{
+  "schemaVersion": 2,
+  "appVersion": "0.21.0",
+  "mode": "AUTONOMOUS_RESEARCH_AND_PAPER",
+  "startedAt": "2026-10-10T16:30:35.385Z",
+  "completedAt": "2026-10-10T16:30:45.280Z",
+  "source": "Binance public market-data-only endpoint",
+  "scheduleTarget": "every 2 hours",
+  "universe": {
+    "version": "0.13.0",
+    "provider": "BINANCE_SPOT_PUBLIC",
+    "assetClass": "CRYPTO",
+    "researchCount": 16,
+    "paperCount": 8,
+    "shadowCount": 8,
+    "shadowPaperAuthority": false,
+    "tiers": {
+      "CORE_PAPER": [
+        "BTCUSDT",
+        "ETHUSDT",
+        "BNBUSDT",
+        "SOLUSDT",
+        "XRPUSDT",
+        "ADAUSDT",
+        "DOGEUSDT",
+        "LINKUSDT"
+      ],
+      "SHADOW_RESEARCH": [
+        "AVAXUSDT",
+        "DOTUSDT",
+        "LTCUSDT",
+        "TRXUSDT",
+        "BCHUSDT",
+        "NEARUSDT",
+        "UNIUSDT",
+        "AAVEUSDT"
+      ]
+    }
+  },
+  "screen": [
+    {
+      "symbol": "BTCUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@1tdanb4",
+      "config": {
+        "fast": 21,
+        "slow": 55,
+        "rsiFloor": 50
+      },
+      "robustScore": 6.5093,
+      "returnPct": 0.4457,
+      "exposureBenchmarkPct": 0.7949,
+      "excessPct": -0.3492,
+      "drawdownPct": -5.3855,
+      "profitFactor": 1.1437,
+      "sharpe": 0.3872,
+      "returnToDrawdown": 0.0828,
+      "exposurePct": 12.5695,
+      "trades": 5,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:36.705Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1836665
+        },
+        "next": {
+          "upProbability": 0.58,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2557349576719227,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.0229398306876909
+        }
+      }
+    },
+    {
+      "symbol": "ETHUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@1f91glx",
+      "config": {
+        "entry": 35,
+        "exit": 55
+      },
+      "robustScore": -3.2115,
+      "returnPct": -2.8297,
+      "exposureBenchmarkPct": 0.6932,
+      "excessPct": -3.5229,
+      "drawdownPct": -8.9803,
+      "profitFactor": 0.7065,
+      "sharpe": -1.2478,
+      "returnToDrawdown": -0.3151,
+      "exposurePct": 17.4638,
+      "trades": 11,
+      "wfPositive": 3,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": false,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": false,
+          "exposureAdjustedEdge": false,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 4,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:37.120Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1837094
+        },
+        "next": {
+          "upProbability": 0.62,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.25508157585831354,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.020326303433254145
+        }
+      }
+    },
+    {
+      "symbol": "BNBUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@0akttwj",
+      "config": {
+        "entry": 25,
+        "exit": 50
+      },
+      "robustScore": 11.1326,
+      "returnPct": 1.438,
+      "exposureBenchmarkPct": 0.6994,
+      "excessPct": 0.7386,
+      "drawdownPct": -2.8678,
+      "profitFactor": 1.8918,
+      "sharpe": 1.2457,
+      "returnToDrawdown": 0.5014,
+      "exposurePct": 9.2325,
+      "trades": 5,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:37.523Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1837496
+        },
+        "next": {
+          "upProbability": 0.54,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2549596185785546,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.01983847431421837
+        }
+      }
+    },
+    {
+      "symbol": "SOLUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": 10.4246,
+      "returnPct": 6.1349,
+      "exposureBenchmarkPct": 3.3267,
+      "excessPct": 2.8082,
+      "drawdownPct": -13.2736,
+      "profitFactor": 1.4911,
+      "sharpe": 1.8431,
+      "returnToDrawdown": 0.4622,
+      "exposurePct": 37.4861,
+      "trades": 13,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:37.924Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1837900
+        },
+        "next": {
+          "upProbability": 0.52,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2553188216151904,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.02127528646076171
+        }
+      }
+    },
+    {
+      "symbol": "XRPUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@19ldn64",
+      "config": {
+        "lookback": 55,
+        "exitLookback": 20
+      },
+      "robustScore": -13.6791,
+      "returnPct": -4.4192,
+      "exposureBenchmarkPct": 0.7261,
+      "excessPct": -5.1453,
+      "drawdownPct": -13.7816,
+      "profitFactor": 0.6006,
+      "sharpe": -0.9349,
+      "returnToDrawdown": -0.3207,
+      "exposurePct": 28.4761,
+      "trades": 6,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": false,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": false,
+          "exposureAdjustedEdge": false,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 3,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:38.319Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1838304
+        },
+        "next": {
+          "upProbability": 0.58,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.25502008326552306,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.020080333062092226
+        }
+      }
+    },
+    {
+      "symbol": "ADAUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@0x6eokb",
+      "config": {
+        "entry": 30,
+        "exit": 52
+      },
+      "robustScore": 8.5012,
+      "returnPct": 2.4366,
+      "exposureBenchmarkPct": 1.8178,
+      "excessPct": 0.6187,
+      "drawdownPct": -5.9518,
+      "profitFactor": 1.5386,
+      "sharpe": 1.0962,
+      "returnToDrawdown": 0.4094,
+      "exposurePct": 8.8988,
+      "trades": 5,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:38.713Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1838699
+        },
+        "next": {
+          "upProbability": 0.54,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.25392797640011067,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.015711905600442666
+        }
+      }
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@0tz21ye",
+      "config": {
+        "fast": 20,
+        "slow": 50,
+        "rsiFloor": 52
+      },
+      "robustScore": -0.2448,
+      "returnPct": 3.6353,
+      "exposureBenchmarkPct": 1.0451,
+      "excessPct": 2.5902,
+      "drawdownPct": -18.4541,
+      "profitFactor": 1.3278,
+      "sharpe": 0.9778,
+      "returnToDrawdown": 0.197,
+      "exposurePct": 29.0323,
+      "trades": 10,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:39.103Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1839091
+        },
+        "next": {
+          "upProbability": 0.56,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2549468880348817,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.019787552139526765
+        }
+      }
+    },
+    {
+      "symbol": "LINKUSDT",
+      "stage": "screen",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@065dxno",
+      "config": {
+        "fast": 12,
+        "slow": 26,
+        "rsiFloor": 50
+      },
+      "robustScore": 31.7239,
+      "returnPct": 19.3552,
+      "exposureBenchmarkPct": 6.3813,
+      "excessPct": 12.9739,
+      "drawdownPct": -12.2472,
+      "profitFactor": 2.5896,
+      "sharpe": 3.4487,
+      "returnToDrawdown": 1.5804,
+      "exposurePct": 40.6007,
+      "trades": 13,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:39.495Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1839482
+        },
+        "next": {
+          "upProbability": 0.6,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2551034970681069,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.020413988272427686
+        }
+      }
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": 45.0427,
+      "returnPct": 29.7188,
+      "exposureBenchmarkPct": 15.7934,
+      "excessPct": 13.9254,
+      "drawdownPct": -14.3853,
+      "profitFactor": 3.0997,
+      "sharpe": 4.1256,
+      "returnToDrawdown": 2.0659,
+      "exposurePct": 40.267,
+      "trades": 11,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:39.884Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1839871
+        },
+        "next": {
+          "upProbability": 0.56,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2549570813591255,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.019828325436501926
+        }
+      }
+    },
+    {
+      "symbol": "DOTUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": 41.5209,
+      "returnPct": 28.9453,
+      "exposureBenchmarkPct": 17.9824,
+      "excessPct": 10.9629,
+      "drawdownPct": -15.5921,
+      "profitFactor": 2.7682,
+      "sharpe": 3.7491,
+      "returnToDrawdown": 1.8564,
+      "exposurePct": 46.7186,
+      "trades": 11,
+      "wfPositive": 3,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:40.272Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1840259
+        },
+        "next": {
+          "upProbability": 0.52,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2527383377628264,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.010953351051305571
+        }
+      }
+    },
+    {
+      "symbol": "LTCUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@09wr3xs",
+      "config": {
+        "fast": 20,
+        "slow": 50
+      },
+      "robustScore": 51.3413,
+      "returnPct": 29.5356,
+      "exposureBenchmarkPct": 11.1578,
+      "excessPct": 18.3778,
+      "drawdownPct": -7.8115,
+      "profitFactor": 13.4726,
+      "sharpe": 4.7875,
+      "returnToDrawdown": 3.781,
+      "exposurePct": 44.1602,
+      "trades": 8,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:40.665Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1840646
+        },
+        "next": {
+          "upProbability": 0.58,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2552575699538294,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.021030279815317687
+        }
+      }
+    },
+    {
+      "symbol": "TRXUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "rsi_mean_reversion",
+      "strategy": "RSI Mean Reversion",
+      "strategyVersion": "rsi_mean_reversion@0akttwj",
+      "config": {
+        "entry": 25,
+        "exit": 50
+      },
+      "robustScore": 4.5376,
+      "returnPct": 0.4872,
+      "exposureBenchmarkPct": 0.0726,
+      "excessPct": 0.4146,
+      "drawdownPct": -0.885,
+      "profitFactor": 1.847,
+      "sharpe": 1.2262,
+      "returnToDrawdown": 0.5504,
+      "exposurePct": 5.8954,
+      "trades": 4,
+      "wfPositive": 0,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": false,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:41.055Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1841041
+        },
+        "next": {
+          "upProbability": 0.32,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2509708691127397,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.003883476450958767
+        }
+      }
+    },
+    {
+      "symbol": "BCHUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@09wr3xs",
+      "config": {
+        "fast": 20,
+        "slow": 50
+      },
+      "robustScore": 53.6407,
+      "returnPct": 31.4752,
+      "exposureBenchmarkPct": 4.5252,
+      "excessPct": 26.95,
+      "drawdownPct": -12.3749,
+      "profitFactor": 4.4099,
+      "sharpe": 4.1324,
+      "returnToDrawdown": 2.5435,
+      "exposurePct": 38.0423,
+      "trades": 12,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "LONG",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:41.448Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1841431
+        },
+        "next": {
+          "upProbability": 0.6,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.25498865608985816,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.019954624359432627
+        }
+      }
+    },
+    {
+      "symbol": "NEARUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@065dxno",
+      "config": {
+        "fast": 12,
+        "slow": 26,
+        "rsiFloor": 50
+      },
+      "robustScore": 55.4828,
+      "returnPct": 56.4092,
+      "exposureBenchmarkPct": 58.5534,
+      "excessPct": -2.1442,
+      "drawdownPct": -17.2934,
+      "profitFactor": 3.9134,
+      "sharpe": 4.8053,
+      "returnToDrawdown": 3.2619,
+      "exposurePct": 44.6051,
+      "trades": 13,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": false,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 4,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:41.845Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1841824
+        },
+        "next": {
+          "upProbability": 0.52,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2539918789473945,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.015967515789578002
+        }
+      }
+    },
+    {
+      "symbol": "UNIUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@09wr3xs",
+      "config": {
+        "fast": 20,
+        "slow": 50
+      },
+      "robustScore": 21.511,
+      "returnPct": 21.746,
+      "exposureBenchmarkPct": 14.0367,
+      "excessPct": 7.7092,
+      "drawdownPct": -22.1273,
+      "profitFactor": 2.6118,
+      "sharpe": 2.448,
+      "returnToDrawdown": 0.9828,
+      "exposurePct": 47.0523,
+      "trades": 11,
+      "wfPositive": 1,
+      "wfTotal": 3,
+      "parameterStabilityPct": 66.6667,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:42.240Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1842226
+        },
+        "next": {
+          "upProbability": 0.54,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.2549377087989955,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.019750835195982086
+        }
+      }
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "stage": "screen",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "sma_trend",
+      "strategy": "SMA Trend",
+      "strategyVersion": "sma_trend@1rg1mwz",
+      "config": {
+        "fast": 10,
+        "slow": 30
+      },
+      "robustScore": 35.0874,
+      "returnPct": 22.086,
+      "exposureBenchmarkPct": 15.1299,
+      "excessPct": 6.9561,
+      "drawdownPct": -11.2806,
+      "profitFactor": 2.7842,
+      "sharpe": 3.4058,
+      "returnToDrawdown": 1.9579,
+      "exposurePct": 47.9422,
+      "trades": 16,
+      "wfPositive": 2,
+      "wfTotal": 3,
+      "parameterStabilityPct": 100,
+      "eligible": true,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": true,
+        "passedCount": 7,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 2
+      },
+      "generatedAt": "2026-10-10T16:30:42.627Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 2999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1842615
+        },
+        "next": {
+          "upProbability": 0.44,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 2974,
+          "brierScore": 0.25572119280037625,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.022884771201505005
+        }
+      }
+    }
+  ],
+  "deep": [
+    {
+      "symbol": "BTCUSDT",
+      "stage": "deep",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": 27.3299,
+      "returnPct": 16.4224,
+      "exposureBenchmarkPct": 11.5188,
+      "excessPct": 4.9037,
+      "drawdownPct": -9.0041,
+      "profitFactor": 2.2367,
+      "sharpe": 3.0722,
+      "returnToDrawdown": 1.8239,
+      "exposurePct": 44.3629,
+      "trades": 21,
+      "wfPositive": 2,
+      "wfTotal": 5,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": true,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 3
+      },
+      "generatedAt": "2026-10-10T16:30:43.297Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 4999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1843266
+        },
+        "next": {
+          "upProbability": 0.58,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 4974,
+          "brierScore": 0.2550748345409817,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.020299338163926706
+        }
+      },
+      "governance": {
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 75,
+        "passRatePct": 8,
+        "governanceScore": 11.2635,
+        "paperAuthority": false
+      }
+    },
+    {
+      "symbol": "SOLUSDT",
+      "stage": "deep",
+      "universeTier": "CORE_PAPER",
+      "paperEligible": true,
+      "strategyId": "breakout",
+      "strategy": "Breakout",
+      "strategyVersion": "breakout@0r5gt25",
+      "config": {
+        "lookback": 20,
+        "exitLookback": 10
+      },
+      "robustScore": 47.6286,
+      "returnPct": 30.2225,
+      "exposureBenchmarkPct": 15.8762,
+      "excessPct": 14.3463,
+      "drawdownPct": -13.2736,
+      "profitFactor": 2.4318,
+      "sharpe": 3.7578,
+      "returnToDrawdown": 2.2769,
+      "exposurePct": 39.6264,
+      "trades": 20,
+      "wfPositive": 5,
+      "wfTotal": 5,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": true,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 6,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 3
+      },
+      "generatedAt": "2026-10-10T16:30:43.954Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 4999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1843924
+        },
+        "next": {
+          "upProbability": 0.52,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 4974,
+          "brierScore": 0.25449359338140476,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.017974373525619036
+        }
+      },
+      "governance": {
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 63,
+        "passRatePct": 50.79,
+        "governanceScore": 57.7584,
+        "paperAuthority": false
+      }
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "stage": "deep",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@0tz21ye",
+      "config": {
+        "fast": 20,
+        "slow": 50,
+        "rsiFloor": 52
+      },
+      "robustScore": 41.6514,
+      "returnPct": 32.6217,
+      "exposureBenchmarkPct": 14.6291,
+      "excessPct": 17.9925,
+      "drawdownPct": -18.2829,
+      "profitFactor": 2.5876,
+      "sharpe": 3.1484,
+      "returnToDrawdown": 1.7843,
+      "exposurePct": 28.2188,
+      "trades": 17,
+      "wfPositive": 0,
+      "wfTotal": 5,
+      "parameterStabilityPct": 80,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 3
+      },
+      "generatedAt": "2026-10-10T16:30:44.620Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 4999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1844585
+        },
+        "next": {
+          "upProbability": 0.56,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 4974,
+          "brierScore": 0.2534534546697456,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.013813818678982459
+        }
+      },
+      "governance": {
+        "version": "ema_momentum@0tz21ye",
+        "lifecycle": "RETIRED",
+        "observations": 31,
+        "passRatePct": 0,
+        "governanceScore": 6.8495,
+        "paperAuthority": false
+      }
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "stage": "deep",
+      "universeTier": "SHADOW_RESEARCH",
+      "paperEligible": false,
+      "strategyId": "ema_momentum",
+      "strategy": "EMA Momentum",
+      "strategyVersion": "ema_momentum@0g04mzi",
+      "config": {
+        "fast": 8,
+        "slow": 21,
+        "rsiFloor": 50
+      },
+      "robustScore": 60.6816,
+      "returnPct": 50.561,
+      "exposureBenchmarkPct": 37.7241,
+      "excessPct": 12.8369,
+      "drawdownPct": -16.2577,
+      "profitFactor": 2.3479,
+      "sharpe": 3.7144,
+      "returnToDrawdown": 3.11,
+      "exposurePct": 50.567,
+      "trades": 38,
+      "wfPositive": 2,
+      "wfTotal": 5,
+      "parameterStabilityPct": 100,
+      "eligible": false,
+      "paperReady": false,
+      "signalNow": "FLAT",
+      "entryWindowLong": false,
+      "entrySignalAt": null,
+      "gate": {
+        "checks": {
+          "oosReturnPositive": true,
+          "enoughOosTrades": true,
+          "drawdownWithinLimit": false,
+          "profitFactor": true,
+          "exposureAdjustedEdge": true,
+          "purgedWalkForward": false,
+          "parameterStability": true
+        },
+        "passed": false,
+        "passedCount": 5,
+        "totalChecks": 7,
+        "requiredPositiveFolds": 3
+      },
+      "generatedAt": "2026-10-10T16:30:45.279Z",
+      "forecastDiagnostics": {
+        "schemaVersion": 1,
+        "diagnosticOnly": true,
+        "executable": false,
+        "calibrated": false,
+        "model": "ROLLING_UP_FREQUENCY_LAPLACE",
+        "horizonBars": 1,
+        "intervalMs": 3600000,
+        "trainingWindow": 48,
+        "minimumTrainingSamples": 24,
+        "status": "READY",
+        "dataQuality": {
+          "valid": true,
+          "issues": [],
+          "closedBars": 4999,
+          "excludedUnclosedBars": 0,
+          "latestClosedTime": 1791644400000,
+          "ageMs": 1845250
+        },
+        "next": {
+          "upProbability": 0.44,
+          "trainingSamples": 48,
+          "asOfTime": 1791648000000
+        },
+        "evaluation": {
+          "sampleCount": 4974,
+          "brierScore": 0.255280753553241,
+          "baselineBrierScore": 0.25,
+          "brierSkillScore": -0.02112301421296392
+        }
+      },
+      "governance": {
+        "version": "ema_momentum@0g04mzi",
+        "lifecycle": "RETIRED",
+        "observations": 11,
+        "passRatePct": 0,
+        "governanceScore": 7.8227,
+        "paperAuthority": false
+      }
+    }
+  ],
+  "screenPass": [
+    "BTCUSDT",
+    "SOLUSDT",
+    "AVAXUSDT",
+    "AAVEUSDT"
+  ],
+  "deepPass": [],
+  "paperReady": [],
+  "shadowPaperReady": [],
+  "failures": [],
+  "safeguards": {
+    "liveTrading": false,
+    "brokerConnected": false,
+    "orderSubmission": false,
+    "brokerAdapter": "NONE",
+    "noSecretsStored": true,
+    "paperOnly": true,
+    "persistenceContainsOnlyPublicResearchAndSimulatedPositions": true
+  },
+  "strategyGovernance": {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "generatedAt": "2026-10-10T16:30:45.280Z",
+    "policy": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "validatedMinObservations": 3,
+      "validatedMinPassRatePct": 66.67,
+      "activeMinObservations": 5,
+      "activeMinPassRatePct": 80,
+      "recoveryConsecutivePasses": 2,
+      "degradeConsecutiveFails": 2,
+      "retireConsecutiveFails": 4,
+      "maxScoreHistory": 24
+    },
+    "counts": {
+      "CANDIDATE": 6,
+      "SHADOW": 0,
+      "VALIDATED": 0,
+      "ACTIVE": 1,
+      "DEGRADED": 0,
+      "RETIRED": 14
+    },
+    "records": [
+      {
+        "id": "AAVEUSDT|sma_trend@1rg1mwz",
+        "symbol": "AAVEUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 10,
+          "slow": 30
+        },
+        "version": "sma_trend@1rg1mwz",
+        "lifecycle": "RETIRED",
+        "observations": 48,
+        "passes": 31,
+        "fails": 17,
+        "passRatePct": 64.58,
+        "consecutivePasses": 12,
+        "consecutiveFails": 0,
+        "firstSeenAt": "2026-10-04T02:39:46.994Z",
+        "lastSeenAt": "2026-10-10T08:31:41.561Z",
+        "lastEligible": true,
+        "lastMetrics": {
+          "robustScore": 74.4771,
+          "returnPct": 55.9082,
+          "excessPct": 17.9344,
+          "drawdownPct": -11.2806,
+          "profitFactor": 3.4405,
+          "wfPositive": 3,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 75.0506,
+        "paperAuthority": false
+      },
+      {
+        "id": "AAVEUSDT|breakout@0r5gt25",
+        "symbol": "AAVEUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 7,
+        "passes": 0,
+        "fails": 7,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 7,
+        "firstSeenAt": "2026-10-06T08:33:42.947Z",
+        "lastSeenAt": "2026-10-07T18:37:37.615Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 75.532,
+          "returnPct": 55.6691,
+          "excessPct": 24.4364,
+          "drawdownPct": -13.7891,
+          "profitFactor": 3.6687,
+          "wfPositive": 3,
+          "wfTotal": 5,
+          "parameterStabilityPct": 40
+        },
+        "governanceScore": 11.751,
+        "paperAuthority": false
+      },
+      {
+        "id": "AAVEUSDT|ema_momentum@0g04mzi",
+        "symbol": "AAVEUSDT",
+        "strategyId": "ema_momentum",
+        "strategyName": "EMA Momentum",
+        "config": {
+          "fast": 8,
+          "slow": 21,
+          "rsiFloor": 50
+        },
+        "version": "ema_momentum@0g04mzi",
+        "lifecycle": "RETIRED",
+        "observations": 11,
+        "passes": 0,
+        "fails": 11,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 11,
+        "firstSeenAt": "2026-10-08T20:34:53.929Z",
+        "lastSeenAt": "2026-10-10T16:30:45.280Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 60.6816,
+          "returnPct": 50.561,
+          "excessPct": 12.8369,
+          "drawdownPct": -16.2577,
+          "profitFactor": 2.3479,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 7.8227,
+        "paperAuthority": false
+      },
+      {
+        "id": "ADAUSDT|breakout@1txjkz9",
+        "symbol": "ADAUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 72,
+          "exitLookback": 24
+        },
+        "version": "breakout@1txjkz9",
+        "lifecycle": "CANDIDATE",
+        "observations": 2,
+        "passes": 0,
+        "fails": 2,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 2,
+        "firstSeenAt": "2026-10-09T00:45:33.078Z",
+        "lastSeenAt": "2026-10-09T02:31:47.078Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 28.5782,
+          "returnPct": 25.453,
+          "excessPct": 20.1498,
+          "drawdownPct": -15.7252,
+          "profitFactor": 5.7954,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 156.1015,
+        "paperAuthority": false
+      },
+      {
+        "id": "ADAUSDT|breakout@0r5gt25",
+        "symbol": "ADAUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "CANDIDATE",
+        "observations": 3,
+        "passes": 0,
+        "fails": 3,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 3,
+        "firstSeenAt": "2026-10-05T18:38:10.844Z",
+        "lastSeenAt": "2026-10-06T14:33:35.949Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 30.7098,
+          "returnPct": 30.3752,
+          "excessPct": 16.3798,
+          "drawdownPct": -26.289,
+          "profitFactor": 2.1155,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 155.0325,
+        "paperAuthority": false
+      },
+      {
+        "id": "AVAXUSDT|ema_momentum@0tz21ye",
+        "symbol": "AVAXUSDT",
+        "strategyId": "ema_momentum",
+        "strategyName": "EMA Momentum",
+        "config": {
+          "fast": 20,
+          "slow": 50,
+          "rsiFloor": 52
+        },
+        "version": "ema_momentum@0tz21ye",
+        "lifecycle": "RETIRED",
+        "observations": 31,
+        "passes": 0,
+        "fails": 31,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 31,
+        "firstSeenAt": "2026-10-07T22:30:08.681Z",
+        "lastSeenAt": "2026-10-10T16:30:45.280Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 41.6514,
+          "returnPct": 32.6217,
+          "excessPct": 17.9925,
+          "drawdownPct": -18.2829,
+          "profitFactor": 2.5876,
+          "wfPositive": 0,
+          "wfTotal": 5,
+          "parameterStabilityPct": 80
+        },
+        "governanceScore": 6.8495,
+        "paperAuthority": false
+      },
+      {
+        "id": "AVAXUSDT|sma_trend@12gnu8y",
+        "symbol": "AVAXUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 40,
+          "slow": 120
+        },
+        "version": "sma_trend@12gnu8y",
+        "lifecycle": "RETIRED",
+        "observations": 4,
+        "passes": 0,
+        "fails": 4,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 4,
+        "firstSeenAt": "2026-10-07T20:32:34.705Z",
+        "lastSeenAt": "2026-10-08T04:33:40.589Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 40.243,
+          "returnPct": 36.9543,
+          "excessPct": 6.0382,
+          "drawdownPct": -17.3366,
+          "profitFactor": 5.7379,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 4.3651,
+        "paperAuthority": false
+      },
+      {
+        "id": "BCHUSDT|sma_trend@1urtnm7",
+        "symbol": "BCHUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 30,
+          "slow": 100
+        },
+        "version": "sma_trend@1urtnm7",
+        "lifecycle": "CANDIDATE",
+        "observations": 1,
+        "passes": 0,
+        "fails": 1,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 1,
+        "firstSeenAt": "2026-10-08T00:42:58.320Z",
+        "lastSeenAt": "2026-10-08T00:42:58.320Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 124.9534,
+          "returnPct": 86.3684,
+          "excessPct": 70.9163,
+          "drawdownPct": -15.0713,
+          "profitFactor": 22.6035,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 169.2464,
+        "paperAuthority": false
+      },
+      {
+        "id": "BNBUSDT|sma_trend@1urtnm7",
+        "symbol": "BNBUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 30,
+          "slow": 100
+        },
+        "version": "sma_trend@1urtnm7",
+        "lifecycle": "RETIRED",
+        "observations": 27,
+        "passes": 11,
+        "fails": 16,
+        "passRatePct": 40.74,
+        "consecutivePasses": 0,
+        "consecutiveFails": 2,
+        "firstSeenAt": "2026-10-01T14:35:11.392Z",
+        "lastSeenAt": "2026-10-10T10:30:34.342Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 31.2717,
+          "returnPct": 17.3818,
+          "excessPct": 6.9464,
+          "drawdownPct": -7.2691,
+          "profitFactor": 2.9268,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 44.893,
+        "paperAuthority": false
+      },
+      {
+        "id": "BNBUSDT|breakout@1txjkz9",
+        "symbol": "BNBUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 72,
+          "exitLookback": 24
+        },
+        "version": "breakout@1txjkz9",
+        "lifecycle": "RETIRED",
+        "observations": 5,
+        "passes": 0,
+        "fails": 5,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 5,
+        "firstSeenAt": "2026-10-01T16:31:19.663Z",
+        "lastSeenAt": "2026-10-05T02:31:47.612Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 35.1564,
+          "returnPct": 20.5946,
+          "excessPct": 12.4748,
+          "drawdownPct": -6.4081,
+          "profitFactor": 6.5612,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 5.6902,
+        "paperAuthority": false
+      },
+      {
+        "id": "BTCUSDT|breakout@0r5gt25",
+        "symbol": "BTCUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 75,
+        "passes": 6,
+        "fails": 69,
+        "passRatePct": 8,
+        "consecutivePasses": 0,
+        "consecutiveFails": 52,
+        "firstSeenAt": "2026-10-01T14:35:11.392Z",
+        "lastSeenAt": "2026-10-10T16:30:45.280Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 27.3299,
+          "returnPct": 16.4224,
+          "excessPct": 4.9037,
+          "drawdownPct": -9.0041,
+          "profitFactor": 2.2367,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 11.2635,
+        "paperAuthority": false
+      },
+      {
+        "id": "BTCUSDT|breakout@1txjkz9",
+        "symbol": "BTCUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 72,
+          "exitLookback": 24
+        },
+        "version": "breakout@1txjkz9",
+        "lifecycle": "RETIRED",
+        "observations": 7,
+        "passes": 0,
+        "fails": 7,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 7,
+        "firstSeenAt": "2026-10-09T14:37:41.318Z",
+        "lastSeenAt": "2026-10-10T02:32:22.486Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 22.8066,
+          "returnPct": 15.2293,
+          "excessPct": 8.186,
+          "drawdownPct": -9.4631,
+          "profitFactor": 3.2499,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 3.4447,
+        "paperAuthority": false
+      },
+      {
+        "id": "DOGEUSDT|breakout@1txjkz9",
+        "symbol": "DOGEUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 72,
+          "exitLookback": 24
+        },
+        "version": "breakout@1txjkz9",
+        "lifecycle": "CANDIDATE",
+        "observations": 2,
+        "passes": 0,
+        "fails": 2,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 2,
+        "firstSeenAt": "2026-10-06T02:31:28.958Z",
+        "lastSeenAt": "2026-10-07T00:43:34.975Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 22.3503,
+          "returnPct": 23.2234,
+          "excessPct": 14.5779,
+          "drawdownPct": -13.8206,
+          "profitFactor": 4.6763,
+          "wfPositive": 0,
+          "wfTotal": 5,
+          "parameterStabilityPct": 40
+        },
+        "governanceScore": 154.4596,
+        "paperAuthority": false
+      },
+      {
+        "id": "DOTUSDT|rsi_mean_reversion@0x6eokb",
+        "symbol": "DOTUSDT",
+        "strategyId": "rsi_mean_reversion",
+        "strategyName": "RSI Mean Reversion",
+        "config": {
+          "entry": 30,
+          "exit": 52
+        },
+        "version": "rsi_mean_reversion@0x6eokb",
+        "lifecycle": "ACTIVE",
+        "observations": 32,
+        "passes": 32,
+        "fails": 0,
+        "passRatePct": 100,
+        "consecutivePasses": 32,
+        "consecutiveFails": 0,
+        "firstSeenAt": "2026-10-07T16:36:13.014Z",
+        "lastSeenAt": "2026-10-10T08:31:41.561Z",
+        "lastEligible": true,
+        "lastMetrics": {
+          "robustScore": 32.4482,
+          "returnPct": 14.5186,
+          "excessPct": 9.6228,
+          "drawdownPct": -5.6768,
+          "profitFactor": 3.685,
+          "wfPositive": 3,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 604.8855,
+        "paperAuthority": false
+      },
+      {
+        "id": "DOTUSDT|ema_momentum@0tz21ye",
+        "symbol": "DOTUSDT",
+        "strategyId": "ema_momentum",
+        "strategyName": "EMA Momentum",
+        "config": {
+          "fast": 20,
+          "slow": 50,
+          "rsiFloor": 52
+        },
+        "version": "ema_momentum@0tz21ye",
+        "lifecycle": "CANDIDATE",
+        "observations": 3,
+        "passes": 0,
+        "fails": 3,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 3,
+        "firstSeenAt": "2026-10-06T00:42:40.693Z",
+        "lastSeenAt": "2026-10-10T10:30:34.342Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 62.928,
+          "returnPct": 45.1374,
+          "excessPct": 28.9216,
+          "drawdownPct": -17.7093,
+          "profitFactor": 2.9722,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 161.1917,
+        "paperAuthority": false
+      },
+      {
+        "id": "LINKUSDT|breakout@0r5gt25",
+        "symbol": "LINKUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 26,
+        "passes": 0,
+        "fails": 26,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 26,
+        "firstSeenAt": "2026-10-02T20:29:45.296Z",
+        "lastSeenAt": "2026-10-10T08:31:41.561Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 67.5923,
+          "returnPct": 47.7833,
+          "excessPct": 28.6618,
+          "drawdownPct": -16.6132,
+          "profitFactor": 3.0132,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 11.6609,
+        "paperAuthority": false
+      },
+      {
+        "id": "LINKUSDT|ema_momentum@065dxno",
+        "symbol": "LINKUSDT",
+        "strategyId": "ema_momentum",
+        "strategyName": "EMA Momentum",
+        "config": {
+          "fast": 12,
+          "slow": 26,
+          "rsiFloor": 50
+        },
+        "version": "ema_momentum@065dxno",
+        "lifecycle": "RETIRED",
+        "observations": 47,
+        "passes": 0,
+        "fails": 47,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 47,
+        "firstSeenAt": "2026-10-02T18:35:40.109Z",
+        "lastSeenAt": "2026-10-10T10:30:34.342Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 67.3933,
+          "returnPct": 48.31,
+          "excessPct": 23.569,
+          "drawdownPct": -15.4547,
+          "profitFactor": 3.0097,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 10.6804,
+        "paperAuthority": false
+      },
+      {
+        "id": "LTCUSDT|sma_trend@12gnu8y",
+        "symbol": "LTCUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 40,
+          "slow": 120
+        },
+        "version": "sma_trend@12gnu8y",
+        "lifecycle": "CANDIDATE",
+        "observations": 2,
+        "passes": 0,
+        "fails": 2,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 2,
+        "firstSeenAt": "2026-10-07T16:36:13.014Z",
+        "lastSeenAt": "2026-10-07T18:37:37.615Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 44.7817,
+          "returnPct": 42.9457,
+          "excessPct": 20.8883,
+          "drawdownPct": -13.6958,
+          "profitFactor": 10.2435,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 80
+        },
+        "governanceScore": 157.971,
+        "paperAuthority": false
+      },
+      {
+        "id": "LTCUSDT|breakout@1txjkz9",
+        "symbol": "LTCUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 72,
+          "exitLookback": 24
+        },
+        "version": "breakout@1txjkz9",
+        "lifecycle": "RETIRED",
+        "observations": 22,
+        "passes": 0,
+        "fails": 22,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 22,
+        "firstSeenAt": "2026-10-07T20:32:34.705Z",
+        "lastSeenAt": "2026-10-09T16:33:58.620Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 50.9821,
+          "returnPct": 36.5536,
+          "excessPct": 23.0881,
+          "drawdownPct": -11.3868,
+          "profitFactor": 10.9309,
+          "wfPositive": 1,
+          "wfTotal": 5,
+          "parameterStabilityPct": 60
+        },
+        "governanceScore": 9.1465,
+        "paperAuthority": false
+      },
+      {
+        "id": "SOLUSDT|breakout@0r5gt25",
+        "symbol": "SOLUSDT",
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "config": {
+          "lookback": 20,
+          "exitLookback": 10
+        },
+        "version": "breakout@0r5gt25",
+        "lifecycle": "RETIRED",
+        "observations": 63,
+        "passes": 32,
+        "fails": 31,
+        "passRatePct": 50.79,
+        "consecutivePasses": 0,
+        "consecutiveFails": 31,
+        "firstSeenAt": "2026-10-02T12:37:34.595Z",
+        "lastSeenAt": "2026-10-10T16:30:45.280Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 47.6286,
+          "returnPct": 30.2225,
+          "excessPct": 14.3463,
+          "drawdownPct": -13.2736,
+          "profitFactor": 2.4318,
+          "wfPositive": 5,
+          "wfTotal": 5,
+          "parameterStabilityPct": 100
+        },
+        "governanceScore": 57.7584,
+        "paperAuthority": false
+      },
+      {
+        "id": "SOLUSDT|sma_trend@12gnu8y",
+        "symbol": "SOLUSDT",
+        "strategyId": "sma_trend",
+        "strategyName": "SMA Trend",
+        "config": {
+          "fast": 40,
+          "slow": 120
+        },
+        "version": "sma_trend@12gnu8y",
+        "lifecycle": "RETIRED",
+        "observations": 12,
+        "passes": 0,
+        "fails": 12,
+        "passRatePct": 0,
+        "consecutivePasses": 0,
+        "consecutiveFails": 12,
+        "firstSeenAt": "2026-10-09T06:40:32.625Z",
+        "lastSeenAt": "2026-10-10T04:32:51.390Z",
+        "lastEligible": false,
+        "lastMetrics": {
+          "robustScore": 47.6768,
+          "returnPct": 41.0207,
+          "excessPct": 19.1821,
+          "drawdownPct": -14.0144,
+          "profitFactor": 6.0034,
+          "wfPositive": 2,
+          "wfTotal": 5,
+          "parameterStabilityPct": 80
+        },
+        "governanceScore": 7.9034,
+        "paperAuthority": false
+      }
+    ],
+    "champions": [
+      {
+        "symbol": "AAVEUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "ADAUSDT",
+        "champion": {
+          "version": "breakout@1txjkz9",
+          "strategy": "Breakout",
+          "lifecycle": "CANDIDATE",
+          "passRatePct": 0,
+          "observations": 2,
+          "governanceScore": 156.1015
+        },
+        "challengers": [
+          {
+            "version": "breakout@0r5gt25",
+            "strategy": "Breakout",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 155.0325
+          }
+        ],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "BCHUSDT",
+        "champion": {
+          "version": "sma_trend@1urtnm7",
+          "strategy": "SMA Trend",
+          "lifecycle": "CANDIDATE",
+          "passRatePct": 0,
+          "observations": 1,
+          "governanceScore": 169.2464
+        },
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "BNBUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "BTCUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "champion": {
+          "version": "breakout@1txjkz9",
+          "strategy": "Breakout",
+          "lifecycle": "CANDIDATE",
+          "passRatePct": 0,
+          "observations": 2,
+          "governanceScore": 154.4596
+        },
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "DOTUSDT",
+        "champion": {
+          "version": "rsi_mean_reversion@0x6eokb",
+          "strategy": "RSI Mean Reversion",
+          "lifecycle": "ACTIVE",
+          "passRatePct": 100,
+          "observations": 32,
+          "governanceScore": 604.8855
+        },
+        "challengers": [
+          {
+            "version": "ema_momentum@0tz21ye",
+            "strategy": "EMA Momentum",
+            "lifecycle": "CANDIDATE",
+            "passRatePct": 0,
+            "observations": 3,
+            "governanceScore": 161.1917
+          }
+        ],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "LINKUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "LTCUSDT",
+        "champion": {
+          "version": "sma_trend@12gnu8y",
+          "strategy": "SMA Trend",
+          "lifecycle": "CANDIDATE",
+          "passRatePct": 0,
+          "observations": 2,
+          "governanceScore": 157.971
+        },
+        "challengers": [],
+        "paperAuthority": false
+      },
+      {
+        "symbol": "SOLUSDT",
+        "champion": null,
+        "challengers": [],
+        "paperAuthority": false
+      }
+    ],
+    "recentEvents": []
+  },
+  "allocationIntelligence": {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "generatedAt": "2026-10-10T16:30:45.280Z",
+    "mode": "SHADOW_ONLY",
+    "paperAuthority": false,
+    "policy": {
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "maxSelectedCandidates": 3,
+      "maxGrossWeightPct": 100,
+      "maxSingleWeightPct": 50,
+      "correlationWindowBars": 168,
+      "minCorrelationSamples": 48,
+      "correlationWarning": 0.75,
+      "correlationHardLimit": 0.9,
+      "maxSameStrategyFamily": 2,
+      "referenceRiskPerTradePct": 0.5
+    },
+    "summary": {
+      "eligibleCandidates": 0,
+      "selectedCandidates": 0,
+      "grossWeightPct": 0,
+      "cashWeightPct": 100,
+      "maxPairCorrelation": null,
+      "referencePortfolioEquityPln": 201.66,
+      "referenceRiskPerTradePln": 1.01,
+      "warnings": [
+        "NO_DEEP_ELIGIBLE_CANDIDATES"
+      ]
+    },
+    "rankedCandidates": [],
+    "pairwiseCorrelations": [],
+    "shadowBasket": []
+  },
+  "shadowExecution": {
+    "schemaVersion": 1,
+    "appVersion": "0.14.0",
+    "mode": "SHADOW_NON_EXECUTABLE",
+    "executable": false,
+    "brokerConnected": false,
+    "canSubmitOrders": false,
+    "totalIntents": 1,
+    "latest": [
+      {
+        "schemaVersion": 1,
+        "appVersion": "0.14.0",
+        "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+        "paperPositionId": "BTCUSDT-1791058174312-diljse",
+        "createdAt": "2026-10-03T20:09:34.312Z",
+        "source": "PAPER_OPENED",
+        "mode": "SHADOW_NON_EXECUTABLE",
+        "executable": false,
+        "broker": "NOT_CONNECTED",
+        "brokerAdapter": "NONE",
+        "action": "BUY",
+        "orderType": "MARKET_REFERENCE_WITH_PROTECTIVE_STOP",
+        "marketSymbol": "BTCUSDT",
+        "brokerInstrumentId": null,
+        "accountCurrency": "PLN",
+        "marketQuoteCurrency": "USDT",
+        "requestedNotionalPln": 100,
+        "plannedRiskPln": 1,
+        "referenceMarketPrice": 84881.03,
+        "simulatedFillPrice": 84906.494309,
+        "protectiveStopPrice": 84057.429366,
+        "stopPct": 1,
+        "brokerQuantity": null,
+        "strategyId": "breakout",
+        "strategyName": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "entrySignalAt": "2026-10-03T17:00:00.000Z",
+        "blockers": [
+          "LIVE_TRADING_DISABLED",
+          "BROKER_NOT_CONNECTED",
+          "INSTRUMENT_MAPPING_REQUIRED",
+          "ACCOUNT_QUOTE_FX_REQUIRED",
+          "BROKER_PRECISION_RULES_REQUIRED"
+        ],
+        "safety": {
+          "canSubmit": false,
+          "liveTrading": false,
+          "brokerConnected": false,
+          "paperOnly": true
+        }
+      }
+    ],
+    "requiredBeforeAnyExecution": [
+      "BROKER_ADAPTER",
+      "INSTRUMENT_MAPPING",
+      "ACCOUNT_QUOTE_FX",
+      "BROKER_PRECISION_RULES",
+      "SEPARATE_EXECUTION_SAFETY_REVIEW"
+    ]
+  },
+  "shadowOrderPreflight": {
+    "schemaVersion": 1,
+    "appVersion": "0.21.0",
+    "mode": "SHADOW_ONLY",
+    "executable": false,
+    "canSubmitOrders": false,
+    "brokerConnected": false,
+    "brokerAdapter": "NONE",
+    "diagnosticSpecSource": "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+    "diagnosticFxSource": "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+    "totalAudits": 1,
+    "latest": [
+      {
+        "schemaVersion": 1,
+        "appVersion": "0.16.0",
+        "at": "2026-10-04T13:44:23.771Z",
+        "mode": "SHADOW_ONLY",
+        "executable": false,
+        "canSubmitOrders": false,
+        "brokerAdapter": "NONE",
+        "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+        "marketSymbol": "BTCUSDT",
+        "preflight": {
+          "schemaVersion": 1,
+          "appVersion": "0.16.0",
+          "mode": "SHADOW_ONLY",
+          "executable": false,
+          "canSubmitOrders": false,
+          "brokerConnected": false,
+          "brokerAdapter": "NONE",
+          "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+          "marketSymbol": "BTCUSDT",
+          "brokerSymbol": "SIM_BTCUSDT",
+          "requested": {
+            "price": 84881.03,
+            "notionalPln": 100
+          },
+          "normalized": {
+            "price": 84881.03,
+            "quantity": 0.000294,
+            "quoteNotional": 25
+          },
+          "acceptedForSimulation": true,
+          "rejectReasons": []
+        },
+        "reconciliation": {
+          "matched": true,
+          "executable": false,
+          "canSubmitOrders": false,
+          "status": "SIMULATED_RECONCILED",
+          "rejectReasons": []
+        }
+      }
+    ]
+  },
+  "executionQuality": {
+    "schemaVersion": 1,
+    "appVersion": "0.17.0",
+    "mode": "SHADOW_ONLY",
+    "executable": false,
+    "canSubmitOrders": false,
+    "brokerConnected": false,
+    "brokerAdapter": "NONE",
+    "totalAudits": 1,
+    "metrics": {
+      "fills": 1,
+      "rejections": 0,
+      "bySymbol": {
+        "BTCUSDT": {
+          "fills": 1,
+          "rejections": 0,
+          "totalSlippageBps": 1.1322,
+          "totalIntentVsFillBps": 1.1322,
+          "avgSlippageBps": 1.1322,
+          "avgIntentVsFillBps": 1.1322
+        }
+      },
+      "byStrategy": {
+        "breakout": {
+          "fills": 1,
+          "rejections": 0,
+          "totalSlippageBps": 1.1322,
+          "totalIntentVsFillBps": 1.1322,
+          "avgSlippageBps": 1.1322,
+          "avgIntentVsFillBps": 1.1322
+        }
+      }
+    },
+    "latest": [
+      {
+        "schemaVersion": 1,
+        "appVersion": "0.17.0",
+        "mode": "SHADOW_ONLY",
+        "executable": false,
+        "canSubmitOrders": false,
+        "brokerConnected": false,
+        "brokerAdapter": "NONE",
+        "intentId": "shadow:BTCUSDT-1791058174312-diljse",
+        "marketSymbol": "BTCUSDT",
+        "strategyId": "breakout",
+        "status": "SIMULATED",
+        "rejectReasons": [],
+        "fillPrice": 84890.64023022,
+        "quantity": 0.000294,
+        "fillCost": 24.95784823,
+        "referenceCost": 24.95502282,
+        "slippageBps": 1.1322,
+        "intentVsFillBps": 1.1322,
+        "roundingPriceBps": 0,
+        "roundingAttribution": {
+          "requestedPrice": 84881.03,
+          "normalizedPrice": 84881.03,
+          "normalizedQuantity": 0.000294,
+          "priceDeltaBps": 0
+        },
+        "costAttribution": {
+          "slippageCost": 0.00282541,
+          "totalSimulatedCost": 24.95784823
+        },
+        "auditId": "quality:shadow:BTCUSDT-1791058174312-diljse",
+        "at": "2026-10-04T13:44:23.771Z",
+        "diagnosticSpecSource": "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+        "diagnosticFxSource": "STATIC_DIAGNOSTIC_FIXTURE_ONLY",
+        "marketInputSource": "PUBLIC_OHLCV_PROXY"
+      }
+    ]
+  },
+  "events": [
+    {
+      "type": "ALLOCATION_SHADOW_UPDATED",
+      "symbol": "PORTFOLIO",
+      "message": "Shadow allocation: 0/0 kandydatów, gross 0%",
+      "selectedCandidates": 0,
+      "eligibleCandidates": 0,
+      "grossWeightPct": 0,
+      "maxPairCorrelation": null,
+      "at": "2026-10-10T16:30:45.280Z"
+    }
+  ],
+  "paperPortfolio": {
+    "mode": "AUTONOMOUS_PAPER_ONLY",
+    "currency": "PLN",
+    "startingCapitalPln": 200,
+    "equityPln": 201.6585,
+    "cashPln": 201.6585,
+    "grossExposurePln": 0,
+    "grossExposurePct": 0,
+    "realizedPnlPln": 1.6585,
+    "unrealizedPnlPln": 0,
+    "totalPnlPln": 1.6585,
+    "totalReturnPct": 0.8292,
+    "drawdownPct": 0,
+    "dailyPnlPct": 0,
+    "openPositionsCount": 0,
+    "closedTradesCount": 1,
+    "wins": 1,
+    "losses": 0,
+    "winRatePct": 100,
+    "dailyHalt": false,
+    "halted": false,
+    "haltReason": null,
+    "policy": {
+      "startingCapitalPln": 200,
+      "riskPerTradePct": 0.5,
+      "maxOpenPositions": 3,
+      "maxGrossExposurePct": 100,
+      "maxSinglePositionPct": 50,
+      "hardDrawdownStopPct": 10,
+      "dailyLossLimitPct": 2,
+      "maxHoldingHours": 168,
+      "atrMultiple": 2,
+      "minStopPct": 1,
+      "maxStopPct": 5,
+      "minPositionPln": 10,
+      "feePerSidePct": 0.1,
+      "slippagePerSidePct": 0.03
+    },
+    "openPositions": [],
+    "recentClosedTrades": [
+      {
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "strategyVersion": "breakout@0r5gt25",
+        "openedAt": "2026-10-03T20:09:34.312Z",
+        "closedAt": "2026-10-05T00:41:30.099Z",
+        "holdingHours": 28.5,
+        "pnlPln": 1.6585,
+        "returnPct": 1.6585,
+        "rMultiple": 1.6585,
+        "mfePct": 2.2608,
+        "maePct": -0.3806,
+        "reason": "DEEP_GATE_LOST"
+      }
+    ],
+    "updatedAt": "2026-10-10T16:30:45.280Z"
+  },
+  "health": {
+    "score": 100,
+    "status": "HEALTHY",
+    "durationSeconds": 9.9,
+    "screenCoveragePct": 100,
+    "screenCount": 16,
+    "expectedSymbols": 16,
+    "deepCount": 4,
+    "failureCount": 0,
+    "previousHeartbeatGapHours": 2.01,
+    "expectedNextHeartbeatAt": "2026-10-10T18:30:45.280Z",
+    "scheduleEvents": [],
+    "checks": {
+      "runCompleted": true,
+      "fullScreenCoverage": true,
+      "noRunFailures": true,
+      "heartbeatDurationOk": true,
+      "scheduleContinuity": true,
+      "paperStateIntegrity": true,
+      "paperUniverseIntegrity": true,
+      "riskEngineNotHardHalted": true
+    },
+    "alerts": []
+  },
+  "operationsMonitor": {
+    "schemaVersion": 1,
+    "diagnosticOnly": true,
+    "canSubmitOrders": false,
+    "status": "OBSERVING",
+    "heartbeat": {
+      "fresh": true,
+      "ageMs": 0
+    },
+    "forecasts": {
+      "expected": 16,
+      "observed": 16,
+      "ready": 16,
+      "unavailable": 0,
+      "belowBaseline": 16
+    },
+    "alerts": [
+      {
+        "code": "FORECAST_BELOW_BASELINE",
+        "severity": "info"
+      }
+    ],
+    "execution": {
+      "connected": false,
+      "liveEnabled": false,
+      "pendingOrders": null,
+      "unknownOrders": null,
+      "readiness": "NOT_CONNECTED",
+      "blockers": [
+        "BROKER_NOT_CONNECTED",
+        "DURABLE_WORKER_NOT_DEPLOYED",
+        "LIVE_RISK_GATE_NOT_INTEGRATED"
+      ]
+    }
+  },
+  "portfolioAnalytics": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-10T16:30:45.280Z",
+    "sampleStatus": "VERY_EARLY_SAMPLE",
+    "evidence": {
+      "schemaVersion": 1,
+      "generatedAt": "2026-10-10T16:30:45.280Z",
+      "status": "DESCRIPTIVE_ONLY",
+      "mode": "SHADOW_ONLY",
+      "paperAuthority": false,
+      "executable": false,
+      "brokerConnected": false,
+      "brokerAdapter": "NONE",
+      "canSubmitOrders": false,
+      "inferenceSupported": false,
+      "liveReadiness": false,
+      "closedTrades": {
+        "retainedCount": 1,
+        "validUniqueCount": 1,
+        "invalidCount": 0,
+        "duplicateCount": 0,
+        "missingIdCount": 0,
+        "earliestClosedAt": "2026-10-05T00:41:30.099Z",
+        "latestClosedAt": "2026-10-05T00:41:30.099Z",
+        "observedSpanDays": 0,
+        "optionalMetrics": {
+          "rMultiple": {
+            "availableCount": 1,
+            "missingCount": 0
+          },
+          "plannedRiskPln": {
+            "availableCount": 1,
+            "missingCount": 0
+          },
+          "holdingHours": {
+            "availableCount": 1,
+            "missingCount": 0
+          },
+          "mfePct": {
+            "availableCount": 1,
+            "missingCount": 0
+          },
+          "maePct": {
+            "availableCount": 1,
+            "missingCount": 0
+          },
+          "fees": {
+            "availableCount": 1,
+            "missingCount": 0
+          }
+        }
+      },
+      "history": {
+        "retainedCount": 101,
+        "validUniqueCount": 101,
+        "invalidCount": 0,
+        "duplicateCount": 0,
+        "equityPoints": 99,
+        "missingHealthCount": 6,
+        "missingEquityCount": 2,
+        "earliestAt": "2026-09-30T22:33:59.684Z",
+        "latestAt": "2026-10-10T16:30:45.280Z",
+        "observedSpanDays": 9.7477,
+        "maxGapHours": 16.0376,
+        "latestAgeHours": 0
+      },
+      "windows": [
+        {
+          "days": 7,
+          "closedTrades": 1,
+          "heartbeats": 75,
+          "equityPoints": 75,
+          "retainedSpanDays": 7,
+          "spanCoveragePct": 100,
+          "coverage": "RETAINED_SPAN_REACHES_WINDOW",
+          "completeCoverage": false
+        },
+        {
+          "days": 30,
+          "closedTrades": 1,
+          "heartbeats": 101,
+          "equityPoints": 99,
+          "retainedSpanDays": 9.7477,
+          "spanCoveragePct": 32.4925,
+          "coverage": "PARTIAL_RETAINED_SPAN",
+          "completeCoverage": false
+        },
+        {
+          "days": 90,
+          "closedTrades": 1,
+          "heartbeats": 101,
+          "equityPoints": 99,
+          "retainedSpanDays": 9.7477,
+          "spanCoveragePct": 10.8308,
+          "coverage": "PARTIAL_RETAINED_SPAN",
+          "completeCoverage": false
+        }
+      ],
+      "shadow": {
+        "retainedCount": 1,
+        "simulatedFills": 1,
+        "rejections": 0,
+        "invalidCount": 0,
+        "duplicateCount": 0,
+        "earliestAt": "2026-10-04T13:44:23.771Z",
+        "latestAt": "2026-10-04T13:44:23.771Z",
+        "observedSpanDays": 0,
+        "comparableToPaper": false
+      },
+      "limitations": [
+        "RETAINED_DATA_ONLY",
+        "TIME_BOUNDS_DO_NOT_PROVE_CONTINUOUS_COVERAGE",
+        "DESCRIPTIVE_STATISTICS_DO_NOT_ESTABLISH_EDGE",
+        "TRADES_MAY_BE_DEPENDENT",
+        "PAPER_RESULTS_ARE_SIMULATED",
+        "SHADOW_FILLS_ARE_NOT_A_COMPARABLE_PORTFOLIO",
+        "LIVE_READINESS_NOT_ASSESSED"
+      ]
+    },
+    "stats": {
+      "trades": 1,
+      "wins": 1,
+      "losses": 0,
+      "winRatePct": 100,
+      "totalPnlPln": 1.6585,
+      "totalReturnPct": 1.6585,
+      "expectancyPln": 1.6585,
+      "expectancyPct": 1.6585,
+      "avgWinPln": 1.6585,
+      "avgLossPln": null,
+      "payoffRatio": null,
+      "profitFactor": null,
+      "profitFactorStatus": "NO_LOSING_TRADES",
+      "avgHoldingHours": 28.5322,
+      "avgRMultiple": 1.6585,
+      "medianRMultiple": 1.6585,
+      "avgMfePct": 2.2608,
+      "avgMaePct": -0.3806,
+      "totalFeesPln": 0.2019,
+      "maxObservedDrawdownPct": -0.108,
+      "riskBudgetUsedPln": 1,
+      "pnlPerRiskBudget": 1.6585,
+      "currentEquityPln": 201.6585,
+      "cashBaselinePnlPln": 1.6585
+    },
+    "byStrategy": [
+      {
+        "strategy": "Breakout",
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "winRatePct": 100,
+        "totalPnlPln": 1.6585,
+        "totalReturnPct": 1.6585,
+        "expectancyPln": 1.6585,
+        "expectancyPct": 1.6585,
+        "avgWinPln": 1.6585,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "profitFactorStatus": "NO_LOSING_TRADES",
+        "avgHoldingHours": 28.5322,
+        "avgRMultiple": 1.6585,
+        "medianRMultiple": 1.6585,
+        "avgMfePct": 2.2608,
+        "avgMaePct": -0.3806,
+        "totalFeesPln": 0.2019
+      }
+    ],
+    "bySymbol": [
+      {
+        "symbol": "BTCUSDT",
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "winRatePct": 100,
+        "totalPnlPln": 1.6585,
+        "totalReturnPct": 1.6585,
+        "expectancyPln": 1.6585,
+        "expectancyPct": 1.6585,
+        "avgWinPln": 1.6585,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "profitFactorStatus": "NO_LOSING_TRADES",
+        "avgHoldingHours": 28.5322,
+        "avgRMultiple": 1.6585,
+        "medianRMultiple": 1.6585,
+        "avgMfePct": 2.2608,
+        "avgMaePct": -0.3806,
+        "totalFeesPln": 0.2019
+      }
+    ],
+    "exitReasons": [
+      {
+        "reason": "DEEP_GATE_LOST",
+        "trades": 1,
+        "pnlPln": 1.6585
+      }
+    ],
+    "rolling": [
+      {
+        "days": 7,
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "winRatePct": 100,
+        "totalPnlPln": 1.6585,
+        "totalReturnPct": 1.6585,
+        "expectancyPln": 1.6585,
+        "expectancyPct": 1.6585,
+        "avgWinPln": 1.6585,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "profitFactorStatus": "NO_LOSING_TRADES",
+        "avgHoldingHours": 28.5322,
+        "avgRMultiple": 1.6585,
+        "medianRMultiple": 1.6585,
+        "avgMfePct": 2.2608,
+        "avgMaePct": -0.3806,
+        "totalFeesPln": 0.2019
+      },
+      {
+        "days": 30,
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "winRatePct": 100,
+        "totalPnlPln": 1.6585,
+        "totalReturnPct": 1.6585,
+        "expectancyPln": 1.6585,
+        "expectancyPct": 1.6585,
+        "avgWinPln": 1.6585,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "profitFactorStatus": "NO_LOSING_TRADES",
+        "avgHoldingHours": 28.5322,
+        "avgRMultiple": 1.6585,
+        "medianRMultiple": 1.6585,
+        "avgMfePct": 2.2608,
+        "avgMaePct": -0.3806,
+        "totalFeesPln": 0.2019
+      },
+      {
+        "days": 90,
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "winRatePct": 100,
+        "totalPnlPln": 1.6585,
+        "totalReturnPct": 1.6585,
+        "expectancyPln": 1.6585,
+        "expectancyPct": 1.6585,
+        "avgWinPln": 1.6585,
+        "avgLossPln": null,
+        "payoffRatio": null,
+        "profitFactor": null,
+        "profitFactorStatus": "NO_LOSING_TRADES",
+        "avgHoldingHours": 28.5322,
+        "avgRMultiple": 1.6585,
+        "medianRMultiple": 1.6585,
+        "avgMfePct": 2.2608,
+        "avgMaePct": -0.3806,
+        "totalFeesPln": 0.2019
+      }
+    ],
+    "equityCurve": [
+      {
+        "at": "2026-10-01T00:40:36.581Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T02:30:10.763Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T04:32:40.714Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T06:38:50.747Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T08:34:41.610Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T10:32:32.830Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T12:38:57.221Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T14:35:11.392Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-01T16:31:19.663Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T08:33:35.109Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T10:31:02.725Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T12:37:34.595Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T14:34:15.264Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T16:34:46.870Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T18:35:40.109Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T20:29:45.296Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-02T22:29:48.671Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T00:37:12.082Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T02:36:29.873Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T04:32:25.339Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T06:45:35.440Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T08:31:24.529Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T10:33:11.193Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T15:20:27.717Z",
+        "equityPln": 200,
+        "totalPnlPln": 0,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-03T20:09:45.514Z",
+        "equityPln": 199.87,
+        "totalPnlPln": -0.13,
+        "drawdownPct": -0.065
+      },
+      {
+        "at": "2026-10-04T02:39:46.994Z",
+        "equityPln": 199.784,
+        "totalPnlPln": -0.216,
+        "drawdownPct": -0.108
+      },
+      {
+        "at": "2026-10-04T06:08:46.595Z",
+        "equityPln": 199.9188,
+        "totalPnlPln": -0.0812,
+        "drawdownPct": -0.0406
+      },
+      {
+        "at": "2026-10-04T13:44:23.771Z",
+        "equityPln": 200.2857,
+        "totalPnlPln": 0.2857,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-04T20:28:48.765Z",
+        "equityPln": 200.5546,
+        "totalPnlPln": 0.5546,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-04T22:29:55.567Z",
+        "equityPln": 201.4703,
+        "totalPnlPln": 1.4703,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T00:41:41.246Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T02:31:47.612Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T04:35:55.705Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T06:43:37.102Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T08:36:03.708Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T10:34:14.980Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T12:39:52.222Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T14:37:05.213Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T15:15:29.411Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T16:34:23.844Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T18:38:10.844Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-05T22:29:45.703Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T00:42:40.693Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T02:31:28.958Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T04:33:00.218Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T06:38:46.292Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T08:33:42.947Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T10:32:47.411Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T12:38:21.292Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T14:33:35.949Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T16:34:43.258Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T18:35:33.976Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T20:32:54.926Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-06T22:30:54.996Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T00:43:34.975Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T02:32:42.592Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T04:33:56.571Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T06:38:20.178Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T08:35:21.939Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T10:33:34.089Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T12:40:49.913Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T14:34:03.198Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T16:36:13.014Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T18:37:37.615Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T20:32:34.705Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-07T22:30:08.681Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T00:42:58.320Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T02:30:45.509Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T04:33:40.589Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T06:40:34.520Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T08:35:33.249Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T10:35:05.458Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T12:41:17.860Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T14:36:51.881Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T16:36:45.217Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T18:37:29.996Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T20:34:53.929Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-08T22:32:22.177Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T00:45:33.078Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T02:31:47.078Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T04:34:30.831Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T06:40:32.625Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T08:35:27.685Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T10:34:46.686Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T12:38:16.247Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T14:37:41.318Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T16:33:58.620Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T18:35:56.267Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T20:31:39.616Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-09T22:32:13.974Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T00:43:52.441Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T02:32:22.486Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T04:32:51.390Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T06:37:31.735Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T08:31:41.561Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T10:30:34.342Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T12:36:41.356Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T14:30:09.779Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "equityPln": 201.6585,
+        "totalPnlPln": 1.6585,
+        "drawdownPct": 0
+      }
+    ],
+    "recentTrades": [
+      {
+        "id": "BTCUSDT-1791058174312-diljse",
+        "symbol": "BTCUSDT",
+        "strategy": "Breakout",
+        "openedAt": "2026-10-03T20:09:34.312Z",
+        "closedAt": "2026-10-05T00:41:30.099Z",
+        "holdingHours": 28.53,
+        "pnlPln": 1.6585,
+        "returnPct": 1.6585,
+        "rMultiple": 1.6585,
+        "mfePct": 2.2608,
+        "maePct": -0.3806,
+        "reason": "DEEP_GATE_LOST"
+      }
+    ]
+  },
+  "decisionJournal": {
+    "entriesAdded": 22,
+    "totalEntries": 1500,
+    "latest": [
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "BTCUSDT",
+        "action": "SCREEN_PASS",
+        "strategy": "EMA Momentum",
+        "reason": "Gate 7/7",
+        "metrics": {
+          "returnPct": 0.4457,
+          "excessPct": -0.3492,
+          "drawdownPct": -5.3855,
+          "trades": 5
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "ETHUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Niespełnione: oosReturnPositive, profitFactor, exposureAdjustedEdge",
+        "metrics": {
+          "returnPct": -2.8297,
+          "excessPct": -3.5229,
+          "drawdownPct": -8.9803,
+          "trades": 11
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "BNBUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 1.438,
+          "excessPct": 0.7386,
+          "drawdownPct": -2.8678,
+          "trades": 5
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "SOLUSDT",
+        "action": "SCREEN_PASS",
+        "strategy": "Breakout",
+        "reason": "Gate 7/7",
+        "metrics": {
+          "returnPct": 6.1349,
+          "excessPct": 2.8082,
+          "drawdownPct": -13.2736,
+          "trades": 13
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "XRPUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "Breakout",
+        "reason": "Niespełnione: oosReturnPositive, profitFactor, exposureAdjustedEdge, purgedWalkForward",
+        "metrics": {
+          "returnPct": -4.4192,
+          "excessPct": -5.1453,
+          "drawdownPct": -13.7816,
+          "trades": 6
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "ADAUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 2.4366,
+          "excessPct": 0.6187,
+          "drawdownPct": -5.9518,
+          "trades": 5
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "DOGEUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "EMA Momentum",
+        "reason": "Niespełnione: drawdownWithinLimit, purgedWalkForward",
+        "metrics": {
+          "returnPct": 3.6353,
+          "excessPct": 2.5902,
+          "drawdownPct": -18.4541,
+          "trades": 10
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "LINKUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "EMA Momentum",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 19.3552,
+          "excessPct": 12.9739,
+          "drawdownPct": -12.2472,
+          "trades": 13
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "AVAXUSDT",
+        "action": "SCREEN_PASS",
+        "strategy": "Breakout",
+        "reason": "Gate 7/7",
+        "metrics": {
+          "returnPct": 29.7188,
+          "excessPct": 13.9254,
+          "drawdownPct": -14.3853,
+          "trades": 11
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "DOTUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "Breakout",
+        "reason": "Niespełnione: drawdownWithinLimit",
+        "metrics": {
+          "returnPct": 28.9453,
+          "excessPct": 10.9629,
+          "drawdownPct": -15.5921,
+          "trades": 11
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "LTCUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "SMA Trend",
+        "reason": "Niespełnione: purgedWalkForward",
+        "metrics": {
+          "returnPct": 29.5356,
+          "excessPct": 18.3778,
+          "drawdownPct": -7.8115,
+          "trades": 8
+        }
+      },
+      {
+        "at": "2026-10-10T16:30:45.280Z",
+        "category": "SCREEN",
+        "symbol": "TRXUSDT",
+        "action": "SCREEN_REJECT",
+        "strategy": "RSI Mean Reversion",
+        "reason": "Niespełnione: enoughOosTrades, purgedWalkForward",
+        "metrics": {
+          "returnPct": 0.4872,
+          "excessPct": 0.4146,
+          "drawdownPct": -0.885,
+          "trades": 4
+        }
+      }
+    ]
+  }
+}
